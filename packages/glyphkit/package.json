@@ -1,6 +1,6 @@
 {
   "name": "@glyphkit/glyphkit",
-  "version": "0.0.1",
+  "version": "0.0.101",
   "description": "A customizable SVG icon toolkit for React applications",
   "type": "module",
   "main": "dist/index.js",
