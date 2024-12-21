@@ -100,7 +100,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
             label="Import Path"
             code={icon.path}
             language="text"
-          />
+          /> 
         </section>
 
         <section className="icon-detail-panel__metadata">
