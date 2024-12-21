@@ -11,7 +11,8 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "clean": "rm -rf .next node_modules",
-    "clean:icons": "rm -rf ../public/icons/icons",
+    "clean:icons": "rm -rf ./public/icons ./public/icon-metadata.json",
+    "copy:icons": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/",
     "generate-metadata": "tsx src/scripts/generateIconMetadata.ts",
     "prebuild": "npm run clean:icons && npm run generate-metadata",
     "check:icons": "ls -la ../public/icons"
