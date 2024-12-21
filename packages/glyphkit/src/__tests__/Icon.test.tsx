@@ -1,28 +1,63 @@
-import { render, screen } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { Icon } from '../components/Icon';
-import { GlyphKitProvider } from '../components/GlyphKitProvider';
 
 describe('Icon', () => {
-  it('renders without crashing', () => {
-    render(
-      <GlyphKitProvider>
-        <Icon name="test-icon" />
-      </GlyphKitProvider>
-    );
-    
-    const svgElement = document.querySelector('svg');
-    expect(svgElement).toBeInTheDocument();
+  beforeEach(() => {
+    // Clear fetch mocks
+    jest.clearAllMocks();
   });
 
-  it('applies custom size and color', () => {
-    render(
-      <GlyphKitProvider>
-        <Icon name="test-icon" size={32} color="#ff0000" />
-      </GlyphKitProvider>
+  it('renders without crashing', async () => {
+    global.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: true,
+        text: () => Promise.resolve('<path d="M0 0h24v24H0z" />')
+      })
     );
-    
-    const svgElement = document.querySelector('svg');
-    expect(svgElement).toHaveAttribute('width', '32');
-    expect(svgElement).toHaveAttribute('fill', '#ff0000');
+
+    const { container } = render(
+      <Icon name="test-icon" />
+    );
+
+    await waitFor(() => {
+      expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+  });
+
+  it('applies custom size and color', async () => {
+    global.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: true,
+        text: () => Promise.resolve('<path d="M0 0h24v24H0z" />')
+      })
+    );
+
+    const { container } = render(
+      <Icon name="test-icon" size={32} color="#ff0000" />
+    );
+
+    await waitFor(() => {
+      const svg = container.querySelector('svg');
+      expect(svg).toHaveAttribute('width', '32');
+      expect(svg).toHaveAttribute('fill', '#ff0000');
+    });
+  });
+
+  it('handles loading errors', async () => {
+    const onError = jest.fn();
+    global.fetch = jest.fn().mockImplementation(() =>
+      Promise.resolve({
+        ok: false,
+        status: 404
+      })
+    );
+
+    render(
+      <Icon name="nonexistent-icon" onError={onError} />
+    );
+
+    await waitFor(() => {
+      expect(onError).toHaveBeenCalled();
+    });
   });
 }); 

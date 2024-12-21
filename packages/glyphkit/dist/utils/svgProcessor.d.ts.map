@@ -1,1 +1,0 @@
-{"version":3,"file":"svgProcessor.d.ts","sourceRoot":"","sources":["../../src/utils/svgProcessor.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,YAAY,EAAE,cAAc,EAAE,MAAM,UAAU,CAAC;AAExD,qBAAa,YAAY;IACvB,OAAO,CAAC,MAAM,CAA2B;gBAE7B,MAAM,GAAE,cAAmB;IASjC,YAAY,IAAI,OAAO,CAAC,YAAY,EAAE,CAAC;IAsB7C,OAAO,CAAC,iBAAiB;IASzB,OAAO,CAAC,YAAY;CAGrB"}

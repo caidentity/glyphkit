@@ -1,6 +1,6 @@
 {
   "name": "@glyphkit/glyphkit",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "A customizable SVG icon toolkit for React applications",
   "type": "module",
   "main": "dist/index.js",
@@ -57,12 +57,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/caideneity/glyphkit.git"
+    "url": "https://github.com/caidentity/glyphkit.git"
   },
   "bugs": {
-    "url": "https://github.com/caideneity/glyphkit/issues"
+    "url": "https://github.com/caidentity/glyphkit/issues"
   },
-  "homepage": "https://github.com/caideneity/glyphkit#readme",
+  "homepage": "https://github.com/caidentity/glyphkit#readme",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"

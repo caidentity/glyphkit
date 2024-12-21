@@ -1,4 +1,5 @@
-export * from './components/GlyphKitProvider';
 export * from './components/Icon';
-export * from './types';
-export * from './utils/svgProcessor'; 
+export type { IconProps } from './components/Icon';
+- export * from './types';
+- export * from './utils/svgProcessor';
+  
