@@ -1,0 +1,11 @@
+.demo-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.icon-grid {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+} 

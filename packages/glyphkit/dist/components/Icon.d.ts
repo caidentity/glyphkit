@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import React from 'react';
 export interface IconProps {
     name: string;
-    size?: number | string;
+    size?: number;
     color?: string;
     className?: string;
-    svgDirectory?: string;
-    iconPrefix?: string;
+    'aria-label'?: string;
     onError?: (error: Error) => void;
-    onLoad?: () => void;
 }
-export declare const Icon: FC<IconProps>;
+export declare const Icon: React.FC<IconProps>;
+declare const _default: React.NamedExoticComponent<IconProps>;
+export default _default;
 //# sourceMappingURL=Icon.d.ts.map

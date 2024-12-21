@@ -1,7 +1,10 @@
 # dependencies
 /node_modules
+/packages/glyphkit/node_modules
 /.pnp
 .pnp.js
+
+/packages/glyphkit/dist
 
 # testing
 /coverage

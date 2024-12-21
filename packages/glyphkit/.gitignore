@@ -1,1 +1,15 @@
- 
+# Dependencies
+/node_modules
+
+# Production build
+/dist
+/dist-demo
+
+# IDE files
+.idea
+.vscode
+
+# Misc
+.DS_Store
+*.log
+.cache
