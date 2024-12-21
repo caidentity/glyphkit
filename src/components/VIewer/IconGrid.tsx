@@ -6,6 +6,7 @@ import Icon from './Icon';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { Eye, Download, Link } from 'lucide-react';
 import Button from "../Button/Button";
+import { useViewportSize } from '@/hooks/useViewportSize';
 
 interface IconGridProps {
   icons: IconMetadata[];
@@ -27,17 +28,27 @@ const IconGrid: React.FC<IconGridProps> = ({
   gridPadding
 }) => {
   const parentRef = React.useRef<HTMLDivElement>(null);
+  const { width } = useViewportSize();
+  
+  const getResponsiveColumns = React.useCallback(() => {
+    if (viewMode === 'list') return 1;
+    if (width < 640) return 2; // Mobile
+    if (width < 1200) return 4; // Tablet
+    return 5; // Desktop
+  }, [width, viewMode]);
+
+  const columns = getResponsiveColumns();
   
   const calculateDynamicPadding = React.useCallback(() => {
     const basePadding = 24;
-    const paddingReduction = (gridPadding - 2) * 2;
+    const paddingReduction = (columns - 2) * 2;
     return Math.max(8, basePadding - paddingReduction);
-  }, [gridPadding]);
+  }, [columns]);
 
   const calculateIconSize = React.useCallback((baseSize: number) => {
-    const scaleFactor = Math.max(0.8, 1 - (gridPadding - 4) * 0.1);
+    const scaleFactor = Math.max(0.8, 1 - (columns - 4) * 0.1);
     return baseSize * iconScale * (viewMode === 'list' ? 1 : scaleFactor * 2);
-  }, [gridPadding, iconScale, viewMode]);
+  }, [columns, iconScale, viewMode]);
 
   const dynamicPadding = calculateDynamicPadding();
   
@@ -118,7 +129,7 @@ const IconGrid: React.FC<IconGridProps> = ({
   ), [viewMode, calculateIconSize, dynamicPadding, onIconSelect, onIconDownload, onIconCopy]);
 
   const rowVirtualizer = useVirtualizer({
-    count: Math.ceil(icons.length / gridPadding),
+    count: Math.ceil(icons.length / columns),
     getScrollElement: () => parentRef.current,
     estimateSize: () => viewMode === 'list' ? 80 : 160 + dynamicPadding * 2,
     overscan: 5,
@@ -137,10 +148,10 @@ const IconGrid: React.FC<IconGridProps> = ({
         }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const startIndex = virtualRow.index * (viewMode === 'list' ? 1 : gridPadding);
+          const startIndex = virtualRow.index * (viewMode === 'list' ? 1 : columns);
           const rowIcons = icons.slice(
             startIndex, 
-            startIndex + (viewMode === 'list' ? 1 : gridPadding)
+            startIndex + (viewMode === 'list' ? 1 : columns)
           );
 
           return (
@@ -155,7 +166,7 @@ const IconGrid: React.FC<IconGridProps> = ({
                 padding: `${dynamicPadding}px`,
                 gap: `${dynamicPadding}px`,
                 gridTemplateColumns: viewMode === 'grid' 
-                  ? `repeat(${gridPadding}, minmax(0, 1fr))`
+                  ? `repeat(${columns}, minmax(0, 1fr))`
                   : 'none',
                 height: viewMode === 'list' ? 'auto' : `${virtualRow.size}px`,
               }}
