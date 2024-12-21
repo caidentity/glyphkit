@@ -78,13 +78,13 @@ export default function TopNavigation() {
               {theme === 'light' ? (
                 <Icon
                   name="ic_moon_16px"
-                  size={24}
+                  size={16}
                   color="currentColor"
                 />
               ) : (
                 <Icon
-                  name="ic_sun_16px"
-                  size={24}
+                  name="ic_moon_16px"
+                  size={16}
                   color="currentColor"
                 />
               )}

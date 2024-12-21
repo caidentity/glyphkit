@@ -15,7 +15,7 @@
     "prebuild": "npm run generate-icons"
   },
   "dependencies": {
-    "@glyphkit/glyphkit": "^0.0.102",
+    "@glyphkit/glyphkit": "^0.0.103",
     "@radix-ui/react-slider": "^1.2.2",
     "@tanstack/react-query": "^5.62.8",
     "@tanstack/react-virtual": "^3.11.2",
