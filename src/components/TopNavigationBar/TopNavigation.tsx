@@ -9,6 +9,7 @@ import './TopNavigation.scss';
 const navigation = [
   { name: 'Icons', href: '/' },
   { name: 'About', href: '/about' },
+  { name: 'NPM', href: 'https://www.npmjs.com/package/@glyphkit/glyphkit' },
 ];
 
 export default function TopNavigation() {
