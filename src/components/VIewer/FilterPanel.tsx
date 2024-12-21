@@ -126,13 +126,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
           <section className="filter-section">
             <div className="filter-section-header">
-              <h3 className="filter-section-title">Grid Spacing</h3>
+              <h3 className="filter-section-title">Icons per Row</h3>
               <div className="filter-section-scale">
                 <Slider
                   value={[gridPadding]}
-                  min={4}
-                  max={24}
-                  step={2}
+                  min={2}
+                  max={8}
+                  step={1}
                   onValueChange={([value]) => setGridPadding(value)}
                   className="w-[140px]"
                 />
