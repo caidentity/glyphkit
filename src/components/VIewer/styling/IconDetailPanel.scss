@@ -1,0 +1,137 @@
+.icon-detail-panel {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+  background: var(--background);
+  border-left: 1px solid var(--border);
+  z-index: 30;
+
+  &__header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 32px;
+    }
+  }
+
+  &__name {
+    font-size: 14px;
+    color: var(--muted-foreground);
+  }
+
+  &__content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  &__preview {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+
+      h3 {
+        font-size: 16px;
+        font-weight: 500;
+      }
+    }
+
+    &-toggle {
+      color: var(--primary);
+      font-size: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--muted);
+
+      span {
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted-foreground);
+      }
+    }
+  }
+
+  &__usage {
+    h3 {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+  }
+
+  &__metadata {
+    &-item {
+      margin-bottom: 16px;
+
+      h3 {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 8px;
+      }
+
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__action-button {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--background);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background: var(--muted);
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+} 

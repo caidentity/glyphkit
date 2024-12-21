@@ -18,6 +18,7 @@ import FilterPanel from './FilterPanel';
 import { useIconFiltering } from './useIconFiltering';
 import { IconCategory } from '@/types/icon';
 import './styling/Viewer.scss';
+import IconDetailPanel from './IconDetailPanel';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -227,116 +228,12 @@ const IconViewer = () => {
 
       {/* Details Panel */}
       {selectedIcon && (
-        <div className="fixed inset-y-0 right-0 w-96 bg-white border-l shadow-lg overflow-y-auto z-30">
-          <div className="p-6">
-            <div className="border-b pb-4 mb-6">
-              <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-bold">Details</h2>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSelectedIcon(null)}
-                  className="w-8 h-8 p-0"
-                >
-                  <X className="h-4 w-4" />
-                </Button>
-              </div>
-              <p className="text-sm text-gray-600">{selectedIcon.name}</p>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="flex flex-col gap-2">
-                <div className="flex justify-between items-center">
-                  <h3 className="text-sm font-medium text-gray-500">Preview</h3>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowLargePreview(!showLargePreview)}
-                    className="text-xs"
-                  >
-                    {showLargePreview ? "Show Original" : "Show Large"}
-                  </Button>
-                </div>
-                <div className="flex justify-center items-center h-48 border rounded-lg bg-gray-50">
-                  <Icon
-                    icon={selectedIcon}
-                    showSize={true}
-                    className="p-4"
-                    customSize={showLargePreview ? selectedIcon.size * 3 : selectedIcon.size}
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <h3 className="text-sm font-medium text-gray-500">Usage</h3>
-                <div className="bg-gray-50 p-4 rounded-lg space-y-4">
-                  <div className="space-y-2">
-                    <p className="text-xs text-gray-500">React Component</p>
-                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
-                      <code>{`<Icon name="${selectedIcon.name}" size={${selectedIcon.size}} />`}</code>
-                    </pre>
-                  </div>
-                  <div className="space-y-2">
-                    <p className="text-xs text-gray-500">Import Path</p>
-                    <pre className="text-xs bg-gray-100 p-2 rounded overflow-x-auto">
-                      <code>{selectedIcon.path}</code>
-                    </pre>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Size</h3>
-                  <p className="text-sm">{selectedIcon.size}px</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Category</h3>
-                  <p className="text-sm">{selectedIcon.category}</p>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <Button
-                  onClick={() => handleCopy(`<Icon name="${selectedIcon.name}" size={${selectedIcon.size}} />`)}
-                  variant="outline"
-                  className="w-full justify-between"
-                >
-                  <span className="flex items-center">
-                    <Code className="h-4 w-4 mr-2" />
-                    Copy Component
-                  </span>
-                  <Link className="h-4 w-4" />
-                </Button>
-                
-                <Button
-                  onClick={() => handleDownload(selectedIcon)}
-                  variant="outline"
-                  className="w-full justify-between"
-                >
-                  <span className="flex items-center">
-                    <Download className="h-4 w-4 mr-2" />
-                    Download SVG
-                  </span>
-                  <ArrowDownToLine className="h-4 w-4" />
-                </Button>
-                
-                <Button
-                  onClick={() => handleCopy(selectedIcon.path)}
-                  variant="outline"
-                  className="w-full justify-between"
-                >
-                  <span className="flex items-center">
-                    <FileText className="h-4 w-4 mr-2" />
-                    Copy Path
-                  </span>
-                  <Link className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <IconDetailPanel
+          icon={selectedIcon}
+          onClose={() => setSelectedIcon(null)}
+          onDownload={handleDownload}
+          onCopy={handleCopy}
+        />
       )}
 
       {/* Copy Alert */}
