@@ -1,0 +1,19 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5 5H7V7H5V5Z" fill="#10181B"/>
+<path d="M7 9H5V11H7V9Z" fill="#10181B"/>
+<path d="M5 13H7V15H5V13Z" fill="#10181B"/>
+<path d="M7 17H5V19H7V17Z" fill="#10181B"/>
+<path d="M13 5H15V7H13V5Z" fill="#10181B"/>
+<path d="M15 9H13V11H15V9Z" fill="#10181B"/>
+<path d="M13 13H15V15H13V13Z" fill="#10181B"/>
+<path d="M15 17H13V19H15V17Z" fill="#10181B"/>
+<path d="M9 5H11V7H9V5Z" fill="#10181B"/>
+<path d="M11 9H9V11H11V9Z" fill="#10181B"/>
+<path d="M9 13H11V15H9V13Z" fill="#10181B"/>
+<path d="M11 17H9V19H11V17Z" fill="#10181B"/>
+<path d="M17 5H19V7H17V5Z" fill="#10181B"/>
+<path d="M19 9H17V11H19V9Z" fill="#10181B"/>
+<path d="M17 13H19V15H17V13Z" fill="#10181B"/>
+<path d="M19 17H17V19H19V17Z" fill="#10181B"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2 2V22H22V2H2ZM20.5 3.5H3.5V20.5H20.5V3.5Z" fill="#10181B"/>
+</svg>
