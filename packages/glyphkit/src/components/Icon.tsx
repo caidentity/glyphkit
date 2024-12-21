@@ -1,4 +1,5 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo } from 'react';
+import { icons } from '../icons';
 
 export interface IconProps {
   name: string;
@@ -17,44 +18,25 @@ export const Icon = memo<IconProps>(({
   'aria-label': ariaLabel,
   onError,
 }) => {
-  const [svgContent, setSvgContent] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadIcon = async () => {
-      try {
-        const response = await fetch(`/icons/${name}.svg`);
-        if (!response.ok) {
-          throw new Error(`Failed to load icon: ${name}`);
-        }
-        const svg = await response.text();
-        setSvgContent(svg);
-      } catch (error) {
-        onError?.(error as Error);
-      }
-    };
-
-    loadIcon();
-  }, [name, onError]);
-
-  if (!svgContent) return null;
+  const icon = icons[name];
+  
+  if (!icon) {
+    onError?.(new Error(`Icon "${name}" not found`));
+    return null;
+  }
 
   return (
-    <div 
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox={icon.viewBox}
+      fill={color}
       className={`glyphkit-icon ${className}`.trim()}
-      style={{ 
-        width: size, 
-        height: size,
-        color: color 
-      }}
-      dangerouslySetInnerHTML={{ 
-        __html: svgContent
-          .replace(/width="([^"]+)"/, `width="${size}"`)
-          .replace(/height="([^"]+)"/, `height="${size}"`)
-          .replace(/fill="([^"]+)"/, `fill="currentColor"`)
-      }}
-      role="img"
       aria-label={ariaLabel || `${name} icon`}
-    />
+      role="img"
+    >
+      <path d={icon.path} />
+    </svg>
   );
 });
 
