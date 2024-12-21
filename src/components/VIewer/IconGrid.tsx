@@ -32,10 +32,16 @@ const IconGrid: React.FC<IconGridProps> = ({
   
   const getResponsiveColumns = React.useCallback(() => {
     if (viewMode === 'list') return 1;
-    if (width < 640) return 2; // Mobile
-    if (width < 1200) return 4; // Tablet
-    return 5; // Desktop
-  }, [width, viewMode]);
+    
+    // Get max columns based on viewport
+    let maxColumns;
+    if (width < 640) maxColumns = 2;      // Mobile
+    else if (width < 1024) maxColumns = 4; // Tablet
+    else maxColumns = 5;                   // Desktop
+
+    // Return the smaller of user-selected columns or viewport max
+    return Math.min(gridPadding, maxColumns);
+  }, [viewMode, gridPadding, width]);
 
   const columns = getResponsiveColumns();
   
