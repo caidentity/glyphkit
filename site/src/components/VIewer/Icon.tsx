@@ -21,7 +21,9 @@ const Icon: React.FC<IconProps> = ({
 }) => {
   const { data: svgContent } = useQuery({
     queryKey: ['icon-svg', icon.path],
-    queryFn: () => loadSvgContent(icon.path),
+    queryFn: () => loadSvgContent(icon.path.startsWith('/') ? icon.path : `/${icon.path}`),
+    staleTime: 1000 * 60 * 60, // 1 hour
+    gcTime: 1000 * 60 * 60 * 24, // 24 hours
   });
 
   const iconSize = customSize || icon.size;

@@ -5,8 +5,10 @@ import { IconMetadata } from '@/types/icon';
 import Icon from './Icon';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { Eye, Download, Link } from 'lucide-react';
-import Button from "../Button/Button";
+import Button from "@/components/Button/Button";
 import { useViewportSize } from '@/hooks/useViewportSize';
+import { useQueries } from '@tanstack/react-query';
+import { loadSvgContent } from '@/lib/iconLoader';
 
 interface IconGridProps {
   icons: IconMetadata[];
@@ -140,6 +142,27 @@ const IconGrid: React.FC<IconGridProps> = ({
     estimateSize: () => viewMode === 'list' ? 80 : 160 + dynamicPadding * 2,
     overscan: 5,
   });
+
+  // Batch load SVGs
+  const iconQueries = useQueries({
+    queries: icons.map(icon => ({
+      queryKey: ['icon-svg', icon.path],
+      queryFn: () => loadSvgContent(icon.path.startsWith('/') ? icon.path : `/${icon.path}`),
+      staleTime: 1000 * 60 * 60, // 1 hour
+      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+      enabled: true,
+    })),
+  });
+
+  const isLoading = iconQueries.some(query => query.isLoading);
+  
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500" />
+      </div>
+    );
+  }
 
   return (
     <div 

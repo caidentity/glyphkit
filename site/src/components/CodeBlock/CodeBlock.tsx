@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Copy, Check } from 'lucide-react';
-import Button from '../Button/Button';
+import Button from '@/components/Button/Button';
+import { Check, Copy } from 'lucide-react';
 import './CodeBlock.scss';
 
 interface CodeBlockProps {

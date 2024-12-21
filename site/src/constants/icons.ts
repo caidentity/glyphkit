@@ -1,8 +1,8 @@
 import { ICON_SIZES } from '@/types/icon'
 
 export const ICONS_CONFIG = {
-  BASE_DIR: 'public/icons',
-  METADATA_FILE: 'public/icons/metadata.json',
+  BASE_DIR: '/icons',
+  METADATA_FILE: 'metadata.json',
   SMALL_SUFFIX: '-small',
   DEFAULT_SIZE: ICON_SIZES.REGULAR,
   SMALL_SIZE: ICON_SIZES.SMALL,

@@ -1,9 +1,14 @@
+const path = require('path');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Production optimizations
   poweredByHeader: false,
   reactStrictMode: true,
   compress: true,
+  
+  // Static file serving
+  output: 'standalone',
   
   // Image optimization
   images: {

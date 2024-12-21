@@ -1,5 +1,6 @@
 import { IconMetadata, IconCategory, IconsMetadata } from '@/types/icon'
 import { ICONS_CONFIG, METADATA_DEFAULTS } from '@/constants/icons'
+import path from 'path'
 
 interface MetadataCache {
   data: IconCategory[] | null
@@ -32,7 +33,7 @@ export async function loadIconMetadata(): Promise<IconCategory[]> {
     }
 
     console.log('Fetching metadata...');
-    const response = await fetch('/icons/metadata.json', {
+    const response = await fetch(`${ICONS_CONFIG.BASE_DIR}/${ICONS_CONFIG.METADATA_FILE}`, {
       cache: process.env.NODE_ENV === 'development' ? 'force-cache' : 'default',
     });
 
@@ -63,7 +64,7 @@ export async function loadIconMetadata(): Promise<IconCategory[]> {
 
 export async function loadSvgContent(path: string): Promise<string | null> {
   try {
-    const response = await fetch(path)
+    const response = await fetch(`/api/icons${path.replace('/icons', '')}`)
     if (!response.ok) throw new Error('Failed to load SVG')
     return response.text()
   } catch (error) {
@@ -76,5 +77,25 @@ export function generateIconPath(icon: IconMetadata): string {
   const sizeSuffix = icon.size === ICONS_CONFIG.SMALL_SIZE 
     ? ICONS_CONFIG.SMALL_SUFFIX 
     : ''
-  return `/icons/${icon.category}/${icon.name}${sizeSuffix}${ICONS_CONFIG.FILE_EXTENSION}`
+  return [
+    ICONS_CONFIG.BASE_DIR,
+    icon.category,
+    `${icon.name}${sizeSuffix}.svg`,
+  ].join('/')
+}
+
+export async function loadSvgBatch(paths: string[]): Promise<{ [key: string]: string }> {
+  try {
+    const searchParams = new URLSearchParams({
+      batch: 'true',
+      paths: JSON.stringify(paths),
+    });
+
+    const response = await fetch(`/api/icons?${searchParams.toString()}`);
+    if (!response.ok) throw new Error('Failed to load SVGs');
+    return response.json();
+  } catch (error) {
+    console.error('Error loading SVG batch:', error);
+    return {};
+  }
 } 

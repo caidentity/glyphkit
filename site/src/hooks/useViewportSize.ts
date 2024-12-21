@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 
 interface ViewportSize {
@@ -5,7 +7,7 @@ interface ViewportSize {
   height: number;
 }
 
-export const useViewportSize = () => {
+export function useViewportSize(): ViewportSize {
   const [size, setSize] = useState<ViewportSize>({
     width: typeof window !== 'undefined' ? window.innerWidth : 0,
     height: typeof window !== 'undefined' ? window.innerHeight : 0,
@@ -24,4 +26,4 @@ export const useViewportSize = () => {
   }, []);
 
   return size;
-}; 
+} 

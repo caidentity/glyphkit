@@ -12,7 +12,7 @@ async function ensureDirectory(dir: string): Promise<void> {
 }
 
 function getIconSize(filename: string): IconSize {
-  return filename.includes('16px') 
+  return filename.includes('-small') 
     ? ICONS_CONFIG.SMALL_SIZE 
     : ICONS_CONFIG.DEFAULT_SIZE
 }
@@ -28,7 +28,11 @@ function createIconMetadata(
   return {
     name,
     category,
-    path: `/icons/${category}/${name}${ICONS_CONFIG.FILE_EXTENSION}`,
+    path: path.posix.join(
+      ICONS_CONFIG.BASE_DIR,
+      category,
+      filename
+    ),
     size: getIconSize(filename)
   }
 }
@@ -37,7 +41,7 @@ async function scanDirectory(dir: string, category: string): Promise<IconMetadat
   const files = await fs.readdir(dir)
   const icons: IconMetadata[] = []
 
-  await Promise.all(files.map(async file => {
+  for (const file of files) {
     const filepath = path.join(dir, file)
     const stat = await fs.stat(filepath)
 
@@ -45,33 +49,40 @@ async function scanDirectory(dir: string, category: string): Promise<IconMetadat
       const subIcons = await scanDirectory(filepath, file)
       icons.push(...subIcons)
     } else if (file.endsWith('.svg')) {
-      const relativePath = path.relative('public', filepath)
-      icons.push(createIconMetadata(file, category, relativePath))
+      icons.push(createIconMetadata(file, category, filepath))
     }
-  }))
+  }
 
   return icons
 }
 
 async function writeMetadata(metadata: IconsMetadata): Promise<void> {
+  const metadataPath = path.join(process.cwd(), '..', 'public', 'icons', 'metadata.json');
+  console.log('Writing metadata to:', metadataPath);
   await fs.writeFile(
-    path.join(process.cwd(), ICONS_CONFIG.METADATA_FILE),
+    metadataPath,
     JSON.stringify(metadata, null, 2)
   )
+  console.log('Metadata written successfully');
 }
 
 async function generateMetadata(): Promise<void> {
   try {
-    const iconsDir = path.join(process.cwd(), ICONS_CONFIG.BASE_DIR)
+    const iconsDir = path.join(process.cwd(), '..', 'public', 'icons')
+    console.log('Checking icons directory:', iconsDir)
     await ensureDirectory(iconsDir)
 
     const items = await fs.readdir(iconsDir)
+    console.log('Found items in directory:', items)
     const categories = await Promise.all(
       items.map(async item => {
         const itemPath = path.join(iconsDir, item)
+        console.log('Checking item:', item, 'at path:', itemPath)
         return (await fs.stat(itemPath)).isDirectory() ? item : null
       })
     ).then(dirs => dirs.filter((dir): dir is string => dir !== null))
+
+    console.log('Found categories:', categories)
 
     if (categories.length === 0) {
       const emptyMetadata: IconsMetadata = { categories: [] }
