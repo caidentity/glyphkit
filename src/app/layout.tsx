@@ -1,7 +1,9 @@
 import React from 'react';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import '@/styles/globals.scss';
+import TopNavigation from '@/components/TopNavigationBar/TopNavigation';
+import Providers from '@/components/Providers';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,7 +13,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Glphykit',
   description: 'Created with Next.js and TypeScript',
-  viewport: 'width=device-width, initial-scale=1',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -21,7 +27,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
-      <body>{children}</body>
+      <body>
+        <Providers>
+          <TopNavigation />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
