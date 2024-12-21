@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from '../../src';
+import { Icon } from '../../src/components/Icon';
 import './App.css';
 
 export function App() {
@@ -15,14 +15,14 @@ export function App() {
           onError={(error) => console.error(error)}
         />
         <Icon 
-          name="arrow" 
+          name="ic_arrow_backward_forward_16px" 
           size={32} 
           color="#d93025"
           aria-label="Medium red arrow"
           onError={(error) => console.error(error)}
         />
         <Icon 
-          name="arrow" 
+          name="ic_arrow_backward_forward_16px" 
           size={48} 
           color="#188038"
           aria-label="Large green arrow"

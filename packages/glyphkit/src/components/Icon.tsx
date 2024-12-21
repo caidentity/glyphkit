@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 
 export interface IconProps {
   name: string;
@@ -9,7 +9,7 @@ export interface IconProps {
   onError?: (error: Error) => void;
 }
 
-export const Icon: React.FC<IconProps> = ({ 
+export const Icon = memo<IconProps>(({ 
   name, 
   size = 24, 
   color = 'currentColor',
@@ -17,24 +17,45 @@ export const Icon: React.FC<IconProps> = ({
   'aria-label': ariaLabel,
   onError,
 }) => {
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke={color}
-      className={`glyphkit-icon ${className}`.trim()}
-      aria-label={ariaLabel || `${name} icon`}
-      role="img"
-    >
-      <path 
-        d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z" 
-        stroke="currentColor"
-        fill={color}
-      />
-    </svg>
-  );
-};
+  const [svgContent, setSvgContent] = useState<string | null>(null);
 
-export default memo(Icon); 
+  useEffect(() => {
+    const loadIcon = async () => {
+      try {
+        const response = await fetch(`/icons/${name}.svg`);
+        if (!response.ok) {
+          throw new Error(`Failed to load icon: ${name}`);
+        }
+        const svg = await response.text();
+        setSvgContent(svg);
+      } catch (error) {
+        onError?.(error as Error);
+      }
+    };
+
+    loadIcon();
+  }, [name, onError]);
+
+  if (!svgContent) return null;
+
+  return (
+    <div 
+      className={`glyphkit-icon ${className}`.trim()}
+      style={{ 
+        width: size, 
+        height: size,
+        color: color 
+      }}
+      dangerouslySetInnerHTML={{ 
+        __html: svgContent
+          .replace(/width="([^"]+)"/, `width="${size}"`)
+          .replace(/height="([^"]+)"/, `height="${size}"`)
+          .replace(/fill="([^"]+)"/, `fill="currentColor"`)
+      }}
+      role="img"
+      aria-label={ariaLabel || `${name} icon`}
+    />
+  );
+});
+
+Icon.displayName = 'Icon'; 

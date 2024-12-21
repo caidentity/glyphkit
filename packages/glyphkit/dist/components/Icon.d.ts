@@ -7,7 +7,5 @@ export interface IconProps {
     'aria-label'?: string;
     onError?: (error: Error) => void;
 }
-export declare const Icon: React.FC<IconProps>;
-declare const _default: React.NamedExoticComponent<IconProps>;
-export default _default;
+export declare const Icon: React.NamedExoticComponent<IconProps>;
 //# sourceMappingURL=Icon.d.ts.map
