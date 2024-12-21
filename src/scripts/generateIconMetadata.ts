@@ -12,7 +12,7 @@ async function ensureDirectory(dir: string): Promise<void> {
 }
 
 function getIconSize(filename: string): IconSize {
-  return filename.includes(ICONS_CONFIG.SMALL_SUFFIX) 
+  return filename.includes('16px') 
     ? ICONS_CONFIG.SMALL_SIZE 
     : ICONS_CONFIG.DEFAULT_SIZE
 }

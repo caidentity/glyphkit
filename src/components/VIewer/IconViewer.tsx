@@ -12,6 +12,7 @@ import IconGrid from './IconGrid';
 import Icon from './Icon';
 import AlertDescription from "../Alert/AlertDescription";
 import Alert from "../Alert/Alert";
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -41,7 +42,7 @@ const IconViewer = () => {
   const filteredIcons = useMemo(() => {
     return allIcons.filter(icon => {
       const matchesSearch = icon.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesSize = icon.size === selectedSize;
+      const matchesSize = icon.name.includes(selectedSize === 16 ? '16px' : '24px');
       const matchesCategory = !selectedCategory || icon.category === selectedCategory;
       const matchesTags = selectedTags.length === 0 || 
         selectedTags.every(tag => hasTag(icon, tag));
@@ -79,6 +80,15 @@ const IconViewer = () => {
       setCopyAlert('Failed to copy to clipboard');
       setTimeout(() => setCopyAlert(null), 2000);
     }
+  };
+
+  const renderTags = () => {
+    if (!selectedIcon?.tags?.length) {
+      return <p className="text-sm text-gray-400">No tags</p>;
+    }
+    return selectedIcon.tags.map(tag => (
+      <Badge key={tag} variant="secondary">{tag}</Badge>
+    ));
   };
 
   return (
@@ -249,13 +259,7 @@ const IconViewer = () => {
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Tags</h3>
                   <div className="flex flex-wrap gap-2 mt-2">
-                    {hasTags(selectedIcon) && selectedIcon.tags ? (
-                      selectedIcon.tags.map(tag => (
-                        <Badge key={tag} variant="secondary">{tag}</Badge>
-                      ))
-                    ) : (
-                      <p className="text-sm text-gray-400">No tags</p>
-                    )}
+                    {renderTags()}
                   </div>
                 </div>
               </div>
