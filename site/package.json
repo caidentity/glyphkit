@@ -13,10 +13,11 @@
     "clean": "rm -rf .next node_modules",
     "clean:metadata": "rm -rf ./public/icon-metadata.json",
     "clean:public": "rm -rf ./public/icons",
-    "prepare:public": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/ || true",
-    "generate-metadata": "NODE_ENV=production tsx src/scripts/generateIconMetadata.ts",
+    "prepare:public": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/ 2>/dev/null || true",
+    "generate-metadata": "set NODE_ENV=production&& tsx src/scripts/generateIconMetadata.ts",
     "prebuild": "npm run clean:metadata && npm run clean:public && npm run prepare:public",
-    "check:icons": "ls -la ../public/icons"
+    "check:icons": "ls -la ../public/icons",
+    "postbuild": "node scripts/verify-build.js"
   },
   "dependencies": {
     "@glyphkit/glyphkit": "^0.0.103",
@@ -42,6 +43,8 @@
     "@types/react": "^18.2.46",
     "@types/react-dom": "18.2.18",
     "autoprefixer": "10.4.16",
+    "copy-webpack-plugin": "^11.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
     "postcss": "8.4.32",
@@ -49,7 +52,6 @@
     "sass": "1.69.7",
     "tailwindcss": "3.4.0",
     "tsx": "^4.19.2",
-    "typescript": "5.3.3",
-    "copy-webpack-plugin": "^11.0.0"
+    "typescript": "5.3.3"
   }
 }

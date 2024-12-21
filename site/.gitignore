@@ -3,6 +3,7 @@
 out/
 build/
 dist/
+public/
 
 # Dependencies
 node_modules/

@@ -37,32 +37,47 @@ function createIconMetadata(
   }
 }
 
+async function validateIconFile(filepath: string): Promise<boolean> {
+  try {
+    const content = await fs.readFile(filepath, 'utf8');
+    return content.includes('<svg') && content.includes('</svg>');
+  } catch {
+    return false;
+  }
+}
+
 async function scanDirectory(dir: string, category: string): Promise<IconMetadata[]> {
-  const files = await fs.readdir(dir)
-  const icons: IconMetadata[] = []
+  const files = await fs.readdir(dir);
+  const icons: IconMetadata[] = [];
 
   for (const file of files) {
-    const filepath = path.join(dir, file)
-    const stat = await fs.stat(filepath)
+    const filepath = path.join(dir, file);
+    const stat = await fs.stat(filepath);
 
     if (stat.isDirectory()) {
-      const subIcons = await scanDirectory(filepath, file)
-      icons.push(...subIcons)
+      const subIcons = await scanDirectory(filepath, file);
+      icons.push(...subIcons);
     } else if (file.endsWith('.svg')) {
-      icons.push(createIconMetadata(file, category, filepath))
+      // Validate SVG file
+      if (await validateIconFile(filepath)) {
+        icons.push(createIconMetadata(file, category, filepath));
+      } else {
+        console.warn(`Warning: Invalid SVG file skipped: ${filepath}`);
+      }
     }
   }
 
-  return icons
+  return icons;
 }
 
 async function generateMetadata(): Promise<void> {
+  const startTime = Date.now();
+  console.log('Starting metadata generation...');
+
   try {
-    // Source directory handling for different environments
     const sourceIconsDir = (() => {
       if (process.env.VERCEL) {
-        // On Vercel, icons should be in the root of the project
-        return path.join(process.cwd(), '..', 'public', 'icons');
+        return path.join(process.cwd(), 'public', 'icons');
       }
       return process.env.NODE_ENV === 'production'
         ? path.join(process.cwd(), 'public', 'icons')
@@ -70,7 +85,7 @@ async function generateMetadata(): Promise<void> {
     })();
 
     console.log('Build environment:', {
-      isVercel: process.env.VERCEL,
+      isVercel: !!process.env.VERCEL,
       nodeEnv: process.env.NODE_ENV,
       cwd: process.cwd(),
       sourceIconsDir,
@@ -80,14 +95,15 @@ async function generateMetadata(): Promise<void> {
     await ensureDirectory(path.join(process.cwd(), 'public'));
     await ensureDirectory(path.join(process.cwd(), 'public', 'icons'));
 
+    // Verify source directory
     try {
-      await fs.access(sourceIconsDir);
+      const stats = await fs.stat(sourceIconsDir);
+      if (!stats.isDirectory()) {
+        throw new Error('Source icons path is not a directory');
+      }
     } catch (error) {
-      console.error(`Source icons directory not found: ${sourceIconsDir}`);
-      console.error('Attempting to list parent directory contents...');
-      const parentDir = path.dirname(sourceIconsDir);
-      const parentContents = await fs.readdir(parentDir);
-      console.log('Parent directory contents:', parentContents);
+      console.error(`Failed to access icons directory: ${sourceIconsDir}`);
+      console.error('Directory structure:', await listDirectoryContents(process.cwd()));
       throw error;
     }
 
@@ -136,16 +152,36 @@ async function generateMetadata(): Promise<void> {
 
     console.log(`✓ Generated metadata for ${totalIcons} icons in ${categories.length} categories`);
     console.log('Metadata written to:', metadataPath);
+
+    const endTime = Date.now();
+    console.log(`Metadata generation completed in ${(endTime - startTime) / 1000}s`);
   } catch (error) {
-    console.error('Error generating metadata:', error);
-    // Create empty metadata file in case of error
-    const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json');
-    await fs.writeFile(metadataPath, JSON.stringify({ categories: [] }, null, 2));
+    console.error('Metadata generation failed:', error);
     throw error;
   }
 }
 
-// Run in both development and production
+// Helper function to list directory contents recursively
+async function listDirectoryContents(dir: string, depth = 0): Promise<string> {
+  if (depth > 3) return '  '.repeat(depth) + '...\n';
+  
+  const items = await fs.readdir(dir);
+  let output = '';
+  
+  for (const item of items) {
+    const fullPath = path.join(dir, item);
+    const stats = await fs.stat(fullPath);
+    output += '  '.repeat(depth) + item + '\n';
+    
+    if (stats.isDirectory()) {
+      output += await listDirectoryContents(fullPath, depth + 1);
+    }
+  }
+  
+  return output;
+}
+
+// Run the generator
 generateMetadata().catch(error => {
   console.error('Failed to generate metadata:', error);
   process.exit(1);
