@@ -32,7 +32,9 @@ const nextConfig = {
     return [
       {
         source: '/icons/:path*',
-        destination: '/public/icons/:path*',
+        destination: process.env.NODE_ENV === 'production'
+          ? '/public/icons/:path*'
+          : path.join('..', 'public', 'icons', ':path*'),
       },
     ];
   },
@@ -54,6 +56,8 @@ const nextConfig = {
             {
               from: path.join(process.cwd(), '..', 'public', 'icons'),
               to: path.join(process.cwd(), 'public', 'icons'),
+              noErrorOnMissing: true, // Don't fail if icons are missing
+              force: true, // Overwrite existing files
             },
           ],
         })

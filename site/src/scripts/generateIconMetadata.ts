@@ -58,15 +58,38 @@ async function scanDirectory(dir: string, category: string): Promise<IconMetadat
 
 async function generateMetadata(): Promise<void> {
   try {
-    // Source directory is now relative to the build environment
-    const sourceIconsDir = process.env.NODE_ENV === 'production'
-      ? path.join(process.cwd(), 'public', 'icons')
-      : path.join(process.cwd(), '..', 'public', 'icons');
-    
-    console.log('Reading icons from:', sourceIconsDir);
-    
-    // Ensure the public directory exists
-    await fs.mkdir(path.join(process.cwd(), 'public'), { recursive: true });
+    // Source directory handling for different environments
+    const sourceIconsDir = (() => {
+      if (process.env.VERCEL) {
+        // On Vercel, icons should be in the root of the project
+        return path.join(process.cwd(), '..', 'public', 'icons');
+      }
+      return process.env.NODE_ENV === 'production'
+        ? path.join(process.cwd(), 'public', 'icons')
+        : path.join(process.cwd(), '..', 'public', 'icons');
+    })();
+
+    console.log('Build environment:', {
+      isVercel: process.env.VERCEL,
+      nodeEnv: process.env.NODE_ENV,
+      cwd: process.cwd(),
+      sourceIconsDir,
+    });
+
+    // Ensure directories exist
+    await ensureDirectory(path.join(process.cwd(), 'public'));
+    await ensureDirectory(path.join(process.cwd(), 'public', 'icons'));
+
+    try {
+      await fs.access(sourceIconsDir);
+    } catch (error) {
+      console.error(`Source icons directory not found: ${sourceIconsDir}`);
+      console.error('Attempting to list parent directory contents...');
+      const parentDir = path.dirname(sourceIconsDir);
+      const parentContents = await fs.readdir(parentDir);
+      console.log('Parent directory contents:', parentContents);
+      throw error;
+    }
 
     const items = await fs.readdir(sourceIconsDir);
     console.log('Found items in directory:', items);

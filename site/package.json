@@ -12,8 +12,10 @@
     "format": "prettier --write .",
     "clean": "rm -rf .next node_modules",
     "clean:metadata": "rm -rf ./public/icon-metadata.json",
+    "clean:public": "rm -rf ./public/icons",
+    "prepare:public": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/ || true",
     "generate-metadata": "NODE_ENV=production tsx src/scripts/generateIconMetadata.ts",
-    "prebuild": "npm run clean:metadata",
+    "prebuild": "npm run clean:metadata && npm run clean:public && npm run prepare:public",
     "check:icons": "ls -la ../public/icons"
   },
   "dependencies": {

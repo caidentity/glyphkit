@@ -11,5 +11,19 @@
       "development": true,
       "preview": true
     }
-  }
+  },
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next",
+      "config": {
+        "copyFiles": [
+          {
+            "from": "../public/icons/**/*",
+            "to": "public/icons"
+          }
+        ]
+      }
+    }
+  ]
 } 
