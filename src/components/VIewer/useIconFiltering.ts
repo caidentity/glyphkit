@@ -6,7 +6,6 @@ interface UseIconFilteringProps {
   searchQuery: string;
   selectedSize: number;
   selectedCategories: string[];
-  selectedTags: string[];
 }
 
 interface UseIconFilteringResult {
@@ -19,24 +18,34 @@ export const useIconFiltering = ({
   searchQuery,
   selectedSize,
   selectedCategories,
-  selectedTags,
 }: UseIconFilteringProps): UseIconFilteringResult => {
   const filteredIcons = useMemo(() => {
     return allIcons.filter(icon => {
-      const matchesSearch = icon.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesSize = icon.name.includes(selectedSize === 16 ? '16px' : '24px');
-      const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(icon.category);
-      const matchesTags = selectedTags.length === 0 || 
-        selectedTags.every(tag => hasTag(icon, tag));
-      
-      return matchesSearch && matchesSize && matchesCategory && matchesTags;
+      if (selectedSize && icon.size !== selectedSize) {
+        return false;
+      }
+
+      if (selectedCategories.length > 0 && !selectedCategories.includes(icon.category)) {
+        return false;
+      }
+
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return (
+          icon.name.toLowerCase().includes(query) ||
+          icon.category.toLowerCase().includes(query)
+        );
+      }
+
+      return true;
     });
-  }, [allIcons, searchQuery, selectedSize, selectedCategories, selectedTags]);
+  }, [allIcons, searchQuery, selectedSize, selectedCategories]);
 
-  const hasActiveFilters = Boolean(searchQuery || selectedCategories.length > 0 || selectedTags.length > 0);
+  const hasActiveFilters = Boolean(
+    searchQuery || 
+    selectedSize || 
+    selectedCategories.length > 0
+  );
 
-  return {
-    filteredIcons,
-    hasActiveFilters
-  };
+  return { filteredIcons, hasActiveFilters };
 }; 

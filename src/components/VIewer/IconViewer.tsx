@@ -22,7 +22,6 @@ import './styling/Viewer.scss';
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState(24);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
   const [copyAlert, setCopyAlert] = useState<string | null>(null);
@@ -30,6 +29,7 @@ const IconViewer = () => {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [iconScale, setIconScale] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [gridPadding, setGridPadding] = useState<number>(16);
 
   const { data: categories = [], isLoading, error } = useQuery<IconCategory[]>({
     queryKey: ['icons-metadata'],
@@ -53,7 +53,6 @@ const IconViewer = () => {
     searchQuery,
     selectedSize,
     selectedCategories,
-    selectedTags,
   });
 
   const handleDownload = async (icon: IconMetadata) => {
@@ -99,7 +98,6 @@ const IconViewer = () => {
   const handleResetFilters = () => {
     setSearchQuery('');
     setSelectedCategories([]);
-    setSelectedTags([]);
   };
 
   return (
@@ -108,16 +106,11 @@ const IconViewer = () => {
         <h1 className="viewer-header__title">Glyph Kit</h1>
         <p className="viewer-header__subtitle">
           Showing {filteredIcons.length} of {allIcons.length} icons
-          {(selectedCategories.length > 0 || selectedTags.length > 0 || searchQuery) && (
+          {(selectedCategories.length > 0 || searchQuery) && (
             <span className="viewer-header__subtitle-highlight">
               {selectedCategories.length > 0 && (
                 <span className="mr-2">
                   in {selectedCategories.length} {selectedCategories.length === 1 ? 'category' : 'categories'}
-                </span>
-              )}
-              {selectedTags.length > 0 && (
-                <span className="mr-2">
-                  with {selectedTags.length} {selectedTags.length === 1 ? 'tag' : 'tags'}
                 </span>
               )}
               {searchQuery && (
@@ -161,14 +154,13 @@ const IconViewer = () => {
             setViewMode={setViewMode}
             iconScale={iconScale}
             setIconScale={setIconScale}
-            selectedTags={selectedTags}
-            setSelectedTags={setSelectedTags}
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}
-            allTags={allTags}
             categories={categories}
             hasActiveFilters={hasActiveFilters}
             onResetFilters={handleResetFilters}
+            gridPadding={gridPadding}
+            setGridPadding={setGridPadding}
           />
         </div>
 
@@ -193,6 +185,7 @@ const IconViewer = () => {
               onIconCopy={(icon) => handleCopy(icon.name)}
               viewMode={viewMode}
               iconScale={iconScale}
+              gridPadding={gridPadding}
             />
           )}
         </div>
@@ -219,14 +212,13 @@ const IconViewer = () => {
               setViewMode={setViewMode}
               iconScale={iconScale}
               setIconScale={setIconScale}
-              selectedTags={selectedTags}
-              setSelectedTags={setSelectedTags}
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
-              allTags={allTags}
               categories={categories}
               hasActiveFilters={hasActiveFilters}
               onResetFilters={handleResetFilters}
+              gridPadding={gridPadding}
+              setGridPadding={setGridPadding}
             />
           </div>
         </div>
@@ -301,13 +293,6 @@ const IconViewer = () => {
                 <div>
                   <h3 className="text-sm font-medium text-gray-500">Category</h3>
                   <p className="text-sm">{selectedIcon.category}</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-sm font-medium text-gray-500">Tags</h3>
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    {renderTags()}
-                  </div>
                 </div>
               </div>
 

@@ -13,14 +13,13 @@ interface FilterPanelProps {
   setViewMode: (mode: 'grid' | 'list') => void;
   iconScale: number;
   setIconScale: (scale: number) => void;
-  selectedTags: string[];
-  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-  allTags: string[];
   categories: IconCategory[];
   hasActiveFilters: boolean;
   onResetFilters: () => void;
+  gridPadding: number;
+  setGridPadding: (padding: number) => void;
 }
 
 const FilterPanel: React.FC<FilterPanelProps> = ({
@@ -30,23 +29,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   setViewMode,
   iconScale,
   setIconScale,
-  selectedTags,
-  setSelectedTags,
   selectedCategories,
   setSelectedCategories,
-  allTags,
   categories,
   hasActiveFilters,
   onResetFilters,
+  gridPadding,
+  setGridPadding,
 }) => {
-  const handleTagToggle = (tag: string) => {
-    setSelectedTags((prev: string[]) => 
-      prev.includes(tag)
-        ? prev.filter((t: string) => t !== tag)
-        : [...prev, tag]
-    );
-  };
-
   const handleCategoryToggle = (categoryName: string) => {
     setSelectedCategories((prev: string[]) => 
       prev.includes(categoryName)
@@ -73,74 +63,80 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
         <div className="filter-content">
           <section className="filter-section">
-            <h3 className="filter-section-title">Size</h3>
-            <div className="filter-section-size">
-              <Button
-                variant={selectedSize === 24 ? "default" : "outline"}
-                onClick={() => setSelectedSize(24)}
-                size="sm"
-              >
-                24px
-              </Button>
-              <Button
-                variant={selectedSize === 16 ? "default" : "outline"}
-                onClick={() => setSelectedSize(16)}
-                size="sm"
-              >
-                16px
-              </Button>
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <h3 className="filter-section-title">View Mode</h3>
-            <div className="filter-section-view">
-              <Button
-                variant={viewMode === 'grid' ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode('grid')}
-                className="rounded-r-none"
-              >
-                <Grid className="h-4 w-4" />
-              </Button>
-              <Button
-                variant={viewMode === 'list' ? "default" : "ghost"}
-                size="sm"
-                onClick={() => setViewMode('list')}
-                className="rounded-l-none"
-              >
-                <List className="h-4 w-4" />
-              </Button>
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <h3 className="filter-section-title">Icon Size</h3>
-            <div className="filter-section-scale">
-              <SlidersHorizontal className="h-4 w-4 text-gray-500" />
-              <Slider
-                value={[iconScale]}
-                min={0.5}
-                max={2}
-                step={0.1}
-                onValueChange={([value]) => setIconScale(value)}
-              />
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <h3 className="filter-section-title">Tags</h3>
-            <div className="filter-section-tags">
-              {allTags.map(tag => (
-                <Badge
-                  key={tag}
-                  variant={selectedTags.includes(tag) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => handleTagToggle(tag)}
+            <div className="filter-section-header">
+              <h3 className="filter-section-title">Size</h3>
+              <div className="filter-section-actions">
+                <Button
+                  variant={selectedSize === 24 ? "default" : "outline"}
+                  onClick={() => setSelectedSize(24)}
+                  size="sm"
                 >
-                  {tag}
-                </Badge>
-              ))}
+                  24px
+                </Button>
+                <Button
+                  variant={selectedSize === 16 ? "default" : "outline"}
+                  onClick={() => setSelectedSize(16)}
+                  size="sm"
+                >
+                  16px
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          <section className="filter-section">
+            <div className="filter-section-header">
+              <h3 className="filter-section-title">View Mode</h3>
+              <div className="filter-section-actions">
+                <Button
+                  variant={viewMode === 'grid' ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                  className="rounded-r-none"
+                >
+                  <Grid className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? "default" : "ghost"}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className="rounded-l-none"
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </section>
+
+          <section className="filter-section">
+            <div className="filter-section-header">
+              <h3 className="filter-section-title">Icon Size</h3>
+              <div className="filter-section-scale">
+                <Slider
+                  value={[iconScale]}
+                  min={0.5}
+                  max={2}
+                  step={0.1}
+                  onValueChange={([value]) => setIconScale(value)}
+                  className="w-[140px]"
+                />
+              </div>
+            </div>
+          </section>
+
+          <section className="filter-section">
+            <div className="filter-section-header">
+              <h3 className="filter-section-title">Grid Spacing</h3>
+              <div className="filter-section-scale">
+                <Slider
+                  value={[gridPadding]}
+                  min={4}
+                  max={24}
+                  step={2}
+                  onValueChange={([value]) => setGridPadding(value)}
+                  className="w-[140px]"
+                />
+              </div>
             </div>
           </section>
 
