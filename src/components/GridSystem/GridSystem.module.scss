@@ -1,0 +1,7 @@
+@import "~@heliux-org/ui-style/dist/mixins";
+@import "../../styles/states";
+
+.box-pageheader {
+  width: 100%;
+  height: calc(100VH - 224px);
+}
