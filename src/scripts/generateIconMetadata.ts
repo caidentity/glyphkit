@@ -62,8 +62,21 @@ async function writeMetadata(metadata: IconsMetadata): Promise<void> {
 
 async function generateMetadata(): Promise<void> {
   try {
+    const publicIconsDir = path.join(process.cwd(), 'public/icons')
+    await ensureDirectory(publicIconsDir)
+    
     const iconsDir = path.join(process.cwd(), ICONS_CONFIG.BASE_DIR)
     await ensureDirectory(iconsDir)
+
+    // If base icons directory doesn't exist, create empty metadata
+    try {
+      await fs.access(iconsDir)
+    } catch {
+      const emptyMetadata: IconsMetadata = { categories: [] }
+      await writeMetadata(emptyMetadata)
+      console.log('✓ Created empty metadata file - icons directory not found')
+      return
+    }
 
     const items = await fs.readdir(iconsDir)
     const categories = await Promise.all(
@@ -100,12 +113,13 @@ async function generateMetadata(): Promise<void> {
     console.log(`✓ Generated metadata for ${totalIcons} icons in ${categories.length} categories`)
   } catch (error) {
     console.error('Error generating metadata:', error)
-    await writeMetadata({ categories: [] })
+    const emptyMetadata: IconsMetadata = { categories: [] }
+    await writeMetadata(emptyMetadata)
     console.log('⚠️ Created empty metadata file due to error')
   }
 }
 
-// Only run in development or during build
-if (process.env.NODE_ENV !== 'production') {
-  generateMetadata().catch(console.error)
-} 
+// Remove top-level await, use regular Promise chain
+generateMetadata().catch(error => {
+  console.error('Failed to generate metadata:', error)
+}) 
