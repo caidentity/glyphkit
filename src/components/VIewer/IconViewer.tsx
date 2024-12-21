@@ -14,19 +14,24 @@ import AlertDescription from "../Alert/AlertDescription";
 import Alert from "../Alert/Alert";
 import { useVirtualizer } from '@tanstack/react-virtual';
 import Slider from "../Slider/Slider";
+import FilterPanel from './FilterPanel';
+import { useIconFiltering } from './useIconFiltering';
+import { IconCategory } from '@/types/icon';
+import './styling/Viewer.scss';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState(24);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
   const [copyAlert, setCopyAlert] = useState<string | null>(null);
   const [showLargePreview, setShowLargePreview] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [iconScale, setIconScale] = useState(1);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
-  const { data: categories = [], isLoading, error } = useQuery({
+  const { data: categories = [], isLoading, error } = useQuery<IconCategory[]>({
     queryKey: ['icons-metadata'],
     queryFn: loadIconMetadata,
   });
@@ -43,17 +48,13 @@ const IconViewer = () => {
     return Array.from(tags);
   }, [allIcons]);
 
-  const filteredIcons = useMemo(() => {
-    return allIcons.filter(icon => {
-      const matchesSearch = icon.name.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesSize = icon.name.includes(selectedSize === 16 ? '16px' : '24px');
-      const matchesCategory = !selectedCategory || icon.category === selectedCategory;
-      const matchesTags = selectedTags.length === 0 || 
-        selectedTags.every(tag => hasTag(icon, tag));
-      
-      return matchesSearch && matchesSize && matchesCategory && matchesTags;
-    });
-  }, [allIcons, searchQuery, selectedSize, selectedCategory, selectedTags]);
+  const { filteredIcons, hasActiveFilters } = useIconFiltering({
+    allIcons,
+    searchQuery,
+    selectedSize,
+    selectedCategories,
+    selectedTags,
+  });
 
   const handleDownload = async (icon: IconMetadata) => {
     try {
@@ -95,133 +96,92 @@ const IconViewer = () => {
     ));
   };
 
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setSelectedCategories([]);
+    setSelectedTags([]);
+  };
+
   return (
-    <div className="p-6 max-w-7xl mx-auto relative">
-      <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">Glyph Kit</h1>
-        <p className="text-gray-600">Browse and search through our collection of {allIcons.length} icons</p>
+    <div className="viewer">
+      <div className="viewer-header">
+        <h1 className="viewer-header__title">Glyph Kit</h1>
+        <p className="viewer-header__subtitle">
+          Showing {filteredIcons.length} of {allIcons.length} icons
+          {(selectedCategories.length > 0 || selectedTags.length > 0 || searchQuery) && (
+            <span className="viewer-header__subtitle-highlight">
+              {selectedCategories.length > 0 && (
+                <span className="mr-2">
+                  in {selectedCategories.length} {selectedCategories.length === 1 ? 'category' : 'categories'}
+                </span>
+              )}
+              {selectedTags.length > 0 && (
+                <span className="mr-2">
+                  with {selectedTags.length} {selectedTags.length === 1 ? 'tag' : 'tags'}
+                </span>
+              )}
+              {searchQuery && (
+                <span>matching "{searchQuery}"</span>
+              )}
+            </span>
+          )}
+        </p>
       </div>
 
-      {copyAlert && (
-        <div className="fixed top-4 right-4 z-50">
-          <Alert variant="success">
-            <Check className="h-4 w-4 mr-2" />
-            <AlertDescription>{copyAlert}</AlertDescription>
-          </Alert>
+      <div className="viewer-search">
+        <div className="viewer-search__input-wrapper">
+          <Input
+            type="text"
+            placeholder="Search icons..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="viewer-search__input"
+          />
+          <Search className="viewer-search__icon" />
         </div>
-      )}
+      </div>
 
-      {isLoading ? (
-        <div className="flex items-center justify-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+      <div className="viewer-mobile-filter">
+        <Button
+          variant="outline"
+          onClick={() => setIsFilterOpen(true)}
+          className="viewer-mobile-filter__button"
+        >
+          <SlidersHorizontal className="h-4 w-4" />
+          Filters
+        </Button>
+      </div>
+
+      <div className="viewer-content">
+        <div className="viewer-content__sidebar">
+          <FilterPanel
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+            iconScale={iconScale}
+            setIconScale={setIconScale}
+            selectedTags={selectedTags}
+            setSelectedTags={setSelectedTags}
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+            allTags={allTags}
+            categories={categories}
+            hasActiveFilters={hasActiveFilters}
+            onResetFilters={handleResetFilters}
+          />
         </div>
-      ) : error ? (
-        <Alert variant="destructive">
-          <AlertDescription>
-            Failed to load icons. Please try again later.
-          </AlertDescription>
-        </Alert>
-      ) : (
-        <div className={`transition-all duration-300 ease-in-out ${selectedIcon ? 'mr-96' : 'mr-0'}`}>
-          <div className="mb-8">
-            <div className="relative max-w-2xl mx-auto">
-              <Input
-                type="text"
-                placeholder="Search icons..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 h-12 text-lg"
-              />
-              <Search className="absolute left-3 top-3.5 h-6 w-6 text-gray-400" />
+
+        <div className="viewer-content__main">
+          {isLoading ? (
+            <div className="viewer-loading">
+              <div className="viewer-loading__spinner" />
             </div>
-          </div>
-
-          <div className="mb-6 space-y-4 bg-gray-50 p-4 rounded-lg">
-            <div className="flex items-center justify-between">
-              <div className="flex gap-2">
-                <Button
-                  variant={selectedSize === 24 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(24)}
-                  size="sm"
-                >
-                  24px
-                </Button>
-                <Button
-                  variant={selectedSize === 16 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(16)}
-                  size="sm"
-                >
-                  16px
-                </Button>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 border rounded-lg">
-                  <Button
-                    variant={viewMode === 'grid' ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => setViewMode('grid')}
-                    className="rounded-r-none"
-                  >
-                    <Grid className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant={viewMode === 'list' ? "default" : "ghost"}
-                    size="sm"
-                    onClick={() => setViewMode('list')}
-                    className="rounded-l-none"
-                  >
-                    <List className="h-4 w-4" />
-                  </Button>
-                </div>
-
-                <div className="flex items-center gap-2 min-w-[200px]">
-                  <SlidersHorizontal className="h-4 w-4 text-gray-500" />
-                  <Slider
-                    value={[iconScale]}
-                    min={0.5}
-                    max={2}
-                    step={0.1}
-                    onValueChange={([value]) => setIconScale(value)}
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <select
-                className="w-full p-2 border rounded"
-                value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-              >
-                <option value="">All Categories</option>
-                {categories.map(category => (
-                  <option key={category.name} value={category.name}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              {allTags.map(tag => (
-                <Badge
-                  key={tag}
-                  variant={selectedTags.includes(tag) ? "default" : "outline"}
-                  className="cursor-pointer"
-                  onClick={() => setSelectedTags(prev => 
-                    prev.includes(tag) 
-                      ? prev.filter(t => t !== tag)
-                      : [...prev, tag]
-                  )}
-                >
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-          </div>
-
-          {filteredIcons.length === 0 ? (
+          ) : error ? (
+            <Alert variant="destructive">
+              <AlertDescription>Failed to load icons</AlertDescription>
+            </Alert>
+          ) : filteredIcons.length === 0 ? (
             <div className="text-center py-12 text-gray-500">
               No icons found matching your criteria
             </div>
@@ -236,16 +196,45 @@ const IconViewer = () => {
             />
           )}
         </div>
+      </div>
+
+      {/* Mobile Filter Overlay */}
+      {isFilterOpen && (
+        <div className="viewer-filter-overlay">
+          <div className="viewer-filter-overlay__panel">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-bold">Filters</h2>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setIsFilterOpen(false)}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+            <FilterPanel
+              selectedSize={selectedSize}
+              setSelectedSize={setSelectedSize}
+              viewMode={viewMode}
+              setViewMode={setViewMode}
+              iconScale={iconScale}
+              setIconScale={setIconScale}
+              selectedTags={selectedTags}
+              setSelectedTags={setSelectedTags}
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              allTags={allTags}
+              categories={categories}
+              hasActiveFilters={hasActiveFilters}
+              onResetFilters={handleResetFilters}
+            />
+          </div>
+        </div>
       )}
 
+      {/* Details Panel */}
       {selectedIcon && (
-        <div 
-          className={`
-            fixed top-0 right-0 h-full w-96 bg-white border-l shadow-lg 
-            transform transition-transform duration-300 ease-in-out overflow-y-auto
-            ${selectedIcon ? 'translate-x-0' : 'translate-x-full'}
-          `}
-        >
+        <div className="fixed inset-y-0 right-0 w-96 bg-white border-l shadow-lg overflow-y-auto z-30">
           <div className="p-6">
             <div className="border-b pb-4 mb-6">
               <div className="flex justify-between items-center mb-2">
@@ -361,6 +350,16 @@ const IconViewer = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Copy Alert */}
+      {copyAlert && (
+        <div className="viewer-alert">
+          <Alert variant="success">
+            <Check className="h-4 w-4 mr-2" />
+            <AlertDescription>{copyAlert}</AlertDescription>
+          </Alert>
         </div>
       )}
     </div>
