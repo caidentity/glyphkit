@@ -29,24 +29,37 @@ const nextConfig = {
 
   // Configure rewrites to handle icon requests
   async rewrites() {
-    if (process.env.NODE_ENV === 'development') {
-      return [
-        {
-          source: '/icons/:path*',
-          destination: path.join('..', 'public', 'icons', ':path*'),
-        },
-      ];
-    }
-    return [];
+    return [
+      {
+        source: '/icons/:path*',
+        destination: '/public/icons/:path*',
+      },
+    ];
   },
 
   // Configure webpack to handle SVG files from parent directory in production
-  webpack: (config, { isServer }) => {
-    config.resolve.alias = {
-      ...config.resolve.alias,
-      '@icons': path.join(process.cwd(), '..', 'public', 'icons'),
-    };
-    
+  webpack: (config, { isServer, dev }) => {
+    // Add SVG handling
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+
+    // Copy icons to public directory during build
+    if (isServer && !dev) {
+      const CopyPlugin = require('copy-webpack-plugin');
+      config.plugins.push(
+        new CopyPlugin({
+          patterns: [
+            {
+              from: path.join(process.cwd(), '..', 'public', 'icons'),
+              to: path.join(process.cwd(), 'public', 'icons'),
+            },
+          ],
+        })
+      );
+    }
+
     return config;
   },
 };

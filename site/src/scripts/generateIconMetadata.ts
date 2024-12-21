@@ -56,24 +56,20 @@ async function scanDirectory(dir: string, category: string): Promise<IconMetadat
   return icons
 }
 
-async function writeMetadata(metadata: IconsMetadata): Promise<void> {
-  const metadataPath = path.join(process.cwd(), '..', 'public', 'icons', 'metadata.json');
-  console.log('Writing metadata to:', metadataPath);
-  await fs.writeFile(
-    metadataPath,
-    JSON.stringify(metadata, null, 2)
-  )
-  console.log('Metadata written successfully');
-}
-
 async function generateMetadata(): Promise<void> {
   try {
-    // Read icons from the root public directory
-    const sourceIconsDir = path.join(process.cwd(), '..', 'public', 'icons')
-    console.log('Reading icons from:', sourceIconsDir)
+    // Source directory is now relative to the build environment
+    const sourceIconsDir = process.env.NODE_ENV === 'production'
+      ? path.join(process.cwd(), 'public', 'icons')
+      : path.join(process.cwd(), '..', 'public', 'icons');
+    
+    console.log('Reading icons from:', sourceIconsDir);
+    
+    // Ensure the public directory exists
+    await fs.mkdir(path.join(process.cwd(), 'public'), { recursive: true });
 
-    const items = await fs.readdir(sourceIconsDir)
-    console.log('Found items in directory:', items)
+    const items = await fs.readdir(sourceIconsDir);
+    console.log('Found items in directory:', items);
     
     const categories = await Promise.all(
       items.map(async item => {
@@ -108,19 +104,26 @@ async function generateMetadata(): Promise<void> {
 
     const metadata: IconsMetadata = { categories: categoriesData }
     
+    // Calculate total icons
+    const totalIcons = categoriesData.reduce((sum, cat) => sum + cat.icons.length, 0);
+    
     // Write metadata to the site's public directory
-    const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json')
-    await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2))
+    const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json');
+    await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2));
 
-    const totalIcons = categoriesData.reduce((sum, cat) => sum + cat.icons.length, 0)
-    console.log(`✓ Generated metadata for ${totalIcons} icons in ${categories.length} categories`)
+    console.log(`✓ Generated metadata for ${totalIcons} icons in ${categories.length} categories`);
+    console.log('Metadata written to:', metadataPath);
   } catch (error) {
-    console.error('Error generating metadata:', error)
-    throw error
+    console.error('Error generating metadata:', error);
+    // Create empty metadata file in case of error
+    const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json');
+    await fs.writeFile(metadataPath, JSON.stringify({ categories: [] }, null, 2));
+    throw error;
   }
 }
 
-// Only run in development or during build
-if (process.env.NODE_ENV !== 'production') {
-  generateMetadata().catch(console.error)
-} 
+// Run in both development and production
+generateMetadata().catch(error => {
+  console.error('Failed to generate metadata:', error);
+  process.exit(1);
+}); 
