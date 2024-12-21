@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import './TopNavigation.scss';
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -12,19 +13,36 @@ const navigation = [
 
 export default function TopNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
 
+  useEffect(() => {
+    // Check for saved theme preference or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    setTheme(initialTheme as 'light' | 'dark');
+    document.documentElement.setAttribute('data-theme', initialTheme);
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
+
   return (
-    <header className="bg-white shadow-sm">
-      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-label="Top">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex lg:hidden">
+    <header className="top-navigation">
+      <nav className="top-navigation__container" aria-label="Top">
+        <div className="top-navigation__content">
+          <div className="top-navigation__mobile-menu">
             <button
               type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle mobile menu"
             >
-              <span className="sr-only">Open main menu</span>
               {mobileMenuOpen ? (
                 <X className="h-6 w-6" aria-hidden="true" />
               ) : (
@@ -33,42 +51,48 @@ export default function TopNavigation() {
             </button>
           </div>
           
-          {/* Logo */}
-          <div className="flex lg:flex-1">
-            <Link href="/" className="text-xl font-bold text-gray-900">
-              Glyph Kit
-            </Link>
-          </div>
+          <Link href="/" className="top-navigation__logo">
+            Glyph Kit
+          </Link>
 
-          {/* Desktop navigation */}
-          <div className="hidden lg:flex lg:gap-x-12">
+          <div className="top-navigation__links">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-semibold leading-6 ${
-                  pathname === item.href
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-900 hover:text-blue-600'
+                className={`top-navigation__link ${
+                  pathname === item.href ? 'top-navigation__link--active' : ''
                 }`}
               >
                 {item.name}
               </Link>
             ))}
+            
+            <button
+              onClick={toggleTheme}
+              className="top-navigation__theme-toggle"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <Moon className="h-5 w-5" />
+              ) : (
+                <Sun className="h-5 w-5" />
+              )}
+            </button>
           </div>
         </div>
 
         {/* Mobile menu */}
-        <div className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}>
-          <div className="space-y-1 pb-3 pt-2">
+        {mobileMenuOpen && (
+          <div className="py-2 mt-2">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`block py-2 px-3 rounded-md ${
                   pathname === item.href
-                    ? 'bg-blue-50 text-blue-600'
-                    : 'text-gray-900 hover:bg-gray-50'
+                    ? 'bg-blue-50 text-blue-600 dark:bg-gray-800 dark:text-blue-400'
+                    : 'text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -76,7 +100,7 @@ export default function TopNavigation() {
               </Link>
             ))}
           </div>
-        </div>
+        )}
       </nav>
     </header>
   );
