@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { IconMetadata } from '@/types/icon';
-import { X, Code, Download, FileText, Link } from 'lucide-react';
+import { X, Code, Download, FileText } from 'lucide-react';
 import Button from "../Button/Button";
 import Icon from './Icon';
 import CodeBlock from '../CodeBlock/CodeBlock';
@@ -32,24 +32,53 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
             variant="ghost"
             size="sm"
             onClick={onClose}
-            className="icon-detail-panel__close"
           >
-            <X className="h-4 w-4" />
+            <X className="icon-detail-panel__close-icon" />
           </Button>
         </div>
         <p className="icon-detail-panel__name">{icon.name}</p>
       </div>
 
       <div className="icon-detail-panel__content">
+        <div className="icon-detail-panel__actions">
+          <Button
+            onClick={() => onCopy(icon.name)}
+            variant="outline"
+            size="sm"
+          >
+            <Code className="icon-detail-panel__button-icon" />
+            <span>Copy Name</span>
+          </Button>
+
+          <Button
+            onClick={() => onDownload(icon)}
+            variant="outline"
+            size="sm"
+          >
+            <Download className="icon-detail-panel__button-icon" />
+            <span>Download</span>
+          </Button>
+
+          <Button
+            onClick={() => onCopy(icon.path)}
+            variant="outline"
+            size="sm"
+          >
+            <FileText className="icon-detail-panel__button-icon" />
+            <span>Copy Path</span>
+          </Button>
+        </div>
+
         <section className="icon-detail-panel__preview">
           <div className="icon-detail-panel__preview-header">
             <h3>Preview</h3>
-            <button 
-              className="icon-detail-panel__preview-toggle"
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setShowLargePreview(!showLargePreview)}
             >
               {showLargePreview ? "Show Original" : "Show Large"}
-            </button>
+            </Button>
           </div>
           <div className="icon-detail-panel__preview-container">
             <Icon
@@ -84,37 +113,6 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
             <p>{icon.category}</p>
           </div>
         </section>
-
-        <div className="icon-detail-panel__actions">
-          <Button
-            onClick={() => onCopy(`<Icon name="${icon.name}" size={${icon.size}} />`)}
-            variant="outline"
-            className="icon-detail-panel__action-button"
-          >
-            <Code className="h-4 w-4" />
-            <span>Copy Component</span>
-            <Link className="h-4 w-4" />
-          </Button>
-
-          <Button
-            onClick={() => onDownload(icon)}
-            variant="outline"
-            className="icon-detail-panel__action-button"
-          >
-            <Download className="h-4 w-4" />
-            <span>Download SVG</span>
-          </Button>
-
-          <Button
-            onClick={() => onCopy(icon.path)}
-            variant="outline"
-            className="icon-detail-panel__action-button"
-          >
-            <FileText className="h-4 w-4" />
-            <span>Copy Path</span>
-            <Link className="h-4 w-4" />
-          </Button>
-        </div>
       </div>
     </div>
   );
