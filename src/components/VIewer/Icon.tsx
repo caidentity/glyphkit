@@ -1,59 +1,51 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { IconMetadata } from '@/types/icon';
+import { loadSvgContent } from '@/lib/iconLoader';
+import { useQuery } from '@tanstack/react-query';
 
-interface IconProps {
+interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: IconMetadata;
   className?: string;
-  onClick?: () => void;
   showSize?: boolean;
+  customSize?: number;
 }
 
-const Icon = ({ icon, className = '', onClick, showSize = true }: IconProps) => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [hasError, setHasError] = React.useState(false);
+const Icon: React.FC<IconProps> = ({ 
+  icon, 
+  className = "", 
+  showSize = false,
+  customSize,
+  ...props 
+}) => {
+  const { data: svgContent } = useQuery({
+    queryKey: ['icon-svg', icon.path],
+    queryFn: () => loadSvgContent(icon.path),
+  });
 
-  const previewSize = showSize 
-    ? (icon.size === 16 ? '32px' : '48px') 
-    : `${icon.size}px`;
+  const iconSize = customSize || icon.size;
 
   return (
     <div 
-      className={`
-        relative inline-flex items-center justify-center
-        ${onClick ? 'cursor-pointer' : ''}
-        ${className}
-      `}
-      style={{ width: previewSize, height: previewSize }}
-      onClick={onClick}
+      className={`inline-flex flex-col items-center ${className}`}
+      {...props}
     >
-      {isLoading && (
-        <div className="absolute inset-0 bg-gray-100 animate-pulse rounded-md" />
-      )}
-      {hasError ? (
-        <div className="absolute inset-0 bg-red-50 flex items-center justify-center rounded-md">
-          <span className="text-xs text-red-400">Error</span>
-        </div>
-      ) : (
-        <Image
-          src={icon.path}
-          alt={icon.name}
-          width={parseInt(previewSize)}
-          height={parseInt(previewSize)}
-          className={`
-            w-full h-full object-contain
-            transition-opacity duration-200
-            ${isLoading ? 'opacity-0' : 'opacity-100'}
-          `}
-          onLoadingComplete={() => setIsLoading(false)}
-          onError={() => {
-            setHasError(true);
-            setIsLoading(false);
+      {svgContent && (
+        <div 
+          style={{ 
+            width: iconSize, 
+            height: iconSize 
           }}
-          priority={icon.size === 24}
+          dangerouslySetInnerHTML={{ 
+            __html: svgContent
+              .replace(/width="([^"]+)"/, `width="${iconSize}"`)
+              .replace(/height="([^"]+)"/, `height="${iconSize}"`)
+          }} 
         />
+      )}
+      {showSize && (
+        <span className="text-xs text-gray-400 mt-1">{iconSize}px</span>
       )}
     </div>
   );

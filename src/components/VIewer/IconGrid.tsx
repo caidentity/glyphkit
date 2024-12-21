@@ -80,16 +80,21 @@ const IconGrid = ({
                            border rounded-lg hover:border-blue-500 hover:shadow-sm 
                            transition-all duration-200"
                 >
-                  <Icon
-                    icon={icon}
-                    className="p-2"
-                  />
-                  <span className="text-sm font-medium text-gray-700 text-center">
-                    {icon.name}
-                  </span>
-                  <span className="text-xs text-gray-400">
-                    {icon.size}px
-                  </span>
+                  <div className="flex-1 flex items-center justify-center mb-2">
+                    <Icon
+                      icon={icon}
+                      customSize={icon.size * 1.5}
+                      className="p-2"
+                    />
+                  </div>
+                  <div className="w-full text-center space-y-1">
+                    <p className="text-xs text-gray-600 truncate max-w-full px-2">
+                      {icon.name}
+                    </p>
+                    <span className="text-xs text-gray-400">
+                      {icon.size}px
+                    </span>
+                  </div>
                   
                   <div className="absolute inset-0 bg-white/90 opacity-0 
                               group-hover:opacity-100 transition-opacity duration-200 

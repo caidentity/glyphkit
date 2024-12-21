@@ -21,6 +21,7 @@ const IconViewer = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('');
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
   const [copyAlert, setCopyAlert] = useState<string | null>(null);
+  const [showLargePreview, setShowLargePreview] = useState(false);
 
   const { data: categories = [], isLoading, error } = useQuery({
     queryKey: ['icons-metadata'],
@@ -219,12 +220,26 @@ const IconViewer = () => {
             </div>
             
             <div className="space-y-6">
-              <div className="flex justify-center items-center h-48 border rounded-lg bg-gray-50">
-                <Icon
-                  icon={selectedIcon}
-                  showSize={true}
-                  className="p-4"
-                />
+              <div className="flex flex-col gap-2">
+                <div className="flex justify-between items-center">
+                  <h3 className="text-sm font-medium text-gray-500">Preview</h3>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowLargePreview(!showLargePreview)}
+                    className="text-xs"
+                  >
+                    {showLargePreview ? "Show Original" : "Show Large"}
+                  </Button>
+                </div>
+                <div className="flex justify-center items-center h-48 border rounded-lg bg-gray-50">
+                  <Icon
+                    icon={selectedIcon}
+                    showSize={true}
+                    className="p-4"
+                    customSize={showLargePreview ? selectedIcon.size * 3 : selectedIcon.size}
+                  />
+                </div>
               </div>
               
               <div className="space-y-2">
