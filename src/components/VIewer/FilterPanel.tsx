@@ -7,8 +7,8 @@ import { IconCategory } from '@/types/icon';
 import './styling/FilterPanel.scss';
 
 interface FilterPanelProps {
-  selectedSize: number;
-  setSelectedSize: (size: number) => void;
+  selectedSize: number | null;
+  setSelectedSize: React.Dispatch<React.SetStateAction<number | null>>;
   viewMode: 'grid' | 'list';
   setViewMode: (mode: 'grid' | 'list') => void;
   iconScale: number;
@@ -68,14 +68,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               <div className="filter-section-actions">
                 <Button
                   variant={selectedSize === 24 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(24)}
+                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
                   size="sm"
                 >
                   24px
                 </Button>
                 <Button
                   variant={selectedSize === 16 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(16)}
+                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
                   size="sm"
                 >
                   16px

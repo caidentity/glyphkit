@@ -4,7 +4,7 @@ import { IconMetadata, hasTag } from '@/types/icon';
 interface UseIconFilteringProps {
   allIcons: IconMetadata[];
   searchQuery: string;
-  selectedSize: number;
+  selectedSize: number | null;
   selectedCategories: string[];
 }
 
@@ -21,7 +21,7 @@ export const useIconFiltering = ({
 }: UseIconFilteringProps): UseIconFilteringResult => {
   const filteredIcons = useMemo(() => {
     return allIcons.filter(icon => {
-      if (selectedSize && icon.size !== selectedSize) {
+      if (selectedSize !== null && icon.size !== selectedSize) {
         return false;
       }
 
@@ -43,7 +43,7 @@ export const useIconFiltering = ({
 
   const hasActiveFilters = Boolean(
     searchQuery || 
-    selectedSize || 
+    selectedSize !== null || 
     selectedCategories.length > 0
   );
 

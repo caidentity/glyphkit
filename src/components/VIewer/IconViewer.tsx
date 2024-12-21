@@ -21,7 +21,7 @@ import './styling/Viewer.scss';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedSize, setSelectedSize] = useState(24);
+  const [selectedSize, setSelectedSize] = useState<number | null>(24);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
   const [copyAlert, setCopyAlert] = useState<string | null>(null);
@@ -97,6 +97,7 @@ const IconViewer = () => {
 
   const handleResetFilters = () => {
     setSearchQuery('');
+    setSelectedSize(null);
     setSelectedCategories([]);
   };
 
