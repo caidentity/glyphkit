@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Search, Download, X, Link, Check, Code, ArrowDownToLine, FileText } from 'lucide-react';
+import { Search, Download, X, Link, Check, Code, ArrowDownToLine, FileText, Grid, List, SlidersHorizontal } from 'lucide-react';
 import  Input  from "../Input/Input";
 import  Button  from "../Button/Button";
 import Badge  from "../Badge/Badge";
@@ -13,6 +13,7 @@ import Icon from './Icon';
 import AlertDescription from "../Alert/AlertDescription";
 import Alert from "../Alert/Alert";
 import { useVirtualizer } from '@tanstack/react-virtual';
+import Slider from "../Slider/Slider";
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -22,6 +23,8 @@ const IconViewer = () => {
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
   const [copyAlert, setCopyAlert] = useState<string | null>(null);
   const [showLargePreview, setShowLargePreview] = useState(false);
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [iconScale, setIconScale] = useState(1);
 
   const { data: categories = [], isLoading, error } = useQuery({
     queryKey: ['icons-metadata'],
@@ -94,6 +97,11 @@ const IconViewer = () => {
 
   return (
     <div className="p-6 max-w-7xl mx-auto relative">
+      <div className="text-center mb-8">
+        <h1 className="text-3xl font-bold mb-2">Icon Library</h1>
+        <p className="text-gray-600">Browse and search through our collection of {allIcons.length} icons</p>
+      </div>
+
       {copyAlert && (
         <div className="fixed top-4 right-4 z-50">
           <Alert variant="success">
@@ -114,53 +122,86 @@ const IconViewer = () => {
           </AlertDescription>
         </Alert>
       ) : (
-        <div 
-          className={`
-            transition-all duration-300 ease-in-out
-            ${selectedIcon ? 'mr-96' : 'mr-0'}
-          `}
-        >
-          <div className="mb-6 space-y-4">
-            <div className="relative">
+        <div className={`transition-all duration-300 ease-in-out ${selectedIcon ? 'mr-96' : 'mr-0'}`}>
+          <div className="mb-8">
+            <div className="relative max-w-2xl mx-auto">
               <Input
                 type="text"
                 placeholder="Search icons..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10"
+                className="w-full pl-10 h-12 text-lg"
               />
-              <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-3 top-3.5 h-6 w-6 text-gray-400" />
+            </div>
+          </div>
+
+          <div className="mb-6 space-y-4 bg-gray-50 p-4 rounded-lg">
+            <div className="flex items-center justify-between">
+              <div className="flex gap-2">
+                <Button
+                  variant={selectedSize === 24 ? "default" : "outline"}
+                  onClick={() => setSelectedSize(24)}
+                  size="sm"
+                >
+                  24px
+                </Button>
+                <Button
+                  variant={selectedSize === 16 ? "default" : "outline"}
+                  onClick={() => setSelectedSize(16)}
+                  size="sm"
+                >
+                  16px
+                </Button>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 border rounded-lg">
+                  <Button
+                    variant={viewMode === 'grid' ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    className="rounded-r-none"
+                  >
+                    <Grid className="h-4 w-4" />
+                  </Button>
+                  <Button
+                    variant={viewMode === 'list' ? "default" : "ghost"}
+                    size="sm"
+                    onClick={() => setViewMode('list')}
+                    className="rounded-l-none"
+                  >
+                    <List className="h-4 w-4" />
+                  </Button>
+                </div>
+
+                <div className="flex items-center gap-2 min-w-[200px]">
+                  <SlidersHorizontal className="h-4 w-4 text-gray-500" />
+                  <Slider
+                    value={[iconScale]}
+                    min={0.5}
+                    max={2}
+                    step={0.1}
+                    onValueChange={([value]) => setIconScale(value)}
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className="flex gap-2">
-              <Button
-                variant={selectedSize === 24 ? "default" : "outline"}
-                onClick={() => setSelectedSize(24)}
-                size="md"
+            <div className="flex gap-4">
+              <select
+                className="w-full p-2 border rounded"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
               >
-                24px
-              </Button>
-              <Button
-                variant={selectedSize === 16 ? "default" : "outline"}
-                onClick={() => setSelectedSize(16)}
-                size="md"
-              >
-                16px
-              </Button>
+                <option value="">All Categories</option>
+                {categories.map(category => (
+                  <option key={category.name} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
-
-            <select
-              className="w-full p-2 border rounded"
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              <option value="">All Categories</option>
-              {categories.map(category => (
-                <option key={category.name} value={category.name}>
-                  {category.name}
-                </option>
-              ))}
-            </select>
 
             <div className="flex flex-wrap gap-2">
               {allTags.map(tag => (
@@ -190,6 +231,8 @@ const IconViewer = () => {
               onIconSelect={setSelectedIcon}
               onIconDownload={handleDownload}
               onIconCopy={(icon) => handleCopy(icon.name)}
+              viewMode={viewMode}
+              iconScale={iconScale}
             />
           )}
         </div>

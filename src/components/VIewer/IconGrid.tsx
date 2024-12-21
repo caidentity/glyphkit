@@ -12,13 +12,17 @@ interface IconGridProps {
   onIconSelect?: (icon: IconMetadata) => void;
   onIconDownload?: (icon: IconMetadata) => void;
   onIconCopy?: (icon: IconMetadata) => void;
+  viewMode: 'grid' | 'list';
+  iconScale: number;
 }
 
 const IconGrid = ({ 
   icons, 
   onIconSelect,
   onIconDownload,
-  onIconCopy
+  onIconCopy,
+  viewMode,
+  iconScale
 }: IconGridProps) => {
   const parentRef = React.useRef<HTMLDivElement>(null);
   
@@ -58,16 +62,21 @@ const IconGrid = ({
         }}
       >
         {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const startIndex = virtualRow.index * columns;
-          const rowIcons = icons.slice(startIndex, startIndex + columns);
+          const startIndex = virtualRow.index * (viewMode === 'list' ? 1 : columns);
+          const rowIcons = icons.slice(
+            startIndex, 
+            startIndex + (viewMode === 'list' ? 1 : columns)
+          );
 
           return (
             <div
               key={virtualRow.index}
               className={`
-                absolute top-0 left-0 
-                grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4
-                w-full p-4
+                absolute top-0 left-0 w-full p-4
+                ${viewMode === 'grid' 
+                  ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'
+                  : 'block'
+                }
               `}
               style={{
                 transform: `translateY(${virtualRow.start}px)`,
@@ -76,14 +85,16 @@ const IconGrid = ({
               {rowIcons.map((icon) => (
                 <div 
                   key={icon.path} 
-                  className="group relative flex flex-col items-center gap-2 p-4 
-                           border rounded-lg hover:border-blue-500 hover:shadow-sm 
-                           transition-all duration-200"
+                  className={`
+                    group relative flex ${viewMode === 'list' ? 'flex-row' : 'flex-col'} 
+                    items-center gap-4 p-4 border rounded-lg 
+                    hover:border-blue-500 hover:shadow-sm transition-all duration-200
+                  `}
                 >
-                  <div className="flex-1 flex items-center justify-center mb-2">
+                  <div className="flex items-center justify-center">
                     <Icon
                       icon={icon}
-                      customSize={icon.size * 1.5}
+                      customSize={icon.size * iconScale * (viewMode === 'list' ? 1 : 1.5)}
                       className="p-2"
                     />
                   </div>
