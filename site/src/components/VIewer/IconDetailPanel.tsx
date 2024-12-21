@@ -114,7 +114,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
           </div>
         </section>
       </div>
-    </div>;
+    </div>
   );
 };
 
