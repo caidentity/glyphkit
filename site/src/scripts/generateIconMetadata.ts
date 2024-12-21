@@ -68,28 +68,16 @@ async function writeMetadata(metadata: IconsMetadata): Promise<void> {
 
 async function generateMetadata(): Promise<void> {
   try {
-    // Source icons directory (in root/public/icons)
+    // Read icons from the root public directory
     const sourceIconsDir = path.join(process.cwd(), '..', 'public', 'icons')
-    console.log('Source icons directory:', sourceIconsDir)
+    console.log('Reading icons from:', sourceIconsDir)
 
-    // Destination directory (in site/public/icons)
-    const destIconsDir = path.join(process.cwd(), 'public', 'icons')
-    console.log('Destination icons directory:', destIconsDir)
-
-    // Ensure destination directory exists
-    await ensureDirectory(destIconsDir)
-
-    // Copy icons from source to destination
-    console.log('Copying icons from source to destination...')
-    await fs.cp(sourceIconsDir, destIconsDir, { recursive: true })
-    console.log('Icons copied successfully')
-
-    const items = await fs.readdir(destIconsDir)
+    const items = await fs.readdir(sourceIconsDir)
     console.log('Found items in directory:', items)
     
     const categories = await Promise.all(
       items.map(async item => {
-        const itemPath = path.join(destIconsDir, item)
+        const itemPath = path.join(sourceIconsDir, item)
         console.log('Checking item:', item, 'at path:', itemPath)
         return (await fs.stat(itemPath)).isDirectory() ? item : null
       })
@@ -99,7 +87,8 @@ async function generateMetadata(): Promise<void> {
 
     if (categories.length === 0) {
       const emptyMetadata: IconsMetadata = { categories: [] }
-      await writeMetadata(emptyMetadata)
+      const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json')
+      await fs.writeFile(metadataPath, JSON.stringify(emptyMetadata, null, 2))
       console.log('✓ Created empty metadata file - no icon directories found')
       return
     }
@@ -107,7 +96,7 @@ async function generateMetadata(): Promise<void> {
     const categoriesData = await Promise.all(
       categories.map(async category => ({
         name: category,
-        icons: await scanDirectory(path.join(destIconsDir, category), category)
+        icons: await scanDirectory(path.join(sourceIconsDir, category), category)
       }))
     )
 
@@ -118,6 +107,7 @@ async function generateMetadata(): Promise<void> {
     })
 
     const metadata: IconsMetadata = { categories: categoriesData }
+    
     // Write metadata to the site's public directory
     const metadataPath = path.join(process.cwd(), 'public', 'icon-metadata.json')
     await fs.writeFile(metadataPath, JSON.stringify(metadata, null, 2))

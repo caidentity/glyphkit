@@ -26,6 +26,29 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   },
+
+  // Configure rewrites to handle icon requests
+  async rewrites() {
+    if (process.env.NODE_ENV === 'development') {
+      return [
+        {
+          source: '/icons/:path*',
+          destination: path.join('..', 'public', 'icons', ':path*'),
+        },
+      ];
+    }
+    return [];
+  },
+
+  // Configure webpack to handle SVG files from parent directory in production
+  webpack: (config, { isServer }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@icons': path.join(process.cwd(), '..', 'public', 'icons'),
+    };
+    
+    return config;
+  },
 };
 
 module.exports = nextConfig;
