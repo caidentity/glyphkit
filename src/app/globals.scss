@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --foreground: theme('colors.gray.900');
+    --background: theme('colors.white');
+  }
+}
+
+body {
+  @apply text-[var(--foreground)] bg-[var(--background)];
+}
