@@ -7,7 +7,7 @@
           "name": "ic_arrow_backward_forward_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_backward_forward_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_backward_forward_24px",
@@ -19,7 +19,7 @@
           "name": "ic_arrow_chevron_double_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_double_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_double_down_24px",
@@ -31,7 +31,7 @@
           "name": "ic_arrow_chevron_double_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_double_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_double_right_24px",
@@ -43,7 +43,7 @@
           "name": "ic_arrow_chevron_double_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_double_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_double_up_24px",
@@ -55,7 +55,7 @@
           "name": "ic_arrow_chevron_doublel_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_doublel_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_doublel_left_24px",
@@ -67,7 +67,7 @@
           "name": "ic_arrow_chevron_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_down_24px",
@@ -79,7 +79,7 @@
           "name": "ic_arrow_chevron_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_left_24px",
@@ -91,7 +91,7 @@
           "name": "ic_arrow_chevron_left_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_left_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_left_right_24px",
@@ -103,7 +103,7 @@
           "name": "ic_arrow_chevron_left_right_slash_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_left_right_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_left_right_slash_24px",
@@ -115,7 +115,7 @@
           "name": "ic_arrow_chevron_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_right_24px",
@@ -127,7 +127,7 @@
           "name": "ic_arrow_chevron_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_chevron_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_chevron_up_24px",
@@ -139,7 +139,7 @@
           "name": "ic_arrow_command_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_command_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_command_24px",
@@ -163,7 +163,7 @@
           "name": "ic_arrow_line_bottom_center_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_bottom_center_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_bottom_center_24px",
@@ -175,7 +175,7 @@
           "name": "ic_arrow_line_box_inside_bottom_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_box_inside_bottom_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_box_inside_bottom_24px",
@@ -187,7 +187,7 @@
           "name": "ic_arrow_line_box_inside_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_box_inside_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_box_inside_left_24px",
@@ -199,7 +199,7 @@
           "name": "ic_arrow_line_box_inside_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_box_inside_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_box_inside_right_24px",
@@ -211,7 +211,7 @@
           "name": "ic_arrow_line_box_inside_top_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_box_inside_top_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_box_inside_top_24px",
@@ -223,7 +223,7 @@
           "name": "ic_arrow_line_curve_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_curve_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_curve_left_24px",
@@ -235,7 +235,7 @@
           "name": "ic_arrow_line_curve_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_curve_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_curve_right_24px",
@@ -247,7 +247,7 @@
           "name": "ic_arrow_line_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_down_24px",
@@ -259,7 +259,7 @@
           "name": "ic_arrow_line_expand_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_expand_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_expand_24px",
@@ -271,7 +271,7 @@
           "name": "ic_arrow_line_inward_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_inward_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_inward_24px",
@@ -283,7 +283,7 @@
           "name": "ic_arrow_line_inward_corner_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_inward_corner_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_inward_corner_24px",
@@ -295,7 +295,7 @@
           "name": "ic_arrow_line_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_left_24px",
@@ -307,7 +307,7 @@
           "name": "ic_arrow_line_outward_corner_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_outward_corner_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_outward_corner_24px",
@@ -331,7 +331,7 @@
           "name": "ic_arrow_line_push_inward_horizontal_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_push_inward_horizontal_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_push_inward_horizontal_24px",
@@ -343,7 +343,7 @@
           "name": "ic_arrow_line_push_inward_vertical_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_push_inward_vertical_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_push_inward_vertical_24px",
@@ -355,7 +355,7 @@
           "name": "ic_arrow_line_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_right_24px",
@@ -367,7 +367,7 @@
           "name": "ic_arrow_line_rotate_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_rotate_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_rotate_left_24px",
@@ -379,7 +379,7 @@
           "name": "ic_arrow_line_rotate_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_rotate_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_rotate_right_24px",
@@ -391,7 +391,7 @@
           "name": "ic_arrow_line_spin_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_spin_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_spin_24px",
@@ -403,7 +403,7 @@
           "name": "ic_arrow_line_top_center_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_top_center_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_top_center_24px",
@@ -415,7 +415,7 @@
           "name": "ic_arrow_line_top_right_corner_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_top_right_corner_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_top_right_corner_24px",
@@ -427,7 +427,7 @@
           "name": "ic_arrow_line_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_up_24px",
@@ -439,7 +439,7 @@
           "name": "ic_arrow_line_up_box_dash_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_up_box_dash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_up_box_dash_24px",
@@ -451,7 +451,7 @@
           "name": "ic_arrow_line_up_box_filled_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_up_box_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_up_box_filled_24px",
@@ -463,7 +463,7 @@
           "name": "ic_arrow_line_up_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_up_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_up_down_24px",
@@ -475,7 +475,7 @@
           "name": "ic_arrow_line_up_down_box_filled_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_up_down_box_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_up_down_box_filled_24px",
@@ -487,7 +487,7 @@
           "name": "ic_arrow_line_wall_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_wall_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_wall_down_24px",
@@ -499,7 +499,7 @@
           "name": "ic_arrow_line_wall_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_wall_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_wall_left_24px",
@@ -511,7 +511,7 @@
           "name": "ic_arrow_line_wall_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_wall_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_wall_right_24px",
@@ -523,7 +523,7 @@
           "name": "ic_arrow_line_wall_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_line_wall_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_line_wall_up_24px",
@@ -535,7 +535,7 @@
           "name": "ic_arrow_merge_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_merge_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_merge_24px",
@@ -547,7 +547,7 @@
           "name": "ic_arrow_orbit_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_orbit_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_orbit_24px",
@@ -559,7 +559,7 @@
           "name": "ic_arrow_sort_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_sort_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_sort_down_24px",
@@ -571,7 +571,7 @@
           "name": "ic_arrow_sort_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_sort_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_sort_up_24px",
@@ -583,7 +583,7 @@
           "name": "ic_arrow_swap_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_swap_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_swap_24px",
@@ -595,7 +595,7 @@
           "name": "ic_arrow_triangle_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_down_24px",
@@ -607,7 +607,7 @@
           "name": "ic_arrow_triangle_left_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_left_24px",
@@ -619,7 +619,7 @@
           "name": "ic_arrow_triangle_right_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_right_24px",
@@ -631,7 +631,7 @@
           "name": "ic_arrow_triangle_up_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_up_24px",
@@ -643,7 +643,7 @@
           "name": "ic_arrow_triangle_up_down_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_up_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_up_down_24px",
@@ -655,7 +655,7 @@
           "name": "ic_arrow_triangle_up_down_bottom_filled_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_up_down_bottom_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_up_down_bottom_filled_24px",
@@ -667,7 +667,7 @@
           "name": "ic_arrow_triangle_up_down_filled_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_up_down_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_up_down_filled_24px",
@@ -679,7 +679,7 @@
           "name": "ic_arrow_triangle_up_down_top_filled_16px",
           "category": "Arrows",
           "path": "/icons/Arrows/ic_arrow_triangle_up_down_top_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_arrow_triangle_up_down_top_filled_24px",
@@ -934,7 +934,7 @@
           "name": "ic_3_dot_connected_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_3_dot_connected_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_3_dot_connected_24px",
@@ -946,7 +946,7 @@
           "name": "ic_3_dot_horizontal_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_3_dot_horizontal_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_3_dot_horizontal_24px",
@@ -958,7 +958,7 @@
           "name": "ic_3_dot_triangle_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_3_dot_triangle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_3_dot_triangle_24px",
@@ -970,7 +970,7 @@
           "name": "ic_3_dot_vertical_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_3_dot_vertical_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_3_dot_vertical_24px",
@@ -982,7 +982,7 @@
           "name": "ic_6_dot_vertical_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_6_dot_vertical_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_6_dot_vertical_24px",
@@ -994,7 +994,7 @@
           "name": "ic_check_mark_content_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_check_mark_content_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_check_mark_content_24px",
@@ -1006,7 +1006,7 @@
           "name": "ic_checkmark_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_checkmark_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_checkmark_24px",
@@ -1018,7 +1018,7 @@
           "name": "ic_checkmark_circle_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_checkmark_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_checkmark_circle_24px",
@@ -1030,7 +1030,7 @@
           "name": "ic_checkmark_circle_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_checkmark_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_checkmark_circle_filled_24px",
@@ -1042,7 +1042,7 @@
           "name": "ic_funnel_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_funnel_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_funnel_24px",
@@ -1054,7 +1054,7 @@
           "name": "ic_funnel_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_funnel_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_funnel_filled_24px",
@@ -1066,7 +1066,7 @@
           "name": "ic_gear_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_gear_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_gear_24px",
@@ -1078,7 +1078,7 @@
           "name": "ic_gear_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_gear_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_gear_filled_24px",
@@ -1102,7 +1102,7 @@
           "name": "ic_liferaft_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_liferaft_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_liferaft_24px",
@@ -1114,7 +1114,7 @@
           "name": "ic_link_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_link_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_link_24px",
@@ -1126,7 +1126,7 @@
           "name": "ic_minus_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_minus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_minus_24px",
@@ -1138,7 +1138,7 @@
           "name": "ic_minus_circle_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_minus_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_minus_circle_24px",
@@ -1150,7 +1150,7 @@
           "name": "ic_minus_circle_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_minus_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_minus_circle_filled_24px",
@@ -1162,7 +1162,7 @@
           "name": "ic_plus_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_plus_24px",
@@ -1174,7 +1174,7 @@
           "name": "ic_plus_circle_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_plus_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_plus_circle_24px",
@@ -1186,7 +1186,7 @@
           "name": "ic_plus_circle_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_plus_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_plus_circle_filled_24px",
@@ -1198,7 +1198,7 @@
           "name": "ic_thumbs_down_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_thumbs_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_thumbs_down_24px",
@@ -1210,7 +1210,7 @@
           "name": "ic_thumbs_down_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_thumbs_down_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_thumbs_down_filled_24px",
@@ -1222,7 +1222,7 @@
           "name": "ic_thumbs_up_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_thumbs_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_thumbs_up_24px",
@@ -1234,7 +1234,7 @@
           "name": "ic_thumbs_up_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_thumbs_up_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_thumbs_up_filled_24px",
@@ -1246,7 +1246,7 @@
           "name": "ic_trash_can_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_trash_can_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_trash_can_24px",
@@ -1258,7 +1258,7 @@
           "name": "ic_trash_can_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_trash_can_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_trash_can_filled_24px",
@@ -1270,7 +1270,7 @@
           "name": "ic_x_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_x_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_x_24px",
@@ -1282,7 +1282,7 @@
           "name": "ic_x_circle_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_x_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_x_circle_24px",
@@ -1294,7 +1294,7 @@
           "name": "ic_x_circle_filled_16px",
           "category": "Controls",
           "path": "/icons/Controls/ic_x_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_x_circle_filled_24px",
@@ -1311,7 +1311,7 @@
           "name": "ic_data_branch_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_branch_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_branch_24px",
@@ -1323,7 +1323,7 @@
           "name": "ic_data_calculator_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_calculator_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_calculator_24px",
@@ -1335,7 +1335,7 @@
           "name": "ic_data_chart_bar_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_bar_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_bar_24px",
@@ -1347,7 +1347,7 @@
           "name": "ic_data_chart_gantt_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_gantt_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_gantt_24px",
@@ -1359,7 +1359,7 @@
           "name": "ic_data_chart_gantt_list_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_gantt_list_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_gantt_list_24px",
@@ -1371,7 +1371,7 @@
           "name": "ic_data_chart_hierarchy_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_hierarchy_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_hierarchy_24px",
@@ -1383,7 +1383,7 @@
           "name": "ic_data_chart_pie_3quarter_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_pie_3quarter_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_pie_3quarter_24px",
@@ -1395,7 +1395,7 @@
           "name": "ic_data_chart_pie_full_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_pie_full_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_pie_full_24px",
@@ -1407,7 +1407,7 @@
           "name": "ic_data_chart_pie_half_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_pie_half_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_pie_half_24px",
@@ -1419,7 +1419,7 @@
           "name": "ic_data_chart_pie_quarter_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_chart_pie_quarter_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_chart_pie_quarter_24px",
@@ -1431,7 +1431,7 @@
           "name": "ic_data_columns_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_columns_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_columns_24px",
@@ -1443,7 +1443,7 @@
           "name": "ic_data_count_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_count_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_count_24px",
@@ -1455,7 +1455,7 @@
           "name": "ic_data_database_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_database_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_database_24px",
@@ -1467,7 +1467,7 @@
           "name": "ic_data_database_filled_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_database_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_database_filled_24px",
@@ -1479,7 +1479,7 @@
           "name": "ic_data_diagram_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_diagram_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_diagram_24px",
@@ -1491,7 +1491,7 @@
           "name": "ic_data_formula_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_formula_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_formula_24px",
@@ -1503,7 +1503,7 @@
           "name": "ic_data_hashtag_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_hashtag_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_hashtag_24px",
@@ -1515,7 +1515,7 @@
           "name": "ic_data_line_chart_multiple_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_line_chart_multiple_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_line_chart_multiple_24px",
@@ -1527,7 +1527,7 @@
           "name": "ic_data_line_chart_up_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_line_chart_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_line_chart_up_24px",
@@ -1539,7 +1539,7 @@
           "name": "ic_data_line_chart_up_filled_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_line_chart_up_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_line_chart_up_filled_24px",
@@ -1551,7 +1551,7 @@
           "name": "ic_data_list_nested_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_list_nested_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_list_nested_24px",
@@ -1563,7 +1563,7 @@
           "name": "ic_data_percent_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_percent_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_percent_24px",
@@ -1575,7 +1575,7 @@
           "name": "ic_data_spreadsheet_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_spreadsheet_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_spreadsheet_24px",
@@ -1587,7 +1587,7 @@
           "name": "ic_data_spreadsheet_search_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_spreadsheet_search_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_spreadsheet_search_24px",
@@ -1599,7 +1599,7 @@
           "name": "ic_data_tallymarks_16px",
           "category": "Data",
           "path": "/icons/Data/ic_data_tallymarks_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_data_tallymarks_24px",
@@ -1611,7 +1611,7 @@
           "name": "ic_diagram_ven_16px",
           "category": "Data",
           "path": "/icons/Data/ic_diagram_ven_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_diagram_ven_24px",
@@ -1623,7 +1623,7 @@
           "name": "ic_dot_spoke_five_16px",
           "category": "Data",
           "path": "/icons/Data/ic_dot_spoke_five_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_dot_spoke_five_24px",
@@ -1635,7 +1635,7 @@
           "name": "ic_dot_spoke_six_16px",
           "category": "Data",
           "path": "/icons/Data/ic_dot_spoke_six_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_dot_spoke_six_24px",
@@ -1647,7 +1647,7 @@
           "name": "ic_dot_spoke_three_16px",
           "category": "Data",
           "path": "/icons/Data/ic_dot_spoke_three_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_dot_spoke_three_24px",
@@ -1659,7 +1659,7 @@
           "name": "ic_graph_check_16px",
           "category": "Data",
           "path": "/icons/Data/ic_graph_check_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_graph_check_24px",
@@ -2161,7 +2161,7 @@
           "name": "ic_building_16px",
           "category": "Location",
           "path": "/icons/Location/ic_building_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_building_24px",
@@ -2173,7 +2173,7 @@
           "name": "ic_building_filled_16px",
           "category": "Location",
           "path": "/icons/Location/ic_building_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_building_filled_24px",
@@ -2185,7 +2185,7 @@
           "name": "ic_buildings_16px",
           "category": "Location",
           "path": "/icons/Location/ic_buildings_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_buildings_24px",
@@ -2197,7 +2197,7 @@
           "name": "ic_buildings_filled_16px",
           "category": "Location",
           "path": "/icons/Location/ic_buildings_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_buildings_filled_24px",
@@ -2209,7 +2209,7 @@
           "name": "ic_buildings_plus_16px",
           "category": "Location",
           "path": "/icons/Location/ic_buildings_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_buildings_plus_24px",
@@ -2245,7 +2245,7 @@
           "name": "ic_globe_16px",
           "category": "Location",
           "path": "/icons/Location/ic_globe_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_globe_24px",
@@ -2257,7 +2257,7 @@
           "name": "ic_home_16px",
           "category": "Location",
           "path": "/icons/Location/ic_home_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_home_24px",
@@ -2269,7 +2269,7 @@
           "name": "ic_home_filled_16px",
           "category": "Location",
           "path": "/icons/Location/ic_home_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_home_filled_24px",
@@ -2281,7 +2281,7 @@
           "name": "ic_location_california_16px",
           "category": "Location",
           "path": "/icons/Location/ic_location_california_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_location_california_24px",
@@ -2293,7 +2293,7 @@
           "name": "ic_location_pin_16px",
           "category": "Location",
           "path": "/icons/Location/ic_location_pin_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_location_pin_24px",
@@ -2358,7 +2358,7 @@
           "name": "ic_media_forward_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_forward_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_forward_24px",
@@ -2370,7 +2370,7 @@
           "name": "ic_media_forward_filled_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_forward_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_forward_filled_24px",
@@ -2394,7 +2394,7 @@
           "name": "ic_media_pause_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_pause_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_pause_24px",
@@ -2454,7 +2454,7 @@
           "name": "ic_media_play_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_play_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_play_24px",
@@ -2466,7 +2466,7 @@
           "name": "ic_media_play_circle_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_play_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_play_circle_24px",
@@ -2478,7 +2478,7 @@
           "name": "ic_media_play_circle_filled_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_play_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_play_circle_filled_24px",
@@ -2490,7 +2490,7 @@
           "name": "ic_media_rewind_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_rewind_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_rewind_24px",
@@ -2502,7 +2502,7 @@
           "name": "ic_media_rewind_filled_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_rewind_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_rewind_filled_24px",
@@ -2526,7 +2526,7 @@
           "name": "ic_media_sound_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_sound_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_sound_24px",
@@ -2538,7 +2538,7 @@
           "name": "ic_media_sound_filled_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_sound_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_sound_filled_24px",
@@ -2550,7 +2550,7 @@
           "name": "ic_media_sound_off_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_sound_off_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_sound_off_24px",
@@ -2562,7 +2562,7 @@
           "name": "ic_media_sound_off_filled_16px",
           "category": "Media",
           "path": "/icons/Media/ic_media_sound_off_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_media_sound_off_filled_24px",
@@ -2668,7 +2668,7 @@
           "name": "ic_money_bank_16px",
           "category": "Money",
           "path": "/icons/Money/ic_money_bank_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_money_bank_24px",
@@ -2757,7 +2757,7 @@
           "name": "ic_cloud_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_24px",
@@ -2769,7 +2769,7 @@
           "name": "ic_cloud_arrow_down_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_arrow_down_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_arrow_down_24px",
@@ -2781,7 +2781,7 @@
           "name": "ic_cloud_arrow_up_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_arrow_up_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_arrow_up_24px",
@@ -2793,7 +2793,7 @@
           "name": "ic_cloud_checkmark_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_checkmark_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_checkmark_24px",
@@ -2805,7 +2805,7 @@
           "name": "ic_cloud_database_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_database_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_database_24px",
@@ -2817,7 +2817,7 @@
           "name": "ic_cloud_slash_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_cloud_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cloud_slash_24px",
@@ -2829,7 +2829,7 @@
           "name": "ic_contrast_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_contrast_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_contrast_24px",
@@ -2841,7 +2841,7 @@
           "name": "ic_leaf_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_leaf_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_leaf_24px",
@@ -2853,7 +2853,7 @@
           "name": "ic_lightning_bolt_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_lightning_bolt_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lightning_bolt_24px",
@@ -2865,7 +2865,7 @@
           "name": "ic_lightning_bolt_circle_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_lightning_bolt_circle_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lightning_bolt_circle_24px",
@@ -2877,7 +2877,7 @@
           "name": "ic_lightning_bolt_circle_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_lightning_bolt_circle_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lightning_bolt_circle_filled_24px",
@@ -2889,7 +2889,7 @@
           "name": "ic_lightning_bolt_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_lightning_bolt_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lightning_bolt_filled_24px",
@@ -2901,7 +2901,7 @@
           "name": "ic_lightning_bolt_filled_slash_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_lightning_bolt_filled_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lightning_bolt_filled_slash_24px",
@@ -2913,7 +2913,7 @@
           "name": "ic_moon_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_moon_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_moon_24px",
@@ -2925,7 +2925,7 @@
           "name": "ic_moon_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_moon_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_moon_filled_24px",
@@ -2937,7 +2937,7 @@
           "name": "ic_snow_flake_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_snow_flake_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_snow_flake_24px",
@@ -2949,7 +2949,7 @@
           "name": "ic_star_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_star_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_star_24px",
@@ -2961,7 +2961,7 @@
           "name": "ic_star_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_star_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_star_filled_24px",
@@ -2973,7 +2973,7 @@
           "name": "ic_star_half_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_star_half_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_star_half_24px",
@@ -2985,7 +2985,7 @@
           "name": "ic_sun_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_sun_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_sun_24px",
@@ -2997,7 +2997,7 @@
           "name": "ic_sun_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_sun_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_sun_filled_24px",
@@ -3009,7 +3009,7 @@
           "name": "ic_water_drop_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_water_drop_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_water_drop_24px",
@@ -3021,7 +3021,7 @@
           "name": "ic_water_drop_filled_16px",
           "category": "Nature",
           "path": "/icons/Nature/ic_water_drop_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_water_drop_filled_24px",
@@ -3122,7 +3122,7 @@
           "name": "ic_object_flag_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_flag_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_flag_24px",
@@ -3134,7 +3134,7 @@
           "name": "ic_object_flag_slash_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_flag_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_flag_slash_24px",
@@ -3146,7 +3146,7 @@
           "name": "ic_object_flag_slash_filled_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_flag_slash_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_flag_slash_filled_24px",
@@ -3314,7 +3314,7 @@
           "name": "ic_object_ribbon_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_ribbon_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_ribbon_24px",
@@ -3326,7 +3326,7 @@
           "name": "ic_object_ribbon_filled_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_ribbon_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_ribbon_filled_24px",
@@ -3338,7 +3338,7 @@
           "name": "ic_object_ribbon_plus_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_ribbon_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_ribbon_plus_24px",
@@ -3350,7 +3350,7 @@
           "name": "ic_object_ribbon_plus_filled_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_object_ribbon_plus_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_object_ribbon_plus_filled_24px",
@@ -3470,7 +3470,7 @@
           "name": "ic_robot_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_robot_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_robot_24px",
@@ -3482,7 +3482,7 @@
           "name": "ic_shopping_cart_16px",
           "category": "Objects",
           "path": "/icons/Objects/ic_shopping_cart_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_shopping_cart_24px",
@@ -4220,7 +4220,7 @@
           "name": "ic_binoculars_16px",
           "category": "View",
           "path": "/icons/View/ic_binoculars_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_binoculars_24px",
@@ -4232,7 +4232,7 @@
           "name": "ic_cube_detailed_16px",
           "category": "View",
           "path": "/icons/View/ic_cube_detailed_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_cube_detailed_24px",
@@ -4244,7 +4244,7 @@
           "name": "ic_grid_16px",
           "category": "View",
           "path": "/icons/View/ic_grid_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_grid_24px",
@@ -4256,7 +4256,7 @@
           "name": "ic_grid_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_grid_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_grid_filled_24px",
@@ -4268,7 +4268,7 @@
           "name": "ic_lines_three_16px",
           "category": "View",
           "path": "/icons/View/ic_lines_three_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lines_three_24px",
@@ -4280,7 +4280,7 @@
           "name": "ic_lines_two_16px",
           "category": "View",
           "path": "/icons/View/ic_lines_two_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_lines_two_24px",
@@ -4292,7 +4292,7 @@
           "name": "ic_magnifying_glass_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_24px",
@@ -4304,7 +4304,7 @@
           "name": "ic_magnifying_glass_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_filled_24px",
@@ -4316,7 +4316,7 @@
           "name": "ic_magnifying_glass_filled_minus_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_filled_minus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_filled_minus_24px",
@@ -4328,7 +4328,7 @@
           "name": "ic_magnifying_glass_filled_plus_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_filled_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_filled_plus_24px",
@@ -4340,7 +4340,7 @@
           "name": "ic_magnifying_glass_minus_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_minus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_minus_24px",
@@ -4352,7 +4352,7 @@
           "name": "ic_magnifying_glass_plus_16px",
           "category": "View",
           "path": "/icons/View/ic_magnifying_glass_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_magnifying_glass_plus_24px",
@@ -4364,7 +4364,7 @@
           "name": "ic_rotate_180_left_16px",
           "category": "View",
           "path": "/icons/View/ic_rotate_180_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_rotate_180_left_24px",
@@ -4376,7 +4376,7 @@
           "name": "ic_rotate_180_right_16px",
           "category": "View",
           "path": "/icons/View/ic_rotate_180_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_rotate_180_right_24px",
@@ -4388,7 +4388,7 @@
           "name": "ic_rotate_90_left_16px",
           "category": "View",
           "path": "/icons/View/ic_rotate_90_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_rotate_90_left_24px",
@@ -4400,7 +4400,7 @@
           "name": "ic_rotate_90_right_16px",
           "category": "View",
           "path": "/icons/View/ic_rotate_90_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_rotate_90_right_24px",
@@ -4412,7 +4412,7 @@
           "name": "ic_view_attach_16px",
           "category": "View",
           "path": "/icons/View/ic_view_attach_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_attach_24px",
@@ -4424,7 +4424,7 @@
           "name": "ic_view_augment_reality_16px",
           "category": "View",
           "path": "/icons/View/ic_view_augment_reality_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_augment_reality_24px",
@@ -4436,7 +4436,7 @@
           "name": "ic_view_box_inside_16px",
           "category": "View",
           "path": "/icons/View/ic_view_box_inside_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_box_inside_24px",
@@ -4448,7 +4448,7 @@
           "name": "ic_view_box_inside_dash_16px",
           "category": "View",
           "path": "/icons/View/ic_view_box_inside_dash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_box_inside_dash_24px",
@@ -4460,7 +4460,7 @@
           "name": "ic_view_collapse_left_16px",
           "category": "View",
           "path": "/icons/View/ic_view_collapse_left_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_collapse_left_24px",
@@ -4472,7 +4472,7 @@
           "name": "ic_view_cube_16px",
           "category": "View",
           "path": "/icons/View/ic_view_cube_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_cube_24px",
@@ -4484,7 +4484,7 @@
           "name": "ic_view_cube_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_view_cube_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_cube_filled_24px",
@@ -4496,7 +4496,7 @@
           "name": "ic_view_cube_inside_16px",
           "category": "View",
           "path": "/icons/View/ic_view_cube_inside_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_cube_inside_24px",
@@ -4508,7 +4508,7 @@
           "name": "ic_view_cube_many_16px",
           "category": "View",
           "path": "/icons/View/ic_view_cube_many_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_cube_many_24px",
@@ -4520,7 +4520,7 @@
           "name": "ic_view_cube_many_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_view_cube_many_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_cube_many_filled_24px",
@@ -4532,7 +4532,7 @@
           "name": "ic_view_density_narrow_16px",
           "category": "View",
           "path": "/icons/View/ic_view_density_narrow_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_density_narrow_24px",
@@ -4544,7 +4544,7 @@
           "name": "ic_view_density_standard_16px",
           "category": "View",
           "path": "/icons/View/ic_view_density_standard_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_density_standard_24px",
@@ -4556,7 +4556,7 @@
           "name": "ic_view_density_wide_16px",
           "category": "View",
           "path": "/icons/View/ic_view_density_wide_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_density_wide_24px",
@@ -4568,7 +4568,7 @@
           "name": "ic_view_detach_16px",
           "category": "View",
           "path": "/icons/View/ic_view_detach_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_detach_24px",
@@ -4580,7 +4580,7 @@
           "name": "ic_view_dots_16px",
           "category": "View",
           "path": "/icons/View/ic_view_dots_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_dots_24px",
@@ -4592,7 +4592,7 @@
           "name": "ic_view_dots_layer_16px",
           "category": "View",
           "path": "/icons/View/ic_view_dots_layer_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_dots_layer_24px",
@@ -4604,7 +4604,7 @@
           "name": "ic_view_double_16px",
           "category": "View",
           "path": "/icons/View/ic_view_double_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_double_24px",
@@ -4616,7 +4616,7 @@
           "name": "ic_view_exclude_16px",
           "category": "View",
           "path": "/icons/View/ic_view_exclude_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_exclude_24px",
@@ -4628,7 +4628,7 @@
           "name": "ic_view_expand_right_16px",
           "category": "View",
           "path": "/icons/View/ic_view_expand_right_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_expand_right_24px",
@@ -4640,7 +4640,7 @@
           "name": "ic_view_eye_16px",
           "category": "View",
           "path": "/icons/View/ic_view_eye_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_eye_24px",
@@ -4652,7 +4652,7 @@
           "name": "ic_view_eye_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_view_eye_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_eye_filled_24px",
@@ -4664,7 +4664,7 @@
           "name": "ic_view_eye_filled_slash_16px",
           "category": "View",
           "path": "/icons/View/ic_view_eye_filled_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_eye_filled_slash_24px",
@@ -4676,7 +4676,7 @@
           "name": "ic_view_eye_slash_16px",
           "category": "View",
           "path": "/icons/View/ic_view_eye_slash_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_eye_slash_24px",
@@ -4688,7 +4688,7 @@
           "name": "ic_view_intersect_16px",
           "category": "View",
           "path": "/icons/View/ic_view_intersect_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_intersect_24px",
@@ -4700,7 +4700,7 @@
           "name": "ic_view_layer_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layer_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layer_24px",
@@ -4712,7 +4712,7 @@
           "name": "ic_view_layer_filled_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layer_filled_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layer_filled_24px",
@@ -4724,7 +4724,7 @@
           "name": "ic_view_layers_many_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layers_many_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layers_many_24px",
@@ -4736,7 +4736,7 @@
           "name": "ic_view_layers_ontop_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layers_ontop_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layers_ontop_24px",
@@ -4748,7 +4748,7 @@
           "name": "ic_view_layers_single_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layers_single_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layers_single_24px",
@@ -4760,7 +4760,7 @@
           "name": "ic_view_layout_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layout_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layout_24px",
@@ -4772,7 +4772,7 @@
           "name": "ic_view_layout_column_three_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layout_column_three_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layout_column_three_24px",
@@ -4784,7 +4784,7 @@
           "name": "ic_view_layout_column_two_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layout_column_two_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layout_column_two_24px",
@@ -4796,7 +4796,7 @@
           "name": "ic_view_layout_grid_16px",
           "category": "View",
           "path": "/icons/View/ic_view_layout_grid_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_layout_grid_24px",
@@ -4808,7 +4808,7 @@
           "name": "ic_view_list_content_16px",
           "category": "View",
           "path": "/icons/View/ic_view_list_content_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_list_content_24px",
@@ -4820,7 +4820,7 @@
           "name": "ic_view_list_content_split_16px",
           "category": "View",
           "path": "/icons/View/ic_view_list_content_split_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_list_content_split_24px",
@@ -4832,7 +4832,7 @@
           "name": "ic_view_merge_16px",
           "category": "View",
           "path": "/icons/View/ic_view_merge_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_merge_24px",
@@ -4844,7 +4844,7 @@
           "name": "ic_view_minimap_16px",
           "category": "View",
           "path": "/icons/View/ic_view_minimap_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_minimap_24px",
@@ -4856,7 +4856,7 @@
           "name": "ic_view_plus_16px",
           "category": "View",
           "path": "/icons/View/ic_view_plus_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_plus_24px",
@@ -4868,7 +4868,7 @@
           "name": "ic_view_subtract_16px",
           "category": "View",
           "path": "/icons/View/ic_view_subtract_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_subtract_24px",
@@ -4880,7 +4880,7 @@
           "name": "ic_view_transparent_16px",
           "category": "View",
           "path": "/icons/View/ic_view_transparent_16px.svg",
-          "size": 24
+          "size": 16
         },
         {
           "name": "ic_view_transparent_24px",

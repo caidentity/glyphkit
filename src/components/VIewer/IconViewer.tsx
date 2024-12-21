@@ -98,7 +98,7 @@ const IconViewer = () => {
   return (
     <div className="p-6 max-w-7xl mx-auto relative">
       <div className="text-center mb-8">
-        <h1 className="text-3xl font-bold mb-2">Icon Library</h1>
+        <h1 className="text-3xl font-bold mb-2">Glyph Kit</h1>
         <p className="text-gray-600">Browse and search through our collection of {allIcons.length} icons</p>
       </div>
 

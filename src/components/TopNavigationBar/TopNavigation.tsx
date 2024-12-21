@@ -36,7 +36,7 @@ export default function TopNavigation() {
           {/* Logo */}
           <div className="flex lg:flex-1">
             <Link href="/" className="text-xl font-bold text-gray-900">
-              Icon Library
+              Glyph Kit
             </Link>
           </div>
 

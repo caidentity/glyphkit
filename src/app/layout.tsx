@@ -11,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Glphykit',
+  title: 'Glyphkit',
   description: 'Created with Next.js and TypeScript',
 };
 
