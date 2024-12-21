@@ -1,5 +1,5 @@
 # dependencies
-/node_modules
+/site/node_modules
 /packages/glyphkit/node_modules
 /.pnp
 .pnp.js
@@ -7,14 +7,14 @@
 /packages/glyphkit/dist
 
 # testing
-/coverage
+/site/coverage
 
 # next.js
-/.next/
-/out/
+/site/.next/
+/site/out/
 
 # production
-/build
+/site/build
 
 # misc
 .DS_Store
@@ -33,4 +33,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts 
+next-env.d.ts
+
+# Prevent duplicate icons
+/public/icons/icons
