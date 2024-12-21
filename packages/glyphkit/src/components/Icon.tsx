@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { icons } from '../icons';
+import type { IconDefinition } from '../types/icon.types';
 
 export interface IconProps {
   name: string;
@@ -18,7 +19,7 @@ export const Icon = memo<IconProps>(({
   'aria-label': ariaLabel,
   onError,
 }) => {
-  const icon = icons[name];
+  const icon = icons[name] as IconDefinition;
   
   if (!icon) {
     onError?.(new Error(`Icon "${name}" not found`));
@@ -29,11 +30,12 @@ export const Icon = memo<IconProps>(({
     <svg 
       width={size} 
       height={size} 
-      viewBox={icon.viewBox}
+      viewBox={icon.viewBox || '0 0 24 24'}
       fill={color}
       className={`glyphkit-icon ${className}`.trim()}
       aria-label={ariaLabel || `${name} icon`}
       role="img"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path d={icon.path} />
     </svg>

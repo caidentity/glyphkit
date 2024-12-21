@@ -32,9 +32,7 @@ const nextConfig = {
     return [
       {
         source: '/icons/:path*',
-        destination: process.env.NODE_ENV === 'production'
-          ? '/public/icons/:path*'
-          : path.join('..', 'public', 'icons', ':path*'),
+        destination: '/public/icons/:path*',
       },
     ];
   },
