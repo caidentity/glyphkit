@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import './TopNavigation.scss';
+import { Icon } from '@glyphkit/glyphkit';
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -75,9 +76,17 @@ export default function TopNavigation() {
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <Moon className="h-5 w-5" />
+                <Icon
+                  name="ic_moon_16px"
+                  size={24}
+                  color="currentColor"
+                />
               ) : (
-                <Sun className="h-5 w-5" />
+                <Icon
+                  name="ic_sun_16px"
+                  size={24}
+                  color="currentColor"
+                />
               )}
             </button>
           </div>
