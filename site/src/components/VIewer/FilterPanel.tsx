@@ -3,7 +3,7 @@ import { Check, Grid, List, SlidersHorizontal } from 'lucide-react';
 import Button from "../Button/Button";
 import Badge from "../Badge/Badge";
 import Slider from "../Slider/Slider";
-import iconRegistry from '@/lib/iconRegistry.json';
+import { IconCategory } from '@/types/icon';
 import './styling/FilterPanel.scss';
 
 interface FilterPanelProps {
@@ -15,6 +15,7 @@ interface FilterPanelProps {
   setIconScale: (scale: number) => void;
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  categories: IconCategory[];
   hasActiveFilters: boolean;
   onResetFilters: () => void;
   gridPadding: number;
@@ -30,6 +31,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   setIconScale,
   selectedCategories,
   setSelectedCategories,
+  categories,
   hasActiveFilters,
   onResetFilters,
   gridPadding,
@@ -141,27 +143,27 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <section className="filter-categories">
             <h3 className="filter-section-title">Categories</h3>
             <div className="filter-categories-list">
-              {Object.entries(iconRegistry.categories).map(([categoryName, category]) => (
+              {categories.map(category => (
                 <div 
-                  key={categoryName}
+                  key={category.name}
                   className="filter-categories-item"
-                  onClick={() => handleCategoryToggle(categoryName)}
+                  onClick={() => handleCategoryToggle(category.name)}
                 >
                   <div className={`
                     filter-categories-checkbox
-                    ${selectedCategories.includes(categoryName) 
+                    ${selectedCategories.includes(category.name) 
                       ? 'filter-categories-checkbox--checked'
                       : 'filter-categories-checkbox--unchecked'
                     }
                   `}>
-                    {selectedCategories.includes(categoryName) && (
+                    {selectedCategories.includes(category.name) && (
                       <Check className="h-3 w-3 text-white" />
                     )}
                   </div>
                   <span className="text-sm">
-                    {categoryName}
+                    {category.name}
                     <span className="text-gray-400 ml-1">
-                      ({category.count})
+                      ({category.icons.length})
                     </span>
                   </span>
                 </div>

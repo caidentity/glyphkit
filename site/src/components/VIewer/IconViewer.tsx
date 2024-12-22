@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Search, Download, X, Link, Check, Code, ArrowDownToLine, FileText, Grid, List, SlidersHorizontal } from 'lucide-react';
 import  Input  from "../Input/Input";
 import  Button  from "../Button/Button";
@@ -32,9 +32,13 @@ const IconViewer = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [gridPadding, setGridPadding] = useState<number>(16);
 
-  const { data: categories = [], isLoading, error } = useQuery<IconCategory[]>({
-    queryKey: ['icons-metadata'],
+  const queryClient = useQueryClient();
+
+  const { data: categories = [], isLoading, error } = useQuery({
+    queryKey: ['iconMetadata'],
     queryFn: loadIconMetadata,
+    staleTime: Infinity,
+    gcTime: Infinity,
   });
 
   const allIcons = useMemo(() => {
@@ -101,6 +105,11 @@ const IconViewer = () => {
     setSelectedSize(null);
     setSelectedCategories([]);
   };
+
+  const prefetchSvgs = React.useCallback(async (icons: IconMetadata[]) => {
+    const paths = icons.map(icon => icon.path);
+    await Promise.all(paths.map(path => loadSvgContent(path)));
+  }, []);
 
   return (
     <div className="viewer">

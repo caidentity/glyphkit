@@ -21,20 +21,28 @@ function isCacheValid(cache: MetadataCache): boolean {
   )
 }
 
+let memoizedCategories: IconCategory[] | null = null;
+
 export async function loadIconMetadata(): Promise<IconCategory[]> {
   try {
-    // Convert registry categories format to IconCategory[]
-    const categories = Object.entries(iconRegistry.categories).map(([name, data]) => ({
+    if (memoizedCategories) {
+      return memoizedCategories;
+    }
+
+    memoizedCategories = Object.entries(iconRegistry.categories).map(([name, data]) => ({
       name,
-      icons: data.icons.map(iconName => ({
-        name: iconName,
-        category: name,
-        size: iconName.endsWith('24') ? 24 : 16,
-        path: `/icons/${name}/${iconName}.svg`
-      }))
+      icons: data.icons.map(iconName => {
+        const size = iconName.endsWith('24') ? 24 : 16;
+        return {
+          name: iconName,
+          category: name,
+          size,
+          path: `/api/icons/${name}/${iconName}`
+        };
+      })
     }));
     
-    return categories;
+    return memoizedCategories;
   } catch (error) {
     console.error('Error loading icon metadata:', error);
     return [];
@@ -43,12 +51,17 @@ export async function loadIconMetadata(): Promise<IconCategory[]> {
 
 export async function loadSvgContent(path: string): Promise<string | null> {
   try {
-    const response = await fetch(`/api/icons${path.replace('/icons', '')}`)
-    if (!response.ok) throw new Error('Failed to load SVG')
-    return response.text()
+    // Remove any double slashes and ensure proper path format
+    const cleanPath = path.replace(/\/+/g, '/');
+    const response = await fetch(cleanPath);
+    if (!response.ok) {
+      console.error(`Failed to load SVG: ${cleanPath}`);
+      return null;
+    }
+    return await response.text();
   } catch (error) {
-    console.error('Error loading SVG content:', error)
-    return null
+    console.error('Error loading SVG content:', error);
+    return null;
   }
 }
 

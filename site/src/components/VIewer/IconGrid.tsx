@@ -5,6 +5,7 @@ import { IconMetadata } from '@/types/icon';
 import Icon from './Icon';
 import { useViewportSize } from '@/hooks/useViewportSize';
 import iconRegistry from '@/lib/iconRegistry.json';
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 interface IconGridProps {
   icons: IconMetadata[];
@@ -103,18 +104,47 @@ const IconGrid: React.FC<IconGridProps> = ({
     );
   }, [viewMode, dynamicPadding, calculateIconSize, onIconSelect, onIconDownload, onIconCopy]);
 
+  const rowVirtualizer = useVirtualizer({
+    count: Math.ceil(icons.length / getResponsiveColumns()),
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 150, // Estimate row height
+    overscan: 5,
+  });
+
   return (
-    <div 
-      ref={parentRef}
-      className={`
-        grid gap-4
-        ${viewMode === 'list' 
-          ? 'grid-cols-1' 
-          : `grid-cols-2 sm:grid-cols-3 md:grid-cols-${columns}`
-        }
-      `}
-    >
-      {icons.map(renderIconCard)}
+    <div ref={parentRef} className="h-[800px] overflow-auto">
+      <div
+        style={{
+          height: `${rowVirtualizer.getTotalSize()}px`,
+          width: '100%',
+          position: 'relative',
+        }}
+      >
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const startIndex = virtualRow.index * columns;
+          const rowIcons = icons.slice(startIndex, startIndex + columns);
+          
+          return (
+            <div
+              key={virtualRow.index}
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: virtualRow.size,
+                transform: `translateY(${virtualRow.start}px)`,
+                display: 'grid',
+                gridTemplateColumns: `repeat(${columns}, 1fr)`,
+                gap: '1rem',
+                padding: '0.5rem',
+              }}
+            >
+              {rowIcons.map((icon) => renderIconCard(icon))}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

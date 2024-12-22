@@ -27,6 +27,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.className}>
+      <head>
+        {/* Preload icon registry */}
+        <link 
+          rel="preload" 
+          href="/lib/iconRegistry.json" 
+          as="fetch" 
+          crossOrigin="anonymous" 
+        />
+      </head>
       <body>
         <Providers>
           <TopNavigation />

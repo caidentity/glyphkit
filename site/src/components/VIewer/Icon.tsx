@@ -3,7 +3,6 @@
 import React from 'react';
 import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
 import { IconMetadata } from '@/types/icon';
-import iconRegistry from '@/lib/iconRegistry.json';
 
 interface IconRegistryItem {
   category: string;
@@ -33,10 +32,9 @@ const Icon: React.FC<IconProps> = ({
   ...props 
 }) => {
   const iconSize = customSize || icon.size;
-  const registry = iconRegistry as IconRegistry;
   
-  // Use typed registry to access icon names
-  const iconName = registry.icons[icon.name]?.name || icon.name;
+  // Use icon name directly since it's already processed by loadIconMetadata
+  const iconName = icon.name;
 
   return (
     <div 
