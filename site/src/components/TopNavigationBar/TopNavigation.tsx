@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import './TopNavigation.scss';
 import { Icon } from '@glyphkit/glyphkit';
+import Image from 'next/image';
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -54,7 +55,13 @@ export default function TopNavigation() {
           </div>
           
           <Link href="/" className="top-navigation__logo">
-            Glyph Kit
+            <Image 
+              src="/Logo/logo.svg"
+              alt="Glyph Kit Logo"
+              width={120}
+              height={32}
+              priority
+            />
           </Link>
 
           <div className="top-navigation__links">
