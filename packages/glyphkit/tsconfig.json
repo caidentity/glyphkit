@@ -10,11 +10,13 @@
     "jsx": "react-jsx",
     "types": ["node"],
     "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*", "scripts/**/*", "demo/**/*"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
 } 

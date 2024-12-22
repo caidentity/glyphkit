@@ -77,7 +77,7 @@ export default function TopNavigation() {
             >
               {theme === 'light' ? (
       <Icon
-      name="ic_moon_16"
+      name="moon_16"
       size={24}
       color="#333"
       onError={(error) => {
@@ -86,7 +86,7 @@ export default function TopNavigation() {
     />
               ) : (
                 <Icon
-                name="ic_moon_16"
+                name="sun_16"
                 size={24}
                 color="#333"
                 onError={(error) => {
