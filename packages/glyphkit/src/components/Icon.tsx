@@ -1,5 +1,6 @@
-import React, { memo } from 'react';
-import { icons } from '../icons/index.js';
+import * as React from 'react';
+import { memo } from 'react';
+import { icons } from '../icons';
 
 export interface IconProps {
   name: keyof typeof icons;
@@ -8,14 +9,6 @@ export interface IconProps {
   className?: string;
   'aria-label'?: string;
   onError?: (error: Error) => void;
-}
-
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      svg: React.SVGProps<SVGSVGElement>;
-    }
-  }
 }
 
 export const Icon = memo<IconProps>(({ 
@@ -29,9 +22,7 @@ export const Icon = memo<IconProps>(({
   try {
     const icon = icons[name];
     if (!icon) {
-      const error = new Error(`Icon "${String(name)}" not found`);
-      console.error('[Icon]', error);
-      onError?.(error);
+      console.error(`Icon not found: ${name}`);
       return null;
     }
 
@@ -42,12 +33,10 @@ export const Icon = memo<IconProps>(({
         height={size}
         viewBox={icon.viewBox}
         xmlns="http://www.w3.org/2000/svg"
+        style={{ color }}
         role="img"
         aria-label={ariaLabel || `${String(name)} icon`}
-        style={{ color }}
-        dangerouslySetInnerHTML={{ 
-          __html: icon.path 
-        }}
+        dangerouslySetInnerHTML={{ __html: icon.path }}
       />
     );
   } catch (error) {

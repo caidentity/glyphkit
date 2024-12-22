@@ -22,31 +22,48 @@ import { uiIcons } from './Icons/ui.js';
 import { viewIcons } from './Icons/view.js';
 
 // Define types for our icon system
-type IconPathData = {
+interface IconPathData {
   path: string;
   viewBox?: string;
-};
+}
 
-type IconElement = React.ReactElement<React.SVGProps<SVGPathElement>>;
-type IconMap = Record<string, IconPathData>;
+interface IconProps extends React.SVGProps<SVGPathElement> {
+  d: string;
+  viewBox?: string;
+}
 
-// Convert string paths to React elements
-const convertPathToElement = (pathData: IconPathData): IconElement => (
-  <path 
-    d={pathData.path} 
-    fill="currentColor"
-  />
-);
+type IconElement = React.ReactElement<IconProps>;
+
+// Helper function to extract path data from SVG string
+function extractPathData(svgString: string): IconPathData {
+  const pathMatch = svgString.match(/<path[^>]*d="([^"]*)"[^>]*>/);
+  const viewBoxMatch = svgString.match(/viewBox="([^"]*)"/);
+
+  if (!pathMatch?.[1]) {
+    throw new Error('No valid path data found in SVG');
+  }
+
+  return {
+    path: pathMatch[1],
+    viewBox: viewBoxMatch?.[1] || "0 0 24 24"
+  };
+}
 
 // Convert icon maps to the correct format
-const convertIconMap = (icons: Record<string, string | IconPathData>): Record<string, IconElement> => {
+const convertIconMap = (icons: Record<string, string>): Record<string, IconElement> => {
   const converted: Record<string, IconElement> = {};
   
   for (const [key, value] of Object.entries(icons)) {
-    if (typeof value === 'string') {
-      converted[key] = convertPathToElement({ path: value });
-    } else {
-      converted[key] = convertPathToElement(value);
+    try {
+      const { path, viewBox } = extractPathData(value);
+      converted[key] = (
+        <path 
+          d={path}
+          viewBox={viewBox}
+        />
+      );
+    } catch (error) {
+      console.error(`Failed to convert icon: ${key}`, error);
     }
   }
   
@@ -74,15 +91,11 @@ const convertedIcons = {
   ...convertIconMap(timeIcons),
   ...convertIconMap(uiIcons),
   ...convertIconMap(viewIcons),
-};
+} as const;
 
-export const paths: Record<string, IconElement> & { default: IconElement } = {
+export const paths = {
   ...convertedIcons,
   default: <path /> as IconElement
-};
-
-export const getPath = (name: PathName): IconElement => {
-  return paths[name] ?? paths.default;
-};
+} as const;
 
 export type PathName = keyof typeof paths;

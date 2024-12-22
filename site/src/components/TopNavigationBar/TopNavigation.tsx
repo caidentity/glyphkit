@@ -76,17 +76,23 @@ export default function TopNavigation() {
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <Icon
-                  name="ic_moon_16px"
-                  size={16}
-                  color="currentColor"
-                />
+      <Icon
+      name="ic_moon_16"
+      size={24}
+      color="#333"
+      onError={(error) => {
+        console.error('Icon error:', error);
+      }}
+    />
               ) : (
                 <Icon
-                  name="ic_sun_16px"
-                  size={16}
-                  color="currentColor"
-                />
+                name="ic_moon_16"
+                size={24}
+                color="#333"
+                onError={(error) => {
+                  console.error('Icon error:', error);
+                }}
+              />
               )}
             </button>
           </div>
