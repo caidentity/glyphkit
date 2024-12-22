@@ -90,9 +90,12 @@ export function generateIconPath(icon: IconMetadata): string {
 
 export async function loadSvgBatch(paths: string[]): Promise<{ [key: string]: string }> {
   try {
+    // Fix: Properly encode each path individually before creating URLSearchParams
+    const encodedPaths = JSON.stringify(paths.map(path => path.replace(/\/+/g, '/')));
+    
     const searchParams = new URLSearchParams({
       batch: 'true',
-      paths: JSON.stringify(paths),
+      paths: encodedPaths,
     });
 
     const response = await fetch(`/api/icons?${searchParams.toString()}`);
