@@ -29,3 +29,12 @@ yarn-error.log*
 # Generated files
 +public/icons/
 +public/icon-metadata.json 
+
+# Generated assets
+public/assets/*
+public/icons/*
+!public/assets/.gitkeep
+!public/icons/.gitkeep
+
+# Keep specific directories
+!public/registry/

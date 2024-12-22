@@ -1,9 +1,43 @@
+# Development
+demo/
+scripts/
+icons/
+src/__tests__/
+*.test.ts
+*.test.tsx
+jest.setup.ts
+
+# Config files
+.eslintrc*
+.prettierrc*
+rollup.config.mjs
+tsconfig.json
+tsconfig.test.json
+jest.config.cjs
+vite.config.ts
+
+# Source maps
+**/*.map
+
+# Source files (since we publish compiled files)
 src/
-tests/
+icons/
+
+# Development tools
+.vscode/
+.idea/
+.git/
 .github/
 .gitignore
-.eslintrc
-.prettierrc
-rollup.config.js
-tsconfig.json
-jest.config.js 
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules/
+
+# Test files
+coverage/
+__tests__/
+__mocks__/ 

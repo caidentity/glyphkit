@@ -1,43 +1,41 @@
-import React, { memo } from 'react';
-import { icons } from '../icons';
+import React from 'react';
+import { icons } from '../icons/registry';
 
 export interface IconProps {
   name: string;
   size?: number;
   color?: string;
   className?: string;
-  'aria-label'?: string;
   onError?: (error: Error) => void;
+  onLoad?: () => void;
 }
 
-export const Icon = memo<IconProps>(({ 
+export const Icon: React.FC<IconProps> = ({ 
   name, 
   size = 24, 
   color = 'currentColor',
   className = '',
-  'aria-label': ariaLabel,
   onError,
+  onLoad
 }) => {
   const icon = icons[name];
-  
   if (!icon) {
-    onError?.(new Error(`Icon "${name}" not found`));
+    console.error(`Icon not found: ${name}`);
     return null;
   }
 
   return (
     <svg 
-      width={size} 
-      height={size} 
-      viewBox={icon.viewBox}
-      fill={color}
       className={`glyphkit-icon ${className}`.trim()}
-      aria-label={ariaLabel || `${name} icon`}
-      role="img"
+      width={size}
+      height={size}
+      viewBox={icon.viewBox}
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path d={icon.path} />
+      <path
+        d={icon.d}
+        fill={color}
+      />
     </svg>
   );
-});
-
-Icon.displayName = 'Icon'; 
+}; 

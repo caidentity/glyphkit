@@ -6,6 +6,8 @@ import { usePathname } from 'next/navigation';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import './TopNavigation.scss';
 import { Icon } from '@glyphkit/glyphkit';
+import Image from 'next/image';
+import { getLogoPath } from '@/lib/assetLoader'
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -17,6 +19,7 @@ export default function TopNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
+  const logoPath = getLogoPath('logo.svg')
 
   useEffect(() => {
     // Check for saved theme preference or system preference
@@ -54,7 +57,13 @@ export default function TopNavigation() {
           </div>
           
           <Link href="/" className="top-navigation__logo">
-            Glyph Kit
+            <Image 
+              src={logoPath}
+              alt="Glyph Kit Logo"
+              width={120}
+              height={32}
+              priority
+            />
           </Link>
 
           <div className="top-navigation__links">
@@ -76,17 +85,23 @@ export default function TopNavigation() {
               aria-label="Toggle theme"
             >
               {theme === 'light' ? (
-                <Icon
-                  name="ic_moon_16px"
-                  size={16}
-                  color="currentColor"
-                />
+      <Icon
+      name="moon_16"
+      size={24}
+      color="#333"
+      onError={(error) => {
+        console.error('Icon error:', error);
+      }}
+    />
               ) : (
                 <Icon
-                  name="ic_moon_16px"
-                  size={16}
-                  color="currentColor"
-                />
+                name="sun_16"
+                size={24}
+                color="#333"
+                onError={(error) => {
+                  console.error('Icon error:', error);
+                }}
+              />
               )}
             </button>
           </div>

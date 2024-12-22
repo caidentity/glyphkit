@@ -1,91 +1,78 @@
-import { promises as fs } from 'fs';
-import path from 'path';
+import * as fs from 'fs/promises';
+import * as path from 'path';
 import { fileURLToPath } from 'url';
-import { dirname } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Define config constants directly in script to avoid import issues
-const ICONS_CONFIG = {
-  BASE_DIR: 'public/icons',
-  FILE_EXTENSION: '.svg',
-  DEFAULT_SIZE: 24,
-  SMALL_SIZE: 16,
-  SMALL_SUFFIX: '-small'
-} as const;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 interface IconDefinition {
-  path: string;
   viewBox: string;
+  d: string;
 }
 
-async function generateIconsIndex(iconDir: string) {
-  const icons: Record<string, IconDefinition> = {};
+async function generateIconRegistry() {
+  const iconsDir = path.resolve(__dirname, '../icons/flat/Icons');
+  const outputDir = path.resolve(__dirname, '../src/icons');
   
-  // Ensure directory exists
-  try {
-    await fs.access(iconDir);
-  } catch {
-    console.error(`Directory not found: ${iconDir}`);
-    return;
-  }
+  await fs.mkdir(outputDir, { recursive: true });
+  await fs.mkdir(path.resolve(__dirname, '../src/types'), { recursive: true });
 
-  // Scan recursively through directories
-  async function scanDirectory(dir: string) {
-    const files = await fs.readdir(dir);
+  const files = await fs.readdir(iconsDir);
+  const icons: Record<string, IconDefinition> = {};
 
-    for (const file of files) {
-      const filepath = path.join(dir, file);
-      const stat = await fs.stat(filepath);
-
-      if (stat.isDirectory()) {
-        await scanDirectory(filepath);
-      } else if (file.endsWith('.svg')) {
-        const content = await fs.readFile(filepath, 'utf-8');
-        const name = path.basename(file, '.svg')
-          .replace(ICONS_CONFIG.SMALL_SUFFIX, '');
-        
-        // Extract path and viewBox from SVG
-        const pathMatch = content.match(/d="([^"]+)"/);
-        const viewBoxMatch = content.match(/viewBox="([^"]+)"/);
-
-        if (pathMatch && viewBoxMatch) {
-          icons[name] = {
-            path: pathMatch[1],
-            viewBox: viewBoxMatch[1]
-          };
-        }
+  // Process icon files
+  for (const file of files) {
+    if (file.endsWith('.js')) {
+      const filePath = path.join(iconsDir, file);
+      try {
+        // Use dynamic import instead of require
+        const iconModule = await import(`file://${filePath}`);
+        const categoryIcons = Object.values(iconModule)[0];
+        Object.assign(icons, categoryIcons);
+      } catch (error) {
+        console.error(`Failed to load icons from ${file}:`, error);
       }
     }
   }
 
-  await scanDirectory(iconDir);
-
-  // Generate icons index file
-  const indexContent = `
-import { IconDefinition } from '../types/icon.types';
+  // Generate registry.ts
+  const registryContent = `// Auto-generated file
+import type { IconDefinition } from '../types/icon.types';
 
 export const icons: Record<string, IconDefinition> = ${JSON.stringify(icons, null, 2)};
-`;
 
-  const outputDir = path.join(__dirname, '../src/icons');
-  
-  // Ensure output directory exists
-  try {
-    await fs.access(outputDir);
-  } catch {
-    await fs.mkdir(outputDir, { recursive: true });
-  }
+export function getIcon(name: string): IconDefinition | null {
+  return icons[name.toLowerCase()] || null;
+}`;
 
-  await fs.writeFile(
-    path.join(outputDir, 'index.ts'),
-    indexContent
-  );
-
-  console.log(`✓ Generated icon definitions for ${Object.keys(icons).length} icons`);
+  // Write files
+  await Promise.all([
+    fs.writeFile(
+      path.join(outputDir, 'registry.ts'),
+      registryContent,
+      'utf-8'
+    ),
+    fs.writeFile(
+      path.join(outputDir, 'index.ts'),
+      `// Auto-generated file
+export * from './registry';
+export type { IconDefinition, IconName } from '../types/icon.types';
+`,
+      'utf-8'
+    ),
+    fs.writeFile(
+      path.resolve(__dirname, '../src/types/icon.types.ts'),
+      `export interface IconDefinition {
+  d: string;
+  viewBox: string;
 }
 
-// Run the script
-const iconDir = path.resolve(__dirname, '../../../public/icons');
-generateIconsIndex(iconDir).catch(console.error); 
+export type IconName = keyof typeof import('../icons/registry').icons;
+`,
+      'utf-8'
+    )
+  ]);
+
+  console.log(`Generated icon registry with ${Object.keys(icons).length} icons`);
+}
+
+generateIconRegistry().catch(console.error); 

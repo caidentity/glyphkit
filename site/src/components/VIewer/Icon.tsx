@@ -1,9 +1,21 @@
 'use client';
 
 import React from 'react';
+import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
 import { IconMetadata } from '@/types/icon';
-import { loadSvgContent } from '@/lib/iconLoader';
-import { useQuery } from '@tanstack/react-query';
+
+interface IconRegistryItem {
+  category: string;
+  name: string;
+}
+
+interface IconRegistry {
+  icons: Record<string, IconRegistryItem>;
+  categories: Record<string, {
+    icons: string[];
+    count: number;
+  }>;
+}
 
 interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: IconMetadata;
@@ -19,36 +31,31 @@ const Icon: React.FC<IconProps> = ({
   customSize,
   ...props 
 }) => {
-  const { data: svgContent } = useQuery({
-    queryKey: ['icon-svg', icon.path],
-    queryFn: () => loadSvgContent(icon.path.startsWith('/') ? icon.path : `/${icon.path}`),
-    staleTime: 1000 * 60 * 60, // 1 hour
-    gcTime: 1000 * 60 * 60 * 24, // 24 hours
-  });
-
   const iconSize = customSize || icon.size;
+  
+  // Use icon name directly since it's already processed by loadIconMetadata
+  const iconName = icon.name;
 
   return (
     <div 
       className={`inline-flex flex-col items-center ${className}`}
       {...props}
     >
-      {svgContent && (
-        <div 
-          style={{ 
-            width: iconSize, 
-            height: iconSize 
-          }}
-          dangerouslySetInnerHTML={{ 
-            __html: svgContent
-              .replace(/width="([^"]+)"/, `width="${iconSize}"`)
-              .replace(/height="([^"]+)"/, `height="${iconSize}"`)
-          }} 
+      <div style={{ width: iconSize, height: iconSize }}>
+        <GlyphKitIcon
+          name={iconName}
+          size={iconSize}
+          onError={(error) => console.error('Icon not found:', iconName)}
         />
-      )}
+      </div>
       {showSize && (
-        <span className="text-xs text-gray-400 mt-1">{iconSize}px</span>
+        <span className="text-xs text-gray-400 mt-1">
+          {iconSize}px
+        </span>
       )}
+      <span className="text-xs text-gray-600 mt-1">
+        {iconName}
+      </span>
     </div>
   );
 };

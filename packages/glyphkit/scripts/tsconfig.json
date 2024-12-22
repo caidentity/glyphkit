@@ -1,14 +1,24 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "node",
     "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react",
     "allowJs": true,
-    "strict": true
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "baseUrl": "..",
+    "paths": {
+      "react": ["node_modules/react"],
+      "*": ["node_modules/*"]
+    }
   },
-  "ts-node": {
-    "esm": true,
-    "experimentalSpecifierResolution": "node"
-  }
+  "include": [
+    "./**/*.ts", 
+    "./**/*.tsx",
+    "../icons/flat/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
 } 

@@ -1,5 +1,5 @@
 export { Icon } from './components/Icon';
 export type { IconProps } from './components/Icon';
-export { icons } from './icons';
-export type { IconDefinition } from './types/icon.types';
+export { icons, getIcon } from './icons/registry';
+export type { IconDefinition, IconName } from './types/icon.types';
   

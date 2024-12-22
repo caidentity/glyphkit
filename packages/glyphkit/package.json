@@ -1,14 +1,11 @@
 {
   "name": "@glyphkit/glyphkit",
-  "version": "0.0.103",
+  "version": "0.0.109",
   "description": "A customizable SVG icon toolkit for React applications",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
   "exports": {
     ".": {
       "import": "./dist/index.esm.js",
@@ -16,72 +13,45 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "clean": "rimraf dist",
-    "build": "npm run generate:icons && npm run clean && npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
-    "build:js": "rollup -c rollup.config.mjs",
     "dev": "vite",
-    "build:demo": "vite build",
+    "build": "vite build && NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
     "preview": "vite preview",
+    "clean": "rimraf dist src/icons/registry.ts src/icons/index.ts src/types/icon.types.ts",
+    "typecheck": "tsc --noEmit",
+    "generate:icons": "NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run lint",
-    "test": "jest --passWithNoTests",
-    "lint": "eslint src --ext .ts,.tsx",
-    "generate:icons": "NODE_OPTIONS=\"--loader ts-node/esm\" ts-node --project ./scripts/tsconfig.json scripts/generateIcons.ts"
+    "transform-icons": "tsx scripts/transformSvgToIcon.ts"
   },
   "peerDependencies": {
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "@testing-library/jest-dom": "^6.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.0.0",
-    "@types/node": "^18.19.68",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.0.0",
-    "eslint-config-standard": "^17.1.0",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-n": "^16.6.2",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "jest": "^29.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "rimraf": "^5.0.0",
-    "rollup": "^3.0.0",
-    "ts-jest": "^29.0.0",
+    "rimraf": "^5.0.10",
+    "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.5",
-    "vite": "^5.0.0"
-  },
-  "keywords": [
-    "react",
-    "icons",
-    "svg",
-    "toolkit"
-  ],
-  "author": "caideneity",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/caidentity/glyphkit.git"
-  },
-  "bugs": {
-    "url": "https://github.com/caidentity/glyphkit/issues"
-  },
-  "homepage": "https://github.com/caidentity/glyphkit#readme",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "tsx": "^4.7.0",
+    "typescript": "^5.7.2",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.0.0"
   }
 }

@@ -1,11 +1,70 @@
 .demo-container {
-  max-width: 800px;
-  margin: 0 auto;
   padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .icon-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
   gap: 1rem;
-  margin-top: 2rem;
-} 
+}
+
+.icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+}
+
+.icon-wrapper:hover {
+  background-color: #f9fafb;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.icon-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
+
+.demo-icon {
+  color: #4b5563;
+}
+
+.icon-name {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-align: center;
+  word-break: break-all;
+  max-width: 100%;
+}
+
+.glyphkit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glyphkit-icon path {
+  fill: currentColor;
+}
+
+/* Rest of your CSS... */ 

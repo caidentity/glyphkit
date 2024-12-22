@@ -5,30 +5,46 @@ import './App.css';
 export function App() {
   return (
     <div className="demo-container">
-      <h1>Glyphkit Demo</h1>
-      <div className="icon-grid">
-        <Icon 
-          name="arrow" 
-          size={24} 
-          color="#1a73e8" 
-          aria-label="Small blue arrow"
-          onError={(error) => console.error(error)}
-        />
-        <Icon 
-          name="ic_arrow_backward_forward_16px" 
-          size={32} 
-          color="#d93025"
-          aria-label="Medium red arrow"
-          onError={(error) => console.error(error)}
-        />
-        <Icon 
-          name="ic_arrow_backward_forward_16px" 
-          size={48} 
-          color="#188038"
-          aria-label="Large green arrow"
-          onError={(error) => console.error(error)}
-        />
-      </div>
+      <Icon
+        name="ic_link_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_sun_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_document_arrow_left_right_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_cloud_database_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_moon_16"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
     </div>
   );
 } 

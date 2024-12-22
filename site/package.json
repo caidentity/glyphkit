@@ -3,8 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "npm run generate-metadata && next build",
+    "dev": "npm run clean:assets && npm run copy:assets && npm run generate:icons && npm run copy:registry && next dev",
+    "build": "npm run clean:assets && npm run copy:assets && npm run verify:assets && npm run generate:icons && npm run copy:registry && npm run verify:registry && next build",
+    "verify:registry": "node -e \"const fs=require('fs');const path=require('path');const file=path.join(process.cwd(),'public/registry/iconRegistry.json');console.log('Verifying registry:',file);const data=JSON.parse(fs.readFileSync(file));console.log('Icons:',Object.keys(data.categories).length,'categories');\"",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
@@ -13,14 +14,18 @@
     "clean": "rm -rf .next node_modules",
     "clean:metadata": "rm -rf ./public/icon-metadata.json",
     "clean:public": "rm -rf ./public/icons",
-    "prepare:public": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/ 2>/dev/null || true",
-    "generate-metadata": "set NODE_ENV=production&& tsx src/scripts/generateIconMetadata.ts",
-    "prebuild": "npm run clean:metadata && npm run clean:public && npm run prepare:public",
+    "prepare:public": "mkdir -p ./public/icons",
     "check:icons": "ls -la ../public/icons",
-    "postbuild": "node scripts/verify-build.js"
+    "postbuild": "node scripts/verify-build.js",
+    "generate:icons": "tsx src/scripts/generateIconRegistry.ts",
+    "copy:registry": "tsx src/scripts/copyIconRegistry.ts",
+    "copy:assets": "tsx src/scripts/copyAssets.ts",
+    "clean:assets": "rm -rf ./public/assets/* && mkdir -p ./public/assets/Logo",
+    "verify:assets": "tsx src/scripts/verifyAssets.ts",
+    "verify:setup": "tsx src/scripts/verifyAssetSetup.ts"
   },
   "dependencies": {
-    "@glyphkit/glyphkit": "^0.0.103",
+    "@glyphkit/glyphkit": "^0.0.109",
     "@radix-ui/react-icons": "^1.3.2",
     "@radix-ui/react-slider": "^1.2.2",
     "@tanstack/react-query": "^5.62.8",
@@ -52,6 +57,8 @@
     "sass": "1.69.7",
     "tailwindcss": "3.4.0",
     "tsx": "^4.19.2",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "fs-extra": "^11.2.0",
+    "@types/fs-extra": "^11.0.4"
   }
 }

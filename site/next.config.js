@@ -17,6 +17,7 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    unoptimized: process.env.NODE_ENV === 'development',
   },
 
   // Build optimization
@@ -31,10 +32,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/registry/:path*',
+        destination: '/registry/:path*'
+      },
+      {
         source: '/icons/:path*',
-        destination: process.env.NODE_ENV === 'production'
-          ? '/public/icons/:path*'
-          : path.join('..', 'public', 'icons', ':path*'),
+        destination: '/icons/:path*'
       },
     ];
   },
@@ -44,20 +47,36 @@ const nextConfig = {
     // Add SVG handling
     config.module.rules.push({
       test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     });
 
-    // Copy icons to public directory during build
+    // Add static asset handling
+    config.module.rules.push({
+      test: /\.(png|jpg|gif|ico|webp|svg)$/i,
+      type: 'asset/resource',
+      generator: {
+        filename: 'assets/[path][name][ext]',
+      },
+    });
+
+    // Copy assets to public directory during build
     if (isServer && !dev) {
       const CopyPlugin = require('copy-webpack-plugin');
       config.plugins.push(
         new CopyPlugin({
           patterns: [
             {
+              from: path.join(process.cwd(), 'src/assets'),
+              to: path.join(process.cwd(), 'public/assets'),
+              noErrorOnMissing: true,
+              force: true,
+            },
+            {
               from: path.join(process.cwd(), '..', 'public', 'icons'),
               to: path.join(process.cwd(), 'public', 'icons'),
-              noErrorOnMissing: true, // Don't fail if icons are missing
-              force: true, // Overwrite existing files
+              noErrorOnMissing: true,
+              force: true,
             },
           ],
         })

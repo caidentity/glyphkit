@@ -1,6 +1,5 @@
-import { IconMetadata, IconCategory, IconsMetadata } from '@/types/icon'
-import { ICONS_CONFIG, METADATA_DEFAULTS } from '@/constants/icons'
-import path from 'path'
+import { IconMetadata, IconCategory } from '@/types/icon'
+import { ICONS_CONFIG } from '@/constants/icons'
 
 interface MetadataCache {
   data: IconCategory[] | null
@@ -20,56 +19,61 @@ function isCacheValid(cache: MetadataCache): boolean {
   )
 }
 
+let memoizedCategories: IconCategory[] | null = null;
+
 export async function loadIconMetadata(): Promise<IconCategory[]> {
   try {
-    console.log('Starting metadata load...');
-    performance.mark('metadata-load-start');
-
-    if (isCacheValid(metadataCache)) {
-      console.log('Using cache...');
-      performance.mark('metadata-load-end');
-      performance.measure('metadata-load', 'metadata-load-start', 'metadata-load-end');
-      return Array.from(metadataCache.data ?? []);
+    if (memoizedCategories) {
+      return memoizedCategories;
     }
 
-    console.log('Fetching metadata...');
-    const response = await fetch(`${ICONS_CONFIG.BASE_DIR}/${ICONS_CONFIG.METADATA_FILE}`, {
-      cache: process.env.NODE_ENV === 'development' ? 'force-cache' : 'default',
-    });
-
-    console.log('Response status:', response.status);
+    // Load from public registry
+    const response = await fetch('/registry/iconRegistry.json');
     if (!response.ok) {
-      console.warn('Failed to load metadata, using defaults');
-      return [...METADATA_DEFAULTS.EMPTY_METADATA.categories];
+      console.error('Failed to load registry:', await response.text());
+      throw new Error('Failed to load icon registry');
     }
     
-    console.log('Parsing JSON...');
-    const data: IconsMetadata = await response.json();
-    console.log('Metadata loaded:', data.categories.length, 'categories');
+    const data = await response.json();
     
-    metadataCache = {
-      data: data.categories,
-      timestamp: Date.now()
-    };
+    if (!data.categories) {
+      console.error('Invalid registry data:', data);
+      throw new Error('Invalid registry format');
+    }
 
-    performance.mark('metadata-load-end');
-    performance.measure('metadata-load', 'metadata-load-start', 'metadata-load-end');
+    memoizedCategories = Object.entries(data.categories).map(([name, data]) => ({
+      name,
+      icons: (data as { icons: string[] }).icons.map((iconName: string) => {
+        const size = iconName.endsWith('24') ? 24 : 16;
+        return {
+          name: iconName,
+          category: name,
+          size,
+          path: `/api/icons/${name}/${iconName}`
+        };
+      })
+    }));
     
-    return Array.from(data.categories);
+    return memoizedCategories;
   } catch (error) {
     console.error('Error loading icon metadata:', error);
-    return [...METADATA_DEFAULTS.EMPTY_METADATA.categories];
+    return [];
   }
 }
 
 export async function loadSvgContent(path: string): Promise<string | null> {
   try {
-    const response = await fetch(`/api/icons${path.replace('/icons', '')}`)
-    if (!response.ok) throw new Error('Failed to load SVG')
-    return response.text()
+    // Remove any double slashes and ensure proper path format
+    const cleanPath = path.replace(/\/+/g, '/');
+    const response = await fetch(cleanPath);
+    if (!response.ok) {
+      console.error(`Failed to load SVG: ${cleanPath}`);
+      return null;
+    }
+    return await response.text();
   } catch (error) {
-    console.error('Error loading SVG content:', error)
-    return null
+    console.error('Error loading SVG content:', error);
+    return null;
   }
 }
 
