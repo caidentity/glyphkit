@@ -14,7 +14,6 @@
     "clean:metadata": "rm -rf ./public/icon-metadata.json",
     "clean:public": "rm -rf ./public/icons",
     "prepare:public": "mkdir -p ./public/icons",
-    "prebuild": "npm run clean:public && npm run prepare:public && npm run generate:icons",
     "check:icons": "ls -la ../public/icons",
     "postbuild": "node scripts/verify-build.js",
     "generate:icons": "tsx src/scripts/generateIconRegistry.ts"

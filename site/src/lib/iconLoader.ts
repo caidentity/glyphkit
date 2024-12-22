@@ -1,7 +1,6 @@
-import { IconMetadata, IconCategory, IconsMetadata } from '@/types/icon'
-import { ICONS_CONFIG, METADATA_DEFAULTS } from '@/constants/icons'
-import path from 'path'
-import iconRegistry from '@/lib/iconRegistry.json';
+import { IconMetadata, IconCategory } from '@/types/icon'
+import { ICONS_CONFIG } from '@/constants/icons'
+import iconRegistry from '@/lib/iconRegistry.json'
 
 interface MetadataCache {
   data: IconCategory[] | null
@@ -29,7 +28,10 @@ export async function loadIconMetadata(): Promise<IconCategory[]> {
       return memoizedCategories;
     }
 
-    memoizedCategories = Object.entries(iconRegistry.categories).map(([name, data]) => ({
+    // Type assertion to handle the unknown structure of iconRegistry
+    const categories = (iconRegistry as { categories: { [key: string]: { icons: string[] } } }).categories;
+    
+    memoizedCategories = Object.entries(categories).map(([name, data]) => ({
       name,
       icons: data.icons.map(iconName => {
         const size = iconName.endsWith('24') ? 24 : 16;

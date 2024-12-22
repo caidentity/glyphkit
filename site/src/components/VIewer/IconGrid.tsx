@@ -60,8 +60,9 @@ const IconGrid: React.FC<IconGridProps> = ({
           relative flex flex-col 
           items-center border rounded-lg 
           hover:border-blue-500 hover:shadow-sm transition-all duration-200
-          ${viewMode === 'list' ? 'p-4' : `p-${dynamicPadding/4}`}
-          ${viewMode === 'list' ? 'gap-4' : 'gap-3'}
+          group
+          ${viewMode === 'list' ? 'p-4 justify-between' : `p-${dynamicPadding/4}`}
+          ${viewMode === 'list' ? 'flex-row' : 'gap-2'}
         `}
         style={{
           padding: viewMode === 'list' ? '1rem' : `${dynamicPadding}px`,
@@ -74,8 +75,10 @@ const IconGrid: React.FC<IconGridProps> = ({
         />
         
         <div className={`
-          flex ${viewMode === 'list' ? 'flex-row gap-4' : 'flex-col gap-2'} 
-          items-center
+          ${viewMode === 'list' 
+            ? 'flex flex-row gap-4 ml-auto' 
+            : 'absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 rounded-lg'
+          }
         `}>
           {onIconDownload && (
             <button
@@ -83,7 +86,10 @@ const IconGrid: React.FC<IconGridProps> = ({
                 e.stopPropagation();
                 onIconDownload(icon);
               }}
-              className="text-gray-500 hover:text-blue-500"
+              className={`
+                text-gray-500 hover:text-blue-500
+                ${viewMode === 'list' ? '' : 'bg-white border rounded-md px-3 py-1 shadow-sm'}
+              `}
             >
               Download
             </button>
@@ -94,7 +100,10 @@ const IconGrid: React.FC<IconGridProps> = ({
                 e.stopPropagation();
                 onIconCopy(icon);
               }}
-              className="text-gray-500 hover:text-blue-500"
+              className={`
+                text-gray-500 hover:text-blue-500
+                ${viewMode === 'list' ? '' : 'bg-white border rounded-md px-3 py-1 shadow-sm'}
+              `}
             >
               Copy
             </button>
@@ -136,8 +145,8 @@ const IconGrid: React.FC<IconGridProps> = ({
                 transform: `translateY(${virtualRow.start}px)`,
                 display: 'grid',
                 gridTemplateColumns: `repeat(${columns}, 1fr)`,
-                gap: '1rem',
-                padding: '0.5rem',
+                gap: '1.5rem',
+                padding: '1rem',
               }}
             >
               {rowIcons.map((icon) => renderIconCard(icon))}
