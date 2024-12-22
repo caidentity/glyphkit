@@ -9,7 +9,11 @@
     "skipLibCheck": true,
     "jsx": "react-jsx",
     "types": ["node"],
-    "outDir": "dist"
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   },
   "include": ["src/**/*", "scripts/**/*", "demo/**/*"],
   "exclude": ["node_modules", "dist"]
