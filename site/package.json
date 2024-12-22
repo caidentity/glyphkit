@@ -15,9 +15,10 @@
     "clean:public": "rm -rf ./public/icons",
     "prepare:public": "mkdir -p ./public/icons && cp -r ../public/icons/* ./public/icons/ 2>/dev/null || true",
     "generate-metadata": "set NODE_ENV=production&& tsx src/scripts/generateIconMetadata.ts",
-    "prebuild": "npm run clean:metadata && npm run clean:public && npm run prepare:public",
+    "prebuild": "npm run clean:metadata && npm run clean:public && npm run prepare:public && npm run generate:icons",
     "check:icons": "ls -la ../public/icons",
-    "postbuild": "node scripts/verify-build.js"
+    "postbuild": "node scripts/verify-build.js",
+    "generate:icons": "tsx src/scripts/generateIconRegistry.ts"
   },
   "dependencies": {
     "@glyphkit/glyphkit": "^0.0.109",

@@ -14,6 +14,11 @@ async function verifyBuild() {
       path: 'public/icons',
       type: 'directory',
       name: 'Icons directory'
+    },
+    {
+      path: 'src/lib/iconMapping.txt',
+      type: 'file',
+      name: 'Icon registry'
     }
   ];
 
