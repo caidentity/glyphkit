@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run copy:assets && npm run generate:icons && npm run copy:registry && next dev",
-    "build": "npm run copy:assets && npm run generate:icons && npm run copy:registry && npm run verify:registry && next build",
+    "dev": "npm run clean:assets && npm run copy:assets && npm run generate:icons && npm run copy:registry && next dev",
+    "build": "npm run clean:assets && npm run copy:assets && npm run verify:assets && npm run generate:icons && npm run copy:registry && npm run verify:registry && next build",
     "verify:registry": "node -e \"const fs=require('fs');const path=require('path');const file=path.join(process.cwd(),'public/registry/iconRegistry.json');console.log('Verifying registry:',file);const data=JSON.parse(fs.readFileSync(file));console.log('Icons:',Object.keys(data.categories).length,'categories');\"",
     "start": "next start",
     "lint": "next lint",
@@ -19,7 +19,10 @@
     "postbuild": "node scripts/verify-build.js",
     "generate:icons": "tsx src/scripts/generateIconRegistry.ts",
     "copy:registry": "tsx src/scripts/copyIconRegistry.ts",
-    "copy:assets": "tsx src/scripts/copyAssets.ts"
+    "copy:assets": "tsx src/scripts/copyAssets.ts",
+    "clean:assets": "rm -rf ./public/assets/* && mkdir -p ./public/assets/Logo",
+    "verify:assets": "tsx src/scripts/verifyAssets.ts",
+    "verify:setup": "tsx src/scripts/verifyAssetSetup.ts"
   },
   "dependencies": {
     "@glyphkit/glyphkit": "^0.0.109",

@@ -7,6 +7,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import './TopNavigation.scss';
 import { Icon } from '@glyphkit/glyphkit';
 import Image from 'next/image';
+import { getLogoPath } from '@/lib/assetLoader'
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -18,6 +19,7 @@ export default function TopNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
+  const logoPath = getLogoPath('logo.svg')
 
   useEffect(() => {
     // Check for saved theme preference or system preference
@@ -56,7 +58,7 @@ export default function TopNavigation() {
           
           <Link href="/" className="top-navigation__logo">
             <Image 
-              src="/Logo/logo.svg"
+              src={logoPath}
               alt="Glyph Kit Logo"
               width={120}
               height={32}
