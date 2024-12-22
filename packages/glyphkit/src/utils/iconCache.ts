@@ -1,4 +1,4 @@
-import { IconCache } from '../types/icon.types';
+import { IconCache } from '../types/icon.types.js';
 
 const CACHE_DURATION = 1000 * 60 * 60; // 1 hour cache duration
 

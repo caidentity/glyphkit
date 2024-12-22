@@ -29,7 +29,7 @@ export const Icon = memo<IconProps>(({
   try {
     const icon = icons[name];
     if (!icon) {
-      const error = new Error(`Icon "${name}" not found`);
+      const error = new Error(`Icon "${String(name)}" not found`);
       console.error('[Icon]', error);
       onError?.(error);
       return null;
@@ -43,7 +43,7 @@ export const Icon = memo<IconProps>(({
         viewBox={icon.viewBox}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-label={ariaLabel || `${name} icon`}
+        aria-label={ariaLabel || `${String(name)} icon`}
         style={{ color }}
         dangerouslySetInnerHTML={{ 
           __html: icon.path 

@@ -1,4 +1,4 @@
-import { registerIcon } from './registry';
+import { registerIcon } from './registry.js';
 
 // Example icon registration
 registerIcon('arrow-right', {

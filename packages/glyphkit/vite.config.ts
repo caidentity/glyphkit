@@ -1,31 +1,24 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
-  root: './demo',
-  publicDir: '../public',
   build: {
-    outDir: '../dist/demo'
-  },
-  css: {
-    postcss: './demo/postcss.config.cjs'
-  },
-  server: {
-    watch: {
-      usePolling: true
+    lib: {
+      entry: resolve(__dirname, 'src/index.ts'),
+      name: 'GlyphKit',
+      fileName: (format) => `index.${format}.js`
+    },
+    outDir: 'dist',
+    rollupOptions: {
+      external: ['react', 'react-dom'],
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM'
+        }
+      }
     }
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@demo': path.resolve(__dirname, './demo/src'),
-      '@icons': path.resolve(__dirname, './src/icons')
-    }
-  },
-  optimizeDeps: {
-    include: ['react', 'react-dom']
-  },
-  assetsInclude: ['**/*.svg'],
+  }
 }); 

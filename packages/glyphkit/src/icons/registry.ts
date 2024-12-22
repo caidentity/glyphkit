@@ -1,26 +1,23 @@
-import { IconRegistry } from '../types/icon.types';
+// This file is auto-generated. Do not edit manually.
+import type { IconDefinition } from '../types/icon.types';
+import { paths } from '../../icons/flat/paths';
 
-const iconRegistry: IconRegistry = {};
-const iconCache = new Map<string, { path: string; viewBox?: string }>();
+export const icons: Record<string, IconDefinition> = {};
 
-export function registerIcon(name: string, definition: { path: string; viewBox?: string }) {
-  iconRegistry[name] = definition;
+// Convert React elements to IconDefinition format
+Object.entries(paths).forEach(([name, pathElement]) => {
+  if (name !== 'default' && pathElement.props) {
+    icons[name] = {
+      path: `<path d="${pathElement.props.d}" fill="currentColor"/>`,
+      viewBox: "0 0 24 24"
+    };
+  }
+});
+
+export function getIcon(name: string): IconDefinition | null {
+  return icons[name] || null;
 }
 
-export function getIcon(name: string) {
-  // Check registry first
-  if (iconRegistry[name]) {
-    return iconRegistry[name];
-  }
-  
-  // Then check cache
-  if (iconCache.has(name)) {
-    return iconCache.get(name);
-  }
-  
-  return null;
+export function registerIcon(name: string, definition: IconDefinition) {
+  icons[name] = definition;
 }
-
-export function cacheIcon(name: string, definition: { path: string; viewBox?: string }) {
-  iconCache.set(name, definition);
-} 

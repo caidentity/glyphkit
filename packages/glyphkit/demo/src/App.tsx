@@ -1,34 +1,50 @@
 import React from 'react';
 import { Icon } from '../../src/components/Icon';
-import { DEBUG_ICONS } from './debug';
 import './App.css';
 
 export function App() {
   return (
     <div className="demo-container">
-      <header>
-        <h1>GlyphKit Icons</h1>
-        <p>Total Icons: {DEBUG_ICONS.length}</p>
-      </header>
-
-      <main className="icon-grid">
-        {DEBUG_ICONS.map(name => (
-          <div key={name} className="icon-wrapper">
-            <div className="icon-display">
-              <Icon 
-                name={name}
-                size={24}
-                className="demo-icon"
-                color='#ccc'
-                onError={(error) => {
-                  console.error(`Failed to load icon ${name}:`, error);
-                }}
-              />
-            </div>
-            <code className="icon-name">{name}</code>
-          </div>
-        ))}
-      </main>
+      <Icon
+        name="ic_link_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_sun_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_document_arrow_left_right_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_link_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
+      <Icon
+        name="ic_link_24"
+        size={24}
+        color="#333"
+        onError={(error) => {
+          console.error('Icon error:', error);
+        }}
+      />
     </div>
   );
 } 

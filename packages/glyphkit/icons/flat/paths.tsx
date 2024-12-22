@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-// Import individual icon files
+// Import individual icon files with .js extensions
 import { arrowIcons } from './Icons/arrows.js';
 import { brandIcons } from './Icons/brand.js';
 import { communicationIcons } from './Icons/communication.js';

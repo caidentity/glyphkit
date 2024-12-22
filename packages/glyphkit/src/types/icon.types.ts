@@ -1,14 +1,15 @@
+import { ReactElement, SVGProps } from 'react';
+
 export interface IconDefinition {
   path: string;
   viewBox?: string;
-  preserveColors?: boolean;
 }
-
-export type IconName = string;
 
 export interface IconRegistry {
   [key: string]: IconDefinition;
 }
+
+export type IconElement = ReactElement<SVGProps<SVGPathElement>>;
 
 export interface IconMetadata {
   name: string;
