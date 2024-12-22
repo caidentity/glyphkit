@@ -1,5 +1,5 @@
-export { Icon } from './components/Icon';
-export type { IconProps } from './components/Icon';
-export { icons } from './icons';
-export type { IconDefinition } from './types/icon.types';
+export { Icon } from './components/Icon.js';
+export type { IconProps } from './components/Icon.js';
+export { icons } from './icons/index.js';
+export type { IconDefinition } from './types/icon.types.js';
   

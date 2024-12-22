@@ -83,7 +83,7 @@ export default function TopNavigation() {
                 />
               ) : (
                 <Icon
-                  name="ic_moon_16px"
+                  name="ic_sun_16px"
                   size={16}
                   color="currentColor"
                 />

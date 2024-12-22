@@ -1,14 +1,21 @@
 import React, { memo } from 'react';
-import { icons } from '../icons';
-import type { IconDefinition } from '../types/icon.types';
+import { icons } from '../icons/index.js';
 
 export interface IconProps {
-  name: string;
+  name: keyof typeof icons;
   size?: number;
   color?: string;
   className?: string;
   'aria-label'?: string;
   onError?: (error: Error) => void;
+}
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      svg: React.SVGProps<SVGSVGElement>;
+    }
+  }
 }
 
 export const Icon = memo<IconProps>(({ 
@@ -19,27 +26,35 @@ export const Icon = memo<IconProps>(({
   'aria-label': ariaLabel,
   onError,
 }) => {
-  const icon = icons[name] as IconDefinition;
-  
-  if (!icon) {
-    onError?.(new Error(`Icon "${name}" not found`));
+  try {
+    const icon = icons[name];
+    if (!icon) {
+      const error = new Error(`Icon "${name}" not found`);
+      console.error('[Icon]', error);
+      onError?.(error);
+      return null;
+    }
+
+    return (
+      <svg 
+        className={`glyphkit-icon ${className}`.trim()}
+        width={size}
+        height={size}
+        viewBox={icon.viewBox}
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label={ariaLabel || `${name} icon`}
+        style={{ color }}
+        dangerouslySetInnerHTML={{ 
+          __html: icon.path 
+        }}
+      />
+    );
+  } catch (error) {
+    console.error('[Icon] Render error:', error);
+    onError?.(error as Error);
     return null;
   }
-
-  return (
-    <svg 
-      width={size} 
-      height={size} 
-      viewBox={icon.viewBox || '0 0 24 24'}
-      fill={color}
-      className={`glyphkit-icon ${className}`.trim()}
-      aria-label={ariaLabel || `${name} icon`}
-      role="img"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d={icon.path} />
-    </svg>
-  );
 });
 
 Icon.displayName = 'Icon'; 

@@ -1,63 +1,34 @@
-import { render, waitFor } from '@testing-library/react';
+import React from 'react';
+import { render } from '@testing-library/react';
 import { Icon } from '../components/Icon';
+import { icons } from '../icons';
+
+// Get a real icon name from our registry
+const SAMPLE_ICON = Object.keys(icons)[0];
 
 describe('Icon', () => {
-  beforeEach(() => {
-    // Clear fetch mocks
-    jest.clearAllMocks();
-  });
-
-  it('renders without crashing', async () => {
-    global.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        ok: true,
-        text: () => Promise.resolve('<path d="M0 0h24v24H0z" />')
-      })
-    );
-
+  it('renders without crashing', () => {
     const { container } = render(
-      <Icon name="test-icon" />
+      <Icon name={SAMPLE_ICON} />
     );
-
-    await waitFor(() => {
-      expect(container.querySelector('svg')).toBeInTheDocument();
-    });
+    expect(container.querySelector('svg')).toBeInTheDocument();
   });
 
-  it('applies custom size and color', async () => {
-    global.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        ok: true,
-        text: () => Promise.resolve('<path d="M0 0h24v24H0z" />')
-      })
-    );
-
+  it('applies custom size and color', () => {
     const { container } = render(
-      <Icon name="test-icon" size={32} color="#ff0000" />
+      <Icon name={SAMPLE_ICON} size={32} color="#ff0000" />
     );
-
-    await waitFor(() => {
-      const svg = container.querySelector('svg');
-      expect(svg).toHaveAttribute('width', '32');
-      expect(svg).toHaveAttribute('fill', '#ff0000');
-    });
+    const svg = container.querySelector('svg');
+    expect(svg).toHaveAttribute('width', '32');
+    expect(svg).toHaveAttribute('height', '32');
+    expect(svg).toHaveStyle({ color: '#ff0000' });
   });
 
-  it('handles loading errors', async () => {
+  it('handles nonexistent icons', () => {
     const onError = jest.fn();
-    global.fetch = jest.fn().mockImplementation(() =>
-      Promise.resolve({
-        ok: false,
-        status: 404
-      })
-    );
-
     render(
       <Icon name="nonexistent-icon" onError={onError} />
     );
-
-    await waitFor(() => {
-      expect(onError).toHaveBeenCalled();
-    });
+    expect(onError).toHaveBeenCalled();
   });
 }); 

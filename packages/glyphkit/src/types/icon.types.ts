@@ -1,12 +1,13 @@
 export interface IconDefinition {
   path: string;
   viewBox?: string;
+  preserveColors?: boolean;
 }
 
 export type IconName = string;
 
 export interface IconRegistry {
-  [key: IconName]: IconDefinition;
+  [key: string]: IconDefinition;
 }
 
 export interface IconMetadata {

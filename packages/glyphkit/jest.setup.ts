@@ -1,12 +1,11 @@
 import '@testing-library/jest-dom';
-import '@testing-library/jest-dom/extend-expect';
 
-// Suppress specific React warnings during tests if needed
+// Suppress console.error during tests
 const originalError = console.error;
 console.error = (...args) => {
   if (
     typeof args[0] === 'string' && 
-    (args[0].includes('Warning: ') || args[0].includes('[React]'))
+    (args[0].includes('[Icon]') || args[0].includes('Warning:'))
   ) {
     return;
   }
