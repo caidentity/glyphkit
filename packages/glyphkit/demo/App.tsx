@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { Icon } from '../src/components/Icon';
 
 const App = () => {
@@ -9,6 +10,9 @@ const App = () => {
           name="ic_brand_apple_16"
           color="#000000" 
           size={32}
+          onError={(error: Error) => {
+            console.error('Icon failed to load:', error);
+          }}
         />
       </div>
     </div>

@@ -2,10 +2,12 @@ import React from 'react';
 import { icons } from '../icons/registry';
 
 export interface IconProps {
-  name: keyof typeof icons;
+  name: string;
   size?: number;
   color?: string;
   className?: string;
+  onError?: (error: Error) => void;
+  onLoad?: () => void;
 }
 
 export const Icon: React.FC<IconProps> = ({ 
@@ -13,6 +15,8 @@ export const Icon: React.FC<IconProps> = ({
   size = 24, 
   color = 'currentColor',
   className = '',
+  onError,
+  onLoad
 }) => {
   const icon = icons[name];
   if (!icon) {

@@ -1,32 +1,28 @@
-import { IconCache } from '../types/icon.types.js';
+import type { IconDefinition } from '../types/icon.types';
 
-const CACHE_DURATION = 1000 * 60 * 60; // 1 hour cache duration
-
-class IconCacheManager {
-  private cache: Map<string, IconCache> = new Map();
-
-  set(key: string, content: string): void {
-    this.cache.set(key, {
-      content,
-      timestamp: Date.now()
-    });
-  }
-
-  get(key: string): string | null {
-    const cached = this.cache.get(key);
-    if (!cached) return null;
-
-    if (Date.now() - cached.timestamp > CACHE_DURATION) {
-      this.cache.delete(key);
-      return null;
-    }
-
-    return cached.content;
-  }
-
-  clear(): void {
-    this.cache.clear();
-  }
+interface CacheEntry {
+  content: IconDefinition;
+  timestamp: number;
 }
 
-export const iconCache = new IconCacheManager(); 
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const iconCache = new Map<string, CacheEntry>();
+
+export function cacheIcon(name: string, content: IconDefinition): void {
+  iconCache.set(name, {
+    content,
+    timestamp: Date.now()
+  });
+}
+
+export function getCachedIcon(name: string): IconDefinition | null {
+  const cached = iconCache.get(name);
+  if (cached) {
+    if (Date.now() - cached.timestamp > CACHE_DURATION) {
+      iconCache.delete(name);
+      return null;
+    }
+    return cached.content;
+  }
+  return null;
+} 

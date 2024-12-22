@@ -25,7 +25,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "clean": "rimraf dist src/icons/registry.ts src/icons/index.ts src/types/icon.types.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "generate:icons": "NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
+    "generate:registry": "NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIconRegistry.ts"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
@@ -45,8 +47,9 @@
     "react-dom": "^18.2.0",
     "rimraf": "^5.0.10",
     "tailwindcss": "^3.4.17",
+    "ts-node": "^10.9.2",
     "tsx": "^4.7.0",
-    "typescript": "^5.0.0",
+    "typescript": "^5.7.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.0.0"
   }

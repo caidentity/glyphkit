@@ -29,10 +29,22 @@ async function generateIconFiles() {
   // Create directory if it doesn't exist
   await fs.mkdir(iconsDir, { recursive: true });
 
+  // Create index.ts file for exporting all icons
+  const indexContent = ICON_SETS
+    .map(set => `export { ${set}Icons } from "./${set}.js";`)
+    .join('\n');
+
+  await fs.writeFile(
+    path.join(iconsDir, 'index.ts'),
+    indexContent + '\n',
+    'utf-8'
+  );
+
   // Create each icon file
   for (const set of ICON_SETS) {
     const filePath = path.join(iconsDir, `${set}.js`);
-    const content = `export const ${set}Icons = {
+    const content = `// Auto-generated file
+export const ${set}Icons = {
   // Icon definitions will be added here
 };
 `;
