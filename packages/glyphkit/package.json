@@ -27,7 +27,8 @@
     "clean": "rimraf dist src/icons/registry.ts src/icons/index.ts src/types/icon.types.ts",
     "typecheck": "tsc --noEmit",
     "generate:icons": "NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "transform-icons": "tsx scripts/transformSvgToIcon.ts"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
