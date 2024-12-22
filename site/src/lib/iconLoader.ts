@@ -1,6 +1,7 @@
 import { IconMetadata, IconCategory, IconsMetadata } from '@/types/icon'
 import { ICONS_CONFIG, METADATA_DEFAULTS } from '@/constants/icons'
 import path from 'path'
+import iconRegistry from '@/lib/iconRegistry.json';
 
 interface MetadataCache {
   data: IconCategory[] | null
@@ -22,43 +23,21 @@ function isCacheValid(cache: MetadataCache): boolean {
 
 export async function loadIconMetadata(): Promise<IconCategory[]> {
   try {
-    console.log('Starting metadata load...');
-    performance.mark('metadata-load-start');
-
-    if (isCacheValid(metadataCache)) {
-      console.log('Using cache...');
-      performance.mark('metadata-load-end');
-      performance.measure('metadata-load', 'metadata-load-start', 'metadata-load-end');
-      return Array.from(metadataCache.data ?? []);
-    }
-
-    console.log('Fetching metadata...');
-    const response = await fetch(`${ICONS_CONFIG.BASE_DIR}/${ICONS_CONFIG.METADATA_FILE}`, {
-      cache: process.env.NODE_ENV === 'development' ? 'force-cache' : 'default',
-    });
-
-    console.log('Response status:', response.status);
-    if (!response.ok) {
-      console.warn('Failed to load metadata, using defaults');
-      return [...METADATA_DEFAULTS.EMPTY_METADATA.categories];
-    }
+    // Convert registry categories format to IconCategory[]
+    const categories = Object.entries(iconRegistry.categories).map(([name, data]) => ({
+      name,
+      icons: data.icons.map(iconName => ({
+        name: iconName,
+        category: name,
+        size: iconName.endsWith('24') ? 24 : 16,
+        path: `/icons/${name}/${iconName}.svg`
+      }))
+    }));
     
-    console.log('Parsing JSON...');
-    const data: IconsMetadata = await response.json();
-    console.log('Metadata loaded:', data.categories.length, 'categories');
-    
-    metadataCache = {
-      data: data.categories,
-      timestamp: Date.now()
-    };
-
-    performance.mark('metadata-load-end');
-    performance.measure('metadata-load', 'metadata-load-start', 'metadata-load-end');
-    
-    return Array.from(data.categories);
+    return categories;
   } catch (error) {
     console.error('Error loading icon metadata:', error);
-    return [...METADATA_DEFAULTS.EMPTY_METADATA.categories];
+    return [];
   }
 }
 
