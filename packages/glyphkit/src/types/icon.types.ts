@@ -1,5 +1,5 @@
 export interface IconDefinition {
-  path: string;
+  d: string;
   viewBox: string;
 }
 

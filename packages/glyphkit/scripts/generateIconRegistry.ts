@@ -13,22 +13,24 @@ async function generateIconRegistry() {
 import type { IconDefinition } from '../types/icon.types';
 
 export const icons: Record<string, IconDefinition> = {
-${iconEntries.map(([name, pathElement]) => {
+${iconEntries.map(([name, iconData]) => {
   try {
-    if (!pathElement.props?.d) {
+    if (!iconData.d) {
       failedIcons.push(name);
       console.warn(`Warning: No path data for icon "${name}"`);
       return null;
     }
 
-    // Escape any quotes in the path data
-    const escapedPath = pathElement.props.d.replace(/([\\"])/g, '\\$1');
-    const viewBox = pathElement.props.viewBox || "0 0 24 24";
+    // Clean and escape the path data
+    const cleanPath = iconData.d
+      .trim()
+      .replace(/\s+/g, ' ') // Normalize whitespace
+      .replace(/([\\"])/g, '\\$1'); // Escape quotes
 
     successfulIcons.push(name);
     return `  "${name}": {
-    path: '<path d="${escapedPath}" fill="currentColor"/>',
-    viewBox: "${viewBox}"
+    d: "${cleanPath}",
+    viewBox: "${iconData.viewBox}"
   }`;
   } catch (error) {
     failedIcons.push(name);
@@ -40,10 +42,6 @@ ${iconEntries.map(([name, pathElement]) => {
 
 export function getIcon(name: string): IconDefinition | null {
   return icons[name] || null;
-}
-
-export function registerIcon(name: string, definition: IconDefinition) {
-  icons[name] = definition;
 }`;
 
   const indexContent = `// Auto-generated file
@@ -71,7 +69,7 @@ export type { IconDefinition, IconName } from '../types/icon.types';
       fs.writeFile(
         path.resolve(process.cwd(), 'src/types/icon.types.ts'),
         `export interface IconDefinition {
-  path: string;
+  d: string;
   viewBox: string;
 }
 

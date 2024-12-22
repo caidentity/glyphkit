@@ -1,23 +1,23 @@
+import React from 'react';
 import { Icon } from '../src/components/Icon';
-import { icons } from '../src/icons';
+import { icons } from '../src/icons/registry';
 
 const App = () => {
   const iconNames = Object.keys(icons);
-  
+
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">GlyphKit Demo ({iconNames.length} icons)</h1>
-      <div className="grid grid-cols-4 gap-4">
-        {iconNames.map((iconName) => (
-          <div key={iconName} className="flex flex-col items-center p-4 border rounded">
+      <h1 className="text-2xl font-bold mb-4">GlyphKit Demo</h1>
+      <div className="grid grid-cols-2 gap-4">
+        {iconNames.map((name) => (
+          <div key={name} className="p-4 border rounded">
             <Icon 
-              name={iconName as keyof typeof icons}
+              name={name as keyof typeof icons}
               color="#000000" 
               size={32}
-              className="w-8 h-8"
-              onError={(error) => console.error(`Error rendering ${iconName}:`, error)} 
+              className="mb-2"
             />
-            <span className="mt-2 text-sm">{iconName}</span>
+            <div className="text-sm">{name}</div>
           </div>
         ))}
       </div>
