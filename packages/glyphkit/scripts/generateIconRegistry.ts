@@ -3,6 +3,11 @@ import * as path from 'path';
 import { paths } from '../icons/flat/paths';
 
 async function generateIconRegistry() {
+  // Create directories if they don't exist
+  await fs.mkdir(path.resolve(process.cwd(), 'src/icons'), { recursive: true });
+  await fs.mkdir(path.resolve(process.cwd(), 'src/types'), { recursive: true });
+  await fs.mkdir(path.resolve(process.cwd(), 'icons/flat/Icons'), { recursive: true });
+
   const iconEntries = Object.entries(paths).filter(([name]) => name !== 'default');
   const successfulIcons: string[] = [];
   const failedIcons: string[] = [];
@@ -50,10 +55,6 @@ export type { IconDefinition, IconName } from '../types/icon.types';
 `;
 
   try {
-    // Create directories
-    await fs.mkdir(path.resolve(process.cwd(), 'src/icons'), { recursive: true });
-    await fs.mkdir(path.resolve(process.cwd(), 'src/types'), { recursive: true });
-
     // Write files
     await Promise.all([
       fs.writeFile(
