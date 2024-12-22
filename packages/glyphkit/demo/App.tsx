@@ -7,7 +7,7 @@ const App = () => {
       <h1 className="text-2xl font-bold mb-4">GlyphKit Demo</h1>
       <div className="p-4 border rounded">
         <Icon 
-          name="communication_paper_plane_send_24"
+          name="sun_16"
           color="#000000" 
           size={32}
           onError={(error: Error) => {
