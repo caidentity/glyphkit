@@ -31,8 +31,12 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: '/registry/:path*',
+        destination: '/registry/:path*'
+      },
+      {
         source: '/icons/:path*',
-        destination: '/public/icons/:path*',
+        destination: '/icons/:path*'
       },
     ];
   },

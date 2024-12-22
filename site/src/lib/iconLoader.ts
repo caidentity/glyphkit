@@ -1,6 +1,5 @@
 import { IconMetadata, IconCategory } from '@/types/icon'
 import { ICONS_CONFIG } from '@/constants/icons'
-import iconRegistry from '@/lib/iconRegistry.json'
 
 interface MetadataCache {
   data: IconCategory[] | null
@@ -28,12 +27,23 @@ export async function loadIconMetadata(): Promise<IconCategory[]> {
       return memoizedCategories;
     }
 
-    // Type assertion to handle the unknown structure of iconRegistry
-    const categories = (iconRegistry as { categories: { [key: string]: { icons: string[] } } }).categories;
+    // Load from public registry
+    const response = await fetch('/registry/iconRegistry.json');
+    if (!response.ok) {
+      console.error('Failed to load registry:', await response.text());
+      throw new Error('Failed to load icon registry');
+    }
     
-    memoizedCategories = Object.entries(categories).map(([name, data]) => ({
+    const data = await response.json();
+    
+    if (!data.categories) {
+      console.error('Invalid registry data:', data);
+      throw new Error('Invalid registry format');
+    }
+
+    memoizedCategories = Object.entries(data.categories).map(([name, data]) => ({
       name,
-      icons: data.icons.map(iconName => {
+      icons: (data as { icons: string[] }).icons.map((iconName: string) => {
         const size = iconName.endsWith('24') ? 24 : 16;
         return {
           name: iconName,

@@ -1,5 +1,24 @@
 import * as fs from 'fs/promises';
 import * as path from 'path';
+import { brandIcons } from '../../../packages/glyphkit/icons/flat/Icons/brand';
+import { systemIcons } from '../../../packages/glyphkit/icons/flat/Icons/system';
+import { peopleIcons } from '../../../packages/glyphkit/icons/flat/Icons/people';
+import { arrowsIcons } from '../../../packages/glyphkit/icons/flat/Icons/arrows';
+import { objectsIcons } from '../../../packages/glyphkit/icons/flat/Icons/objects';
+import { communicationIcons } from '../../../packages/glyphkit/icons/flat/Icons/communication';
+import { controlsIcons } from '../../../packages/glyphkit/icons/flat/Icons/controls';
+import { dataIcons } from '../../../packages/glyphkit/icons/flat/Icons/data';
+import { filesIcons } from '../../../packages/glyphkit/icons/flat/Icons/files';
+import { locationIcons } from '../../../packages/glyphkit/icons/flat/Icons/location';
+import { mediaIcons } from '../../../packages/glyphkit/icons/flat/Icons/media';
+import { messageIcons } from '../../../packages/glyphkit/icons/flat/Icons/message';
+import { moneyIcons } from '../../../packages/glyphkit/icons/flat/Icons/money';
+import { natureIcons } from '../../../packages/glyphkit/icons/flat/Icons/nature';
+import { shapesIcons } from '../../../packages/glyphkit/icons/flat/Icons/shapes';
+import { textIcons } from '../../../packages/glyphkit/icons/flat/Icons/text';
+import { timeIcons } from '../../../packages/glyphkit/icons/flat/Icons/time';
+import { uiIcons } from '../../../packages/glyphkit/icons/flat/Icons/ui';
+import { viewIcons } from '../../../packages/glyphkit/icons/flat/Icons/view';
 
 interface IconRegistry {
   icons: {
@@ -21,66 +40,70 @@ interface IconRegistry {
   };
 }
 
+const ICON_SETS = {
+  arrows: arrowsIcons,
+  brand: brandIcons,
+  communication: communicationIcons,
+  controls: controlsIcons,
+  data: dataIcons,
+  files: filesIcons,
+  location: locationIcons,
+  media: mediaIcons,
+  message: messageIcons,
+  money: moneyIcons,
+  nature: natureIcons,
+  objects: objectsIcons,
+  people: peopleIcons,
+  shapes: shapesIcons,
+  system: systemIcons,
+  text: textIcons,
+  time: timeIcons,
+  ui: uiIcons,
+  view: viewIcons
+};
+
 async function generateIconRegistry() {
-  // Simplified path resolution
-  const iconsDir = process.env.VERCEL 
-    ? path.join(process.cwd(), 'public/icons')
-    : path.resolve(__dirname, '../../../public/icons');
-    
   const outputDir = path.join(process.cwd(), 'src/lib');
   
-  console.log('Build environment:', {
-    isVercel: !!process.env.VERCEL,
-    nodeEnv: process.env.NODE_ENV,
-    cwd: process.cwd(),
-    iconsDir,
-    outputDir
-  });
-
-  // Create output directory if it doesn't exist
-  await fs.mkdir(outputDir, { recursive: true });
+  console.log('Generating icon registry:');
+  console.log('- Output:', outputDir);
 
   try {
-    const iconFiles = await fs.readdir(iconsDir);
+    // Create output directory
+    await fs.mkdir(outputDir, { recursive: true });
+
+    // Generate registry from all icon sets
     const registry: IconRegistry = {
       icons: {},
       categories: {},
       metadata: {
         totalIcons: 0,
-        totalCategories: 0,
+        totalCategories: Object.keys(ICON_SETS).length,
         generatedAt: new Date().toISOString()
       }
     };
 
-    // Process each icon file
-    for (const file of iconFiles) {
-      if (file.endsWith('.svg')) {
-        const categoryName = path.basename(path.dirname(file));
-        const iconName = path.basename(file, '.svg');
-        
-        // Initialize category if it doesn't exist
-        if (!registry.categories[categoryName]) {
-          registry.categories[categoryName] = {
-            icons: [],
-            count: 0
-          };
-        }
+    // Initialize categories
+    Object.keys(ICON_SETS).forEach(category => {
+      registry.categories[category] = {
+        icons: [],
+        count: 0
+      };
+    });
 
-        // Add icon to registry
+    // Process all icon sets
+    for (const [category, iconSet] of Object.entries(ICON_SETS)) {
+      for (const [iconName, iconData] of Object.entries(iconSet)) {
         registry.icons[iconName] = {
-          category: categoryName,
+          category,
           name: iconName
         };
-
-        // Add to category
-        registry.categories[categoryName].icons.push(iconName);
-        registry.categories[categoryName].count++;
+        registry.categories[category].icons.push(iconName);
+        registry.categories[category].count++;
       }
     }
 
-    // Update metadata
     registry.metadata.totalIcons = Object.keys(registry.icons).length;
-    registry.metadata.totalCategories = Object.keys(registry.categories).length;
 
     // Write registry files
     await Promise.all([
@@ -112,6 +135,6 @@ async function generateIconRegistry() {
 }
 
 generateIconRegistry().catch(error => {
-  console.error('Failed to generate icon registry:', error);
+  console.error('Error:', error);
   process.exit(1);
 }); 
