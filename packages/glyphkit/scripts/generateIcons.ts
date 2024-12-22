@@ -14,26 +14,37 @@ interface IconDefinition {
 async function generateIconRegistry() {
   console.log('Generating icon registry...');
   
-  // Import files.tsx content directly
-  const filesContent = await fs.readFile(
-    path.join(packageRoot, 'icons/flat/Icons/files.tsx'),
-    'utf-8'
-  );
-
-  // Extract SVG content using regex
+  const iconFiles = ['nature', 'files', 'controls', 'view'];
   const icons: Record<string, IconDefinition> = {};
-  const iconRegex = /ic_[\w_]+_\d+:\s*`\s*<svg[^>]*viewBox="([^"]+)"[^>]*>([\s\S]*?)<\/svg>\s*`/g;
-  
-  let match;
-  while ((match = iconRegex.exec(filesContent)) !== null) {
-    const iconName = match[0].split(':')[0].trim();
-    const viewBox = match[1];
-    const svgContent = match[2].trim();
-    
-    icons[iconName] = {
-      path: svgContent,
-      viewBox: viewBox
-    };
+
+  for (const category of iconFiles) {
+    try {
+      const filePath = path.join(packageRoot, 'icons/flat/Icons', `${category}.tsx`);
+      const content = await fs.readFile(filePath, 'utf-8');
+      
+      // Extract icon definitions using regex
+      const iconRegex = /ic_[\w_]+_(?:16|24):\s*`\s*<svg[^>]*viewBox="([^"]+)"[^>]*>([\s\S]*?)<\/svg>\s*`/g;
+      
+      let match;
+      while ((match = iconRegex.exec(content)) !== null) {
+        const iconName = match[0].split(':')[0].trim();
+        const viewBox = match[1];
+        const svgContent = match[2].trim();
+        
+        // Extract path elements
+        const pathRegex = /<path[^>]+>/g;
+        const paths = svgContent.match(pathRegex);
+        
+        if (paths) {
+          icons[iconName] = {
+            path: paths.join(''),
+            viewBox
+          };
+        }
+      }
+    } catch (error) {
+      console.warn(`Warning: Could not process category ${category}:`, error);
+    }
   }
 
   const content = `// Auto-generated file
@@ -43,8 +54,7 @@ export const icons: Record<string, IconDefinition> = ${JSON.stringify(icons, nul
 
 export function getIcon(name: string): IconDefinition | null {
   return icons[name] || null;
-}
-`;
+}`;
 
   const outputFile = path.join(packageRoot, 'src/icons/index.ts');
   await fs.writeFile(outputFile, content, 'utf-8');

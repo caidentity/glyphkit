@@ -30,7 +30,7 @@ export function App() {
         }}
       />
       <Icon
-        name="ic_link_24"
+        name="ic_cloud_database_24"
         size={24}
         color="#333"
         onError={(error) => {
@@ -38,7 +38,7 @@ export function App() {
         }}
       />
       <Icon
-        name="ic_link_24"
+        name="ic_moon_16"
         size={24}
         color="#333"
         onError={(error) => {
