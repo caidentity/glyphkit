@@ -146,13 +146,12 @@ const IconViewer = () => {
       <div className="viewer-search">
         <div className="viewer-search__input-wrapper">
           <Input
-            type="text"
+            variant="search"
             placeholder="Search icons..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="viewer-search__input"
           />
-          <Search className="viewer-search__icon" />
         </div>
       </div>
 

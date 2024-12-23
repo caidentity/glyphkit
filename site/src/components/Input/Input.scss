@@ -1,0 +1,62 @@
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &--search {
+    .input-icon {
+      position: absolute;
+      left: var(--space-3);
+      color: var(--text-tertiary);
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  height: 40px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  transition: all 150ms ease;
+
+  &::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  &:hover {
+    border-color: var(--border-secondary);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px var(--overlay-light);
+  }
+
+  &--with-icon {
+    padding-left: calc(var(--space-3) * 2 + 16px); // icon width + padding
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--surface-secondary);
+  }
+}
+
+// Dark mode adjustments
+[data-theme="dark"] {
+  .input {
+    &:focus {
+      box-shadow: 0 0 0 3px var(--overlay-medium);
+    }
+  }
+} 

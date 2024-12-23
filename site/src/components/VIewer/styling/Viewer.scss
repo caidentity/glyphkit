@@ -57,10 +57,7 @@
       width: 100%;
       padding: var(--space-3) var(--space-4);
       padding-left: var(--space-10);
-      border: 1px solid var(--border-primary);
-      border-radius: 8px;
-      background: var(--surface-primary);
-      color: var(--text-primary);
+
 
       &:focus {
         outline: none;
@@ -439,5 +436,16 @@
   svg {
     width: 100%;
     height: 100%;
+  }
+}
+
+.viewer-search {
+  .input {
+    height: 36px; // Slightly smaller for the viewer context
+    background: var(--surface-secondary);
+    
+    &:focus {
+      background: var(--surface-primary);
+    }
   }
 }
