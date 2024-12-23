@@ -1,36 +1,35 @@
 :root {
-  // Light mode
-  --kit-background-default: #ffffff;
-  --kit-background-subtle: #f9fafb;
-  --kit-foreground-default: #111827;
-  --kit-foreground-muted: #6b7280;
-  --kit-border-default: #e5e7eb;
+  // Z-index and layout constants
+  --z-drawer: 40;
+  --z-overlay: 39;
   
-  // For dark mode
-  @media (prefers-color-scheme: dark) {
-    --kit-background-default: #1a1a1a;
-    --kit-background-subtle: #262626;
-    --kit-foreground-default: #ffffff;
-    --kit-foreground-muted: #a1a1aa;
-    --kit-border-default: #323232;
+  // Transitions
+  --transition-duration: 300ms;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Common shadows
+  --shadow-lg: 0 10px 15px -3px var(--shadow-light),
+               0 4px 6px -2px var(--shadow-light);
+
+  // Light theme
+  &[data-theme="light"] {
+    --surface-default: var(--background-page);
+    --surface-subtle: var(--background-subtle);
+    --surface-raised: var(--background-page);
+    --surface-overlay: var(--background-page);
+    
+    --surface-border: var(--border-default);
+    --overlay-background: rgba(0, 0, 0, 0.5);
   }
 
-  // Overlay and other variables
-  --kit-overlay-background: rgba(0, 0, 0, 0.5);
-  --kit-z-drawer: 40;
-  --kit-z-overlay: 39;
-  --kit-transition-duration: 300ms;
-  --kit-transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --kit-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                   0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-  // Type colors
-  --kit-type-primary: #111827;  // Dark for light theme
-  --kit-type-secondary: #6B7280; // Mid gray
-  
-  // For dark mode
-  @media (prefers-color-scheme: dark) {
-    --kit-type-primary: #FFFFFF;    // White for dark theme
-    --kit-type-secondary: #9CA3AF;  // Lighter gray for dark theme
+  // Dark theme
+  &[data-theme="dark"] {
+    --surface-default: var(--background-page);
+    --surface-subtle: var(--background-subtle);
+    --surface-raised: var(--background-subtle);
+    --surface-overlay: var(--background-subtle);
+    
+    --surface-border: var(--border-default);
+    --overlay-background: rgba(0, 0, 0, 0.5);
   }
 } 

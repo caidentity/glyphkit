@@ -12,15 +12,16 @@
   &--default {
     background: var(--brand-primary);
     color: var(--surface-primary);
-    border: 1px solid var(--brand-primary);
+    border: none;
 
     &:hover {
       background: var(--brand-primary-hover);
-      border-color: var(--brand-primary-hover);
+      border: none;
     }
 
     &:active {
       transform: translateY(1px);
+      border: none;
     }
   }
 
@@ -41,6 +42,21 @@
 
     &:hover {
       background: var(--surface-hover);
+    }
+  }
+
+  &--secondary {
+    background: var(--surface-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+
+    &:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-secondary);
+    }
+
+    &:active {
+      transform: translateY(1px);
     }
   }
 

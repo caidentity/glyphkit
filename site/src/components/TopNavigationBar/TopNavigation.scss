@@ -78,9 +78,15 @@
   }
 
   &__theme-toggle {
-    padding: var(--space-1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: var(--space-2);
+    border: none;
     border-radius: 50%;
-    background: var(--surface-secondary);
+    background: var(--surface-tertiary);
     color: var(--text-primary);
     cursor: pointer;
     transition: all 0.2s;

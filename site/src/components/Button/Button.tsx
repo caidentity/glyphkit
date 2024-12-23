@@ -1,8 +1,8 @@
 import React from 'react';
 import './Button.scss';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'outline' | 'ghost';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'default' | 'outline' | 'ghost' | 'secondary';
   size?: 'xs' | 'sm' | 'md' | 'lg';
 }
 

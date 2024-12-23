@@ -5,6 +5,7 @@ import Badge from "../Badge/Badge";
 import Slider from "../Slider/Slider";
 import { IconCategory } from '@/types/icon';
 import './styling/FilterPanel.scss';
+import ButtonGroup from "../Button/ButtonGroup";
 
 interface FilterPanelProps {
   selectedSize: number | null;
@@ -51,7 +52,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
         {hasActiveFilters && (
           <div className="filter-reset">
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
               onClick={onResetFilters}
             >
@@ -64,46 +65,48 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
           <section className="filter-section">
             <div className="filter-section-header">
               <h3 className="filter-section-title">Size</h3>
-              <div className="filter-section-actions">
+              <ButtonGroup>
                 <Button
-                  variant={selectedSize === 24 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
+                  variant="secondary"
                   size="sm"
+                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
+                  data-state={selectedSize === 24 ? 'active' : undefined}
                 >
                   24px
                 </Button>
                 <Button
-                  variant={selectedSize === 16 ? "default" : "outline"}
-                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
+                  variant="secondary"
                   size="sm"
+                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
+                  data-state={selectedSize === 16 ? 'active' : undefined}
                 >
                   16px
                 </Button>
-              </div>
+              </ButtonGroup>
             </div>
           </section>
 
           <section className="filter-section">
             <div className="filter-section-header">
               <h3 className="filter-section-title">View Mode</h3>
-              <div className="filter-section-actions">
+              <ButtonGroup>
                 <Button
-                  variant={viewMode === 'grid' ? "default" : "ghost"}
+                  variant="secondary"
                   size="sm"
                   onClick={() => setViewMode('grid')}
-                  className="rounded-r-none"
+                  data-state={viewMode === 'grid' ? 'active' : undefined}
                 >
                   <Grid className="h-4 w-4" />
                 </Button>
                 <Button
-                  variant={viewMode === 'list' ? "default" : "ghost"}
+                  variant="secondary"
                   size="sm"
                   onClick={() => setViewMode('list')}
-                  className="rounded-l-none"
+                  data-state={viewMode === 'list' ? 'active' : undefined}
                 >
                   <List className="h-4 w-4" />
                 </Button>
-              </div>
+              </ButtonGroup>
             </div>
           </section>
 

@@ -1,0 +1,40 @@
+.button-group {
+  display: inline-flex;
+  border: none;
+  
+  .button-group__item {
+    position: relative; // For z-index to work properly
+    
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px; // Prevent double borders
+    }
+    
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    
+    // Active state styling
+    &[data-state="active"] {
+      background-color: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: var(--text-on-accent);
+      z-index: 2; // Keep active button's borders visible
+      
+      &:hover {
+        background-color: var(--accent-primary-hover);
+      }
+    }
+    
+    // Focus and hover states
+    &:focus-visible {
+      z-index: 3;
+    }
+    
+    &:hover {
+      z-index: 1;
+    }
+  }
+} 
