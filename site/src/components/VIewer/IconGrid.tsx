@@ -58,16 +58,27 @@ const IconGrid: React.FC<IconGridProps> = ({
       <div
         key={icon.name}
         onClick={() => onIconSelect?.(icon)}
-        className={viewMode === 'list' ? 'viewer-list__item' : 'viewer-grid__item'}
+        className={`${
+          viewMode === 'list' ? 'viewer-list__item' : 'viewer-grid__item'
+        }`}
       >
         <div className="viewer-grid__item-content">
           <Icon
             icon={icon}
             customSize={calculateIconSize(icon.size)}
-            className={viewMode === 'list' ? 'viewer-list__item-icon' : 'viewer-grid__item-icon'}
+            className={`${
+              viewMode === 'list' 
+                ? 'viewer-list__item-icon' 
+                : 'viewer-grid__item-icon'
+            }`}
             showLabel={false}
           />
-          <span className={viewMode === 'list' ? 'viewer-list__item-name' : 'viewer-grid__item-name'}>
+          <span 
+            className={`
+              ${viewMode === 'list' ? 'viewer-list__item-name' : 'viewer-grid__item-name'}
+              text-sm
+            `}
+          >
             {icon.name}
           </span>
         </div>

@@ -10,12 +10,13 @@
 
   // Base styles
   &--default {
-    background: var(--text-primary);
+    background: var(--brand-primary);
     color: var(--surface-primary);
-    border: 1px solid var(--text-primary);
+    border: 1px solid var(--brand-primary);
 
     &:hover {
-      opacity: 0.9;
+      background: var(--brand-primary-hover);
+      border-color: var(--brand-primary-hover);
     }
 
     &:active {
@@ -36,7 +37,6 @@
 
   &--ghost {
     background: transparent;
-    border: 1px solid transparent;
     color: var(--text-primary);
 
     &:hover {
@@ -46,24 +46,32 @@
 
   // Sizes
   &--sm {
-    height: 32px;
-    padding: 0 var(--space-3);
-    font-size: var(--text-sm);
-    border-radius: 6px;
+    height: 24px;
+    min-height: 18px;
+    padding: 0 var(--space-2);
+    font-size: var(--text-xs);
+    border-radius: 2px;
+    gap: var(--space-2);
+
+    // Adjust icon sizes in small buttons
+    svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &--md {
     height: 40px;
     padding: 0 var(--space-4);
     font-size: var(--text-base);
-    border-radius: 8px;
+    border-radius: 4px;
   }
 
   &--lg {
     height: 48px;
     padding: 0 var(--space-6);
     font-size: var(--text-lg);
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   // States

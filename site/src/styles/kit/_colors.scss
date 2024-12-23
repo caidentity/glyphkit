@@ -3,6 +3,9 @@
   --color-white: #ffffff;
   --color-black: #000000;
   
+  // Brand colors
+  --color-brand-primary: #004DFF;
+  
   // Blue shades
   --color-blue-50: #eff6ff;
   --color-blue-100: #dbeafe;
@@ -68,6 +71,10 @@
     // Borders
     --border-primary: var(--color-gray-200);
     --border-secondary: var(--color-gray-300);
+    
+    // Brand colors in theme
+    --brand-primary: var(--color-brand-primary);
+    --brand-primary-hover: #0040D1; // Slightly darker shade for hover
   }
 
   // Dark theme
@@ -108,5 +115,9 @@
     // Borders
     --border-primary: var(--color-gray-700);
     --border-secondary: var(--color-gray-600);
+    
+    // Brand colors in theme
+    --brand-primary: var(--color-brand-primary);
+    --brand-primary-hover: #1A5FFF; // Slightly lighter shade for hover
   }
 } 
