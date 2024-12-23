@@ -31,6 +31,7 @@ const IconViewer = () => {
   const [iconScale, setIconScale] = useState(1);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [gridPadding, setGridPadding] = useState<number>(16);
+  const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -110,6 +111,16 @@ const IconViewer = () => {
     const paths = icons.map(icon => icon.path);
     await Promise.all(paths.map(path => loadSvgContent(path)));
   }, []);
+
+  const handleIconSelect = (icon: IconMetadata) => {
+    setSelectedIcon(icon);
+    setIsDetailPanelOpen(true);
+  };
+
+  const handleCloseDetail = () => {
+    setIsDetailPanelOpen(false);
+    setTimeout(() => setSelectedIcon(null), 300);
+  };
 
   return (
     <div className="viewer">
@@ -191,7 +202,7 @@ const IconViewer = () => {
           ) : (
             <IconGrid 
               icons={filteredIcons} 
-              onIconSelect={setSelectedIcon}
+              onIconSelect={handleIconSelect}
               onIconDownload={handleDownload}
               onIconCopy={(icon) => handleCopy(icon.name)}
               viewMode={viewMode}
@@ -239,7 +250,8 @@ const IconViewer = () => {
       {selectedIcon && (
         <IconDetailPanel
           icon={selectedIcon}
-          onClose={() => setSelectedIcon(null)}
+          isOpen={isDetailPanelOpen}
+          onClose={handleCloseDetail}
           onDownload={handleDownload}
           onCopy={handleCopy}
         />

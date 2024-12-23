@@ -21,6 +21,7 @@ interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   icon: IconMetadata;
   className?: string;
   showSize?: boolean;
+  showLabel?: boolean;
   customSize?: number;
 }
 
@@ -28,6 +29,7 @@ const Icon: React.FC<IconProps> = ({
   icon, 
   className = "", 
   showSize = false,
+  showLabel = false,
   customSize,
   ...props 
 }) => {
@@ -48,14 +50,7 @@ const Icon: React.FC<IconProps> = ({
           onError={(error) => console.error('Icon not found:', iconName)}
         />
       </div>
-      {showSize && (
-        <span className="text-xs text-gray-400 mt-1">
-          {iconSize}px
-        </span>
-      )}
-      <span className="text-xs text-gray-600 mt-1">
-        {iconName}
-      </span>
+
     </div>
   );
 };

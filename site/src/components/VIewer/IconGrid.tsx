@@ -6,6 +6,8 @@ import Icon from './Icon';
 import { useViewportSize } from '@/hooks/useViewportSize';
 import iconRegistry from '@/lib/iconRegistry.json';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import Button from '../Button/Button';
+import { Download, Code } from 'lucide-react';
 
 interface IconGridProps {
   icons: IconMetadata[];
@@ -56,62 +58,53 @@ const IconGrid: React.FC<IconGridProps> = ({
       <div
         key={icon.name}
         onClick={() => onIconSelect?.(icon)}
-        className={`
-          relative flex flex-col 
-          items-center border rounded-lg 
-          hover:border-blue-500 hover:shadow-sm transition-all duration-200
-          group
-          ${viewMode === 'list' ? 'p-4 justify-between' : `p-${dynamicPadding/4}`}
-          ${viewMode === 'list' ? 'flex-row' : 'gap-2'}
-        `}
-        style={{
-          padding: viewMode === 'list' ? '1rem' : `${dynamicPadding}px`,
-        }}
+        className={viewMode === 'list' ? 'viewer-list__item' : 'viewer-grid__item'}
       >
-        <Icon
-          icon={icon}
-          customSize={calculateIconSize(icon.size)}
-          className={viewMode === 'list' ? 'flex-shrink-0' : ''}
-        />
+        <div className="viewer-grid__item-content">
+          <Icon
+            icon={icon}
+            customSize={calculateIconSize(icon.size)}
+            className={viewMode === 'list' ? 'viewer-list__item-icon' : 'viewer-grid__item-icon'}
+            showLabel={false}
+          />
+          <span className={viewMode === 'list' ? 'viewer-list__item-name' : 'viewer-grid__item-name'}>
+            {icon.name}
+          </span>
+        </div>
         
-        <div className={`
-          ${viewMode === 'list' 
-            ? 'flex flex-row gap-4 ml-auto' 
-            : 'absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-white/80 rounded-lg'
-          }
-        `}>
+        <div className={viewMode === 'list' ? 'viewer-list__item-actions' : 'viewer-grid__item-actions'}>
           {onIconDownload && (
-            <button
+            <Button
+              variant="default"
+              size="xs"
               onClick={(e) => {
                 e.stopPropagation();
                 onIconDownload(icon);
               }}
-              className={`
-                text-gray-500 hover:text-blue-500
-                ${viewMode === 'list' ? '' : 'bg-white border rounded-md px-3 py-1 shadow-sm'}
-              `}
+              className="icon-action-button"
+              title="Download"
             >
-              Download
-            </button>
+              <Download className="h-3 w-3" />
+            </Button>
           )}
           {onIconCopy && (
-            <button
+            <Button
+              variant="outline"
+              size="xs"
               onClick={(e) => {
                 e.stopPropagation();
                 onIconCopy(icon);
               }}
-              className={`
-                text-gray-500 hover:text-blue-500
-                ${viewMode === 'list' ? '' : 'bg-white border rounded-md px-3 py-1 shadow-sm'}
-              `}
+              className="icon-action-button"
+              title="Copy"
             >
-              Copy
-            </button>
+              <Code className="h-3 w-3" />
+            </Button>
           )}
         </div>
       </div>
     );
-  }, [viewMode, dynamicPadding, calculateIconSize, onIconSelect, onIconDownload, onIconCopy]);
+  }, [viewMode, calculateIconSize, onIconSelect, onIconDownload, onIconCopy]);
 
   const rowVirtualizer = useVirtualizer({
     count: Math.ceil(icons.length / getResponsiveColumns()),
@@ -120,39 +113,17 @@ const IconGrid: React.FC<IconGridProps> = ({
     overscan: 5,
   });
 
+  // Get grid size class based on padding/icons per row
+  const getSizeClass = () => {
+    if (gridPadding <= 4) return 'viewer-grid--small';
+    if (gridPadding >= 8) return 'viewer-grid--large';
+    return 'viewer-grid--medium';
+  };
+
   return (
-    <div ref={parentRef} className="h-[800px] overflow-auto">
-      <div
-        style={{
-          height: `${rowVirtualizer.getTotalSize()}px`,
-          width: '100%',
-          position: 'relative',
-        }}
-      >
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const startIndex = virtualRow.index * columns;
-          const rowIcons = icons.slice(startIndex, startIndex + columns);
-          
-          return (
-            <div
-              key={virtualRow.index}
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: virtualRow.size,
-                transform: `translateY(${virtualRow.start}px)`,
-                display: 'grid',
-                gridTemplateColumns: `repeat(${columns}, 1fr)`,
-                gap: '1.5rem',
-                padding: '1rem',
-              }}
-            >
-              {rowIcons.map((icon) => renderIconCard(icon))}
-            </div>
-          );
-        })}
+    <div className="viewer-grid-wrapper">
+      <div className={`viewer-grid ${getSizeClass()}`}>
+        {icons.map((icon) => renderIconCard(icon))}
       </div>
     </div>
   );

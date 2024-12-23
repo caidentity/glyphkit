@@ -54,7 +54,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               variant="ghost"
               size="sm"
               onClick={onResetFilters}
-              className="text-xs text-blue-500 hover:text-blue-600"
             >
               Reset all filters
             </Button>

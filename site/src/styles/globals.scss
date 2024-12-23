@@ -1,14 +1,33 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@use 'kit' as *;
 
-:root {
-  --foreground: #1a1a1a;
-  --background: #ffffff;
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@layer components {
-  .container {
-    @apply max-w-4xl mx-auto px-4;
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background: var(--background-primary);
+}
+
+// Container
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+// Basic link styles
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  
+  &:hover {
+    color: var(--accent-hover);
   }
 } 
