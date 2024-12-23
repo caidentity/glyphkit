@@ -125,7 +125,7 @@ const IconViewer = () => {
   return (
     <div className="viewer">
       <div className="viewer-header">
-        <h1 className="viewer-header__title">Glyph Kit</h1>
+        <h1 className="viewer-header__title">Icons</h1>
         <p className="viewer-header__subtitle">
           Showing {filteredIcons.length} of {allIcons.length} icons
           {(selectedCategories.length > 0 || searchQuery) && (

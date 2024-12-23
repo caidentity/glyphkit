@@ -10,7 +10,6 @@
   &-header {
     width: 100%;
     padding: var(--space-4);
-    border-bottom: 1px solid var(--border-primary);
     background: var(--surface-primary);
     
     &__content {
@@ -40,8 +39,6 @@
   &-search {
     width: 100%;
     padding: var(--space-4);
-    background: var(--surface-primary);
-    border-bottom: 1px solid var(--border-primary);
 
     &__content {
       max-width: var(--container-width);
@@ -55,8 +52,6 @@
 
     &__input {
       width: 100%;
-      padding: var(--space-3) var(--space-4);
-      padding-left: var(--space-10);
 
 
       &:focus {
