@@ -115,12 +115,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               <h3 className="filter-section-title">Icon Size</h3>
               <div className="filter-section-scale">
                 <Slider
+                  label="Scale"
                   value={[iconScale]}
                   min={0.5}
                   max={2}
                   step={0.1}
+                  formatValue={(value) => `${value}x`}
                   onValueChange={([value]) => setIconScale(value)}
-                  className="w-[140px]"
                 />
               </div>
             </div>
@@ -131,12 +132,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               <h3 className="filter-section-title">Icons per Row</h3>
               <div className="filter-section-scale">
                 <Slider
+                  label="Count"
                   value={[gridPadding]}
                   min={2}
                   max={8}
                   step={1}
+                  formatValue={(value) => `${value}`}
                   onValueChange={([value]) => setGridPadding(value)}
-                  className="w-[140px]"
                 />
               </div>
             </div>

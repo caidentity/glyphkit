@@ -56,7 +56,7 @@ const IconGrid: React.FC<IconGridProps> = ({
   const renderIconCard = React.useCallback((icon: IconMetadata) => {
     return (
       <div
-        key={icon.name}
+        key={`${icon.name}_${icon.size}`}
         onClick={() => onIconSelect?.(icon)}
         className={`${
           viewMode === 'list' ? 'viewer-list__item' : 'viewer-grid__item'
