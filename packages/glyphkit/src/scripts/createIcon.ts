@@ -39,8 +39,8 @@ const PACKAGE_ROOT = path.resolve(__dirname, '..', '..');
 // Configure source and target paths relative to package root
 const SOURCE_CONFIG = {
   "location": {
-    sourcePath: path.join(PACKAGE_ROOT, 'icons/flat/Icons/newicons/locations'),
-    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/location.js')
+    sourcePath: path.join(PACKAGE_ROOT, 'icons/flat/Icons/newicons'),
+    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/brand.js')
   }
 };
 
