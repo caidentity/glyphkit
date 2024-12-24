@@ -417,6 +417,7 @@
     .viewer-grid__item-actions,
     .viewer-list__item-actions {
       opacity: 1;
+      transform: translateY(0);
       visibility: visible;
     }
   }
@@ -441,6 +442,78 @@
     
     &:focus {
       background: var(--surface-primary);
+    }
+  }
+}
+
+// Update the hover state styles
+.viewer-grid__item,
+.viewer-list__item {
+  &:hover {
+    .viewer-grid__item-actions,
+    .viewer-list__item-actions {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+  }
+}
+
+.viewer-grid__item-actions,
+.viewer-list__item-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.2s ease-in-out;
+  justify-content: center;
+  visibility: hidden;
+  z-index: 10;
+  
+  .icon-action-button {
+    padding: 0.5rem;
+    height: 32px;
+    width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:hover {
+      background-color: var(--surface-hover);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+// Tooltip styles
+.tooltip-content {
+  z-index: 50;
+  background: var(--surface-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Update detail panel action buttons
+.icon-detail-panel__actions {
+  .icon-action-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    
+    span {
+      margin-left: 0.5rem;
     }
   }
 }

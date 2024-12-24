@@ -17,7 +17,7 @@ interface IconRegistry {
   }>;
 }
 
-interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
+interface IconProps {
   icon: IconMetadata;
   className?: string;
   showSize?: boolean;

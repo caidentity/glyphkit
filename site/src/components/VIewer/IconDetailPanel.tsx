@@ -8,6 +8,7 @@ import Icon from './Icon';
 import CodeBlock from '../CodeBlock/CodeBlock';
 import './styling/IconDetailPanel.scss';
 import { cn } from '@/lib/utils';
+import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
 
 interface IconDetailPanelProps {
   icon: IconMetadata;
@@ -63,7 +64,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               variant="default"
               size="sm"
             >
-              <Code className="icon-detail-panel__button-icon" />
+              <GlyphKitIcon name="text_24" size={16} />
               <span>Copy Name</span>
             </Button>
 
@@ -72,7 +73,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               variant="default"
               size="sm"
             >
-              <Download className="icon-detail-panel__button-icon" />
+              <Download className="h-4 w-4" />
               <span>Download</span>
             </Button>
 
@@ -81,7 +82,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               variant="default"
               size="sm"
             >
-              <FileText className="icon-detail-panel__button-icon" />
+              <GlyphKitIcon name="arrow_chevron_left_right_24" size={16} />
               <span>Copy Path</span>
             </Button>
           </div>

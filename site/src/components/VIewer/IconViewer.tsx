@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Search, Download, X, Link, Check, Code, ArrowDownToLine, FileText, Grid, List, SlidersHorizontal } from 'lucide-react';
-import  Input  from "../Input/Input";
-import  Button  from "../Button/Button";
-import Badge  from "@/components/Badge/Badge";
+import Input from "../Input/Input";
+import Button from "../Button/Button";
+import Badge from "@/components/Badge/Badge";
 import { IconMetadata, hasTag, hasTags } from '@/types/icon';
 import { loadIconMetadata, loadSvgContent } from '@/lib/iconLoader';
 import IconGrid from './IconGrid';
@@ -19,6 +19,7 @@ import { useIconFiltering } from './useIconFiltering';
 import { IconCategory } from '@/types/icon';
 import './styling/Viewer.scss';
 import IconDetailPanel from './IconDetailPanel';
+import Tooltip from '../Tooltip/Tooltip';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -80,10 +81,10 @@ const IconViewer = () => {
     }
   };
 
-  const handleCopy = async (iconName: string) => {
+  const handleCopy = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(iconName);
-      setCopyAlert(`Copied "${iconName}" to clipboard`);
+      await navigator.clipboard.writeText(text);
+      setCopyAlert(`Copied "${text}" to clipboard`);
       setTimeout(() => setCopyAlert(null), 2000);
     } catch (error) {
       console.error('Failed to copy:', error);
@@ -203,7 +204,7 @@ const IconViewer = () => {
               icons={filteredIcons} 
               onIconSelect={handleIconSelect}
               onIconDownload={handleDownload}
-              onIconCopy={(icon) => handleCopy(icon.name)}
+              onIconCopy={handleCopy}
               viewMode={viewMode}
               iconScale={iconScale}
               gridPadding={gridPadding}
