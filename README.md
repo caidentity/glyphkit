@@ -50,3 +50,13 @@ This script scans the `public/icons` directory and generates metadata for all SV
 ## Development
 
 Run the development server:
+
+
+
+# Scripts
+##Package Glyphkit generatiion
+# 1. First run convert-paths to normalize all icon files
+npm run convert-paths
+
+# 2. Then run generate-icons to update the package
+npm run generate:icons

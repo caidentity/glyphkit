@@ -10,6 +10,13 @@ export interface IconProps {
   onLoad?: () => void;
 }
 
+interface PathAttributes {
+  d: string;
+  fillRule?: string;
+  clipRule?: string;
+  fill?: string;
+}
+
 export const Icon: React.FC<IconProps> = ({ 
   name, 
   size = 24, 
@@ -20,9 +27,14 @@ export const Icon: React.FC<IconProps> = ({
 }) => {
   const icon = icons[name];
   if (!icon) {
-    console.error(`Icon not found: ${name}`);
+    const error = new Error(`Icon not found: ${name}`);
+    onError?.(error);
     return null;
   }
+
+  React.useEffect(() => {
+    onLoad?.();
+  }, [onLoad]);
 
   return (
     <svg 
@@ -32,10 +44,24 @@ export const Icon: React.FC<IconProps> = ({
       viewBox={icon.viewBox}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d={icon.d}
-        fill={color}
-      />
+      {icon.d ? (
+        // Single path format
+        <path
+          d={icon.d}
+          fill={color}
+        />
+      ) : icon.paths ? (
+        // Multi-path format
+        icon.paths.map((pathData: PathAttributes, index: number) => (
+          <path
+            key={index}
+            d={pathData.d}
+            fill={pathData.fill || color}
+            fillRule={pathData.fillRule}
+            clipRule={pathData.clipRule}
+          />
+        ))
+      ) : null}
     </svg>
   );
 }; 

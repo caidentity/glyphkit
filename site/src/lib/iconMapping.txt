@@ -1,16 +1,16 @@
 // Auto-generated icon mapping
 // Total icons: 819
 
-3_dot_connected_16: controls
-3_dot_connected_24: controls
-3_dot_horizontal_16: controls
-3_dot_horizontal_24: controls
-3_dot_triangle_16: controls
-3_dot_triangle_24: controls
-3_dot_vertical_16: controls
-3_dot_vertical_24: controls
-6_dot_vertical_16: controls
-6_dot_vertical_24: controls
+three_dot_connected_16: controls
+three_dot_connected_24: controls
+three_dot_horizontal_16: controls
+three_dot_horizontal_24: controls
+three_dot_triangle_16: controls
+three_dot_triangle_24: controls
+three_dot_vertical_16: controls
+three_dot_vertical_24: controls
+six_dot_vertical_16: controls
+six_dot_vertical_24: controls
 arrow_backward_forward_16: arrows
 arrow_backward_forward_24: arrows
 arrow_chevron_double_down_16: arrows

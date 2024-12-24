@@ -46,6 +46,15 @@ const App = () => {
             console.error('Icon failed to load:', error);
           }}
         />
+                        <Icon 
+          name="factory_16"
+          color="red" 
+          size={32}
+          onError={(error: Error) => {
+            console.error('Icon failed to load:', error);
+          }}
+        />
+        
       </div>
     </div>
   );

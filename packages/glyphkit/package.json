@@ -28,7 +28,9 @@
     "typecheck": "tsc --noEmit",
     "generate:icons": "NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
     "prepare": "npm run build",
-    "transform-icons": "tsx scripts/transformSvgToIcon.ts"
+    "transform-icons": "tsx scripts/transformSvgToIcon.ts",
+    "convert-paths": "NODE_ENV=development tsx src/scripts/convertPaths.ts",
+    "createicon": "tsx src/scripts/createIcon.ts"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",

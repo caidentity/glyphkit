@@ -632,9 +632,9 @@
       "category": "controls",
       "name": "minus_circle_24"
     },
-    "3_dot_connected_16": {
+    "three_dot_connected_16": {
       "category": "controls",
-      "name": "3_dot_connected_16"
+      "name": "three_dot_connected_16"
     },
     "gear_24": {
       "category": "controls",
@@ -660,9 +660,9 @@
       "category": "controls",
       "name": "thumbs_up_16"
     },
-    "3_dot_vertical_24": {
+    "three_dot_vertical_24": {
       "category": "controls",
-      "name": "3_dot_vertical_24"
+      "name": "three_dot_vertical_24"
     },
     "checkmark_circle_filled_24": {
       "category": "controls",
@@ -672,9 +672,9 @@
       "category": "controls",
       "name": "thumbs_down_24"
     },
-    "3_dot_triangle_16": {
+    "three_dot_triangle_16": {
       "category": "controls",
-      "name": "3_dot_triangle_16"
+      "name": "three_dot_triangle_16"
     },
     "x_circle_filled_24": {
       "category": "controls",
@@ -704,17 +704,17 @@
       "category": "controls",
       "name": "thumbs_down_filled_24"
     },
-    "6_dot_vertical_16": {
+    "six_dot_vertical_16": {
       "category": "controls",
-      "name": "6_dot_vertical_16"
+      "name": "six_dot_vertical_16"
     },
     "plus_circle_filled_24": {
       "category": "controls",
       "name": "plus_circle_filled_24"
     },
-    "3_dot_horizontal_24": {
+    "three_dot_horizontal_24": {
       "category": "controls",
-      "name": "3_dot_horizontal_24"
+      "name": "three_dot_horizontal_24"
     },
     "knobs_16": {
       "category": "controls",
@@ -740,9 +740,9 @@
       "category": "controls",
       "name": "plus_24"
     },
-    "3_dot_triangle_24": {
+    "three_dot_triangle_24": {
       "category": "controls",
-      "name": "3_dot_triangle_24"
+      "name": "three_dot_triangle_24"
     },
     "x_circle_filled_16": {
       "category": "controls",
@@ -764,9 +764,9 @@
       "category": "controls",
       "name": "thumbs_up_24"
     },
-    "3_dot_vertical_16": {
+    "three_dot_vertical_16": {
       "category": "controls",
-      "name": "3_dot_vertical_16"
+      "name": "three_dot_vertical_16"
     },
     "checkmark_circle_filled_16": {
       "category": "controls",
@@ -776,9 +776,9 @@
       "category": "controls",
       "name": "thumbs_down_16"
     },
-    "3_dot_connected_24": {
+    "three_dot_connected_24": {
       "category": "controls",
-      "name": "3_dot_connected_24"
+      "name": "three_dot_connected_24"
     },
     "gear_16": {
       "category": "controls",
@@ -828,9 +828,9 @@
       "category": "controls",
       "name": "plus_16"
     },
-    "3_dot_horizontal_16": {
+    "three_dot_horizontal_16": {
       "category": "controls",
-      "name": "3_dot_horizontal_16"
+      "name": "three_dot_horizontal_16"
     },
     "x_16": {
       "category": "controls",
@@ -840,9 +840,9 @@
       "category": "controls",
       "name": "trash_can_16"
     },
-    "6_dot_vertical_24": {
+    "six_dot_vertical_24": {
       "category": "controls",
-      "name": "6_dot_vertical_24"
+      "name": "six_dot_vertical_24"
     },
     "plus_circle_filled_16": {
       "category": "controls",
@@ -1488,109 +1488,125 @@
       "category": "files",
       "name": "file_document_image_16"
     },
-    "building_filled_16": {
+    "building_16": {
       "category": "location",
-      "name": "building_filled_16"
-    },
-    "globe_16": {
-      "category": "location",
-      "name": "globe_16"
-    },
-    "buildings_filled_16": {
-      "category": "location",
-      "name": "buildings_filled_16"
-    },
-    "map_16": {
-      "category": "location",
-      "name": "map_16"
+      "name": "building_16"
     },
     "building_24": {
       "category": "location",
       "name": "building_24"
     },
-    "location_pin_24": {
+    "building_filled_16": {
       "category": "location",
-      "name": "location_pin_24"
-    },
-    "crosshair_24": {
-      "category": "location",
-      "name": "crosshair_24"
-    },
-    "buildings_16": {
-      "category": "location",
-      "name": "buildings_16"
-    },
-    "home_16": {
-      "category": "location",
-      "name": "home_16"
-    },
-    "home_filled_24": {
-      "category": "location",
-      "name": "home_filled_24"
-    },
-    "buildings_plus_16": {
-      "category": "location",
-      "name": "buildings_plus_16"
-    },
-    "location_california_16": {
-      "category": "location",
-      "name": "location_california_16"
-    },
-    "compass_24": {
-      "category": "location",
-      "name": "compass_24"
-    },
-    "compass_16": {
-      "category": "location",
-      "name": "compass_16"
-    },
-    "location_pin_16": {
-      "category": "location",
-      "name": "location_pin_16"
-    },
-    "building_16": {
-      "category": "location",
-      "name": "building_16"
+      "name": "building_filled_16"
     },
     "building_filled_24": {
       "category": "location",
       "name": "building_filled_24"
     },
-    "globe_24": {
+    "buildings_16": {
       "category": "location",
-      "name": "globe_24"
+      "name": "buildings_16"
+    },
+    "buildings_24": {
+      "category": "location",
+      "name": "buildings_24"
+    },
+    "buildings_filled_16": {
+      "category": "location",
+      "name": "buildings_filled_16"
     },
     "buildings_filled_24": {
       "category": "location",
       "name": "buildings_filled_24"
     },
+    "buildings_plus_16": {
+      "category": "location",
+      "name": "buildings_plus_16"
+    },
     "buildings_plus_24": {
       "category": "location",
       "name": "buildings_plus_24"
     },
-    "location_california_24": {
+    "compass_16": {
       "category": "location",
-      "name": "location_california_24"
+      "name": "compass_16"
     },
-    "home_filled_16": {
+    "compass_24": {
       "category": "location",
-      "name": "home_filled_16"
+      "name": "compass_24"
     },
     "crosshair_16": {
       "category": "location",
       "name": "crosshair_16"
     },
+    "crosshair_24": {
+      "category": "location",
+      "name": "crosshair_24"
+    },
+    "factory_16": {
+      "category": "location",
+      "name": "factory_16"
+    },
+    "factory_24": {
+      "category": "location",
+      "name": "factory_24"
+    },
+    "factory_filled_16": {
+      "category": "location",
+      "name": "factory_filled_16"
+    },
+    "factory_filled_24": {
+      "category": "location",
+      "name": "factory_filled_24"
+    },
+    "globe_16": {
+      "category": "location",
+      "name": "globe_16"
+    },
+    "globe_24": {
+      "category": "location",
+      "name": "globe_24"
+    },
+    "home_16": {
+      "category": "location",
+      "name": "home_16"
+    },
     "home_24": {
       "category": "location",
       "name": "home_24"
     },
+    "home_filled_16": {
+      "category": "location",
+      "name": "home_filled_16"
+    },
+    "home_filled_24": {
+      "category": "location",
+      "name": "home_filled_24"
+    },
+    "location_california_16": {
+      "category": "location",
+      "name": "location_california_16"
+    },
+    "location_california_24": {
+      "category": "location",
+      "name": "location_california_24"
+    },
+    "location_pin_16": {
+      "category": "location",
+      "name": "location_pin_16"
+    },
+    "location_pin_24": {
+      "category": "location",
+      "name": "location_pin_24"
+    },
+    "map_16": {
+      "category": "location",
+      "name": "map_16"
+    },
     "map_24": {
       "category": "location",
       "name": "map_24"
-    },
-    "buildings_24": {
-      "category": "location",
-      "name": "buildings_24"
     },
     "media_forward_filled_24": {
       "category": "media",
@@ -3453,17 +3469,17 @@
         "checkmark_circle_16",
         "link_16",
         "minus_circle_24",
-        "3_dot_connected_16",
+        "three_dot_connected_16",
         "gear_24",
         "thumbs_up_filled_16",
         "check_mark_content_24",
         "gear_filled_24",
         "funnel_24",
         "thumbs_up_16",
-        "3_dot_vertical_24",
+        "three_dot_vertical_24",
         "checkmark_circle_filled_24",
         "thumbs_down_24",
-        "3_dot_triangle_16",
+        "three_dot_triangle_16",
         "x_circle_filled_24",
         "plus_circle_24",
         "liferaft_24",
@@ -3471,25 +3487,25 @@
         "x_circle_16",
         "minus_24",
         "thumbs_down_filled_24",
-        "6_dot_vertical_16",
+        "six_dot_vertical_16",
         "plus_circle_filled_24",
-        "3_dot_horizontal_24",
+        "three_dot_horizontal_24",
         "knobs_16",
         "x_24",
         "trash_can_24",
         "trash_can_filled_16",
         "minus_circle_filled_24",
         "plus_24",
-        "3_dot_triangle_24",
+        "three_dot_triangle_24",
         "x_circle_filled_16",
         "plus_circle_16",
         "liferaft_16",
         "knobs_24",
         "thumbs_up_24",
-        "3_dot_vertical_16",
+        "three_dot_vertical_16",
         "checkmark_circle_filled_16",
         "thumbs_down_16",
-        "3_dot_connected_24",
+        "three_dot_connected_24",
         "gear_16",
         "thumbs_up_filled_24",
         "check_mark_content_16",
@@ -3502,10 +3518,10 @@
         "trash_can_filled_24",
         "minus_circle_filled_16",
         "plus_16",
-        "3_dot_horizontal_16",
+        "three_dot_horizontal_16",
         "x_16",
         "trash_can_16",
-        "6_dot_vertical_24",
+        "six_dot_vertical_24",
         "plus_circle_filled_16",
         "checkmark_16",
         "x_circle_24",
@@ -3684,34 +3700,38 @@
     },
     "location": {
       "icons": [
-        "building_filled_16",
-        "globe_16",
-        "buildings_filled_16",
-        "map_16",
-        "building_24",
-        "location_pin_24",
-        "crosshair_24",
-        "buildings_16",
-        "home_16",
-        "home_filled_24",
-        "buildings_plus_16",
-        "location_california_16",
-        "compass_24",
-        "compass_16",
-        "location_pin_16",
         "building_16",
+        "building_24",
+        "building_filled_16",
         "building_filled_24",
-        "globe_24",
+        "buildings_16",
+        "buildings_24",
+        "buildings_filled_16",
         "buildings_filled_24",
+        "buildings_plus_16",
         "buildings_plus_24",
-        "location_california_24",
-        "home_filled_16",
+        "compass_16",
+        "compass_24",
         "crosshair_16",
+        "crosshair_24",
+        "factory_16",
+        "factory_24",
+        "factory_filled_16",
+        "factory_filled_24",
+        "globe_16",
+        "globe_24",
+        "home_16",
         "home_24",
-        "map_24",
-        "buildings_24"
+        "home_filled_16",
+        "home_filled_24",
+        "location_california_16",
+        "location_california_24",
+        "location_pin_16",
+        "location_pin_24",
+        "map_16",
+        "map_24"
       ],
-      "count": 26
+      "count": 30
     },
     "media": {
       "icons": [
@@ -4196,8 +4216,8 @@
     }
   },
   "metadata": {
-    "totalIcons": 819,
+    "totalIcons": 823,
     "totalCategories": 19,
-    "generatedAt": "2024-12-23T01:46:46.061Z"
+    "generatedAt": "2024-12-24T20:45:30.383Z"
   }
 }
