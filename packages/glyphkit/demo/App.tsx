@@ -29,7 +29,7 @@ const iconConfigs = [
   { name: 'x_circle_24', color: 'green' },
   { name: 'x_circle_24', color: 'green' },
   { name: 'message_warning_filled_24', color: 'green' },
-  { name: 'x_circle_24', color: 'green' },
+  { name: 'object_ruler_24', color: 'green' },
   { name: 'x_circle_24', color: 'green' },
 
   // Fill remaining spots with placeholders
