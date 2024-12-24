@@ -95,6 +95,17 @@ interface IconConfig {
   targetFile: string;
 }
 
+function normalizeIconName(name: string): string {
+  return name
+    .toLowerCase()
+    .replace(/^ic_/, '')                // Remove 'ic_' prefix
+    .replace(/px(?:_?\d+)?$/, '')      // Remove 'px' or 'px_24' suffix
+    .replace(/_+(\d+)$/, '_$1')        // Clean up size suffix
+    .replace(/[^a-z0-9]/g, '_')        // Replace special chars with underscore
+    .replace(/_+/g, '_')               // Replace multiple underscores
+    .trim();
+}
+
 function extractSVGData(svgContent: string): IconData {
   const viewBoxMatch = svgContent.match(/viewBox="([^"]+)"/);
   const viewBox = viewBoxMatch ? viewBoxMatch[1] : "0 0 24 24";
@@ -149,16 +160,15 @@ function extractSVGData(svgContent: string): IconData {
 }
 
 function generateIconName(filePath: string): string {
-  const baseName = path.basename(filePath, '.svg')
-    .toLowerCase()
-    .replace(/[^a-z0-9]/g, '_')
-    .replace(/_+/g, '_'); // Replace multiple underscores with single
+  const baseName = path.basename(filePath, '.svg');
+  const normalizedName = normalizeIconName(baseName);
   
   // Extract size if present in filename
-  const sizeMatch = baseName.match(/_(\d+)$/);
+  const sizeMatch = baseName.match(/[_]?(\d+)(?:px)?$/);
   const size = sizeMatch ? sizeMatch[1] : '24';
   
-  return `${baseName}${sizeMatch ? '' : `_${size}`}`;
+  // Ensure the name ends with the size
+  return normalizedName.replace(/_?\d+$/, '') + '_' + size;
 }
 
 async function processIcon(svgPath: string, targetJsFile: string): Promise<void> {
@@ -166,7 +176,7 @@ async function processIcon(svgPath: string, targetJsFile: string): Promise<void>
     console.log(`Processing: ${svgPath}`);
     const svgContent = fs.readFileSync(svgPath, 'utf8');
     const iconData = extractSVGData(svgContent);
-    const iconName = generateIconName(svgPath);
+    const newIconName = generateIconName(svgPath);
 
     if (!iconData.d && (!iconData.paths || iconData.paths.length === 0)) {
       console.error(`No valid paths found in ${path.basename(svgPath)}`);
@@ -197,8 +207,16 @@ async function processIcon(svgPath: string, targetJsFile: string): Promise<void>
       return;
     }
 
+    // Find if there's an existing icon with the same normalized name
+    const existingIconName = Object.keys(existingIcons).find(key => 
+      normalizeIconName(key) === normalizeIconName(newIconName)
+    );
+
+    // Use existing name if found, otherwise use new name
+    const finalIconName = existingIconName || newIconName;
+
     // Add or update icon
-    existingIcons[iconName] = iconData;
+    existingIcons[finalIconName] = iconData;
 
     // Generate new content with consistent formatting
     const newContent = `export const ${iconTypeMatch}Icons = {
@@ -238,7 +256,7 @@ ${pathsStr}
 
     // Write updated content
     fs.writeFileSync(targetJsFile, newContent);
-    console.log(`✓ ${iconName} added/updated in ${path.basename(targetJsFile)}`);
+    console.log(`✓ ${finalIconName} added/updated in ${path.basename(targetJsFile)}`);
 
   } catch (error) {
     console.error(`Error processing ${svgPath}:`, error);
