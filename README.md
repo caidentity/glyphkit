@@ -60,3 +60,9 @@ npm run convert-paths
 
 # 2. Then run generate-icons to update the package
 npm run generate:icons
+
+Once both run... publish so the site can fetch
+
+## Site updates
+For the site to proropery render and read all sites... run npm run build to gather all names and catagories in the package.
+make sure getting latest build of the package...

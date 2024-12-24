@@ -20,6 +20,16 @@ const iconConfigs = [
   { name: 'data_spreadsheet_search_24', color: 'red' },
   { name: 'data_spreadsheet_24', color: 'yellow' },
   { name: 'checkmark_circle_24', color: 'purple' },
+  { name: 'file_note_24', color: 'green' },
+  { name: 'location_pin_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'map_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
+  { name: 'x_circle_24', color: 'green' },
   { name: 'x_circle_24', color: 'green' },
 
   // Fill remaining spots with placeholders

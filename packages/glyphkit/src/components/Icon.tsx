@@ -1,6 +1,22 @@
 import React from 'react';
 import { icons } from '../icons/registry';
 
+// Define strict types for fill and clip rules
+type RuleValue = 'nonzero' | 'evenodd' | 'inherit';
+
+interface PathAttributes {
+  d: string;
+  fillRule?: RuleValue;
+  clipRule?: RuleValue;
+  fill?: string;
+}
+
+interface IconDefinition {
+  viewBox: string;
+  d?: string;
+  paths?: PathAttributes[];
+}
+
 export interface IconProps {
   name: string;
   size?: number;
@@ -8,13 +24,6 @@ export interface IconProps {
   className?: string;
   onError?: (error: Error) => void;
   onLoad?: () => void;
-}
-
-interface PathAttributes {
-  d: string;
-  fillRule?: string;
-  clipRule?: string;
-  fill?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({ 
@@ -25,16 +34,20 @@ export const Icon: React.FC<IconProps> = ({
   onError,
   onLoad
 }) => {
-  const icon = icons[name];
-  if (!icon) {
-    const error = new Error(`Icon not found: ${name}`);
-    onError?.(error);
-    return null;
-  }
+  const icon = icons[name] as IconDefinition;
 
   React.useEffect(() => {
-    onLoad?.();
-  }, [onLoad]);
+    if (!icon) {
+      const error = new Error(`Icon not found: ${name}`);
+      onError?.(error);
+    } else if (onLoad) {
+      onLoad();
+    }
+  }, [icon, name, onError, onLoad]);
+
+  if (!icon) {
+    return null;
+  }
 
   return (
     <svg 
@@ -54,7 +67,7 @@ export const Icon: React.FC<IconProps> = ({
         // Multi-path format
         icon.paths.map((pathData: PathAttributes, index: number) => (
           <path
-            key={index}
+            key={`icon-path-${index}`}
             d={pathData.d}
             fill={pathData.fill || color}
             fillRule={pathData.fillRule}
@@ -64,4 +77,6 @@ export const Icon: React.FC<IconProps> = ({
       ) : null}
     </svg>
   );
-}; 
+};
+
+export default Icon; 

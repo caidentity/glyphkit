@@ -29,21 +29,23 @@ const __dirname = path.dirname(__filename);
 const PACKAGE_ROOT = path.resolve(__dirname, '..', '..');
 const ICONS_DIR = path.join(PACKAGE_ROOT, 'icons', 'flat', 'Icons');
 
-interface PathAttributes {
+interface SVGPathAttributes {
   d: string;
-  fillRule?: string;
-  clipRule?: string;
+  fillRule?: 'nonzero' | 'evenodd' | 'inherit';
+  clipRule?: 'nonzero' | 'evenodd' | 'inherit';
   fill?: string;
 }
 
-interface IconData {
+interface IconDefinition {
   viewBox: string;
-  d?: string;          // For single path icons
-  paths?: PathAttributes[]; // For multi-path icons
+  d?: string;
+  paths?: SVGPathAttributes[];
 }
 
+interface IconData extends IconDefinition {}
+
 interface IconSet {
-  [key: string]: IconData;
+  [key: string]: IconDefinition;
 }
 
 function formatSVGPath(pathData: string): string {
@@ -58,7 +60,7 @@ function formatSVGPath(pathData: string): string {
     .trim();
 }
 
-function convertSinglePathToMulti(iconData: any): IconData {
+function convertSinglePathToMulti(iconData: IconDefinition): IconDefinition {
   if (!iconData || !iconData.viewBox) {
     console.error('Invalid icon data:', iconData);
     return { viewBox: "0 0 24 24", d: "" };
@@ -76,7 +78,7 @@ function convertSinglePathToMulti(iconData: any): IconData {
   if (iconData.paths && Array.isArray(iconData.paths) && iconData.paths.length > 0) {
     return {
       viewBox: iconData.viewBox,
-      paths: iconData.paths.map(path => ({
+      paths: iconData.paths.map((path: SVGPathAttributes) => ({
         ...path,
         d: formatSVGPath(path.d)
       }))
@@ -84,14 +86,14 @@ function convertSinglePathToMulti(iconData: any): IconData {
   }
 
   // Convert legacy format if needed
-  if (iconData.d || iconData.fillRule || iconData.clipRule || iconData.fill) {
+  if (iconData.d || (iconData as any).fillRule || (iconData as any).clipRule || (iconData as any).fill) {
     return {
       viewBox: iconData.viewBox,
       paths: [{
         d: formatSVGPath(iconData.d || ''),
-        ...(iconData.fillRule && { fillRule: iconData.fillRule }),
-        ...(iconData.clipRule && { clipRule: iconData.clipRule }),
-        ...(iconData.fill && { fill: iconData.fill })
+        ...(iconData as any).fillRule && { fillRule: (iconData as any).fillRule },
+        ...(iconData as any).clipRule && { clipRule: (iconData as any).clipRule },
+        ...(iconData as any).fill && { fill: (iconData as any).fill }
       }]
     };
   }
@@ -125,9 +127,16 @@ function processIconFile(filePath: string): void {
     const [, iconType, iconObject] = match;
     console.log(`Processing ${iconType} icons...`);
 
-    let parsed;
+    let parsed: IconSet;
     try {
-      parsed = eval(`(${iconObject})`);
+      // Safer evaluation of the icon object
+      const evalContext = {
+        IconSet: {} as IconSet,
+        processObject: function(obj: string) {
+          return Function('"use strict";return (' + obj + ')')();
+        }
+      };
+      parsed = evalContext.processObject(iconObject);
     } catch (error) {
       console.error('Error parsing icon data:', error);
       return;
