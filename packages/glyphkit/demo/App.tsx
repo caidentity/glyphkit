@@ -54,7 +54,21 @@ const App = () => {
             console.error('Icon failed to load:', error);
           }}
         />
-        
+                        <Icon 
+          name="brand_sap_24"
+          color="red" 
+          size={32}
+          onError={(error: Error) => {
+            console.error('Icon failed to load:', error);
+          }}
+        />                        <Icon 
+        name="minus_circle_24"
+        color="red" 
+        size={32}
+        onError={(error: Error) => {
+          console.error('Icon failed to load:', error);
+        }}
+      />        
       </div>
     </div>
   );
