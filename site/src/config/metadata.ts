@@ -1,6 +1,6 @@
 export const siteMetadata = {
   title: 'Glyphkit',
-  description: 'Modern icon toolkit for your next web project',
+  description: 'Modern icon toolkit for modern applications.',
   siteUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
 } as const
 

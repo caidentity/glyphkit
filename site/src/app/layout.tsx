@@ -29,8 +29,14 @@ export const metadata: Metadata = {
     type: 'website',
     title: siteMetadata.title,
     description: siteMetadata.description,
-    images: [defaultOpenGraphImage],
     url: siteMetadata.siteUrl,
+    images: [
+      {
+        ...defaultOpenGraphImage,
+        url: new URL(defaultOpenGraphImage.url, siteMetadata.siteUrl).toString()
+      }
+    ],
+    siteName: siteMetadata.title,
   },
   
   // Twitter
@@ -39,6 +45,7 @@ export const metadata: Metadata = {
     title: siteMetadata.title,
     description: siteMetadata.description,
     images: [defaultOpenGraphImage],
+    creator: '@glyphkit',
   },
 };
 
