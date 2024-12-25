@@ -11,23 +11,32 @@ const requiredAssets = {
     'site.webmanifest'
   ],
   social: [
-    'og-image.png'
+    'og-Image.png'
   ]
+}
+
+async function fileExistsIgnoreCase(dirPath: string, fileName: string): Promise<boolean> {
+  try {
+    const files = await fs.readdir(dirPath)
+    return files.some(file => file.toLowerCase() === fileName.toLowerCase())
+  } catch {
+    return false
+  }
 }
 
 async function verifyAssets() {
   // Verify root assets
   for (const file of requiredAssets.root) {
-    const filePath = path.join(PUBLIC_DIR, file)
-    if (!await fs.pathExists(filePath)) {
+    const dirPath = PUBLIC_DIR
+    if (!await fileExistsIgnoreCase(dirPath, file)) {
       throw new Error(`Missing required root asset: ${file}`)
     }
   }
 
   // Verify social assets
   for (const file of requiredAssets.social) {
-    const filePath = path.join(PUBLIC_DIR, 'assets/social', file)
-    if (!await fs.pathExists(filePath)) {
+    const dirPath = path.join(PUBLIC_DIR, 'assets/social')
+    if (!await fileExistsIgnoreCase(dirPath, file)) {
       throw new Error(`Missing required social asset: ${file}`)
     }
   }

@@ -30,7 +30,7 @@ const ASSET_MAPPINGS: AssetMapping[] = [
     from: 'social',
     to: 'assets/social',
     files: [
-      'og-image.png'
+      'og-Image.png'
     ]
   },
   {
@@ -41,6 +41,16 @@ const ASSET_MAPPINGS: AssetMapping[] = [
     ]
   }
 ]
+
+async function findFileIgnoreCase(dirPath: string, fileName: string): Promise<string | null> {
+  try {
+    const files = await fs.readdir(dirPath)
+    const match = files.find(file => file.toLowerCase() === fileName.toLowerCase())
+    return match ? path.join(dirPath, match) : null
+  } catch {
+    return null
+  }
+}
 
 async function copyAssets() {
   try {
@@ -63,14 +73,17 @@ async function copyAssets() {
 
       // Copy each specified file
       for (const file of mapping.files) {
-        const sourcePath = path.join(sourceDir, file)
+        const sourceDir = path.join(ASSETS_SOURCE, mapping.from)
+        const targetDir = path.join(PUBLIC_DIR, mapping.to)
+        
+        const sourcePath = await findFileIgnoreCase(sourceDir, file)
         const targetPath = path.join(targetDir, file)
 
-        if (await fs.pathExists(sourcePath)) {
+        if (sourcePath) {
           await fs.copy(sourcePath, targetPath, { overwrite: true })
           console.log(`✓ Copied ${file} to ${targetPath}`)
         } else {
-          console.warn(`Warning: Source file not found: ${sourcePath}`)
+          console.warn(`Warning: Source file not found: ${path.join(sourceDir, file)}`)
         }
       }
     }
