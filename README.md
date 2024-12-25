@@ -1,25 +1,7 @@
-# Icon Viewer
+# GlyphKit
 
-A web application for viewing and managing SVG icons, built with Next.js, React, and TypeScript.
+Glyphkit is a repository of icon libraries designed for building cohesison and high quality applications. 
 
-## Prerequisites
-
-- Node.js 18.x or later
-- npm or yarn package manager
-
-## Installation
-
-1. Clone the repository:
-
-
-
-## Features
-
-- View SVG icons in different sizes
-- Grid view of all available icons
-- Icon metadata generation
-- Real-time SVG rendering
-- Size customization
 
 ## Technologies
 
@@ -27,7 +9,7 @@ A web application for viewing and managing SVG icons, built with Next.js, React,
 - React 18
 - TypeScript
 - TanStack Query
-- Tailwind CSS
+
 
 ## Scripts
 
