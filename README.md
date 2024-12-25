@@ -36,15 +36,15 @@ Run the development server:
 
 
 # Scripts
-## Package Glyphkit generatiion
-# 1. First run convert-paths to normalize all icon files
+## Package Glyphkit 
+### 1. First run convert-paths to normalize all icon files
 npm run convert-paths
 
-# 2. Then run generate-icons to update the package
+### 2. Then run generate-icons to update the package
 npm run generate:icons
 
 Once both run... publish so the site can fetch
 
-## Site updates
+## GlyphKit.com Site 
 For the site to proropery render and read all sites... run npm run build to gather all names and catagories in the package.
 make sure getting latest build of the package...
