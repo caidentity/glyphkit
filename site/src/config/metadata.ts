@@ -3,23 +3,30 @@ const baseUrl = process.env.NEXT_PUBLIC_APP_URL ||
 
 const description = 'Modern icon toolkit for modern applications.'
 
+// More aggressive cache-busting using timestamp and random hash
+const cacheBuster = process.env.NODE_ENV === 'production' 
+  ? `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`
+  : 'dev'
+
 export const siteMetadata = {
   title: 'Glyphkit',
   description,
   siteUrl: baseUrl,
 } as const
 
-// Add cache control headers and consistent description
+// More aggressive cache control headers
 export const defaultOpenGraphImage = {
-  url: `${baseUrl}/assets/social/og-image.png?v=${process.env.NODE_ENV === 'production' ? Date.now() : 'dev'}`,
+  url: `${baseUrl}/assets/social/og-image.png?v=${cacheBuster}`,
   width: 1200,
   height: 630,
   alt: `Glyphkit - ${description}`
 }
 
-// Add cache headers for social media crawlers
+// More aggressive cache control headers
 export const metadataHeaders = {
-  'Cache-Control': 'no-cache, no-store, must-revalidate',
+  'Cache-Control': 'no-cache, no-store, must-revalidate, max-age=0',
   'Pragma': 'no-cache',
-  'Expires': '0'
+  'Expires': '-1',
+  'Surrogate-Control': 'no-store',
+  'Vary': '*'
 } 
