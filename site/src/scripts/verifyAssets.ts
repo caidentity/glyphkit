@@ -11,12 +11,7 @@ const requiredAssets = {
     'icon-metadata.json'
   ],
   social: [
-    'og-Image.png'
-  ],
-  registry: [
-    'registry/iconRegistry.json',
-    'registry/icons.json',
-    'registry/categories.json'
+    'og-image.png'
   ]
 }
 
@@ -29,16 +24,10 @@ async function verifyAssets() {
   }
 
   // Verify social assets
+  const socialDir = path.join(PUBLIC_DIR, 'assets/social')
   for (const file of requiredAssets.social) {
-    if (!await fs.pathExists(path.join(PUBLIC_DIR, 'assets/social', file))) {
+    if (!await fs.pathExists(path.join(socialDir, file))) {
       throw new Error(`Missing required social asset: ${file}`)
-    }
-  }
-
-  // Verify registry files
-  for (const file of requiredAssets.registry) {
-    if (!await fs.pathExists(path.join(PUBLIC_DIR, file))) {
-      throw new Error(`Missing required registry file: ${file}`)
     }
   }
   
@@ -46,16 +35,7 @@ async function verifyAssets() {
 }
 
 // Ensure directories exist before verification
-async function ensureDirectories() {
-  await Promise.all([
-    fs.ensureDir(path.join(PUBLIC_DIR, 'assets/social')),
-    fs.ensureDir(path.join(PUBLIC_DIR, 'registry')),
-    fs.ensureDir(path.join(PUBLIC_DIR, 'icons'))
-  ])
-}
-
-// Run verification
-ensureDirectories()
+fs.ensureDir(path.join(PUBLIC_DIR, 'assets/social'))
   .then(verifyAssets)
   .catch((error) => {
     console.error('Asset verification failed:', error)

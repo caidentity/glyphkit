@@ -30,7 +30,7 @@ const ASSET_MAPPINGS: AssetMapping[] = [
     from: 'social',
     to: 'assets/social',
     files: [
-      'og-Image.png'
+      'og-image.png'
     ]
   },
   {
