@@ -1,7 +1,7 @@
 {
   "name": "Glyphkit",
   "short_name": "Glyphkit",
-  "description": "Modern icon toolkit for your next web project",
+  "description": "Modern icon toolkit for modern applications.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
