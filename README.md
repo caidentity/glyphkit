@@ -36,7 +36,7 @@ Run the development server:
 
 
 # Scripts
-##Package Glyphkit generatiion
+## Package Glyphkit generatiion
 # 1. First run convert-paths to normalize all icon files
 npm run convert-paths
 
