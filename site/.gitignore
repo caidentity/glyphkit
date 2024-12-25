@@ -38,3 +38,7 @@ public/icons/*
 
 # Keep specific directories
 !public/registry/
+
+# Generated files
+public/icon-metadata.json
+public/icons/metadata.json
