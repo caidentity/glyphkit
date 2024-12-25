@@ -4021,9 +4021,51 @@
         "system_signal_16",
         "system_signal_24",
         "system_signal_dash_16",
-        "system_signal_dash_24"
+        "system_signal_dash_24",
+        "text_16",
+        "text_24",
+        "text_align_center_16",
+        "text_align_center_24",
+        "text_align_left_16",
+        "text_align_left_24",
+        "text_align_right_16",
+        "text_align_right_24",
+        "text_bold_16",
+        "text_bold_24",
+        "text_color_16",
+        "text_color_24",
+        "text_indent_left_16",
+        "text_indent_left_24",
+        "text_indent_right_16",
+        "text_indent_right_24",
+        "text_italic_16",
+        "text_italic_24",
+        "text_list_check_16",
+        "text_list_check_24",
+        "text_list_number_16",
+        "text_list_number_24",
+        "text_minus_16",
+        "text_minus_24",
+        "text_orient_down_16",
+        "text_orient_down_24",
+        "text_orient_left_16",
+        "text_orient_left_24",
+        "text_orient_right_16",
+        "text_orient_right_24",
+        "text_orient_stacked_16",
+        "text_orient_stacked_24",
+        "text_orient_stacked_vertical_16",
+        "text_orient_stacked_vertical_24",
+        "text_orient_up_16",
+        "text_orient_up_24",
+        "text_plus_16",
+        "text_plus_24",
+        "text_strikethrough_16",
+        "text_strikethrough_24",
+        "text_underline_16",
+        "text_underline_24"
       ],
-      "count": 8
+      "count": 50
     },
     "text": {
       "icons": [
@@ -4218,6 +4260,6 @@
   "metadata": {
     "totalIcons": 823,
     "totalCategories": 19,
-    "generatedAt": "2024-12-24T22:52:02.086Z"
+    "generatedAt": "2024-12-25T18:14:17.752Z"
   }
 }

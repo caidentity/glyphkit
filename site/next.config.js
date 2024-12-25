@@ -42,46 +42,32 @@ const nextConfig = {
     ];
   },
 
-  // Configure webpack to handle SVG files from parent directory in production
+  // Simplify webpack config
   webpack: (config, { isServer, dev }) => {
-    // Add SVG handling
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     });
 
-    // Add static asset handling
-    config.module.rules.push({
-      test: /\.(png|jpg|gif|ico|webp|svg)$/i,
-      type: 'asset/resource',
-      generator: {
-        filename: 'assets/[path][name][ext]',
-      },
-    });
-
-    // Copy assets to public directory during build
-    if (isServer && !dev) {
-      const CopyPlugin = require('copy-webpack-plugin');
-      config.plugins.push(
-        new CopyPlugin({
-          patterns: [
-            {
-              from: path.join(process.cwd(), 'src/assets'),
-              to: path.join(process.cwd(), 'public/assets'),
-              noErrorOnMissing: true,
-              force: true,
-            },
-            {
-              from: path.join(process.cwd(), '..', 'public', 'icons'),
-              to: path.join(process.cwd(), 'public', 'icons'),
-              noErrorOnMissing: true,
-              force: true,
-            },
-          ],
-        })
-      );
-    }
+    // Copy assets in both dev and prod
+    const CopyPlugin = require('copy-webpack-plugin');
+    config.plugins.push(
+      new CopyPlugin({
+        patterns: [
+          {
+            from: 'src/assets/root',
+            to: '.',
+            noErrorOnMissing: true,
+          },
+          {
+            from: 'src/assets/social',
+            to: 'assets/social',
+            noErrorOnMissing: true,
+          },
+        ],
+      })
+    );
 
     return config;
   },

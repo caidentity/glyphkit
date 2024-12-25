@@ -1,0 +1,16 @@
+{
+  "name": "Glyphkit",
+  "short_name": "Glyphkit",
+  "description": "Modern icon toolkit for your next web project",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+} 

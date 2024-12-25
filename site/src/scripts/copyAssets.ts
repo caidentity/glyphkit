@@ -1,58 +1,83 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-const SOURCE_DIR = path.join(process.cwd(), 'src/assets')
-const TARGET_DIR = path.join(process.cwd(), 'public/assets')
+const ASSETS_SOURCE = path.join(process.cwd(), 'src/assets')
+const PUBLIC_DIR = path.join(process.cwd(), 'public')
+
+interface AssetMapping {
+  from: string
+  to: string
+  files: string[]
+}
+
+const ASSET_MAPPINGS: AssetMapping[] = [
+  {
+    from: 'Logo/favicon',
+    to: '.',
+    files: [
+      'favicon.ico',
+      'apple-touch-icon.png'
+    ]
+  },
+  {
+    from: 'root',
+    to: '.',
+    files: [
+      'site.webmanifest'
+    ]
+  },
+  {
+    from: 'social',
+    to: 'assets/social',
+    files: [
+      'og-image.png'
+    ]
+  },
+  {
+    from: 'Logo',
+    to: 'assets/Logo',
+    files: [
+      'logo.svg'
+    ]
+  }
+]
 
 async function copyAssets() {
   try {
-    // Ensure source Logo directory exists
-    const logoSourceDir = path.join(SOURCE_DIR, 'Logo')
-    if (!await fs.pathExists(logoSourceDir)) {
-      console.error('❌ Source Logo directory not found at:', logoSourceDir)
-      console.log('Creating Logo directory and default logo...')
-      
-      // Create the directory
-      await fs.ensureDir(logoSourceDir)
-      
-      // Create a default logo if none exists
-      const defaultLogo = `<svg width="120" height="32" viewBox="0 0 120 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <text x="10" y="24" font-family="Arial" font-size="24" fill="currentColor">Glyphkit</text>
-      </svg>`
-      
-      await fs.writeFile(path.join(logoSourceDir, 'logo.svg'), defaultLogo)
+    // Ensure target directories exist
+    await fs.ensureDir(path.join(PUBLIC_DIR, 'assets/social'))
+    await fs.ensureDir(path.join(PUBLIC_DIR, 'assets/Logo'))
+
+    // Copy assets according to mappings
+    for (const mapping of ASSET_MAPPINGS) {
+      const sourceDir = path.join(ASSETS_SOURCE, mapping.from)
+      const targetDir = path.join(PUBLIC_DIR, mapping.to)
+
+      console.log(`Copying from ${sourceDir} to ${targetDir}`)
+
+      // Ensure source directory exists
+      if (!await fs.pathExists(sourceDir)) {
+        console.warn(`Warning: Source directory not found: ${sourceDir}`)
+        continue
+      }
+
+      // Copy each specified file
+      for (const file of mapping.files) {
+        const sourcePath = path.join(sourceDir, file)
+        const targetPath = path.join(targetDir, file)
+
+        if (await fs.pathExists(sourcePath)) {
+          await fs.copy(sourcePath, targetPath, { overwrite: true })
+          console.log(`✓ Copied ${file} to ${targetPath}`)
+        } else {
+          console.warn(`Warning: Source file not found: ${sourcePath}`)
+        }
+      }
     }
 
-    // Ensure target directory exists
-    await fs.ensureDir(TARGET_DIR)
-    
-    // Log the source and target directories
-    console.log('Copying assets from:', SOURCE_DIR)
-    console.log('Copying assets to:', TARGET_DIR)
-    
-    // Copy all assets recursively
-    await fs.copy(SOURCE_DIR, TARGET_DIR, {
-      overwrite: true,
-      filter: (src: string) => {
-        // Skip README files and any other files you want to exclude
-        const shouldCopy = !src.includes('README.md')
-        if (shouldCopy) {
-          console.log('Copying:', src)
-        }
-        return shouldCopy
-      }
-    })
-    
-    // Verify the copy
-    const logoDir = path.join(TARGET_DIR, 'Logo')
-    if (await fs.pathExists(logoDir)) {
-      const files = await fs.readdir(logoDir)
-      console.log('✅ Assets copied successfully. Files in Logo directory:', files)
-    } else {
-      throw new Error('Logo directory not created in target')
-    }
+    console.log('✓ Assets copied successfully')
   } catch (error) {
-    console.error('❌ Error copying assets:', error)
+    console.error('Failed to copy assets:', error)
     process.exit(1)
   }
 }

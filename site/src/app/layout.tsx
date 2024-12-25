@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import '@/styles/globals.scss';
 import TopNavigation from '@/components/TopNavigationBar/TopNavigation';
 import Providers from '@/components/Providers';
+import { siteMetadata, defaultOpenGraphImage } from '@/config/metadata';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -11,8 +12,34 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Glyphkit',
-  description: 'Created with Next.js and TypeScript',
+  title: {
+    default: siteMetadata.title,
+    template: `%s | ${siteMetadata.title}`,
+  },
+  description: siteMetadata.description,
+  metadataBase: new URL(siteMetadata.siteUrl),
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
+  
+  // OpenGraph
+  openGraph: {
+    type: 'website',
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [defaultOpenGraphImage],
+    url: siteMetadata.siteUrl,
+  },
+  
+  // Twitter
+  twitter: {
+    card: 'summary_large_image',
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [defaultOpenGraphImage],
+  },
 };
 
 export const viewport: Viewport = {

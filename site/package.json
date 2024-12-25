@@ -20,7 +20,7 @@
     "generate:icons": "tsx src/scripts/generateIconRegistry.ts",
     "copy:registry": "tsx src/scripts/copyIconRegistry.ts",
     "copy:assets": "tsx src/scripts/copyAssets.ts",
-    "clean:assets": "rm -rf ./public/assets/* && mkdir -p ./public/assets/Logo",
+    "clean:assets": "rm -rf ./public/assets && rm -f ./public/favicon.ico ./public/apple-touch-icon.png ./public/site.webmanifest",
     "verify:assets": "tsx src/scripts/verifyAssets.ts",
     "verify:setup": "tsx src/scripts/verifyAssetSetup.ts"
   },
