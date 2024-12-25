@@ -63,14 +63,15 @@ const ICON_SETS = {
 };
 
 async function generateIconRegistry() {
-  const outputDir = path.join(process.cwd(), 'src/lib');
+  const srcLibDir = path.join(process.cwd(), 'src/lib');
+  const publicDir = path.join(process.cwd(), 'public');
   
-  console.log('Generating icon registry:');
-  console.log('- Output:', outputDir);
+  console.log('Generating icon registry...');
 
   try {
-    // Create output directory
-    await fs.mkdir(outputDir, { recursive: true });
+    // Create output directories
+    await fs.mkdir(srcLibDir, { recursive: true });
+    await fs.mkdir(path.join(publicDir, 'icons'), { recursive: true });
 
     // Generate registry from all icon sets
     const registry: IconRegistry = {
@@ -105,29 +106,28 @@ async function generateIconRegistry() {
 
     registry.metadata.totalIcons = Object.keys(registry.icons).length;
 
-    // Write registry files
+    // Write registry files to both locations
     await Promise.all([
+      // Source lib files
       fs.writeFile(
-        path.join(outputDir, 'iconRegistry.json'),
+        path.join(srcLibDir, 'iconRegistry.json'),
+        JSON.stringify(registry, null, 2),
+        'utf-8'
+      ),
+      // Public files for API
+      fs.writeFile(
+        path.join(publicDir, 'icon-metadata.json'),
         JSON.stringify(registry, null, 2),
         'utf-8'
       ),
       fs.writeFile(
-        path.join(outputDir, 'icons.json'),
-        JSON.stringify(registry.icons, null, 2),
-        'utf-8'
-      ),
-      fs.writeFile(
-        path.join(outputDir, 'categories.json'),
-        JSON.stringify(registry.categories, null, 2),
+        path.join(publicDir, 'icons/metadata.json'),
+        JSON.stringify(registry, null, 2),
         'utf-8'
       )
     ]);
 
-    console.log(`Generated icon registry with:
-- ${registry.metadata.totalIcons} icons
-- ${registry.metadata.totalCategories} categories`);
-
+    console.log(`✓ Generated icon registry with ${registry.metadata.totalIcons} icons in ${registry.metadata.totalCategories} categories`);
   } catch (error) {
     console.error('Failed to generate icon registry:', error);
     throw error;

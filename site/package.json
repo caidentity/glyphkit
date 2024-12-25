@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "npm run clean:assets && npm run copy:assets && npm run generate:icons && npm run copy:registry && next dev",
-    "build": "npm run clean:assets && npm run copy:assets && npm run verify:assets && npm run generate:icons && npm run copy:registry && npm run verify:registry && next build",
+    "build": "npm run clean:assets && npm run copy:assets && npm run generate:icons && npm run copy:registry && npm run verify:all && next build",
+    "verify:all": "npm run verify:assets && npm run verify:registry",
     "verify:registry": "node -e \"const fs=require('fs');const path=require('path');const file=path.join(process.cwd(),'public/registry/iconRegistry.json');console.log('Verifying registry:',file);const data=JSON.parse(fs.readFileSync(file));console.log('Icons:',Object.keys(data.categories).length,'categories');\"",
     "start": "next start",
     "lint": "next lint",
