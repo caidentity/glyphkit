@@ -8,6 +8,7 @@ import './TopNavigation.scss';
 import { Icon } from '@glyphkit/glyphkit';
 import Image from 'next/image';
 import { getLogoPath } from '@/lib/assetLoader'
+import Button from '@/components/Button/Button';
 
 const navigation = [
   { name: 'Icons', href: '/' },
@@ -17,6 +18,7 @@ const navigation = [
 
 export default function TopNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
   const logoPath = getLogoPath('logo.svg')
@@ -38,34 +40,51 @@ export default function TopNavigation() {
     document.documentElement.setAttribute('data-theme', newTheme);
   };
 
+  // Handle mobile menu animations
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      setIsAnimating(true);
+    } else {
+      document.body.style.overflow = 'unset';
+      const timer = setTimeout(() => setIsAnimating(false), 500);
+      return () => clearTimeout(timer);
+    }
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header className="top-navigation">
-      <nav className="top-navigation__container" aria-label="Top">
-        <div className="top-navigation__content">
-          <div className="top-navigation__mobile-menu">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle mobile menu"
+      {/* Mobile Menu Overlay */}
+      <div className={`top-navigation__mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}>
+        <div className="top-navigation__mobile-links">
+          {navigation.map((item, index) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={`top-navigation__mobile-link ${pathname === item.href ? 'active' : ''}`}
+              style={{
+                transitionDelay: mobileMenuOpen ? `${(index + 1) * 100}ms` : '0ms',
+              }}
+              onClick={() => setMobileMenuOpen(false)}
             >
-              {mobileMenuOpen ? (
-                <X className="h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
-          </div>
-          
+              {item.name}
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <nav className="top-navigation__container">
+        <div className="top-navigation__content">
+          {/* Logo */}
           <Link href="/" className="top-navigation__logo">
-            <Image 
-              src={logoPath}
-              alt="Glyph Kit Logo"
-              width={120}
-              height={32}
-              priority
-            />
+            <Image src={logoPath} alt="Logo" width={40} height={40} priority />
           </Link>
 
+          {/* Desktop Navigation Links */}
           <div className="top-navigation__links">
             {navigation.map((item) => (
               <Link
@@ -78,54 +97,38 @@ export default function TopNavigation() {
                 {item.name}
               </Link>
             ))}
-            
-            <button
+          </div>
+
+          {/* Actions */}
+          <div className="top-navigation__actions">
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={toggleTheme}
-              className="top-navigation__theme-toggle"
               aria-label="Toggle theme"
             >
-              {theme === 'light' ? (
-                <Icon
-                  name="moon_16"
-                  size={20}
-                  color="currentColor"
-                  onError={(error) => {
-                    console.error('Icon error:', error);
-                  }}
-                />
-              ) : (
-                <Icon
-                  name="sun_16"
-                  size={20}
-                  color="currentColor"
-                  onError={(error) => {
-                    console.error('Icon error:', error);
-                  }}
-                />
-              )}
-            </button>
+              <Icon 
+                name={theme === 'dark' ? 'moon_24' : 'sun_24'} 
+                size={24} 
+              />
+            </Button>
+
+            {/* Mobile Menu Button - Only show on mobile */}
+            <Button
+              variant="ghost"
+              size="sm"
+              className="top-navigation__mobile-menu"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              <Icon 
+                name={mobileMenuOpen ? 'shape_x_24' : 'text_align_left_24'} 
+                size={24} 
+              />
+            </Button>
           </div>
         </div>
-
-        {/* Mobile menu */}
-        {mobileMenuOpen && (
-          <div className="py-2 mt-2">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`block py-2 px-3 rounded-md ${
-                  pathname === item.href
-                    ? 'bg-blue-50 text-blue-600 dark:bg-gray-800 dark:text-blue-400'
-                    : 'text-gray-900 hover:bg-gray-50 dark:text-gray-100 dark:hover:bg-gray-800'
-                }`}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
       </nav>
     </header>
   );
