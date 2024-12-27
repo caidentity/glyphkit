@@ -33,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
       <div className="search-wrapper">
         <Input
           variant="search"
-          placeholder="Search icons..."
+          placeholder="Search 1000+ icons..."
           value={searchQuery}
           onChange={handleSearchInput}
           className="search-input"
