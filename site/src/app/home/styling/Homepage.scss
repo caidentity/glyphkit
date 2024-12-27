@@ -2,19 +2,18 @@
 
 .homepage {
   .masthead {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 88vh;
     background: var(--background-primary);
     display: flex;
     align-items: flex-end;
     z-index: 10;
-    transition: opacity 0.3s ease;
 
     @include mobile {
-      height: calc(100vh - var(--space-16));
+      height: 90vh;
       padding-bottom: var(--space-4);
     }
 
@@ -123,8 +122,8 @@
 
   // Main Content
   .main-content {
-    padding: var(--space-8) var(--space-4);
-    background: var(--surface-background);
+    position: relative;
+    z-index: 1;
   }
 
   .container {
@@ -134,6 +133,17 @@
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
+  }
+
+  // Add specific positioning for KitsSection
+  .kits-section {
+    position: relative;
+    margin-top: 80vh; // Slightly less than masthead height to ensure visibility
+    z-index: 20; // Higher than masthead to ensure visibility
+    
+    @include mobile {
+      margin-top: 85vh;
+    }
   }
 }
 
