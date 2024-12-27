@@ -14,16 +14,16 @@ const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ isVisible }) => {
       <div className="clipped-section">
         <CanvasBackground className="gradient-background" />
         <div className="background-pattern" />
-      </div>
-      <div className="pattern-overlay">
-        <div 
-          className="pattern-repeat"
-          style={{
-            backgroundImage: `url(${iconPath})`,
-            backgroundRepeat: 'repeat',
-            backgroundSize: '468px 406px'
-          }}
-        />
+        <div className="pattern-overlay">
+          <div 
+            className="pattern-repeat"
+            style={{
+              backgroundImage: `url(${iconPath})`,
+              backgroundRepeat: 'repeat',
+              backgroundSize: '468px 406px'
+            }}
+          />
+        </div>
       </div>
     </div>
   );
