@@ -1,12 +1,18 @@
 import React from 'react';
+import { CanvasBackground } from '@/components/Gradient/Gradient';
 
 interface BackgroundPatternProps {
   isVisible: boolean;
 }
 
 const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ isVisible }) => (
-  <div className={`background-pattern ${isVisible ? 'visible' : ''}`}>
+  <div className={`masthead-background ${isVisible ? 'visible' : ''}`}>
+    <div className="clipped-section">
+      <CanvasBackground className="gradient-background" />
+      <div className="background-pattern" />
+    </div>
     <svg 
+      className="pattern-overlay"
       preserveAspectRatio="none" 
       viewBox="0 0 100 100"
       xmlns="http://www.w3.org/2000/svg"
@@ -23,8 +29,7 @@ const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ isVisible }) => (
           <circle cx="2" cy="2" r="1" fill="#ffffff" fillOpacity="0.3"/>
         </pattern>
       </defs>
-      <path d="M0 0 L100 50 L100 0 Z" fill="#4a90e2"/>
-      <path d="M0 0 L100 50 L100 0 Z" fill="url(#dots)"/>
+      <rect width="100" height="100" fill="url(#dots)"/>
     </svg>
   </div>
 );

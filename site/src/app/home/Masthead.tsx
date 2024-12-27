@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search } from 'lucide-react';
 import BackgroundPattern from './BackgroundPattern';
 import SearchBar from './SearchBar';
 import LogoSection from './LogoSection';
@@ -16,9 +15,7 @@ const Masthead = () => {
 
   return (
     <header className={`masthead ${isTransitioning ? 'transitioning' : ''}`}>
-      <div className="masthead-background">
-        <BackgroundPattern isVisible={isVisible} />
-      </div>
+      <BackgroundPattern isVisible={isVisible} />
       <div className="masthead-overlay"/>
       <div className="masthead-content">
         <div className="content-wrapper">
