@@ -1,27 +1,27 @@
 @use '@/styles/kit' as *;
 
 .search-container {
-  width: 100%;
-  max-width: 36rem;
-  transform: translateY(2rem);
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
-
-  &.visible {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  &.transitioning {
-    position: fixed;
-    left: 0;
-    right: 0;
-    padding: 0 var(--space-4);
-    animation: moveSearchToViewer 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    pointer-events: auto;
-  }
-
+    width: 100%;
+    max-width: 36rem;
+    transform: translateY(2rem);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+  
+    &.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  
+    &.transitioning {
+      position: fixed;
+      left: 0;
+      right: 0;
+      padding: 0 var(--space-4);
+      animation: moveSearchToViewer 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      pointer-events: auto;
+    }
+  
   .search-wrapper {
     position: relative;
     max-width: 36rem;
@@ -75,7 +75,7 @@
     max-width: 36rem;
   }
   100% {
-    top: 60px;
+    top: 120px;
     transform: translateY(0);
     max-width: 100%;
   }

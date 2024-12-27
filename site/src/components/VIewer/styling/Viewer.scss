@@ -6,6 +6,9 @@
   background: var(--background-primary);
   display: flex;
   flex-direction: column;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 
   &-header {
     width: 100%;
@@ -39,15 +42,15 @@
   &-search {
     width: 100%;
     padding: var(--space-4);
-    opacity: 0;
-    transform: translateY(-1rem);
-    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    animation-delay: 0.2s;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.3s ease-out;
 
     &__input-wrapper {
       position: relative;
       max-width: 36rem;
       margin: 0 auto;
+      transition: max-width 0.3s ease-out;
     }
 
     &__input {
@@ -345,6 +348,16 @@
       display: none;
     }
   }
+
+  &.transitioning-from-home {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInFromHome 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
+    .viewer-search {
+      animation: expandSearchBar 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  }
 }
 
 // Filter overlay for mobile
@@ -516,6 +529,28 @@
   }
   to {
     opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInFromHome {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes expandSearchBar {
+  0% {
+    max-width: 36rem;
+    transform: translateY(calc(50vh - 60px));
+  }
+  100% {
+    max-width: 100%;
     transform: translateY(0);
   }
 }

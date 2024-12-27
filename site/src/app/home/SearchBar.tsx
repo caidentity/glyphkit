@@ -22,6 +22,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
     setIsTransitioning(true);
     onTransitionStart?.();
     
+    sessionStorage.setItem('fromHomeSearch', 'true');
+    
     await new Promise(resolve => setTimeout(resolve, 500));
     router.push(`/icons?search=${encodeURIComponent(value.trim())}`);
   };
