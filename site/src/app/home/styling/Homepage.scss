@@ -83,6 +83,21 @@
       height: 100%;
       pointer-events: none;
       mix-blend-mode: soft-light;
+      opacity: 0.3;
+      overflow: hidden;
+      z-index: 2;
+
+      .pattern-repeat {
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        transform: rotate(-10deg);
+        background-size: 200px 200px;
+        background-position: top right;
+        opacity: 0.95;
+      }
     }
   }
 

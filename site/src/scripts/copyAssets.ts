@@ -39,6 +39,13 @@ const ASSET_MAPPINGS: AssetMapping[] = [
     files: [
       'logo.svg'
     ]
+  },
+  {
+    from: 'home',
+    to: 'assets/home',
+    files: [
+      'icons.svg'
+    ]
   }
 ]
 
@@ -54,22 +61,36 @@ async function findFileIgnoreCase(dirPath: string, fileName: string): Promise<st
 
 async function copyAssets() {
   try {
+    // Verify source directories exist
+    const sourceHomeDir = path.join(ASSETS_SOURCE, 'home')
+    if (!await fs.pathExists(sourceHomeDir)) {
+      console.warn(`Creating source home directory: ${sourceHomeDir}`)
+      await fs.ensureDir(sourceHomeDir)
+    }
+
     // Ensure target directories exist
     await fs.ensureDir(path.join(PUBLIC_DIR, 'assets/social'))
     await fs.ensureDir(path.join(PUBLIC_DIR, 'assets/Logo'))
+    await fs.ensureDir(path.join(PUBLIC_DIR, 'assets/home'))
 
     // Copy assets according to mappings
     for (const mapping of ASSET_MAPPINGS) {
       const sourceDir = path.join(ASSETS_SOURCE, mapping.from)
       const targetDir = path.join(PUBLIC_DIR, mapping.to)
 
-      console.log(`Copying from ${sourceDir} to ${targetDir}`)
+      // Add debug logging
+      console.log(`Checking directory: ${sourceDir}`)
+      const exists = await fs.pathExists(sourceDir)
+      console.log(`Directory exists: ${exists}`)
 
-      // Ensure source directory exists
-      if (!await fs.pathExists(sourceDir)) {
+      if (!exists) {
         console.warn(`Warning: Source directory not found: ${sourceDir}`)
         continue
       }
+
+      // List files in directory
+      const files = await fs.readdir(sourceDir)
+      console.log(`Files in directory: ${files.join(', ')}`)
 
       // Copy each specified file
       for (const file of mapping.files) {
