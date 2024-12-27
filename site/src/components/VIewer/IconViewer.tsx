@@ -36,14 +36,24 @@ const IconViewer = () => {
 
   const queryClient = useQueryClient();
 
-  const searchParams = new URLSearchParams(window.location.search);
-  const initialSearch = searchParams.get('search') || '';
-
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const initialSearch = searchParams.get('search') || '';
     if (initialSearch) {
       setSearchQuery(initialSearch);
+      const newUrl = `${window.location.pathname}?search=${encodeURIComponent(initialSearch)}`;
+      window.history.replaceState({}, '', newUrl);
     }
-  }, [initialSearch]);
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery) {
+      const newUrl = `${window.location.pathname}?search=${encodeURIComponent(searchQuery)}`;
+      window.history.replaceState({}, '', newUrl);
+    } else {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [searchQuery]);
 
   const { data: categories = [], isLoading, error } = useQuery({
     queryKey: ['iconMetadata'],
@@ -132,6 +142,14 @@ const IconViewer = () => {
     setTimeout(() => setSelectedIcon(null), 300);
   };
 
+  const handleSearchInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    
+    const newUrl = `${window.location.pathname}?search=${encodeURIComponent(value)}`;
+    window.history.replaceState({}, '', newUrl);
+  };
+
   return (
     <div className="viewer">
       <div className="viewer-header">
@@ -159,8 +177,9 @@ const IconViewer = () => {
             variant="search"
             placeholder="Search icons..."
             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
+            onChange={handleSearchInput}
             className="viewer-search__input"
+            autoFocus
           />
         </div>
       </div>

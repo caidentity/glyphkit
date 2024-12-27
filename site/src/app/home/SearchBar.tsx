@@ -2,48 +2,42 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Search } from 'lucide-react';
+import Input from '@/components/Input/Input';
+import './styling/Search.scss';
 
 interface SearchBarProps {
   isVisible: boolean;
+  onTransitionStart?: () => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ isVisible }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      router.push(`/icons?search=${encodeURIComponent(searchQuery.trim())}`);
-    }
-  };
+  const handleSearchInput = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch(e);
-    }
+    setIsTransitioning(true);
+    onTransitionStart?.();
+    
+    await new Promise(resolve => setTimeout(resolve, 500));
+    router.push(`/icons?search=${encodeURIComponent(value.trim())}`);
   };
 
   return (
-    <div className={`search-container ${isVisible ? 'visible' : ''}`}>
-      <form onSubmit={handleSearch} className="search-wrapper">
-        <input
-          type="text"
+    <div className={`search-container ${isVisible ? 'visible' : ''} ${isTransitioning ? 'transitioning' : ''}`}>
+      <div className="search-wrapper">
+        <Input
+          variant="search"
           placeholder="Search icons..."
-          className="search-input"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyPress={handleKeyPress}
+          onChange={handleSearchInput}
+          className="search-input"
+          autoFocus
         />
-        <button 
-          type="submit" 
-          className="search-button" 
-          aria-label="Search"
-        >
-          <Search size={24} />
-        </button>
-      </form>
+      </div>
     </div>
   );
 };

@@ -8,13 +8,14 @@ import LogoSection from './LogoSection';
 
 const Masthead = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
   return (
-    <header className="masthead">
+    <header className={`masthead ${isTransitioning ? 'transitioning' : ''}`}>
       <div className="masthead-background">
         <BackgroundPattern isVisible={isVisible} />
       </div>
@@ -22,7 +23,10 @@ const Masthead = () => {
       <div className="masthead-content">
         <div className="content-wrapper">
           <LogoSection isVisible={isVisible} />
-          <SearchBar isVisible={isVisible} />
+          <SearchBar 
+            isVisible={isVisible} 
+            onTransitionStart={() => setIsTransitioning(true)}
+          />
         </div>
       </div>
     </header>

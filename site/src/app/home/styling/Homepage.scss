@@ -7,15 +7,23 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
-    overflow: hidden;
+    background: #fff;
     display: flex;
     align-items: flex-end;
     z-index: 10;
+    transition: opacity 0.3s ease;
 
     @include mobile {
       height: calc(100vh - var(--space-16));
       padding-bottom: var(--space-4);
+    }
+
+    &.transitioning {
+      .masthead-background,
+      .masthead-overlay,
+      .logo-section {
+        opacity: 0;
+      }
     }
   }
 
@@ -32,12 +40,12 @@
     left: 0;
     width: 100%;
     height: 50%;
-    background: linear-gradient(
-      to top, 
-      rgba(0, 0, 0, 0.3) 0%,
-      rgba(0, 0, 0, 0.2) 30%,
-      rgba(0, 0, 0, 0) 100%
-    );
+    // background: linear-gradient(
+    //   to top, 
+    //   rgba(0, 0, 0, 0.3) 0%,
+    //   rgba(0, 0, 0, 0.2) 10%,
+    //   rgba(0, 0, 0, 0) 100%
+    // );
     pointer-events: none;
   }
 
@@ -67,9 +75,7 @@
   }
 
   .logo-wrapper {
-    width: 12rem;
-    height: 4rem;
-    background: rgba(255, 255, 255, 0.95);
+    width: 120px;
     backdrop-filter: blur(8px);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
@@ -96,7 +102,7 @@
   .description {
     max-width: 32rem;
     font-size: var(--text-xl);
-    color: white;
+    color: var(--text-secondary);
     font-weight: var(--font-medium);
     line-height: 1.5;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -115,67 +121,6 @@
     }
   }
 
-  // Search
-  .search-container {
-    width: 100%;
-    max-width: 36rem;
-    transform: translateY(2rem);
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 700ms;
-
-    &.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  .search-wrapper {
-    position: relative;
-  }
-
-  .search-input {
-    width: 100%;
-    height: 3.5rem;
-    padding: 0 3.5rem 0 1.5rem;
-    font-size: var(--text-lg);
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9999px;
-    box-shadow: var(--shadow-lg);
-    transition: all 0.2s ease;
-
-    &:focus {
-      outline: none;
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: var(--shadow-xl);
-    }
-
-    @include mobile {
-      height: 3rem;
-      font-size: var(--text-base);
-    }
-  }
-
-  .search-button {
-    position: absolute;
-    right: var(--space-4);
-    top: 50%;
-    transform: translateY(-50%);
-    padding: var(--space-2);
-    color: var(--text-secondary);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--accent-primary);
-    }
-  }
-
   // Main Content
   .main-content {
     padding: var(--space-8) var(--space-4);
@@ -190,4 +135,22 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
   }
-} 
+}
+
+@keyframes moveSearchToViewer {
+  0% {
+    top: 50%;
+    transform: translateY(-50%);
+    max-width: 36rem;
+  }
+  100% {
+    top: 60px;
+    transform: translateY(0);
+    max-width: 100%;
+  }
+}
+
+// Ensure the search field stays above other content during transition
+.transitioning {
+  z-index: 1000;
+}
