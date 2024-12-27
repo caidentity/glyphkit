@@ -11,7 +11,7 @@ import { getLogoPath } from '@/lib/assetLoader'
 import Button from '@/components/Button/Button';
 
 const navigation = [
-  { name: 'Icons', href: '/' },
+  { name: 'Icons', href: '/icons' },
   { name: 'About', href: '/about' },
   { name: 'NPM', href: 'https://www.npmjs.com/package/@glyphkit/glyphkit' },
 ];

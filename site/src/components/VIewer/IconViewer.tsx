@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { Search, Download, X, Link, Check, Code, ArrowDownToLine, FileText, Grid, List, SlidersHorizontal } from 'lucide-react';
 import Input from "../Input/Input";
@@ -35,6 +35,15 @@ const IconViewer = () => {
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
 
   const queryClient = useQueryClient();
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const initialSearch = searchParams.get('search') || '';
+
+  useEffect(() => {
+    if (initialSearch) {
+      setSearchQuery(initialSearch);
+    }
+  }, [initialSearch]);
 
   const { data: categories = [], isLoading, error } = useQuery({
     queryKey: ['iconMetadata'],
