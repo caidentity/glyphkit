@@ -33,6 +33,7 @@ const IconViewer = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [gridPadding, setGridPadding] = useState<number>(16);
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   const queryClient = useQueryClient();
 
@@ -150,6 +151,30 @@ const IconViewer = () => {
     window.history.replaceState({}, '', newUrl);
   };
 
+  const filterPanel = (
+    <FilterPanel
+      selectedSize={selectedSize}
+      setSelectedSize={setSelectedSize}
+      viewMode={viewMode}
+      setViewMode={setViewMode}
+      iconScale={iconScale}
+      setIconScale={setIconScale}
+      selectedCategories={selectedCategories}
+      setSelectedCategories={setSelectedCategories}
+      selectedTags={selectedTags}
+      setSelectedTags={setSelectedTags}
+      categories={categories}
+      tags={allTags.map(tag => ({ 
+        name: tag, 
+        count: filteredIcons.filter(icon => icon.tags?.includes(tag)).length 
+      }))}
+      hasActiveFilters={hasActiveFilters}
+      onResetFilters={handleResetFilters}
+      gridPadding={gridPadding}
+      setGridPadding={setGridPadding}
+    />
+  );
+
   return (
     <div className="viewer">
       <div className="viewer-header">
@@ -197,47 +222,19 @@ const IconViewer = () => {
 
       <div className="viewer-content">
         <div className="viewer-content__sidebar">
-          <FilterPanel
-            selectedSize={selectedSize}
-            setSelectedSize={setSelectedSize}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            iconScale={iconScale}
-            setIconScale={setIconScale}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-            categories={categories}
-            hasActiveFilters={hasActiveFilters}
-            onResetFilters={handleResetFilters}
-            gridPadding={gridPadding}
-            setGridPadding={setGridPadding}
-          />
+          {filterPanel}
         </div>
 
         <div className="viewer-content__main">
-          {isLoading ? (
-            <div className="viewer-loading">
-              <div className="viewer-loading__spinner" />
-            </div>
-          ) : error ? (
-            <Alert variant="destructive">
-              <AlertDescription>Failed to load icons</AlertDescription>
-            </Alert>
-          ) : filteredIcons.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              No icons found matching your criteria
-            </div>
-          ) : (
-            <IconGrid 
-              icons={filteredIcons} 
-              onIconSelect={handleIconSelect}
-              onIconDownload={handleDownload}
-              onIconCopy={handleCopy}
-              viewMode={viewMode}
-              iconScale={iconScale}
-              gridPadding={gridPadding}
-            />
-          )}
+          <IconGrid 
+            icons={filteredIcons}
+            onIconSelect={handleIconSelect}
+            onIconDownload={handleDownload}
+            onIconCopy={handleCopy}
+            viewMode={viewMode}
+            iconScale={iconScale}
+            gridPadding={gridPadding}
+          />
         </div>
       </div>
 
@@ -255,21 +252,7 @@ const IconViewer = () => {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <FilterPanel
-              selectedSize={selectedSize}
-              setSelectedSize={setSelectedSize}
-              viewMode={viewMode}
-              setViewMode={setViewMode}
-              iconScale={iconScale}
-              setIconScale={setIconScale}
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
-              categories={categories}
-              hasActiveFilters={hasActiveFilters}
-              onResetFilters={handleResetFilters}
-              gridPadding={gridPadding}
-              setGridPadding={setGridPadding}
-            />
+            {filterPanel}
           </div>
         </div>
       )}
