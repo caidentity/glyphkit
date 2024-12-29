@@ -20,6 +20,8 @@ import { IconCategory } from '@/types/icon';
 import './styling/Viewer.scss';
 import IconDetailPanel from './IconDetailPanel';
 import Tooltip from '../Tooltip/Tooltip';
+import SearchInput, { SearchSuggestion } from '../Search/SearchInput';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -34,6 +36,7 @@ const IconViewer = () => {
   const [gridPadding, setGridPadding] = useState<number>(16);
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [debouncedSearch, setDebouncedSearch] = useState(searchQuery);
 
   const queryClient = useQueryClient();
 
@@ -75,9 +78,22 @@ const IconViewer = () => {
     return Array.from(tags);
   }, [allIcons]);
 
+  useDebounce(() => {
+    setDebouncedSearch(searchQuery);
+  }, 150, [searchQuery]);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      const newUrl = `${window.location.pathname}?search=${encodeURIComponent(debouncedSearch)}`;
+      window.history.replaceState({}, '', newUrl);
+    } else {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [debouncedSearch]);
+
   const { filteredIcons, hasActiveFilters } = useIconFiltering({
     allIcons,
-    searchQuery,
+    searchQuery: debouncedSearch,
     selectedSize,
     selectedCategories,
     selectedTags,
@@ -251,6 +267,62 @@ const IconViewer = () => {
     }
   }, [categories]);
 
+  const generateSearchSuggestions = (): SearchSuggestion[] => {
+    const suggestions: SearchSuggestion[] = [];
+    
+    // Add category suggestions
+    categories.forEach(category => {
+      if (category.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+        suggestions.push({
+          type: 'category',
+          value: category.name,
+          count: category.icons.length
+        });
+      }
+    });
+
+    // Add tag suggestions
+    allTags.forEach(tag => {
+      if (tag.toLowerCase().includes(searchQuery.toLowerCase())) {
+        const count = allIcons.filter(icon => icon.tags?.includes(tag)).length;
+        suggestions.push({
+          type: 'tag',
+          value: tag,
+          count
+        });
+      }
+    });
+
+    // Add icon name suggestions
+    allIcons.forEach(icon => {
+      if (icon.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+        suggestions.push({
+          type: 'icon',
+          value: icon.name
+        });
+      }
+    });
+
+    // Limit suggestions to top 10
+    return suggestions.slice(0, 10);
+  };
+
+  const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
+    switch (suggestion.type) {
+      case 'category':
+        handleCategoryToggle(suggestion.value);
+        setSearchQuery('');
+        break;
+      case 'tag':
+        handleTagToggle(suggestion.value);
+        setSearchQuery('');
+        break;
+      case 'icon':
+        setSearchQuery(suggestion.value);
+        break;
+    }
+  };
+
   return (
     <div className="viewer">
       <div className="viewer-header">
@@ -274,11 +346,12 @@ const IconViewer = () => {
 
       <div className="viewer-search">
         <div className="viewer-search__input-wrapper">
-          <Input
-            variant="search"
-            placeholder="Search icons..."
+          <SearchInput
             value={searchQuery}
-            onChange={handleSearchInput}
+            onChange={setSearchQuery}
+            onSuggestionSelect={handleSuggestionSelect}
+            suggestions={generateSearchSuggestions()}
+            placeholder="Search icons..."
             className="viewer-search__input"
             autoFocus
           />
