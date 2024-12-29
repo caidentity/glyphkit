@@ -64,12 +64,12 @@ export const Icon: React.FC<IconProps> = ({
           fill={color}
         />
       ) : icon.paths ? (
-        // Multi-path format
+        // Multi-path format - always use color prop if provided
         icon.paths.map((pathData: PathAttributes, index: number) => (
           <path
             key={`icon-path-${index}`}
             d={pathData.d}
-            fill={pathData.fill || color}
+            fill={color}
             fillRule={pathData.fillRule}
             clipRule={pathData.clipRule}
           />

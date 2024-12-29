@@ -22,7 +22,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && NODE_OPTIONS=\"--loader ts-node/esm\" node --experimental-specifier-resolution=node scripts/generateIcons.ts",
+    "build": "vite build && node --loader ts-node/esm --experimental-specifier-resolution=node scripts/generateIcons.ts",
     "preview": "vite preview",
     "clean": "rimraf dist src/icons/registry.ts src/icons/index.ts src/types/icon.types.ts",
     "typecheck": "tsc --noEmit",
