@@ -1,7 +1,6 @@
-import React from 'react';
-import { Check, Grid, List, SlidersHorizontal } from 'lucide-react';
+import React, { useCallback, useEffect } from 'react';
+import { Check, Grid, List } from 'lucide-react';
 import Button from "../Button/Button";
-import Badge from "../Badge/Badge";
 import Slider from "../Slider/Slider";
 import { IconCategory, IconTag } from '@/types/icon';
 import './styling/FilterPanel.scss';
@@ -44,23 +43,30 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   gridPadding,
   setGridPadding,
 }) => {
-  const handleCategoryClick = (categoryName: string) => {
-    try {
-      setSelectedCategories(categoryName);
-    } catch (error) {
-      console.error('Error toggling category:', error);
-      // Optionally show an error message to the user
-    }
-  };
+  const handleCategoryClick = useCallback((categoryName: string) => {
+    setSelectedCategories(categoryName);
+  }, [setSelectedCategories]);
 
-  const handleTagClick = (tagName: string) => {
-    try {
-      setSelectedTags(tagName);
-    } catch (error) {
-      console.error('Error toggling tag:', error);
-      // Optionally show an error message to the user
+  const handleTagClick = useCallback((tagName: string) => {
+    setSelectedTags(tagName);
+  }, [setSelectedTags]);
+
+  // Handle initial search state
+  useEffect(() => {
+    const searchType = sessionStorage.getItem('searchType');
+    const searchValue = sessionStorage.getItem('searchValue');
+    
+    if (searchType && searchValue) {
+      if (searchType === 'category') {
+        setSelectedCategories(searchValue);
+      } else if (searchType === 'tag') {
+        setSelectedTags(searchValue);
+      }
+      // Clear search params after applying
+      sessionStorage.removeItem('searchType');
+      sessionStorage.removeItem('searchValue');
     }
-  };
+  }, [setSelectedCategories, setSelectedTags]);
 
   return (
     <div className="filter">

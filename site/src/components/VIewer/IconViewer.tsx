@@ -96,7 +96,7 @@ const IconViewer = () => {
     searchQuery: debouncedSearch,
     selectedSize,
     selectedCategories,
-    selectedTags,
+    selectedTags
   });
 
   const handleDownload = async (icon: IconMetadata) => {
@@ -177,38 +177,34 @@ const IconViewer = () => {
     if (!categoryName) return;
     
     setSelectedCategories(prev => {
-      const newCategories = prev.includes(categoryName)
-        ? prev.filter(c => c !== categoryName)
-        : [...prev, categoryName];
-
-      // Validate that all categories exist
-      const validCategories = newCategories.filter(c => 
-        categories.some(category => category.name === c)
-      );
-
-      return validCategories;
+      // If already selected, clear selection
+      if (prev.includes(categoryName)) {
+        return [];
+      }
+      // Otherwise, set only this category
+      return [categoryName];
     });
     
-    // Reset tags when changing categories
+    // Clear other filters when selecting a category
     setSelectedTags([]);
-    setSearchQuery(''); // Optional: clear search when changing categories
+    setSearchQuery('');
   };
 
   const handleTagToggle = (tagName: string) => {
     if (!tagName) return;
     
     setSelectedTags(prev => {
-      const newTags = prev.includes(tagName)
-        ? prev.filter(t => t !== tagName)
-        : [...prev, tagName];
-
-      // Validate that all tags exist
-      const validTags = newTags.filter(t => 
-        allTags.includes(t)
-      );
-
-      return validTags;
+      // If already selected, clear selection
+      if (prev.includes(tagName)) {
+        return [];
+      }
+      // Otherwise, set only this tag
+      return [tagName];
     });
+    
+    // Clear other filters when selecting a tag
+    setSelectedCategories([]);
+    setSearchQuery('');
   };
 
   const filterPanel = (

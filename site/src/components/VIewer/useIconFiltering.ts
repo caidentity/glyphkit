@@ -3,74 +3,113 @@ import { IconMetadata } from '@/types/icon';
 
 interface UseIconFilteringProps {
   allIcons: IconMetadata[];
-  searchQuery: string;
-  selectedSize: number | null;
-  selectedCategories: string[];
-  selectedTags: string[];
+  searchQuery?: string;
+  selectedSize?: number | null;
+  selectedCategories?: string[];
+  selectedTags?: string[];
 }
 
-interface UseIconFilteringResult {
-  filteredIcons: IconMetadata[];
-  hasActiveFilters: boolean;
-}
-
-export const useIconFiltering = ({
-  allIcons,
-  searchQuery,
-  selectedSize,
-  selectedCategories,
-  selectedTags,
-}: UseIconFilteringProps): UseIconFilteringResult => {
+export const useIconFiltering = ({ 
+  allIcons, 
+  searchQuery = '',
+  selectedSize = null,
+  selectedCategories = [],
+  selectedTags = []
+}: UseIconFilteringProps) => {
   const filteredIcons = useMemo(() => {
-    const filtered = allIcons.filter(icon => {
-      // Filter by size
-      if (selectedSize !== null && icon.size !== selectedSize) {
+    // Start with valid icons only
+    let filtered = allIcons.filter(icon => {
+      // Ensure icon has required properties and valid category
+      if (!icon || !icon.name || !icon.category || icon.category === 'undefined') {
+        return false;
+      }
+      
+      // Validate size (only 16px or 24px)
+      if (icon.size !== 16 && icon.size !== 24) {
         return false;
       }
 
-      // Filter by categories
-      if (selectedCategories.length > 0 && !selectedCategories.includes(icon.category)) {
+      // Filter out link_16 and link_24 if they're not explicitly searched for
+      if ((icon.name === 'link_16' || icon.name === 'link_24') && 
+          !searchQuery.toLowerCase().includes('link')) {
         return false;
-      }
-
-      // Filter by tags
-      if (selectedTags.length > 0) {
-        if (!icon.tags?.some(tag => selectedTags.includes(tag))) {
-          return false;
-        }
-      }
-
-      // Filter by search query
-      if (searchQuery) {
-        const query = searchQuery.toLowerCase();
-        return (
-          icon.name.toLowerCase().includes(query) ||
-          icon.category.toLowerCase().includes(query) ||
-          icon.tags?.some(tag => tag.toLowerCase().includes(query)) ||
-          false
-        );
       }
 
       return true;
     });
 
-    // Sort icons alphabetically by name
+    // Apply filters in order of specificity
+    if (selectedSize !== null) {
+      filtered = filtered.filter(icon => icon.size === selectedSize);
+    }
+
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(icon => {
+        // Ensure the category is valid and matches selection
+        return icon.category && 
+               icon.category !== 'undefined' && 
+               selectedCategories.includes(icon.category);
+      });
+    }
+    else if (selectedTags.length > 0) {
+      filtered = filtered.filter(icon => {
+        // Ensure tags exist and match selection
+        return icon.tags && 
+               icon.tags.length > 0 && 
+               icon.tags.some(tag => selectedTags.includes(tag));
+      });
+    }
+
+    // Apply search filter last
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      filtered = filtered.filter(icon => {
+        // Skip link icons unless explicitly searched for
+        if ((icon.name === 'link_16' || icon.name === 'link_24') && 
+            !query.includes('link')) {
+          return false;
+        }
+
+        // Check name match first (most specific)
+        if (icon.name.toLowerCase().includes(query)) {
+          return true;
+        }
+        // Then category match
+        if (icon.category.toLowerCase().includes(query)) {
+          return true;
+        }
+        // Finally tag match
+        return icon.tags?.some(tag => 
+          tag.toLowerCase().includes(query)
+        ) || false;
+      });
+    }
+
+    // Sort with consistent ordering
     return filtered.sort((a, b) => {
-      // First sort by size if they're different
-      if (a.size !== b.size) {
-        return a.size - b.size;
-      }
-      // Then sort alphabetically
+      // First by category
+      const categoryCompare = a.category.localeCompare(b.category);
+      if (categoryCompare !== 0) return categoryCompare;
+      
+      // Then by size (larger first)
+      if (a.size !== b.size) return b.size - a.size;
+      
+      // Finally by name
       return a.name.localeCompare(b.name);
     });
   }, [allIcons, searchQuery, selectedSize, selectedCategories, selectedTags]);
 
   const hasActiveFilters = Boolean(
-    searchQuery || 
+    searchQuery.trim() || 
     selectedSize !== null || 
     selectedCategories.length > 0 ||
     selectedTags.length > 0
   );
 
-  return { filteredIcons, hasActiveFilters };
+  return { 
+    filteredIcons, 
+    hasActiveFilters,
+    totalIcons: allIcons.length,
+    filteredCount: filteredIcons.length
+  };
 }; 
