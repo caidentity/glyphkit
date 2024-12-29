@@ -91,7 +91,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
           suggestions={generateSearchSuggestions()}
           placeholder="Search 1000+ icons..."
           className="search-input"
-          autoFocus
         />
       </div>
     </div>

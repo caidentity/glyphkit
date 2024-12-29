@@ -349,7 +349,6 @@ const IconViewer = () => {
             suggestions={generateSearchSuggestions()}
             placeholder="Search icons..."
             className="viewer-search__input"
-            autoFocus
           />
         </div>
       </div>
