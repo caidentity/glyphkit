@@ -15,9 +15,9 @@ interface FilterPanelProps {
   iconScale: number;
   setIconScale: (scale: number) => void;
   selectedCategories: string[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedCategories: (category: string) => void;
   selectedTags: string[];
-  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedTags: (tag: string) => void;
   categories: IconCategory[];
   tags: IconTag[];
   hasActiveFilters: boolean;
@@ -44,20 +44,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   gridPadding,
   setGridPadding,
 }) => {
-  const handleCategoryToggle = (categoryName: string) => {
-    setSelectedCategories((prev: string[]) => 
-      prev.includes(categoryName)
-        ? prev.filter((c: string) => c !== categoryName)
-        : [...prev, categoryName]
-    );
+  const handleCategoryClick = (categoryName: string) => {
+    try {
+      setSelectedCategories(categoryName);
+    } catch (error) {
+      console.error('Error toggling category:', error);
+      // Optionally show an error message to the user
+    }
   };
 
-  const handleTagToggle = (tagName: string) => {
-    setSelectedTags((prev: string[]) => 
-      prev.includes(tagName)
-        ? prev.filter((t: string) => t !== tagName)
-        : [...prev, tagName]
-    );
+  const handleTagClick = (tagName: string) => {
+    try {
+      setSelectedTags(tagName);
+    } catch (error) {
+      console.error('Error toggling tag:', error);
+      // Optionally show an error message to the user
+    }
   };
 
   return (
@@ -165,7 +167,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <div 
                   key={category.name}
                   className="filter-categories-item"
-                  onClick={() => handleCategoryToggle(category.name)}
+                  onClick={() => handleCategoryClick(category.name)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleCategoryClick(category.name);
+                    }
+                  }}
                 >
                   <div className={`
                     filter-categories-checkbox
@@ -197,7 +206,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   <div 
                     key={tag.name}
                     className="filter-categories-item"
-                    onClick={() => handleTagToggle(tag.name)}
+                    onClick={() => handleTagClick(tag.name)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handleTagClick(tag.name);
+                      }
+                    }}
                   >
                     <div className={`
                       filter-categories-checkbox

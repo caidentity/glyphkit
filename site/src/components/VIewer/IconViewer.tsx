@@ -128,6 +128,10 @@ const IconViewer = () => {
     setSelectedSize(null);
     setSelectedCategories([]);
     setSelectedTags([]);
+    setIconScale(1);
+    setIsDetailPanelOpen(false);
+    setSelectedIcon(null);
+    window.history.replaceState({}, '', window.location.pathname);
   };
 
   const prefetchSvgs = React.useCallback(async (icons: IconMetadata[]) => {
@@ -153,6 +157,44 @@ const IconViewer = () => {
     window.history.replaceState({}, '', newUrl);
   };
 
+  const handleCategoryToggle = (categoryName: string) => {
+    if (!categoryName) return;
+    
+    setSelectedCategories(prev => {
+      const newCategories = prev.includes(categoryName)
+        ? prev.filter(c => c !== categoryName)
+        : [...prev, categoryName];
+
+      // Validate that all categories exist
+      const validCategories = newCategories.filter(c => 
+        categories.some(category => category.name === c)
+      );
+
+      return validCategories;
+    });
+    
+    // Reset tags when changing categories
+    setSelectedTags([]);
+    setSearchQuery(''); // Optional: clear search when changing categories
+  };
+
+  const handleTagToggle = (tagName: string) => {
+    if (!tagName) return;
+    
+    setSelectedTags(prev => {
+      const newTags = prev.includes(tagName)
+        ? prev.filter(t => t !== tagName)
+        : [...prev, tagName];
+
+      // Validate that all tags exist
+      const validTags = newTags.filter(t => 
+        allTags.includes(t)
+      );
+
+      return validTags;
+    });
+  };
+
   const filterPanel = (
     <FilterPanel
       selectedSize={selectedSize}
@@ -162,13 +204,13 @@ const IconViewer = () => {
       iconScale={iconScale}
       setIconScale={setIconScale}
       selectedCategories={selectedCategories}
-      setSelectedCategories={setSelectedCategories}
+      setSelectedCategories={handleCategoryToggle}
       selectedTags={selectedTags}
-      setSelectedTags={setSelectedTags}
+      setSelectedTags={handleTagToggle}
       categories={categories}
       tags={allTags.map(tag => ({ 
         name: tag, 
-        count: filteredIcons.filter(icon => icon.tags?.includes(tag)).length 
+        count: allIcons.filter(icon => icon.tags?.includes(tag)).length 
       }))}
       hasActiveFilters={hasActiveFilters}
       onResetFilters={handleResetFilters}
@@ -176,6 +218,38 @@ const IconViewer = () => {
       setGridPadding={setGridPadding}
     />
   );
+
+  useEffect(() => {
+    // Cleanup function to reset state when component unmounts
+    return () => {
+      setSearchQuery('');
+      setSelectedSize(null);
+      setSelectedCategories([]);
+      setSelectedTags([]);
+      setIconScale(1);
+      setIsFilterOpen(false);
+      setIsDetailPanelOpen(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        const newUrl = `${window.location.pathname}?search=${encodeURIComponent(searchQuery)}`;
+        window.history.replaceState({}, '', newUrl);
+      } else {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (categories.length > 0 && !categories.some(c => selectedCategories.includes(c.name))) {
+      setSelectedCategories([]);
+    }
+  }, [categories]);
 
   return (
     <div className="viewer">

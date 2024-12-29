@@ -22,7 +22,7 @@ export const useIconFiltering = ({
   selectedTags,
 }: UseIconFilteringProps): UseIconFilteringResult => {
   const filteredIcons = useMemo(() => {
-    return allIcons.filter(icon => {
+    const filtered = allIcons.filter(icon => {
       // Filter by size
       if (selectedSize !== null && icon.size !== selectedSize) {
         return false;
@@ -52,6 +52,16 @@ export const useIconFiltering = ({
       }
 
       return true;
+    });
+
+    // Sort icons alphabetically by name
+    return filtered.sort((a, b) => {
+      // First sort by size if they're different
+      if (a.size !== b.size) {
+        return a.size - b.size;
+      }
+      // Then sort alphabetically
+      return a.name.localeCompare(b.name);
     });
   }, [allIcons, searchQuery, selectedSize, selectedCategories, selectedTags]);
 
