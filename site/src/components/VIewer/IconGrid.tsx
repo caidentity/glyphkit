@@ -21,7 +21,7 @@ interface IconGridProps {
   gridPadding: number;
 }
 
-const IconGrid: React.FC<IconGridProps> = ({ 
+const IconGrid: React.FC<IconGridProps> = React.memo(({ 
   icons, 
   onIconSelect,
   onIconDownload,
@@ -116,13 +116,23 @@ const IconGrid: React.FC<IconGridProps> = ({
     return 'viewer-grid--medium';
   };
 
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => setIsLoading(false), 100);
+    return () => clearTimeout(timer);
+  }, [icons]);
+
   return (
     <div className="viewer-grid-wrapper">
-      <div className={`viewer-grid ${getSizeClass()}`}>
+      <div className={`viewer-grid ${getSizeClass()} ${isLoading ? 'viewer-grid--loading' : ''}`}>
         {icons.map((icon) => renderIconCard(icon))}
       </div>
     </div>
   );
-};
+});
+
+IconGrid.displayName = 'IconGrid';
 
 export default IconGrid; 

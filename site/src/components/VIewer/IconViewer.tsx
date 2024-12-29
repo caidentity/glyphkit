@@ -80,6 +80,7 @@ const IconViewer = () => {
     searchQuery,
     selectedSize,
     selectedCategories,
+    selectedTags,
   });
 
   const handleDownload = async (icon: IconMetadata) => {
@@ -126,6 +127,7 @@ const IconViewer = () => {
     setSearchQuery('');
     setSelectedSize(null);
     setSelectedCategories([]);
+    setSelectedTags([]);
   };
 
   const prefetchSvgs = React.useCallback(async (icons: IconMetadata[]) => {
