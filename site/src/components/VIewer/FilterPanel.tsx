@@ -3,7 +3,7 @@ import { Check, Grid, List, SlidersHorizontal } from 'lucide-react';
 import Button from "../Button/Button";
 import Badge from "../Badge/Badge";
 import Slider from "../Slider/Slider";
-import { IconCategory } from '@/types/icon';
+import { IconCategory, IconTag } from '@/types/icon';
 import './styling/FilterPanel.scss';
 import ButtonGroup from "../Button/ButtonGroup";
 
@@ -16,7 +16,10 @@ interface FilterPanelProps {
   setIconScale: (scale: number) => void;
   selectedCategories: string[];
   setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedTags: string[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>;
   categories: IconCategory[];
+  tags: IconTag[];
   hasActiveFilters: boolean;
   onResetFilters: () => void;
   gridPadding: number;
@@ -32,7 +35,10 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   setIconScale,
   selectedCategories,
   setSelectedCategories,
+  selectedTags,
+  setSelectedTags,
   categories,
+  tags = [],
   hasActiveFilters,
   onResetFilters,
   gridPadding,
@@ -43,6 +49,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
       prev.includes(categoryName)
         ? prev.filter((c: string) => c !== categoryName)
         : [...prev, categoryName]
+    );
+  };
+
+  const handleTagToggle = (tagName: string) => {
+    setSelectedTags((prev: string[]) => 
+      prev.includes(tagName)
+        ? prev.filter((t: string) => t !== tagName)
+        : [...prev, tagName]
     );
   };
 
@@ -172,6 +186,41 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   </span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="filter-tags">
+            <h3 className="filter-section-title">Tags</h3>
+            <div className="filter-tags-list">
+              {tags?.length > 0 ? (
+                tags.map(tag => (
+                  <div 
+                    key={tag.name}
+                    className="filter-categories-item"
+                    onClick={() => handleTagToggle(tag.name)}
+                  >
+                    <div className={`
+                      filter-categories-checkbox
+                      ${selectedTags.includes(tag.name) 
+                        ? 'filter-categories-checkbox--checked'
+                        : 'filter-categories-checkbox--unchecked'
+                      }
+                    `}>
+                      {selectedTags.includes(tag.name) && (
+                        <Check className="h-3 w-3 text-white" />
+                      )}
+                    </div>
+                    <span className="text-sm">
+                      {tag.name}
+                      <span className="text-gray-400 ml-1">
+                        ({tag.count})
+                      </span>
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className="text-sm text-gray-400 p-2">No tags available</div>
+              )}
             </div>
           </section>
         </div>

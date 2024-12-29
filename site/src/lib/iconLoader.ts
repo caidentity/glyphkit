@@ -1,4 +1,4 @@
-import { IconMetadata, IconCategory } from '@/types/icon'
+import { IconMetadata, IconCategory, IconRegistryData, IconTag, PathAttributes } from '@/types/icon'
 import { ICONS_CONFIG } from '@/constants/icons'
 
 interface MetadataCache {
@@ -19,57 +19,88 @@ function isCacheValid(cache: MetadataCache): boolean {
   )
 }
 
-let memoizedCategories: IconCategory[] | null = null;
-
 export async function loadIconMetadata(): Promise<IconCategory[]> {
   try {
-    if (memoizedCategories) {
-      return memoizedCategories;
+    if (metadataCache.data && isCacheValid(metadataCache)) {
+      return metadataCache.data;
     }
 
-    // Load from public registry
     const response = await fetch('/registry/iconRegistry.json');
     if (!response.ok) {
-      console.error('Failed to load registry:', await response.text());
       throw new Error('Failed to load icon registry');
     }
     
-    const data = await response.json();
+    const data: IconRegistryData = await response.json();
     
     if (!data.categories) {
-      console.error('Invalid registry data:', data);
       throw new Error('Invalid registry format');
     }
 
-    memoizedCategories = Object.entries(data.categories).map(([name, data]) => ({
+    const categories = Object.entries(data.categories).map(([name, categoryData]) => ({
       name,
-      icons: (data as { icons: string[] }).icons.map((iconName: string) => {
-        const size = iconName.endsWith('24') ? 24 : 16;
+      count: categoryData.count,
+      icons: categoryData.icons.map(iconName => {
+        const iconData = data.icons[iconName];
         return {
           name: iconName,
-          category: name,
-          size,
-          path: `/api/icons/${name}/${iconName}`
+          category: iconData.category,
+          size: iconName.endsWith('24') ? 24 : 16,
+          path: `/api/icons/${iconData.category}/${iconName}`,
+          tags: iconData.tags
         };
       })
     }));
-    
-    return memoizedCategories;
+
+    metadataCache = {
+      data: categories,
+      timestamp: Date.now()
+    };
+
+    return categories;
   } catch (error) {
     console.error('Error loading icon metadata:', error);
     return [];
   }
 }
 
+export function calculateTagCounts(registry: IconRegistryData): IconTag[] {
+  const tagCounts = new Map<string, number>();
+  
+  Object.values(registry.icons).forEach(icon => {
+    if (icon.tags) {
+      icon.tags.forEach(tag => {
+        tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+      });
+    }
+  });
+  
+  return Array.from(tagCounts.entries())
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+export function getCategories(registry: IconRegistryData): IconCategory[] {
+  return Object.entries(registry.categories).map(([name, data]) => ({
+    name,
+    count: data.count,
+    icons: data.icons.map(iconName => {
+      const iconData = registry.icons[iconName];
+      return {
+        name: iconName,
+        category: iconData.category,
+        size: iconName.endsWith('24') ? 24 : 16,
+        path: `/api/icons/${iconData.category}/${iconName}`,
+        tags: iconData.tags
+      };
+    })
+  }));
+}
+
 export async function loadSvgContent(path: string): Promise<string | null> {
   try {
-    // Remove any double slashes and ensure proper path format
     const cleanPath = path.replace(/\/+/g, '/');
     const response = await fetch(cleanPath);
-    if (!response.ok) {
-      console.error(`Failed to load SVG: ${cleanPath}`);
-      return null;
-    }
+    if (!response.ok) return null;
     return await response.text();
   } catch (error) {
     console.error('Error loading SVG content:', error);
@@ -78,14 +109,7 @@ export async function loadSvgContent(path: string): Promise<string | null> {
 }
 
 export function generateIconPath(icon: IconMetadata): string {
-  const sizeSuffix = icon.size === ICONS_CONFIG.SMALL_SIZE 
-    ? ICONS_CONFIG.SMALL_SUFFIX 
-    : ''
-  return [
-    ICONS_CONFIG.BASE_DIR,
-    icon.category,
-    `${icon.name}${sizeSuffix}.svg`,
-  ].join('/')
+  return `/api/icons/${icon.category}/${icon.name}`;
 }
 
 export async function loadSvgBatch(paths: string[]): Promise<{ [key: string]: string }> {

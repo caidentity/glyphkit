@@ -213,3 +213,33 @@
     transform: translateX(0);
   }
 }
+
+.filter-categories-list,
+.filter-tags-list {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 8px;
+  
+  // Nice scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--background-muted);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--text-muted);
+    }
+  }
+}
+
+.filter-tags {
+  margin-top: 1.5rem;
+}
