@@ -15,7 +15,6 @@ interface PathAttributes {
 interface IconDefinition {
   viewBox: string;
   paths: PathAttributes[];
-  d?: string;
   category?: string;
   tags?: string[];
 }
@@ -54,18 +53,14 @@ async function generateIconRegistry() {
             tag !== '16' && tag !== '24'
           );
 
-          const paths = icon.paths.map(path => ({
-            ...path,
-            d: path.d,
-            fillRule: path.fillRule || 'nonzero',
-            clipRule: path.clipRule,
-            fill: path.fill !== '#000000' ? path.fill : undefined
-          }));
-
           icons[name] = {
             viewBox: icon.viewBox,
-            paths: paths,
-            d: paths[0]?.d,
+            paths: icon.paths.map(path => ({
+              d: path.d,
+              fillRule: path.fillRule || 'nonzero',
+              clipRule: path.clipRule,
+              fill: path.fill !== '#000000' ? path.fill : undefined
+            })),
             category,
             tags: [category, ...nameTags]
           };
@@ -91,11 +86,43 @@ export function getIcon(name: string): IconDefinition | null {
   return icons[name.toLowerCase()] || null;
 }`;
 
-  await fs.writeFile(
-    path.join(outputDir, 'registry.ts'),
-    registryContent,
-    'utf-8'
-  );
+  const typeDefinitionContent = `export interface PathAttributes {
+  d: string;
+  fillRule?: 'nonzero' | 'evenodd' | 'inherit';
+  clipRule?: 'nonzero' | 'evenodd' | 'inherit';
+  fill?: string;
+}
+
+export interface IconDefinition {
+  viewBox: string;
+  paths: PathAttributes[];
+  category?: string;
+  tags?: string[];
+}
+
+export type IconName = keyof typeof import('../icons/registry').icons;
+`;
+
+  await Promise.all([
+    fs.writeFile(
+      path.join(outputDir, 'registry.ts'),
+      registryContent,
+      'utf-8'
+    ),
+    fs.writeFile(
+      path.join(outputDir, 'index.ts'),
+      `// Auto-generated file
+export * from './registry';
+export type { IconDefinition, IconName, PathAttributes } from '../types/icon.types';
+`,
+      'utf-8'
+    ),
+    fs.writeFile(
+      path.resolve(__dirname, '../src/types/icon.types.ts'),
+      typeDefinitionContent,
+      'utf-8'
+    )
+  ]);
 
   console.log(`Generated icon registry with ${Object.keys(icons).length} icons`);
   console.log(`Found ${categories.size} categories and ${allTags.size} unique tags`);
