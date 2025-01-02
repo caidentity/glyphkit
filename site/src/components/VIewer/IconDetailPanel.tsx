@@ -33,8 +33,17 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
     };
     
     window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
-  }, [onClose]);
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [onClose, isOpen]);
 
   return (
     <>
@@ -61,16 +70,16 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
           <div className="icon-detail-panel__actions">
             <Button
               onClick={() => onCopy(icon.name)}
-              variant="default"
+              variant="secondary"
               size="sm"
             >
-              <GlyphKitIcon name="text_24" size={16} />
+              <GlyphKitIcon name="text_24" size={16} color='#fff' />
               <span>Copy Name</span>
             </Button>
 
             <Button
               onClick={() => onDownload(icon)}
-              variant="default"
+              variant="secondary"
               size="sm"
             >
               <Download className="h-4 w-4" />
@@ -79,7 +88,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
 
             <Button
               onClick={() => onCopy(icon.path)}
-              variant="default"
+              variant="secondary"
               size="sm"
             >
               <GlyphKitIcon name="arrow_chevron_left_right_24" size={16} />
@@ -114,11 +123,11 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               code={`<Icon name="${icon.name}" size={${icon.size}} />`}
               language="jsx"
             />
-            <CodeBlock
+            {/* <CodeBlock
               label="Import Path"
               code={icon.path}
               language="text"
-            /> 
+            />  */}
           </section>
 
           <section className="icon-detail-panel__metadata">

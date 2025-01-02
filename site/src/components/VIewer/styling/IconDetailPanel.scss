@@ -3,7 +3,8 @@
   top: 0;
   bottom: 0;
   right: 0;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   opacity: 0;
   padding: 0 8px;
   border-left: 1px solid var(--kit-border-default);
@@ -64,8 +65,8 @@
 
   &__actions {
     display: flex;
-    gap: var(--kit-space-3);
-    margin-bottom: var(--kit-space-8);
+    gap: 8px;
+    margin-bottom: 16px;
 
     button {
       flex: 1;
@@ -154,7 +155,7 @@
 .icon-detail-overlay {
   position: fixed;
   inset: 0;
-  background: var(--kit-overlay-background);
+  background: var(--overlay-light);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: var(--kit-z-overlay);
