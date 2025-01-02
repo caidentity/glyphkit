@@ -204,9 +204,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
           </section>
 
-          <section className="filter-tags">
+          <section className="filter-categories">
             <h3 className="filter-section-title">Tags</h3>
-            <div className="filter-tags-list">
+            <div className="filter-categories-list">
               {tags?.length > 0 ? (
                 tags.map(tag => (
                   <div 

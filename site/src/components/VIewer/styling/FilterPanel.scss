@@ -54,6 +54,7 @@
   // Section styles
   &-section {
     position: relative;
+    height: 16px;
 
     &-header {
       display: flex;
@@ -124,6 +125,7 @@
       flex: 1;
       overflow-y: auto;
       padding-right: 0.5rem;
+      font-size: 13px;
 
       &::-webkit-scrollbar {
         width: 4px;
@@ -216,7 +218,7 @@
 
 .filter-categories-list,
 .filter-tags-list {
-  max-height: 300px;
+  max-height: 260px;
   overflow-y: auto;
   padding-right: 8px;
   
@@ -270,6 +272,7 @@
 
 .filter-categories,
 .filter-tags {
+  max-height: 270px;
   &-item {
     transition: background-color 0.2s ease-in-out;
     
