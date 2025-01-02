@@ -323,7 +323,7 @@ const IconViewer = () => {
     <div className="viewer">
       <div className="viewer-header">
         <h1 className="viewer-header__title">Icons</h1>
-        <p className="viewer-header__subtitle">
+        {/* <p className="viewer-header__subtitle">
           Showing {filteredIcons.length} of {allIcons.length} icons
           {(selectedCategories.length > 0 || searchQuery) && (
             <span className="viewer-header__subtitle-highlight">
@@ -337,7 +337,7 @@ const IconViewer = () => {
               )}
             </span>
           )}
-        </p>
+        </p> */}
       </div>
 
       <div className="viewer-search">
@@ -347,7 +347,7 @@ const IconViewer = () => {
             onChange={setSearchQuery}
             onSuggestionSelect={handleSuggestionSelect}
             suggestions={generateSearchSuggestions()}
-            placeholder="Search icons..."
+            placeholder="Search 1000+ icons..."
             className="viewer-search__input"
           />
         </div>
