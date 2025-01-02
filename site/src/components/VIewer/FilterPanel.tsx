@@ -1,9 +1,8 @@
-import React from 'react';
-import { Check, Grid, List, SlidersHorizontal } from 'lucide-react';
+import React, { useCallback, useEffect } from 'react';
+import { Check, Grid, List } from 'lucide-react';
 import Button from "../Button/Button";
-import Badge from "../Badge/Badge";
 import Slider from "../Slider/Slider";
-import { IconCategory } from '@/types/icon';
+import { IconCategory, IconTag } from '@/types/icon';
 import './styling/FilterPanel.scss';
 import ButtonGroup from "../Button/ButtonGroup";
 
@@ -15,8 +14,11 @@ interface FilterPanelProps {
   iconScale: number;
   setIconScale: (scale: number) => void;
   selectedCategories: string[];
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedCategories: (category: string) => void;
+  selectedTags: string[];
+  setSelectedTags: (tag: string) => void;
   categories: IconCategory[];
+  tags: IconTag[];
   hasActiveFilters: boolean;
   onResetFilters: () => void;
   gridPadding: number;
@@ -32,19 +34,39 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   setIconScale,
   selectedCategories,
   setSelectedCategories,
+  selectedTags,
+  setSelectedTags,
   categories,
+  tags = [],
   hasActiveFilters,
   onResetFilters,
   gridPadding,
   setGridPadding,
 }) => {
-  const handleCategoryToggle = (categoryName: string) => {
-    setSelectedCategories((prev: string[]) => 
-      prev.includes(categoryName)
-        ? prev.filter((c: string) => c !== categoryName)
-        : [...prev, categoryName]
-    );
-  };
+  const handleCategoryClick = useCallback((categoryName: string) => {
+    setSelectedCategories(categoryName);
+  }, [setSelectedCategories]);
+
+  const handleTagClick = useCallback((tagName: string) => {
+    setSelectedTags(tagName);
+  }, [setSelectedTags]);
+
+  // Handle initial search state
+  useEffect(() => {
+    const searchType = sessionStorage.getItem('searchType');
+    const searchValue = sessionStorage.getItem('searchValue');
+    
+    if (searchType && searchValue) {
+      if (searchType === 'category') {
+        setSelectedCategories(searchValue);
+      } else if (searchType === 'tag') {
+        setSelectedTags(searchValue);
+      }
+      // Clear search params after applying
+      sessionStorage.removeItem('searchType');
+      sessionStorage.removeItem('searchValue');
+    }
+  }, [setSelectedCategories, setSelectedTags]);
 
   return (
     <div className="filter">
@@ -151,7 +173,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <div 
                   key={category.name}
                   className="filter-categories-item"
-                  onClick={() => handleCategoryToggle(category.name)}
+                  onClick={() => handleCategoryClick(category.name)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      handleCategoryClick(category.name);
+                    }
+                  }}
                 >
                   <div className={`
                     filter-categories-checkbox
@@ -172,6 +201,48 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   </span>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="filter-categories">
+            <h3 className="filter-section-title">Tags</h3>
+            <div className="filter-categories-list">
+              {tags?.length > 0 ? (
+                tags.map(tag => (
+                  <div 
+                    key={tag.name}
+                    className="filter-categories-item"
+                    onClick={() => handleTagClick(tag.name)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        handleTagClick(tag.name);
+                      }
+                    }}
+                  >
+                    <div className={`
+                      filter-categories-checkbox
+                      ${selectedTags.includes(tag.name) 
+                        ? 'filter-categories-checkbox--checked'
+                        : 'filter-categories-checkbox--unchecked'
+                      }
+                    `}>
+                      {selectedTags.includes(tag.name) && (
+                        <Check className="h-3 w-3 text-white" />
+                      )}
+                    </div>
+                    <span className="text-sm">
+                      {tag.name}
+                      <span className="text-gray-400 ml-1">
+                        ({tag.count})
+                      </span>
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <div className="text-sm text-gray-400 p-2">No tags available</div>
+              )}
             </div>
           </section>
         </div>

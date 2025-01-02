@@ -20,11 +20,28 @@ import { timeIcons } from '../../../packages/glyphkit/icons/flat/Icons/time';
 import { uiIcons } from '../../../packages/glyphkit/icons/flat/Icons/ui';
 import { viewIcons } from '../../../packages/glyphkit/icons/flat/Icons/view';
 
+interface PathAttributes {
+  d: string;
+  fillRule?: 'nonzero' | 'evenodd' | 'inherit';
+  clipRule?: 'nonzero' | 'evenodd' | 'inherit';
+  fill?: string;
+}
+
+interface IconDefinition {
+  viewBox: string;
+  paths: PathAttributes[];
+  category?: string;
+  tags?: string[];
+}
+
 interface IconRegistry {
   icons: {
     [key: string]: {
       category: string;
       name: string;
+      viewBox: string;
+      paths: PathAttributes[];
+      tags: string[];
     };
   };
   categories: {
@@ -69,52 +86,80 @@ async function generateIconRegistry() {
   console.log('Generating icon registry...');
 
   try {
-    // Create output directories
     await fs.mkdir(srcLibDir, { recursive: true });
     await fs.mkdir(path.join(publicDir, 'icons'), { recursive: true });
 
-    // Generate registry from all icon sets
     const registry: IconRegistry = {
       icons: {},
       categories: {},
       metadata: {
         totalIcons: 0,
-        totalCategories: Object.keys(ICON_SETS).length,
+        totalCategories: 0,
         generatedAt: new Date().toISOString()
       }
     };
 
-    // Initialize categories
-    Object.keys(ICON_SETS).forEach(category => {
-      registry.categories[category] = {
-        icons: [],
-        count: 0
-      };
-    });
+    const uniqueCategories = new Set<string>();
 
     // Process all icon sets
-    for (const [category, iconSet] of Object.entries(ICON_SETS)) {
-      for (const [iconName, iconData] of Object.entries(iconSet)) {
-        registry.icons[iconName] = {
+    for (const [fileCategory, iconSet] of Object.entries(ICON_SETS)) {
+      for (const [iconKey, iconDefinition] of Object.entries(iconSet)) {
+        const iconDef = iconDefinition as IconDefinition;
+        
+        // Get category from icon or fallback to file category
+        const category = iconDef.category || fileCategory;
+        
+        // Get tags from name
+        const nameTags = iconKey.split('_').filter(tag => 
+          tag !== '16' && tag !== '24'
+        );
+
+        // Initialize category if needed
+        if (!registry.categories[category]) {
+          registry.categories[category] = {
+            icons: [],
+            count: 0
+          };
+        }
+
+        uniqueCategories.add(category);
+
+        // Combine all tags, avoiding Set spread operator
+        const allTags = Array.from(new Set([
           category,
-          name: iconName
+          ...(iconDef.tags || []),
+          ...nameTags
+        ]));
+
+        // Add icon to registry
+        registry.icons[iconKey] = {
+          category,
+          name: iconKey,
+          viewBox: iconDef.viewBox,
+          paths: iconDef.paths.map(path => ({
+            d: path.d,
+            fillRule: path.fillRule || 'nonzero',
+            clipRule: path.clipRule,
+            fill: path.fill !== '#000000' ? path.fill : undefined
+          })),
+          tags: allTags
         };
-        registry.categories[category].icons.push(iconName);
+
+        registry.categories[category].icons.push(iconKey);
         registry.categories[category].count++;
       }
     }
 
     registry.metadata.totalIcons = Object.keys(registry.icons).length;
+    registry.metadata.totalCategories = uniqueCategories.size;
 
-    // Write registry files to both locations
+    // Write files
     await Promise.all([
-      // Source lib files
       fs.writeFile(
         path.join(srcLibDir, 'iconRegistry.json'),
         JSON.stringify(registry, null, 2),
         'utf-8'
       ),
-      // Public files for API
       fs.writeFile(
         path.join(publicDir, 'icon-metadata.json'),
         JSON.stringify(registry, null, 2),

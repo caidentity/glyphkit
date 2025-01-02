@@ -5,10 +5,10 @@ import { Icon } from '../src/components/Icon';
 const iconConfigs = [
   // Original icons
   { name: 'sun_16', color: '#000000' },
-  { name: 'arrow_line_inward_corner_16', color: 'red' },
+  { name: 'arrow_line_inward_corner_16', color: '#ccc' },
   { name: 'dot_spoke_three_24', color: '#ccc' },
   { name: 'communication_paper_plane_send_24', color: '#000000' },
-  { name: 'message_warning_filled_16', color: '#000000' },
+  { name: 'message_warning_filled_16', color: '#ccc' },
   { name: 'factory_16', color: 'red' },
   { name: 'brand_sap_24', color: 'red' },
   { name: 'minus_circle_24', color: 'red' },

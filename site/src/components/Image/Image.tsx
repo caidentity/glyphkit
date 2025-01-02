@@ -96,19 +96,29 @@ const ImageComponent = ({
     }
   }, [width, quality, state.isClient, isSvg]);
 
-  // Handle image preloading
+  // Handle image preloading - Fixed version
   useEffect(() => {
-    if (!state.isClient) return;
+    if (!state.isClient || !priority) return;
 
-    if (priority) {
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'image';
-      link.href = getOptimizedImageUrl(src);
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = getOptimizedImageUrl(src);
+
+    // Check if link already exists
+    const existingLink = document.head.querySelector(`link[href="${link.href}"]`);
+    if (!existingLink) {
       document.head.appendChild(link);
-
+      
       return () => {
-        document.head.removeChild(link);
+        try {
+          // Only try to remove if the link is still in document.head
+          if (link.parentNode === document.head) {
+            document.head.removeChild(link);
+          }
+        } catch (error) {
+          console.warn('Failed to remove preload link:', error);
+        }
       };
     }
   }, [src, priority, getOptimizedImageUrl, state.isClient]);

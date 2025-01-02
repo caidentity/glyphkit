@@ -1,14 +1,28 @@
 @use '@/styles/kit' as *;
 
 .viewer {
-  min-height: 100vh;
-  width: 100%;
-  background: var(--background-primary);
   display: flex;
   flex-direction: column;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+  height: 100vh;
+  background: var(--surface-primary);
+
+  &-content {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+
+    &__sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border-primary);
+    }
+
+    &__main {
+      flex: 1;
+      overflow: auto;
+      padding: var(--space-4);
+    }
+  }
 
   &-header {
     width: 100%;
@@ -25,7 +39,8 @@
       font-size: var(--text-2xl);
       font-weight: var(--font-bold);
       color: var(--text-primary);
-      margin-bottom: var(--space-2);
+      margin: 0 auto var(--space-1);
+      text-align: center;
     }
 
     &__subtitle {
@@ -62,35 +77,6 @@
         border-color: var(--accent-primary);
         transform: scale(1.01);
       }
-    }
-  }
-
-  &-content {
-    flex: 1;
-    display: flex;
-    width: 100%;
-    padding: var(--space-6);
-    gap: var(--space-6);
-
-    &__sidebar {
-      width: 280px;
-      flex-shrink: 0;
-      position: sticky;
-      top: var(--space-6);
-      height: calc(100vh - 200px);
-      background: var(--surface-primary);
-      border-radius: 12px;
-      border: 1px solid var(--border-primary);
-      overflow: hidden;
-    }
-
-    &__main {
-      flex: 1;
-      min-width: 0;
-      background: var(--surface-primary);
-      border-radius: 12px;
-      border: 1px solid var(--border-primary);
-      overflow: hidden;
     }
   }
 

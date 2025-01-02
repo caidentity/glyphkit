@@ -1,12 +1,31 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import { promises as fs } from 'fs';
 import { fileURLToPath } from 'url';
+import * as path from 'path';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+interface PathAttributes {
+  d: string;
+  fillRule?: 'nonzero' | 'evenodd' | 'inherit';
+  clipRule?: 'nonzero' | 'evenodd' | 'inherit';
+  fill?: string;
+}
 
 interface IconDefinition {
   viewBox: string;
-  d: string;
+  paths: PathAttributes[];
+  category?: string;
+  tags?: string[];
+}
+
+interface IconData {
+  viewBox: string;
+  paths: PathAttributes[];
+}
+
+interface IconModule {
+  [key: string]: Record<string, IconData>;
 }
 
 async function generateIconRegistry() {
@@ -14,37 +33,76 @@ async function generateIconRegistry() {
   const outputDir = path.resolve(__dirname, '../src/icons');
   
   await fs.mkdir(outputDir, { recursive: true });
-  await fs.mkdir(path.resolve(__dirname, '../src/types'), { recursive: true });
 
   const files = await fs.readdir(iconsDir);
   const icons: Record<string, IconDefinition> = {};
+  const categories = new Set<string>();
+  const allTags = new Set<string>();
 
-  // Process icon files
   for (const file of files) {
     if (file.endsWith('.js')) {
       const filePath = path.join(iconsDir, file);
       try {
-        // Use dynamic import instead of require
-        const iconModule = await import(`file://${filePath}`);
-        const categoryIcons = Object.values(iconModule)[0];
-        Object.assign(icons, categoryIcons);
+        const module = await import(`file://${filePath}`);
+        const iconModule = module as IconModule;
+        const [, categoryIcons] = Object.entries(iconModule)[0];
+        const category = path.basename(file, '.js');
+
+        Object.entries(categoryIcons).forEach(([name, icon]) => {
+          const nameTags = name.split('_').filter(tag => 
+            tag !== '16' && tag !== '24'
+          );
+
+          icons[name] = {
+            viewBox: icon.viewBox,
+            paths: icon.paths.map(path => ({
+              d: path.d,
+              fillRule: path.fillRule || 'nonzero',
+              clipRule: path.clipRule,
+              fill: path.fill !== '#000000' ? path.fill : undefined
+            })),
+            category,
+            tags: [category, ...nameTags]
+          };
+
+          categories.add(category);
+          nameTags.forEach(tag => allTags.add(tag));
+        });
       } catch (error) {
         console.error(`Failed to load icons from ${file}:`, error);
       }
     }
   }
 
-  // Generate registry.ts
   const registryContent = `// Auto-generated file
 import type { IconDefinition } from '../types/icon.types';
 
 export const icons: Record<string, IconDefinition> = ${JSON.stringify(icons, null, 2)};
 
+export const categories = ${JSON.stringify(Array.from(categories), null, 2)} as const;
+export const tags = ${JSON.stringify(Array.from(allTags), null, 2)} as const;
+
 export function getIcon(name: string): IconDefinition | null {
   return icons[name.toLowerCase()] || null;
 }`;
 
-  // Write files
+  const typeDefinitionContent = `export interface PathAttributes {
+  d: string;
+  fillRule?: 'nonzero' | 'evenodd' | 'inherit';
+  clipRule?: 'nonzero' | 'evenodd' | 'inherit';
+  fill?: string;
+}
+
+export interface IconDefinition {
+  viewBox: string;
+  paths: PathAttributes[];
+  category?: string;
+  tags?: string[];
+}
+
+export type IconName = keyof typeof import('../icons/registry').icons;
+`;
+
   await Promise.all([
     fs.writeFile(
       path.join(outputDir, 'registry.ts'),
@@ -55,24 +113,19 @@ export function getIcon(name: string): IconDefinition | null {
       path.join(outputDir, 'index.ts'),
       `// Auto-generated file
 export * from './registry';
-export type { IconDefinition, IconName } from '../types/icon.types';
+export type { IconDefinition, IconName, PathAttributes } from '../types/icon.types';
 `,
       'utf-8'
     ),
     fs.writeFile(
       path.resolve(__dirname, '../src/types/icon.types.ts'),
-      `export interface IconDefinition {
-  d: string;
-  viewBox: string;
-}
-
-export type IconName = keyof typeof import('../icons/registry').icons;
-`,
+      typeDefinitionContent,
       'utf-8'
     )
   ]);
 
   console.log(`Generated icon registry with ${Object.keys(icons).length} icons`);
+  console.log(`Found ${categories.size} categories and ${allTags.size} unique tags`);
 }
 
 generateIconRegistry().catch(console.error); 

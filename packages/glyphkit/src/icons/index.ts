@@ -1,3 +1,3 @@
 // Auto-generated file
 export * from './registry';
-export type { IconDefinition, IconName } from '../types/icon.types';
+export type { IconDefinition, IconName, PathAttributes } from '../types/icon.types';

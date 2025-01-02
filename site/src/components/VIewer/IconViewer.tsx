@@ -20,6 +20,8 @@ import { IconCategory } from '@/types/icon';
 import './styling/Viewer.scss';
 import IconDetailPanel from './IconDetailPanel';
 import Tooltip from '../Tooltip/Tooltip';
+import SearchInput, { SearchSuggestion } from '../Search/SearchInput';
+import { useDebounce } from '../../hooks/useDebounce';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -33,6 +35,8 @@ const IconViewer = () => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [gridPadding, setGridPadding] = useState<number>(16);
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [debouncedSearch, setDebouncedSearch] = useState(searchQuery);
 
   const queryClient = useQueryClient();
 
@@ -74,11 +78,25 @@ const IconViewer = () => {
     return Array.from(tags);
   }, [allIcons]);
 
+  useDebounce(() => {
+    setDebouncedSearch(searchQuery);
+  }, 150, [searchQuery]);
+
+  useEffect(() => {
+    if (debouncedSearch) {
+      const newUrl = `${window.location.pathname}?search=${encodeURIComponent(debouncedSearch)}`;
+      window.history.replaceState({}, '', newUrl);
+    } else {
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [debouncedSearch]);
+
   const { filteredIcons, hasActiveFilters } = useIconFiltering({
     allIcons,
-    searchQuery,
+    searchQuery: debouncedSearch,
     selectedSize,
     selectedCategories,
+    selectedTags
   });
 
   const handleDownload = async (icon: IconMetadata) => {
@@ -125,6 +143,11 @@ const IconViewer = () => {
     setSearchQuery('');
     setSelectedSize(null);
     setSelectedCategories([]);
+    setSelectedTags([]);
+    setIconScale(1);
+    setIsDetailPanelOpen(false);
+    setSelectedIcon(null);
+    window.history.replaceState({}, '', window.location.pathname);
   };
 
   const prefetchSvgs = React.useCallback(async (icons: IconMetadata[]) => {
@@ -150,11 +173,157 @@ const IconViewer = () => {
     window.history.replaceState({}, '', newUrl);
   };
 
+  const handleCategoryToggle = (categoryName: string) => {
+    if (!categoryName) return;
+    
+    setSelectedCategories(prev => {
+      // If already selected, clear selection
+      if (prev.includes(categoryName)) {
+        return [];
+      }
+      // Otherwise, set only this category
+      return [categoryName];
+    });
+    
+    // Clear other filters when selecting a category
+    setSelectedTags([]);
+    setSearchQuery('');
+  };
+
+  const handleTagToggle = (tagName: string) => {
+    if (!tagName) return;
+    
+    setSelectedTags(prev => {
+      // If already selected, clear selection
+      if (prev.includes(tagName)) {
+        return [];
+      }
+      // Otherwise, set only this tag
+      return [tagName];
+    });
+    
+    // Clear other filters when selecting a tag
+    setSelectedCategories([]);
+    setSearchQuery('');
+  };
+
+  const filterPanel = (
+    <FilterPanel
+      selectedSize={selectedSize}
+      setSelectedSize={setSelectedSize}
+      viewMode={viewMode}
+      setViewMode={setViewMode}
+      iconScale={iconScale}
+      setIconScale={setIconScale}
+      selectedCategories={selectedCategories}
+      setSelectedCategories={handleCategoryToggle}
+      selectedTags={selectedTags}
+      setSelectedTags={handleTagToggle}
+      categories={categories}
+      tags={allTags.map(tag => ({ 
+        name: tag, 
+        count: allIcons.filter(icon => icon.tags?.includes(tag)).length 
+      }))}
+      hasActiveFilters={hasActiveFilters}
+      onResetFilters={handleResetFilters}
+      gridPadding={gridPadding}
+      setGridPadding={setGridPadding}
+    />
+  );
+
+  useEffect(() => {
+    // Cleanup function to reset state when component unmounts
+    return () => {
+      setSearchQuery('');
+      setSelectedSize(null);
+      setSelectedCategories([]);
+      setSelectedTags([]);
+      setIconScale(1);
+      setIsFilterOpen(false);
+      setIsDetailPanelOpen(false);
+    };
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery) {
+        const newUrl = `${window.location.pathname}?search=${encodeURIComponent(searchQuery)}`;
+        window.history.replaceState({}, '', newUrl);
+      } else {
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (categories.length > 0 && !categories.some(c => selectedCategories.includes(c.name))) {
+      setSelectedCategories([]);
+    }
+  }, [categories]);
+
+  const generateSearchSuggestions = (): SearchSuggestion[] => {
+    const suggestions: SearchSuggestion[] = [];
+    
+    // Add category suggestions
+    categories.forEach(category => {
+      if (category.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+        suggestions.push({
+          type: 'category',
+          value: category.name,
+          count: category.icons.length
+        });
+      }
+    });
+
+    // Add tag suggestions
+    allTags.forEach(tag => {
+      if (tag.toLowerCase().includes(searchQuery.toLowerCase())) {
+        const count = allIcons.filter(icon => icon.tags?.includes(tag)).length;
+        suggestions.push({
+          type: 'tag',
+          value: tag,
+          count
+        });
+      }
+    });
+
+    // Add icon name suggestions
+    allIcons.forEach(icon => {
+      if (icon.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+        suggestions.push({
+          type: 'icon',
+          value: icon.name
+        });
+      }
+    });
+
+    // Limit suggestions to top 10
+    return suggestions.slice(0, 10);
+  };
+
+  const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
+    switch (suggestion.type) {
+      case 'category':
+        handleCategoryToggle(suggestion.value);
+        setSearchQuery('');
+        break;
+      case 'tag':
+        handleTagToggle(suggestion.value);
+        setSearchQuery('');
+        break;
+      case 'icon':
+        setSearchQuery(suggestion.value);
+        break;
+    }
+  };
+
   return (
     <div className="viewer">
       <div className="viewer-header">
-        <h1 className="viewer-header__title">Icons</h1>
-        <p className="viewer-header__subtitle">
+        {/* <h1 className="viewer-header__title">Icons</h1> */}
+        {/* <p className="viewer-header__subtitle">
           Showing {filteredIcons.length} of {allIcons.length} icons
           {(selectedCategories.length > 0 || searchQuery) && (
             <span className="viewer-header__subtitle-highlight">
@@ -168,18 +337,18 @@ const IconViewer = () => {
               )}
             </span>
           )}
-        </p>
+        </p> */}
       </div>
 
       <div className="viewer-search">
         <div className="viewer-search__input-wrapper">
-          <Input
-            variant="search"
-            placeholder="Search icons..."
+          <SearchInput
             value={searchQuery}
-            onChange={handleSearchInput}
+            onChange={setSearchQuery}
+            onSuggestionSelect={handleSuggestionSelect}
+            suggestions={generateSearchSuggestions()}
+            placeholder="Search 1000+ icons..."
             className="viewer-search__input"
-            autoFocus
           />
         </div>
       </div>
@@ -197,47 +366,19 @@ const IconViewer = () => {
 
       <div className="viewer-content">
         <div className="viewer-content__sidebar">
-          <FilterPanel
-            selectedSize={selectedSize}
-            setSelectedSize={setSelectedSize}
-            viewMode={viewMode}
-            setViewMode={setViewMode}
-            iconScale={iconScale}
-            setIconScale={setIconScale}
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-            categories={categories}
-            hasActiveFilters={hasActiveFilters}
-            onResetFilters={handleResetFilters}
-            gridPadding={gridPadding}
-            setGridPadding={setGridPadding}
-          />
+          {filterPanel}
         </div>
 
         <div className="viewer-content__main">
-          {isLoading ? (
-            <div className="viewer-loading">
-              <div className="viewer-loading__spinner" />
-            </div>
-          ) : error ? (
-            <Alert variant="destructive">
-              <AlertDescription>Failed to load icons</AlertDescription>
-            </Alert>
-          ) : filteredIcons.length === 0 ? (
-            <div className="text-center py-12 text-gray-500">
-              No icons found matching your criteria
-            </div>
-          ) : (
-            <IconGrid 
-              icons={filteredIcons} 
-              onIconSelect={handleIconSelect}
-              onIconDownload={handleDownload}
-              onIconCopy={handleCopy}
-              viewMode={viewMode}
-              iconScale={iconScale}
-              gridPadding={gridPadding}
-            />
-          )}
+          <IconGrid 
+            icons={filteredIcons}
+            onIconSelect={handleIconSelect}
+            onIconDownload={handleDownload}
+            onIconCopy={handleCopy}
+            viewMode={viewMode}
+            iconScale={iconScale}
+            gridPadding={gridPadding}
+          />
         </div>
       </div>
 
@@ -255,21 +396,7 @@ const IconViewer = () => {
                 <X className="h-4 w-4" />
               </Button>
             </div>
-            <FilterPanel
-              selectedSize={selectedSize}
-              setSelectedSize={setSelectedSize}
-              viewMode={viewMode}
-              setViewMode={setViewMode}
-              iconScale={iconScale}
-              setIconScale={setIconScale}
-              selectedCategories={selectedCategories}
-              setSelectedCategories={setSelectedCategories}
-              categories={categories}
-              hasActiveFilters={hasActiveFilters}
-              onResetFilters={handleResetFilters}
-              gridPadding={gridPadding}
-              setGridPadding={setGridPadding}
-            />
+            {filterPanel}
           </div>
         </div>
       )}

@@ -54,6 +54,7 @@
   // Section styles
   &-section {
     position: relative;
+    height: 16px;
 
     &-header {
       display: flex;
@@ -124,6 +125,7 @@
       flex: 1;
       overflow-y: auto;
       padding-right: 0.5rem;
+      font-size: 13px;
 
       &::-webkit-scrollbar {
         width: 4px;
@@ -211,5 +213,79 @@
   }
   to {
     transform: translateX(0);
+  }
+}
+
+.filter-categories-list,
+.filter-tags-list {
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 8px;
+  
+  // Nice scrollbar styling
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: var(--background-muted);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+    
+    &:hover {
+      background: var(--text-muted);
+    }
+  }
+}
+
+.filter-tags {
+  margin-top: 1.5rem;
+}
+
+.viewer-grid {
+  transition: opacity 0.2s ease-in-out;
+
+  &--loading {
+    opacity: 0.5;
+  }
+
+  &__item {
+    opacity: 0;
+    animation: fadeIn 0.3s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-categories,
+.filter-tags {
+  max-height: 270px;
+  &-item {
+    transition: background-color 0.2s ease-in-out;
+    
+    &:hover {
+      background: var(--surface-hover);
+    }
+  }
+
+  &-checkbox {
+    transition: all 0.2s ease-in-out;
+    
+    &--checked {
+      transform: scale(1.05);
+    }
   }
 }
