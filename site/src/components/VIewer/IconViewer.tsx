@@ -22,13 +22,14 @@ import IconDetailPanel from './IconDetailPanel';
 import Tooltip from '../Tooltip/Tooltip';
 import SearchInput, { SearchSuggestion } from '../Search/SearchInput';
 import { useDebounce } from '../../hooks/useDebounce';
+import Toast, { ToastType } from '../Toast/Toast';
+import { AnimatePresence } from 'framer-motion';
 
 const IconViewer = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState<number | null>(24);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
-  const [copyAlert, setCopyAlert] = useState<string | null>(null);
   const [showLargePreview, setShowLargePreview] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [iconScale, setIconScale] = useState(1);
@@ -37,6 +38,7 @@ const IconViewer = () => {
   const [isDetailPanelOpen, setIsDetailPanelOpen] = useState(false);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState(searchQuery);
+  const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
 
   const queryClient = useQueryClient();
 
@@ -121,12 +123,10 @@ const IconViewer = () => {
   const handleCopy = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      setCopyAlert(`Copied "${text}" to clipboard`);
-      setTimeout(() => setCopyAlert(null), 2000);
+      setToast({ message: `Copied "${text}" to clipboard`, type: 'success' });
     } catch (error) {
       console.error('Failed to copy:', error);
-      setCopyAlert('Failed to copy to clipboard');
-      setTimeout(() => setCopyAlert(null), 2000);
+      setToast({ message: 'Failed to copy to clipboard', type: 'error' });
     }
   };
 
@@ -412,15 +412,16 @@ const IconViewer = () => {
         />
       )}
 
-      {/* Copy Alert */}
-      {copyAlert && (
-        <div className="viewer-alert">
-          <Alert variant="success">
-            <Check className="h-4 w-4 mr-2" />
-            <AlertDescription>{copyAlert}</AlertDescription>
-          </Alert>
-        </div>
-      )}
+      <AnimatePresence>
+        {toast && (
+          <Toast
+            message={toast.message}
+            type={toast.type}
+            onClose={() => setToast(null)}
+            duration={2000}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
