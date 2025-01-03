@@ -93,7 +93,11 @@ const IconViewer = () => {
     }
   }, [debouncedSearch]);
 
-  const { filteredIcons, hasActiveFilters } = useIconFiltering({
+  const { 
+    filteredIcons, 
+    hasActiveFilters, 
+    totalResults 
+  } = useIconFiltering({
     allIcons,
     searchQuery: debouncedSearch,
     selectedSize,
@@ -185,17 +189,13 @@ const IconViewer = () => {
     if (!categoryName) return;
     
     setSelectedCategories(prev => {
-      // If already selected, clear selection
+      // If category is already selected, remove it
       if (prev.includes(categoryName)) {
-        return [];
+        return prev.filter(cat => cat !== categoryName);
       }
-      // Otherwise, set only this category
-      return [categoryName];
+      // Add the category to existing selection
+      return [...prev, categoryName];
     });
-    
-    // Clear other filters when selecting a category
-    setSelectedTags([]);
-    setSearchQuery('');
   };
 
   const handleTagToggle = (tagName: string) => {
@@ -326,6 +326,15 @@ const IconViewer = () => {
         break;
     }
   };
+
+  // Add error handling for empty states
+  if (!categories.length) {
+    return (
+      <div className="p-4">
+          No icon categories available. Please try refreshing the page.
+      </div>
+    );
+  }
 
   return (
     <div className="viewer">

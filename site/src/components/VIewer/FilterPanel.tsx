@@ -176,11 +176,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   onClick={() => handleCategoryClick(category.name)}
                   role="button"
                   tabIndex={0}
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                      handleCategoryClick(category.name);
-                    }
-                  }}
                 >
                   <div className={`
                     filter-categories-checkbox
