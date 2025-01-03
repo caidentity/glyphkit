@@ -120,10 +120,18 @@ const IconViewer = () => {
     }
   };
 
-  const handleCopy = async (text: string) => {
+  const handleCopy = async (text: string, type: 'name' | 'code' = 'name') => {
     try {
-      await navigator.clipboard.writeText(text);
-      setToast({ message: `Copied "${text}" to clipboard`, type: 'success' });
+      let copyText = text;
+      if (type === 'code') {
+        copyText = `import { Icon } from '@glyphkit/glyphkit';\n\n<Icon name="${text}" size={24} />`;
+      }
+      
+      await navigator.clipboard.writeText(copyText);
+      setToast({ 
+        message: `Copied ${type === 'code' ? 'code snippet' : `"${text}"`} to clipboard`, 
+        type: 'success' 
+      });
     } catch (error) {
       console.error('Failed to copy:', error);
       setToast({ message: 'Failed to copy to clipboard', type: 'error' });

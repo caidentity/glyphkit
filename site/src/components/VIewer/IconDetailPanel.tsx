@@ -15,7 +15,7 @@ interface IconDetailPanelProps {
   isOpen: boolean;
   onClose: () => void;
   onDownload: (icon: IconMetadata) => void;
-  onCopy: (text: string) => void;
+  onCopy: (text: string, type?: 'name' | 'code') => void;
 }
 
 const IconDetailPanel: React.FC<IconDetailPanelProps> = ({

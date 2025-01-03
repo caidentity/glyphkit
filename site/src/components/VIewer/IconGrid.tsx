@@ -15,10 +15,10 @@ interface IconGridProps {
   icons: IconMetadata[];
   onIconSelect?: (icon: IconMetadata) => void;
   onIconDownload?: (icon: IconMetadata) => void;
-  onIconCopy?: (text: string) => void;
-  viewMode: 'grid' | 'list';
-  iconScale: number;
-  gridPadding: number;
+  onIconCopy?: (text: string, type?: 'name' | 'code') => void;
+  viewMode?: 'grid' | 'list';
+  iconScale?: number;
+  gridPadding?: number;
 }
 
 const IconGrid: React.FC<IconGridProps> = React.memo(({ 
@@ -26,9 +26,9 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
   onIconSelect,
   onIconDownload,
   onIconCopy,
-  viewMode,
-  iconScale,
-  gridPadding
+  viewMode = 'grid',
+  iconScale = 1,
+  gridPadding = 6
 }) => {
   const parentRef = React.useRef<HTMLDivElement>(null);
   const { width } = useViewportSize();
@@ -37,13 +37,13 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
     if (viewMode === 'list') return 1;
     if (width < 640) return 2;
     if (width < 1024) return 4;
-    return Math.min(gridPadding, 5);
+    return Math.min(gridPadding || 6, 5);
   }, [viewMode, gridPadding, width]);
 
   const calculateIconSize = React.useCallback((baseSize: number) => {
     const columns = getResponsiveColumns();
     const scaleFactor = Math.max(0.8, 1 - (columns - 4) * 0.1);
-    return baseSize * iconScale * (viewMode === 'list' ? 1 : scaleFactor * 2);
+    return baseSize * (iconScale || 1) * (viewMode === 'list' ? 1 : scaleFactor * 2);
   }, [getResponsiveColumns, iconScale, viewMode]);
 
   const renderIconCard = React.useCallback((icon: IconMetadata) => (
@@ -71,7 +71,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
             size="xs"
             onClick={(e) => {
               e.stopPropagation();
-              onIconCopy?.(icon.name);
+              onIconCopy?.(icon.name, 'name');
             }}
             className="icon-action-button"
           >
@@ -79,13 +79,13 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
           </Button>
         </Tooltip>
 
-        <Tooltip content="Copy path">
+        <Tooltip content="Copy code">
           <Button
             variant="outline"
             size="xs"
             onClick={(e) => {
               e.stopPropagation();
-              onIconCopy?.(icon.path);
+              onIconCopy?.(icon.name, 'code');
             }}
             className="icon-action-button"
           >
