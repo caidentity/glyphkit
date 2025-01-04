@@ -1,7 +1,7 @@
 import React from 'react';
 import './terms.scss';
 import Footer from '@/components/Footer/Footer';
-import '@/styles/pages/legalpages.scss';
+import '@/styles/pages/infopages.scss';
 import FloatingTOC from '@/components/FloatingTOC/FloatingTOC';
 
 const tocItems = [

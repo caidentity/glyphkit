@@ -1,6 +1,6 @@
 .page-masthead {
     height: 40vh;
-    background-color: #ccc;
+    background-color: var(--surface-secondary);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -8,7 +8,6 @@
   
     h1 {
       font-size: 3rem;
-      color: #333;
       text-align: center;
     }
   }

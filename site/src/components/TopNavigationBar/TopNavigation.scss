@@ -173,6 +173,11 @@
       padding: var(--space-1);
       transition: all 0.2s;
 
+      svg {
+        height: 24px;
+        width: 24px;
+      }
+
       &:hover {
         color: var(--accent-primary);
         background: transparent;

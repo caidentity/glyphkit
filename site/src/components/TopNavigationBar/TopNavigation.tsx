@@ -12,8 +12,7 @@ import Button from '@/components/Button/Button';
 
 const navigation = [
   { name: 'Icons', href: '/icons' },
-  { name: 'About', href: '/about' },
-  { name: 'NPM', href: 'https://www.npmjs.com/package/@glyphkit/glyphkit' },
+  { name: 'Docs', href: '/docs' },
 ];
 
 export default function TopNavigation() {
@@ -101,10 +100,22 @@ export default function TopNavigation() {
 
           {/* Actions */}
           <div className="top-navigation__actions">
+            <Button
+              variant="tertiary"
+              size="md"
+              onClick={() => window.open('https://www.npmjs.com/package/@glyphkit/glyphkit', '_blank', 'noopener noreferrer')}
+              aria-label="Visit NPM package"
+            >
+              <Icon 
+                name="brand_npm_24"
+                size={24} 
+              />
+            </Button>
+
             {/* Theme Toggle */}
             <Button
               variant="tertiary"
-              size="sm"
+              size="md"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
