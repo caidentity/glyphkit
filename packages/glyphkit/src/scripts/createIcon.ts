@@ -40,7 +40,7 @@ const PACKAGE_ROOT = path.resolve(__dirname, '..', '..');
 const SOURCE_CONFIG = {
   "location": {
     sourcePath: path.join(PACKAGE_ROOT, 'icons/flat/Icons/newicons'),
-    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/location.js')
+    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/brand.js')
   }
 };
 
@@ -82,8 +82,10 @@ interface PathAttributes {
 
 interface IconData {
   viewBox: string;
-  d?: string;          // Keep for backward compatibility
-  paths?: PathAttributes[]; // Optional paths array for multi-path icons
+  d?: string;
+  paths?: PathAttributes[];
+  category?: string;
+  tags?: string[];
 }
 
 interface IconSet {
@@ -171,12 +173,32 @@ function generateIconName(filePath: string): string {
   return normalizedName.replace(/_?\d+$/, '') + '_' + size;
 }
 
+function generateMetadata(filePath: string, targetFile: string): { category: string; tags: string[] } {
+  // Extract category from target file name (e.g., 'brand.js' -> 'brand')
+  const category = path.basename(targetFile, '.js');
+  
+  // Generate tags from file name
+  const fileName = path.basename(filePath, '.svg');
+  const baseNameWithoutSize = fileName.replace(/[_]?\d+(?:px)?$/, '');
+  const tags = [
+    category,
+    ...baseNameWithoutSize.split('_').filter(tag => tag.length > 0)
+  ];
+  
+  return { category, tags };
+}
+
 async function processIcon(svgPath: string, targetJsFile: string): Promise<void> {
   try {
     console.log(`Processing: ${svgPath}`);
     const svgContent = fs.readFileSync(svgPath, 'utf8');
     const iconData = extractSVGData(svgContent);
     const newIconName = generateIconName(svgPath);
+
+    // Add metadata
+    const metadata = generateMetadata(svgPath, targetJsFile);
+    iconData.category = metadata.category;
+    iconData.tags = metadata.tags;
 
     if (!iconData.d && (!iconData.paths || iconData.paths.length === 0)) {
       console.error(`No valid paths found in ${path.basename(svgPath)}`);
@@ -223,11 +245,15 @@ async function processIcon(svgPath: string, targetJsFile: string): Promise<void>
 ${Object.entries(existingIcons)
   .sort(([a], [b]) => a.localeCompare(b))
   .map(([key, value]) => {
+    const metadataStr = `    category: "${value.category}",
+    tags: ${JSON.stringify(value.tags)}`;
+
     if (value.d) {
       // Simple path format
       return `  ${key}: {
     viewBox: "${value.viewBox}",
-    d: "${value.d}"
+    d: "${value.d}",
+${metadataStr}
   }`;
     } else {
       // Multi-path format
@@ -246,7 +272,8 @@ ${Object.entries(existingIcons)
     viewBox: "${value.viewBox}",
     paths: [
 ${pathsStr}
-    ]
+    ],
+${metadataStr}
   }`;
     }
   })
