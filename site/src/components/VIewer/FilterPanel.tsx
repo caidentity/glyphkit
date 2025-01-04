@@ -149,7 +149,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
           </section>
 
-          <section className="filter-section">
+          {/* <section className="filter-section">
             <div className="filter-section-header">
               <h3 className="filter-section-title">Icons per Row</h3>
               <div className="filter-section-scale">
@@ -164,7 +164,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 />
               </div>
             </div>
-          </section>
+          </section> */}
 
           <section className="filter-categories">
             <h3 className="filter-section-title">Categories</h3>
