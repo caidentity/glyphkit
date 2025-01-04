@@ -75,7 +75,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
 
   // Virtual list configuration with extra padding
   const rowVirtualizer = useVirtualizer({
-    count: Math.ceil(icons.length / gridDimensions.columns),
+    count: viewMode === 'list' ? icons.length : Math.ceil(icons.length / gridDimensions.columns),
     getScrollElement: () => parentRef.current,
     estimateSize: useCallback(() => {
       // Add extra padding to prevent overlap
@@ -105,64 +105,123 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
           role="button"
           tabIndex={0}
         >
-          <div className="viewer-grid__item-content">
-            <Icon
-              icon={icon}
-              customSize={calculateIconSize(icon.size)}
-              className={viewMode === 'list' ? 'viewer-list__item-icon' : 'viewer-grid__item-icon'}
-              showLabel={false}
-            />
-            <span 
-              className={viewMode === 'list' ? 'viewer-list__item-name' : 'viewer-grid__item-name'}
-              text-sm
-            >
-              {icon.name}
-            </span>
-          </div>
+          {viewMode === 'list' ? (
+            <>
+              <div className="viewer-list__item-content">
+                <Icon
+                  icon={icon}
+                  customSize={calculateIconSize(icon.size)}
+                  className="viewer-list__item-icon"
+                  showLabel={false}
+                />
+                <span className="viewer-list__item-name">
+                  {icon.name}
+                </span>
+              </div>
 
-          <div className={viewMode === 'list' ? 'viewer-list__item-actions' : 'viewer-grid__item-actions'}>
-            <Tooltip content="Copy name">
-              <Button
-                variant="outline"
-                size="xs"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onIconCopy?.(icon.name, 'name');
-                }}
-                className="icon-action-button"
-              >
-                <GlyphKitIcon name="text_24" size={16} />
-              </Button>
-            </Tooltip>
+              <div className="viewer-list__item-actions">
+                <Tooltip content="Copy name">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconCopy?.(icon.name, 'name');
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="text_24" size={16} />
+                  </Button>
+                </Tooltip>
 
-            <Tooltip content="Copy code">
-              <Button
-                variant="outline"
-                size="xs"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onIconCopy?.(icon.name, 'code');
-                }}
-                className="icon-action-button"
-              >
-              <GlyphKitIcon name="arrow_chevron_left_right_24" size={16} />
-            </Button>
-            </Tooltip>
+                <Tooltip content="Copy code">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconCopy?.(icon.name, 'code');
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="arrow_chevron_left_right_24" size={16} />
+                  </Button>
+                </Tooltip>
 
-            <Tooltip content="Download SVG">
-              <Button
-                variant="outline"
-                size="xs"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onIconDownload?.(icon);
-                }}
-                className="icon-action-button"
-              >
-                <GlyphKitIcon name="arrow_line_wall_down_24" size={16} />
-              </Button>
-            </Tooltip>
-          </div>
+                <Tooltip content="Download SVG">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconDownload?.(icon);
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="arrow_line_wall_down_24" size={16} />
+                  </Button>
+                </Tooltip>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="viewer-grid__item-content">
+                <Icon
+                  icon={icon}
+                  customSize={calculateIconSize(icon.size)}
+                  className="viewer-grid__item-icon"
+                  showLabel={false}
+                />
+                <span className="viewer-grid__item-name">
+                  {icon.name}
+                </span>
+              </div>
+
+              <div className="viewer-grid__item-actions">
+                <Tooltip content="Copy name">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconCopy?.(icon.name, 'name');
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="text_24" size={16} />
+                  </Button>
+                </Tooltip>
+
+                <Tooltip content="Copy code">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconCopy?.(icon.name, 'code');
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="arrow_chevron_left_right_24" size={16} />
+                  </Button>
+                </Tooltip>
+
+                <Tooltip content="Download SVG">
+                  <Button
+                    variant="outline"
+                    size="xs"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onIconDownload?.(icon);
+                    }}
+                    className="icon-action-button"
+                  >
+                    <GlyphKitIcon name="arrow_line_wall_down_24" size={16} />
+                  </Button>
+                </Tooltip>
+              </div>
+            </>
+          )}
         </div>
       );
     } catch (error) {
@@ -174,7 +233,10 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
   // Render grid rows
   const renderRow = useCallback((virtualRow: any) => {
     const startIndex = virtualRow.index * gridDimensions.columns;
-    const rowIcons = icons.slice(startIndex, startIndex + gridDimensions.columns);
+    // In list view, show one icon per row. In grid view, show multiple icons
+    const rowIcons = viewMode === 'list' 
+      ? icons.slice(startIndex, startIndex + 1)
+      : icons.slice(startIndex, startIndex + gridDimensions.columns);
 
     return (
       <div
@@ -188,10 +250,10 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
           height: virtualRow.size,
           transform: `translateY(${virtualRow.start}px)`,
           display: 'flex',
-          gap: gridPadding,
-          padding: gridPadding,
+          gap: 0,
+          padding: 0,
           boxSizing: 'border-box',
-          marginBottom: gridPadding, // Extra space between rows
+          marginBottom: 0,
         }}
       >
         {rowIcons.map((icon) => (

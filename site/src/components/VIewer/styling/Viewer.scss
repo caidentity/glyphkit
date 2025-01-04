@@ -39,8 +39,7 @@
       font-size: var(--text-2xl);
       font-weight: var(--font-bold);
       color: var(--text-primary);
-      margin: 0 auto var(--space-1);
-      text-align: center;
+      margin: 0 auto var(--space-2);
     }
 
     &__subtitle {
@@ -84,9 +83,9 @@
   &-grid {
     display: grid;
     width: 100%;
-    gap: 1px;
-    background: var(--border-primary);
-    padding: 1px;
+    gap: 0;
+    background: var(--surface-primary);
+    padding: 0;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 
     &__item {
@@ -96,12 +95,13 @@
       display: flex;
       flex-direction: column;
       cursor: pointer;
-      border: 2px solid transparent;
+      border: 1px solid var(--border-primary);
       transition: border-color 0.2s ease;
       padding: var(--space-2);
 
       &:hover {
         border-color: var(--accent-primary);
+        z-index: 1;
 
         .viewer-grid__item-actions {
           transform: translateY(0);
@@ -190,7 +190,7 @@
     width: 100%;
     background: var(--surface-primary);
     overflow: hidden;
-    padding: var(--space-4);
+    padding: 0;
 
     @include mobile {
       padding: 0;
@@ -254,11 +254,13 @@
     &__item {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       padding: var(--space-3);
       border-radius: 8px;
       border: 1px solid var(--border-primary);
       background: var(--surface-primary);
       transition: all 0.2s;
+      width: 100%;
 
       &:hover {
         border-color: var(--accent-primary);
@@ -266,21 +268,32 @@
       }
     }
 
+    &__item-content {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
     &__item-icon {
       color: var(--text-primary);
       margin-right: var(--space-4);
+      flex-shrink: 0;
     }
 
     &__item-name {
       flex: 1;
       font-size: var(--text-sm);
       color: var(--text-secondary);
+      margin-right: var(--space-4);
     }
 
     &__item-actions {
       display: flex;
       gap: var(--space-2);
       margin-left: auto;
+      opacity: 0;
+      visibility: visible;
+      transition: all 0.2s ease;
     }
   }
 
