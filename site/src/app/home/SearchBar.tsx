@@ -2,11 +2,9 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
 import SearchInput, { SearchSuggestion } from '@/components/Search/SearchInput';
 import { useSearch } from '@/contexts/SearchContext';
 import { useSearchSuggestions } from '@/hooks/useSearchSuggestions';
-import { loadIconMetadata } from '@/lib/iconLoader';
 import './styling/Search.scss';
 
 interface SearchBarProps {
@@ -18,13 +16,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
   const { query, setQuery, selectedSuggestion, setSelectedSuggestion } = useSearch();
-  const { data: categories = [] } = useQuery({
-    queryKey: ['iconMetadata'],
-    queryFn: loadIconMetadata,
-    staleTime: Infinity,
-  });
-  const allIcons = categories.flatMap(category => category.icons);
-  const suggestions = useSearchSuggestions(query, categories, allIcons);
+  const suggestions = useSearchSuggestions(query);
 
   const handleSearch = (searchQuery: string) => {
     setIsTransitioning(true);
@@ -59,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
           suggestions={suggestions}
           placeholder="Search 1000+ icons..."
           className="search-input"
-          size='large'
+          size="large"
         />
       </div>
     </div>

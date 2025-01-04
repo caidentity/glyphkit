@@ -4,6 +4,7 @@ import React from 'react';
 import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import './Input.scss';
+import { Icon } from '@glyphkit/glyphkit';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   className?: string;
@@ -16,7 +17,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={cn('input-wrapper', `input-wrapper--${variant}`, className)}>
         {variant === 'search' && (
-          <Search className="input-icon" />
+          <Icon name="magnifying_glass_16" size={16} className="input-icon" />
         )}
         <input
           type="text"

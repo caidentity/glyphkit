@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Search } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import Input from "../Input/Input";
 import { useSearch } from '@/contexts/SearchContext';
