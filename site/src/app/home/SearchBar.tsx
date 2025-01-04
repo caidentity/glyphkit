@@ -1,11 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import SearchInput, { SearchSuggestion } from '@/components/Search/SearchInput';
 import { useSearch } from '@/contexts/SearchContext';
 import { useSearchSuggestions } from '@/hooks/useSearchSuggestions';
 import './styling/Search.scss';
+import { useQuery } from '@tanstack/react-query';
+import { loadIconMetadata } from '@/lib/iconLoader';
 
 interface SearchBarProps {
   isVisible: boolean;
@@ -16,7 +18,21 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
   const { query, setQuery, selectedSuggestion, setSelectedSuggestion } = useSearch();
-  const suggestions = useSearchSuggestions(query);
+  
+  // Load initial data for suggestions
+  const { data: categories = [] } = useQuery({
+    queryKey: ['iconMetadata'],
+    queryFn: loadIconMetadata,
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
+
+  const allIcons = useMemo(() => {
+    return categories.flatMap(category => category.icons);
+  }, [categories]);
+
+  // Get suggestions using the same hook as IconViewer
+  const suggestions = useSearchSuggestions(query, categories, allIcons);
 
   const handleSearch = (searchQuery: string) => {
     setIsTransitioning(true);
@@ -52,6 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
           placeholder="Search 1000+ icons..."
           className="search-input"
           size="large"
+          autoFocus
         />
       </div>
     </div>
