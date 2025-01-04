@@ -22,23 +22,22 @@ export default function AboutPage() {
           
           <div className="description">
             <p>
-              Glyphkit is a comprehensive icon toolkit designed to provide developers 
-              and designers with a versatile collection of high-quality icons for modern 
-              web applications.
+              GlyphKit is a comprehensive icon toolkit designed to bring quality to any application. 
             </p>
 
-            <h2>Our Mission</h2>
+            <h2>Design Philosphy</h2>
             <p>
-              We aim to simplify the process of implementing consistent, scalable, 
-              and accessible icons across digital projects. Our library offers a carefully 
-              curated selection of icons in multiple sizes and styles, ensuring flexibility 
-              and consistency in your designs.
+              Eaach icon is carefully designed to uphold a high level of accessibility, readability and conformance to any design language.
             </p>
+            <p>
+              Styling is kept a  minimum in order to bring conformance to any existing design language. This library will continue to evolve over time and support more mechinims to control styling in order to ensure a even closer fit to your existing design language. 
+            </p>
+
 
             <h2>Features</h2>
             <ul>
-              <li>Comprehensive icon collection</li>
-              <li>Multiple size variants (16px, 24px)</li>
+              <li>Comprehensive icon collection containing over 1000+ icons</li>
+              <li>Multiple sizes avaliable (16px, 24px)</li>
               <li>Consistent design language</li>
               <li>Easy integration</li>
               <li>Regular updates and additions</li>
