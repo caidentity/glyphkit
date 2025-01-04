@@ -21,6 +21,49 @@ GlyphKit is a comprehensive icon toolkit designed to bring quality to any applic
 
 
 
+
+## Generating Icons
+Follow these steps to create and integrate icons into the project:
+
+### 1. Generate Icons
+Navigate to the packages/glyphkit folder.
+Add the SVG source files for the icons in the appropriate directory.
+Run the following command to generate icons and push the data to the appropriate JavaScript files for handling paths and metadata:
+bash
+Copy code
+npm run createicon  
+afterwards make sure to run npm run bild to make sure bundled correctly and added to registary.
+
+### 2. Verify Setup
+After generating the icons, verify that the setup is correct.
+Adjust tags or categories as needed to ensure proper organization and metadata accuracy.
+
+### 3. Update the Demo Application
+Edit the app.tsx file located in the packages/glyphkit/demo folder to reflect the newly added icons.
+To verify the setup, run the development server:
+bash
+Copy code
+npm run dev  
+
+### 4. Build the Package
+Once the icons are verified and the paths are set up properly, build the package:
+bash
+Copy code
+npm run build  
+
+### 5. Sync with the Site
+Navigate to the site folder and run the following command to fetch the source registry and update the site:
+bash
+Copy code
+npm run build  
+Note: Ensure that the package is built (npm run build in packages/glyphkit) before this step.
+
+### 6. Deploy to NPM
+To see the updates on the site, deploy the latest package to NPM so the site can fetch and render the changes.
+
+
+
+
 ## Setup
 
 1. Generate icon metadata:

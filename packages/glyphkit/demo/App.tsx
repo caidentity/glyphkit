@@ -12,7 +12,7 @@ const iconConfigs = [
   { name: 'factory_16', color: 'red' },
   { name: 'brand_sap_24', color: 'red' },
   { name: 'minus_circle_24', color: 'red' },
-  { name: 'minus_circle_24', color: 'red' },
+  { name: 'brand_atlassian_16', color: 'red' },
   { name: 'date_progress_37_24', color: 'red' },
   { name: 'plus_circle_24', color: '#ccc' },
   { name: 'data_chart_pie_quarter_24', color: 'red' },

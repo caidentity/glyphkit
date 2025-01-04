@@ -2034,9 +2034,9 @@
         "filled"
       ]
     },
-    "brand_16": {
+    "brand_atlassian_16": {
       "category": "brand",
-      "name": "brand_16",
+      "name": "brand_atlassian_16",
       "viewBox": "0 0 16 16",
       "paths": [
         {
@@ -2046,12 +2046,13 @@
         }
       ],
       "tags": [
-        "brand"
+        "brand",
+        "atlassian"
       ]
     },
-    "brand_24": {
+    "brand_atlassian_24": {
       "category": "brand",
-      "name": "brand_24",
+      "name": "brand_atlassian_24",
       "viewBox": "0 0 24 24",
       "paths": [
         {
@@ -2061,7 +2062,8 @@
         }
       ],
       "tags": [
-        "brand"
+        "brand",
+        "atlassian"
       ]
     },
     "brand_afterpay_16": {
@@ -10252,6 +10254,95 @@
       "tags": [
         "location",
         "map"
+      ]
+    },
+    "warehouse_16": {
+      "category": "location",
+      "name": "warehouse_16",
+      "viewBox": "0 0 17 17",
+      "paths": [
+        {
+          "d": "M 15.9799 5.79275 L 8.79742 1.82684 L 1.61499 5.79275 V 16.2062 H 15.9799 V 5.79275 Z  M 13.0663 14.7062 H 14.4799 V 6.67797 L 8.79742 3.54032 L 3.11499 6.67797 V 14.7062 H 4.28625 V 6.61304 H 13.0663 V 14.7062 Z  M 5.78625 14.7062 H 11.5663 V 13.5026 H 5.78625 V 14.7062 Z  M 5.78625 12.0026 H 11.5663 V 10.8242 H 5.78625 V 12.0026 Z  M 5.78625 9.32425 V 8.11304 H 11.5663 V 9.32425 H 5.78625 Z",
+          "fillRule": "evenodd",
+          "clipRule": "evenodd",
+          "fill": "black"
+        }
+      ],
+      "tags": [
+        "location",
+        "warehouse"
+      ]
+    },
+    "warehouse_24": {
+      "category": "location",
+      "name": "warehouse_24",
+      "viewBox": "0 0 25 25",
+      "paths": [
+        {
+          "d": "M 12.7973 3.01382 L 22.7365 8.42776 V 22.6179 H 2.85815 V 8.42776 L 12.7973 3.01382 Z  M 21.2365 21.1179 H 18.5744 V 9.71246 H 6.67444 V 21.1179 H 4.35815 V 9.31879 L 12.7973 4.72192 L 21.2365 9.31879 V 21.1179 Z  M 17.0744 21.1179 H 8.17444 V 19.8395 H 17.0744 V 21.1179 Z  M 17.0744 18.3395 H 8.17444 V 16.9854 H 17.0744 V 18.3395 Z  M 8.17444 14.0016 V 15.4854 H 17.0744 V 14.0016 H 8.17444 Z  M 8.17444 12.5016 V 11.2125 H 17.0744 V 12.5016 H 8.17444 Z",
+          "fillRule": "evenodd",
+          "clipRule": "evenodd",
+          "fill": "black"
+        }
+      ],
+      "tags": [
+        "location",
+        "warehouse"
+      ]
+    },
+    "warehouse_filled_16": {
+      "category": "location",
+      "name": "warehouse_filled_16",
+      "viewBox": "0 0 17 17",
+      "paths": [
+        {
+          "d": "M 15.839 5.79275 L 8.65655 1.82684 L 1.47412 5.79275 V 16.2062 H 4.14539 V 6.61304 H 12.9254 V 16.2062 H 15.839 V 5.79275 Z  M 5.64539 16.2062 H 11.4254 V 14.5258 H 5.64539 V 16.2062 Z  M 5.64539 13.0258 H 11.4254 V 11.2675 H 5.64539 V 13.0258 Z  M 5.64539 9.76746 V 8.11304 H 11.4254 V 9.76746 H 5.64539 Z",
+          "fillRule": "evenodd",
+          "clipRule": "evenodd",
+          "fill": "black"
+        }
+      ],
+      "tags": [
+        "location",
+        "warehouse",
+        "filled"
+      ]
+    },
+    "warehouse_filled_24": {
+      "category": "location",
+      "name": "warehouse_filled_24",
+      "viewBox": "0 0 25 25",
+      "paths": [
+        {
+          "d": "M 22.5957 8.42776 L 12.6565 3.01382 L 2.71729 8.42776 V 22.6179 H 6.53357 V 9.71246 H 18.4336 V 22.6179 H 22.5957 V 8.42776 Z",
+          "fillRule": "nonzero",
+          "fill": "black"
+        },
+        {
+          "d": "M 8.03357 22.6179 H 16.9336 V 20.942 H 8.03357 V 22.6179 Z",
+          "fillRule": "nonzero",
+          "fill": "black"
+        },
+        {
+          "d": "M 8.03357 19.442 H 16.9336 V 17.7248 H 8.03357 V 19.442 Z",
+          "fillRule": "nonzero",
+          "fill": "black"
+        },
+        {
+          "d": "M 8.03357 16.2248 H 16.9336 V 14.3613 H 8.03357 V 16.2248 Z",
+          "fillRule": "nonzero",
+          "fill": "black"
+        },
+        {
+          "d": "M 8.03357 12.8613 V 11.2125 H 16.9336 V 12.8613 H 8.03357 Z",
+          "fillRule": "nonzero",
+          "fill": "black"
+        }
+      ],
+      "tags": [
+        "location",
+        "warehouse",
+        "filled"
       ]
     },
     "media_camera_16": {
@@ -21081,8 +21172,8 @@
     },
     "brand": {
       "icons": [
-        "brand_16",
-        "brand_24",
+        "brand_atlassian_16",
+        "brand_atlassian_24",
         "brand_afterpay_16",
         "brand_afterpay_24",
         "brand_airbnb_16",
@@ -21495,9 +21586,13 @@
         "location_pin_16",
         "location_pin_24",
         "map_16",
-        "map_24"
+        "map_24",
+        "warehouse_16",
+        "warehouse_24",
+        "warehouse_filled_16",
+        "warehouse_filled_24"
       ],
-      "count": 30
+      "count": 34
     },
     "media": {
       "icons": [
@@ -22024,8 +22119,8 @@
     }
   },
   "metadata": {
-    "totalIcons": 923,
+    "totalIcons": 927,
     "totalCategories": 19,
-    "generatedAt": "2025-01-04T21:15:20.341Z"
+    "generatedAt": "2025-01-04T21:33:35.963Z"
   }
 }
