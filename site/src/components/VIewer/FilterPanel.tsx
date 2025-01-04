@@ -68,21 +68,15 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     }
   }, [setSelectedCategories, setSelectedTags]);
 
+  useEffect(() => {
+    if (!selectedSize) {
+      setSelectedSize(24);
+    }
+  }, []); // Only run once on mount
+
   return (
     <div className="filter">
       <div className="filter-container">
-        {hasActiveFilters && (
-          <div className="filter-reset">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={onResetFilters}
-            >
-              Reset all filters
-            </Button>
-          </div>
-        )}
-
         <div className="filter-content">
           <section className="filter-section">
             <div className="filter-section-header">
@@ -91,7 +85,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => setSelectedSize(24)}
+                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
                   data-state={selectedSize === 24 ? 'active' : undefined}
                 >
                   24px
@@ -99,7 +93,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => setSelectedSize(16)}
+                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
                   data-state={selectedSize === 16 ? 'active' : undefined}
                 >
                   16px
@@ -241,6 +235,17 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
             </div>
           </section>
         </div>
+        {hasActiveFilters && (
+          <div className="filter-reset">
+            <Button
+              variant="tertiary"
+              size="sm"
+              onClick={onResetFilters}
+            >
+              Reset all filters
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

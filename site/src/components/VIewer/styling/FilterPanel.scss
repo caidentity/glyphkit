@@ -14,15 +14,14 @@
   }
 
   &-reset {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    bottom: 0;
     display: flex;
     justify-content: flex-end;
     background: var(--surface-primary);
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
     z-index: 10;
-    border-bottom: 1px solid var(--divider-primary);
   }
 
   &-content {

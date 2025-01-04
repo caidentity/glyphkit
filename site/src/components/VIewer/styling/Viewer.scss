@@ -55,14 +55,14 @@
 
   &-search {
     width: 100%;
-    padding: var(--space-4);
+    padding: 80px var(--space-4) 0px;
     opacity: 1;
     transform: translateY(0);
     transition: all 0.3s ease-out;
 
     &__input-wrapper {
       position: relative;
-      max-width: 36rem;
+      max-width: 50vw;
       margin: 0 auto;
       transition: max-width 0.3s ease-out;
     }
