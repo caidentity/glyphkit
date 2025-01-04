@@ -56,9 +56,10 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
           <div className="icon-detail-panel__title">
             <h2>Details</h2>
             <Button
-              variant="ghost"
+              variant="tertiary"
               size="sm"
               onClick={onClose}
+
             >
               <X className="icon-detail-panel__close-icon" />
             </Button>

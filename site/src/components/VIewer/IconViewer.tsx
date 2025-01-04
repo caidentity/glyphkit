@@ -407,7 +407,7 @@ const IconViewer = () => {
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-bold">Filters</h2>
               <Button
-                variant="ghost"
+                variant="tertiary"
                 size="sm"
                 onClick={() => setIsFilterOpen(false)}
               >

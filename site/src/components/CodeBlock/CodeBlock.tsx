@@ -34,7 +34,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ label, code, language }) => {
       <div className="code-block__header">
         <span className="code-block__label">{label}</span>
         <Button
-          variant="ghost"
+          variant="tertiary"
           size="sm"
           onClick={handleCopy}
           className="code-block__copy-button"

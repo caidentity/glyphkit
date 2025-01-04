@@ -103,7 +103,7 @@ export default function TopNavigation() {
           <div className="top-navigation__actions">
             {/* Theme Toggle */}
             <Button
-              variant="ghost"
+              variant="tertiary"
               size="sm"
               onClick={toggleTheme}
               aria-label="Toggle theme"
@@ -116,7 +116,7 @@ export default function TopNavigation() {
 
             {/* Mobile Menu Button - Only show on mobile */}
             <Button
-              variant="ghost"
+              variant="tertiary"
               size="sm"
               className="top-navigation__mobile-menu"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

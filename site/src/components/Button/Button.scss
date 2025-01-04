@@ -36,9 +36,10 @@
     }
   }
 
-  &--ghost {
+  &--tertiary {
     background: transparent;
     color: var(--text-primary);
+    border: none;
 
     &:hover {
       background: var(--surface-hover);
