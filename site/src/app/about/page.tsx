@@ -1,21 +1,19 @@
 import React from 'react';
-import Image from 'next/image';
-import '@/styles/about.scss';
+import './about.scss';
+import Image from '@/components/Image/Image';
 
 export default function AboutPage() {
   return (
     <main className="about-page">
       <div className="hero-section">
-        <div className="container">
           <Image
-            src="/path-to-your-image.jpg" // You'll need to add your image
+            src="/assets/about/about_header.jpg" // You'll need to add your image
             alt="Glyphkit Hero"
             width={1200}
             height={400}
             className="hero-image"
             priority
           />
-        </div>
       </div>
       
       <div className="content-section">

@@ -78,15 +78,16 @@
 }
 
 .search-suggestion {
-  padding: 8px 12px;
+  padding: 4px 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
+  font-size: 14px;
 
   &:hover,
   &.highlighted {
-    background: var(--accent);
+    background: var(--surface-secondary);
   }
 
   &--empty {
@@ -100,9 +101,11 @@
   }
 
   .suggestion-type {
-    font-size: 0.75rem;
-    color: var(--muted-foreground);
+    font-size: 12px;
+    width: 64px;
+    color: var(--text-tertiary);
     text-transform: uppercase;
+    text-align: right;
   }
 
   .suggestion-value {
