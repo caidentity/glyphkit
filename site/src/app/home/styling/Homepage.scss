@@ -1,218 +1,226 @@
 @use '@/styles/kit' as *;
 
+.homepage-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .homepage {
-  .masthead {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 88vh;
-    background: var(--background-primary);
-    display: flex;
-    align-items: flex-end;
-    z-index: 10;
+  flex: 1;
+}
 
-    @include mobile {
-      height: 90vh;
-      padding-bottom: var(--space-4);
-    }
+.masthead {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 88vh;
+  background: var(--background-primary);
+  display: flex;
+  align-items: flex-end;
+  z-index: 10;
 
-    &.transitioning {
-      .masthead-background,
-      .masthead-overlay,
-      .logo-section {
-        opacity: 0;
-      }
-    }
+  @include mobile {
+    height: 90vh;
+    padding-bottom: var(--space-4);
   }
 
-  .masthead-background {
+  &.transitioning {
+    .masthead-background,
+    .masthead-overlay,
+    .logo-section {
+      opacity: 0;
+    }
+  }
+}
+
+.masthead-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  overflow: hidden;
+  background-color: var(--background-primary);
+
+  &:not(.visible) {
+    opacity: 0;
+  }
+
+  .clipped-section {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80vw;
+    height: 72vh;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+    overflow: hidden;
+  }
+
+  .gradient-background {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-    overflow: hidden;
-    background-color: var(--background-primary);
-
-    &:not(.visible) {
-      opacity: 0;
-    }
-
-    .clipped-section {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 80vw;
-      height: 72vh;
-      clip-path: polygon(100% 0, 0 0, 100% 100%);
-      overflow: hidden;
-    }
-
-    .gradient-background {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      filter: brightness(0.8) saturate(1.2);
-    }
-
-    .background-pattern {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      // &::before {
-      //   content: '';
-      //   position: absolute;
-      //   inset: 0;
-      //   background: repeating-linear-gradient(
-      //     45deg,
-      //     rgba(255, 255, 255, 0.2),
-      //     rgba(255, 255, 255, 0.2) 4px,
-      //     transparent 4px,
-      //     transparent 12px
-      //   );
-      // }
-    }
-
-    .pattern-overlay {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      mix-blend-mode: soft-light;
-      opacity: 0.3;
-      overflow: hidden;
-      z-index: 2;
-
-      .pattern-repeat {
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        width: 200%;
-        height: 200%;
-        transform: rotate(-10deg);
-        background-size: 200px 200px;
-        background-position: top right;
-        opacity: 0.95;
-      }
-    }
+    filter: brightness(0.8) saturate(1.2);
   }
 
-  .masthead-overlay {
+  .background-pattern {
     position: absolute;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
-    height: 50%;
-    // background: linear-gradient(
-    //   to top, 
-    //   rgba(0, 0, 0, 0.3) 0%,
-    //   rgba(0, 0, 0, 0.2) 10%,
-    //   rgba(0, 0, 0, 0) 100%
-    // );
+    height: 100%;
+    // &::before {
+    //   content: '';
+    //   position: absolute;
+    //   inset: 0;
+    //   background: repeating-linear-gradient(
+    //     45deg,
+    //     rgba(255, 255, 255, 0.2),
+    //     rgba(255, 255, 255, 0.2) 4px,
+    //     transparent 4px,
+    //     transparent 12px
+    //   );
+    // }
+  }
+
+  .pattern-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     pointer-events: none;
-  }
+    mix-blend-mode: soft-light;
+    opacity: 0.3;
+    overflow: hidden;
+    z-index: 2;
 
-  .masthead-content {
-    position: relative;
-    width: 100%;
-    padding: var(--space-12);
-    z-index: 10;
-
-    @include mobile {
-      padding: var(--space-6) var(--space-4);
+    .pattern-repeat {
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      transform: rotate(-10deg);
+      background-size: 200px 200px;
+      background-position: top right;
+      opacity: 0.95;
     }
   }
+}
 
-  .content-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-    max-width: 48rem;
+.masthead-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  // background: linear-gradient(
+  //   to top, 
+  //   rgba(0, 0, 0, 0.3) 0%,
+  //   rgba(0, 0, 0, 0.2) 10%,
+  //   rgba(0, 0, 0, 0) 100%
+  // );
+  pointer-events: none;
+}
+
+.masthead-content {
+  position: relative;
+  width: 100%;
+  padding: var(--space-12);
+  z-index: 10;
+
+  @include mobile {
+    padding: var(--space-6) var(--space-4);
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 48rem;
+}
+
+// Logo Section
+.logo-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.logo-wrapper {
+  width: 120px;
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(2rem);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.logo-text {
+  font-size: var(--text-2xl);
+  font-weight: var(--font-bold);
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+
+.description {
+  max-width: 32rem;
+  font-size: var(--text-xl);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2rem);
+  opacity: 0;
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 300ms;
+
+  &.visible {
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  // Logo Section
-  .logo-section {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+  @include mobile {
+    font-size: var(--text-lg);
   }
+}
 
-  .logo-wrapper {
-    width: 120px;
-    backdrop-filter: blur(8px);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(2rem);
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+// Main Content
+.main-content {
+  position: relative;
+  z-index: 1;
+}
 
-    &.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+.container {
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: var(--space-6);
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
 
-  .logo-text {
-    font-size: var(--text-2xl);
-    font-weight: var(--font-bold);
-    color: var(--text-primary);
-    letter-spacing: -0.025em;
-  }
-
-  .description {
-    max-width: 32rem;
-    font-size: var(--text-xl);
-    color: var(--text-secondary);
-    font-weight: var(--font-medium);
-    line-height: 1.5;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transform: translateY(2rem);
-    opacity: 0;
-    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
-    transition-delay: 300ms;
-
-    &.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    @include mobile {
-      font-size: var(--text-lg);
-    }
-  }
-
-  // Main Content
-  .main-content {
-    position: relative;
-    z-index: 1;
-  }
-
-  .container {
-    max-width: 64rem;
-    margin: 0 auto;
-    padding: var(--space-6);
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-  }
-
-  // Add specific positioning for KitsSection
-  .kits-section {
-    position: relative;
-    margin-top: 80vh; // Slightly less than masthead height to ensure visibility
-    z-index: 20; // Higher than masthead to ensure visibility
-    
-    @include mobile {
-      margin-top: 85vh;
-    }
+// Add specific positioning for KitsSection
+.kits-section {
+  position: relative;
+  margin-top: 80vh; // Slightly less than masthead height to ensure visibility
+  z-index: 20; // Higher than masthead to ensure visibility
+  
+  @include mobile {
+    margin-top: 85vh;
   }
 }
 

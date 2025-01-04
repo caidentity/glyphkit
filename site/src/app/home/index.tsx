@@ -10,9 +10,11 @@ const Masthead = dynamic(() => import('./Masthead'), {
 
 export default function Homepage() {
   return (
-    <div className="homepage">
-      <Masthead />
-      <KitsSection />
+    <div className="homepage-wrapper">
+      <div className="homepage">
+        <Masthead />
+        {/* <KitsSection /> */}
+      </div>
       <Footer/>
     </div>
   );
