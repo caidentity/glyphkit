@@ -1,6 +1,7 @@
 import React from 'react';
 import './about.scss';
 import Image from '@/components/Image/Image';
+import Footer from '@/components/Footer/Footer';
 
 export default function AboutPage() {
   return (
@@ -45,6 +46,7 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
+      <Footer/>
     </main>
   );
 } 

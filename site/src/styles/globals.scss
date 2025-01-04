@@ -20,6 +20,7 @@ body {
   background: var(--background-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
 }
 
 // Heading defaults
@@ -56,4 +57,11 @@ a {
   max-width: 1024px;
   margin: 0 auto;
   padding: 0 var(--container-padding);
+}
+
+// Your root layout container
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
