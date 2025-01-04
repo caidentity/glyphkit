@@ -1,7 +1,6 @@
 # GlyphKit
 
-Glyphkit is a repository of icon libraries designed for building cohesison and high quality applications. 
-
+GlyphKit is a comprehensive icon toolkit designed to bring quality to any application.
 
 ## Technologies
 
