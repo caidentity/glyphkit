@@ -5,13 +5,14 @@ import { Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import './Input.scss';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   className?: string;
   variant?: 'default' | 'search';
+  size?: 'small' | 'medium' | 'large';
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, variant = 'default', ...props }, ref) => {
+  ({ className, variant = 'default', size = 'medium', ...props }, ref) => {
     return (
       <div className={cn('input-wrapper', `input-wrapper--${variant}`, className)}>
         {variant === 'search' && (
@@ -22,7 +23,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             'input',
             `input--${variant}`,
-            { 'input--with-icon': variant === 'search' }
+            `input--${size}`,
+            { 'input--with-icon': variant === 'search' },
+            className
           )}
           ref={ref}
           {...props}

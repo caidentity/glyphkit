@@ -153,7 +153,7 @@ const IconViewer = () => {
 
   const handleResetFilters = () => {
     setSearchQuery('');
-    setSelectedSize(null);
+    setSelectedSize(24);
     setSelectedCategories([]);
     setSelectedTags([]);
     setIconScale(1);
@@ -366,6 +366,7 @@ const IconViewer = () => {
             suggestions={generateSearchSuggestions()}
             placeholder="Search 1000+ icons..."
             className="viewer-search__input"
+            size='large'
           />
         </div>
       </div>

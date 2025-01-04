@@ -22,7 +22,7 @@
     padding: 0.5rem 1rem;
     margin: 0 -1rem;
     z-index: 10;
-    border-bottom: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--divider-primary);
   }
 
   &-content {
@@ -113,7 +113,7 @@
 
   // Categories
   &-categories {
-    border-top: 1px solid var(--border-primary);
+    border-top: 1px solid var(--divider-primary);
     padding-top: 1rem;
     margin-top: 1rem;
     flex: 1;
@@ -159,7 +159,7 @@
       width: 1rem;
       height: 1rem;
       border-radius: 0.25rem;
-      border: 1px solid var(--border-primary);
+      border: 1px solid var(--divider-primary);
       display: flex;
       align-items: center;
       justify-content: center;

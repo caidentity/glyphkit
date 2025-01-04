@@ -23,7 +23,7 @@
   font-size: var(--text-sm);
   color: var(--text-primary);
   background: var(--surface-primary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--divider-primary);
   border-radius: var(--radius-md);
   transition: all 150ms ease;
 
@@ -49,6 +49,24 @@
     opacity: 0.5;
     cursor: not-allowed;
     background: var(--surface-secondary);
+  }
+
+  &--small {
+    height: 28px;
+    font-size: 0.875rem;
+    padding: 0 12px;
+  }
+
+  &--medium {
+    height: 32px;
+    font-size: 0.875rem;
+    padding: 0 14px;
+  }
+
+  &--large {
+    height: 40px;
+    font-size: 1rem;
+    padding: 0 16px;
   }
 }
 

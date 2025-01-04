@@ -20,7 +20,14 @@ interface SearchInputProps {
   placeholder?: string;
   autoFocus?: boolean;
   className?: string;
+  size?: 'small' | 'medium' | 'large';
 }
+
+const sizeToNumber = {
+  small: 28,
+  medium: 32,
+  large: 40,
+} as const;
 
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
@@ -30,6 +37,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   placeholder = "Search...",
   autoFocus,
   className,
+  size = 'medium',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -153,7 +161,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   return (
-    <div className="search-input-container" ref={inputRef}>
+    <div className={`search-input-container search-input-container--${size}`} ref={inputRef}>
       <Input
         variant="search"
         value={value}
@@ -163,6 +171,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         placeholder={placeholder}
         autoFocus={autoFocus}
         className={className}
+        size={size}
       />
       {renderSuggestions()}
     </div>

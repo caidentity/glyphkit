@@ -6,7 +6,7 @@
 .tooltip {
   position: absolute;
   background: var(--surface-primary);
-  border: 1px solid var(--border-primary);
+  border: 1px solid var(--divider-primary);
   padding: 0.5rem 0.75rem;
   border-radius: 4px;
   font-size: 0.75rem;
@@ -33,7 +33,7 @@
 @media (prefers-color-scheme: dark) {
   .tooltip {
     background: var(--surface-primary);
-    border-color: var(--border-primary);
+    border-color: var(--divider-primary);
     color: var(--text-primary);
 
     &::after {

@@ -91,7 +91,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
+                  onClick={() => setSelectedSize(24)}
                   data-state={selectedSize === 24 ? 'active' : undefined}
                 >
                   24px
@@ -99,7 +99,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <Button
                   variant="secondary"
                   size="sm"
-                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
+                  onClick={() => setSelectedSize(16)}
                   data-state={selectedSize === 16 ? 'active' : undefined}
                 >
                   16px

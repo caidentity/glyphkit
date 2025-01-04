@@ -26,6 +26,18 @@
     position: relative;
     max-width: 36rem;
     margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+    
+    .search-input-container--large {
+      height: 40px;
+      
+      input {
+        height: 40px;
+        font-size: 1rem;
+        padding: 0 16px;
+      }
+    }
   }
 
   :global(.input) {
@@ -55,7 +67,7 @@
 
   &.transitioning :global(.input) {
     background: var(--surface-primary);
-    border: 1px solid var(--border-primary);
+    border: 1px solid var(--divider-primary);
     border-radius: var(--radius-md);
     height: 40px;
     font-size: var(--text-sm);
