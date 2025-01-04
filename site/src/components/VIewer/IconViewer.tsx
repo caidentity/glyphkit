@@ -24,9 +24,12 @@ import SearchInput, { SearchSuggestion } from '../Search/SearchInput';
 import { useDebounce } from '../../hooks/useDebounce';
 import Toast, { ToastType } from '../Toast/Toast';
 import { AnimatePresence } from 'framer-motion';
+import { useSearchSuggestions } from '../../hooks/useSearchSuggestions';
+import { useSearch } from '@/contexts/SearchContext';
 
 const IconViewer = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const { query, setQuery, selectedSuggestion } = useSearch();
+  const [searchQuery, setSearchQuery] = useState(query);
   const [selectedSize, setSelectedSize] = useState<number | null>(24);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
@@ -271,46 +274,6 @@ const IconViewer = () => {
     }
   }, [categories]);
 
-  const generateSearchSuggestions = (): SearchSuggestion[] => {
-    const suggestions: SearchSuggestion[] = [];
-    
-    // Add category suggestions
-    categories.forEach(category => {
-      if (category.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-        suggestions.push({
-          type: 'category',
-          value: category.name,
-          count: category.icons.length
-        });
-      }
-    });
-
-    // Add tag suggestions
-    allTags.forEach(tag => {
-      if (tag.toLowerCase().includes(searchQuery.toLowerCase())) {
-        const count = allIcons.filter(icon => icon.tags?.includes(tag)).length;
-        suggestions.push({
-          type: 'tag',
-          value: tag,
-          count
-        });
-      }
-    });
-
-    // Add icon name suggestions
-    allIcons.forEach(icon => {
-      if (icon.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-        suggestions.push({
-          type: 'icon',
-          value: icon.name
-        });
-      }
-    });
-
-    // Limit suggestions to top 10
-    return suggestions.slice(0, 10);
-  };
-
   const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
     switch (suggestion.type) {
       case 'category':
@@ -327,11 +290,36 @@ const IconViewer = () => {
     }
   };
 
+  const suggestions = useSearchSuggestions(searchQuery, categories, allIcons);
+
+  useEffect(() => {
+    // Restore search state from homepage
+    const lastSearch = sessionStorage.getItem('lastSearch');
+    if (lastSearch) {
+      setSearchQuery(lastSearch);
+      setQuery(lastSearch);
+      sessionStorage.removeItem('lastSearch');
+    }
+
+    const searchType = sessionStorage.getItem('searchType');
+    const searchValue = sessionStorage.getItem('searchValue');
+    if (searchType && searchValue) {
+      // Handle filters based on suggestion type
+      if (searchType === 'category') {
+        setSelectedCategories([searchValue]);
+      } else if (searchType === 'tag') {
+        setSelectedTags([searchValue]);
+      }
+      sessionStorage.removeItem('searchType');
+      sessionStorage.removeItem('searchValue');
+    }
+  }, [setQuery, setSelectedCategories, setSelectedTags]);
+
   // Add error handling for empty states
   if (!categories.length) {
     return (
       <div className="p-4">
-          No icon categories available. Please try refreshing the page.
+        No icon categories available. Please try refreshing the page.
       </div>
     );
   }
@@ -363,7 +351,7 @@ const IconViewer = () => {
             value={searchQuery}
             onChange={setSearchQuery}
             onSuggestionSelect={handleSuggestionSelect}
-            suggestions={generateSearchSuggestions()}
+            suggestions={suggestions}
             placeholder="Search 1000+ icons..."
             className="viewer-search__input"
             size='large'

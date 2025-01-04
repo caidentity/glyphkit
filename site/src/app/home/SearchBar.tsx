@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import SearchInput, { SearchSuggestion } from '@/components/Search/SearchInput';
+import { useSearch } from '@/contexts/SearchContext';
+import { useSearchSuggestions } from '@/hooks/useSearchSuggestions';
 import { loadIconMetadata } from '@/lib/iconLoader';
 import './styling/Search.scss';
 
@@ -13,71 +15,36 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const router = useRouter();
-
+  const { query, setQuery, selectedSuggestion, setSelectedSuggestion } = useSearch();
   const { data: categories = [] } = useQuery({
     queryKey: ['iconMetadata'],
     queryFn: loadIconMetadata,
     staleTime: Infinity,
   });
-
   const allIcons = categories.flatMap(category => category.icons);
-  const allTags = Array.from(new Set(allIcons.flatMap(icon => icon.tags || [])));
+  const suggestions = useSearchSuggestions(query, categories, allIcons);
 
-  const generateSearchSuggestions = (): SearchSuggestion[] => {
-    if (!searchQuery) return [];
-    
-    const suggestions: SearchSuggestion[] = [];
-    const query = searchQuery.toLowerCase();
-
-    // Similar suggestion generation logic as IconViewer
-    categories.forEach(category => {
-      if (category.name.toLowerCase().includes(query)) {
-        suggestions.push({
-          type: 'category',
-          value: category.name,
-          count: category.icons.length
-        });
-      }
-    });
-
-    allTags.forEach(tag => {
-      if (tag.toLowerCase().includes(query)) {
-        suggestions.push({
-          type: 'tag',
-          value: tag,
-          count: allIcons.filter(icon => icon.tags?.includes(tag)).length
-        });
-      }
-    });
-
-    allIcons.forEach(icon => {
-      if (icon.name.toLowerCase().includes(query)) {
-        suggestions.push({
-          type: 'icon',
-          value: icon.name
-        });
-      }
-    });
-
-    return suggestions.slice(0, 10);
-  };
-
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
+  const handleSearch = (searchQuery: string) => {
     setIsTransitioning(true);
     onTransitionStart?.();
     
-    sessionStorage.setItem('fromHomeSearch', 'true');
+    // Store search state
+    sessionStorage.setItem('lastSearch', searchQuery);
+    if (selectedSuggestion) {
+      sessionStorage.setItem('searchType', selectedSuggestion.type);
+      sessionStorage.setItem('searchValue', selectedSuggestion.value);
+    }
     
     setTimeout(() => {
-      router.push(`/icons?search=${encodeURIComponent(query.trim())}`);
+      router.push(`/icons?search=${encodeURIComponent(searchQuery.trim())}`);
     }, 500);
   };
 
   const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
+    setSelectedSuggestion(suggestion);
+    setQuery(suggestion.value);
     handleSearch(suggestion.value);
   };
 
@@ -85,10 +52,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
     <div className={`search-container ${isVisible ? 'visible' : ''} ${isTransitioning ? 'transitioning' : ''}`}>
       <div className="search-wrapper">
         <SearchInput
-          value={searchQuery}
-          onChange={setSearchQuery}
+          value={query}
+          onChange={setQuery}
+          onSearch={handleSearch}
           onSuggestionSelect={handleSuggestionSelect}
-          suggestions={generateSearchSuggestions()}
+          suggestions={suggestions}
           placeholder="Search 1000+ icons..."
           className="search-input"
           size='large'

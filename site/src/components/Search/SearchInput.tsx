@@ -4,8 +4,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Search } from 'lucide-react';
 import { createPortal } from 'react-dom';
 import Input from "../Input/Input";
+import { useSearch } from '@/contexts/SearchContext';
 import './SearchInput.scss';
 
+// Types
 export interface SearchSuggestion {
   type: 'icon' | 'category' | 'tag';
   value: string;
@@ -15,6 +17,7 @@ export interface SearchSuggestion {
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
+  onSearch?: (value: string) => void;
   onSuggestionSelect?: (suggestion: SearchSuggestion) => void;
   suggestions: SearchSuggestion[];
   placeholder?: string;
@@ -23,15 +26,11 @@ interface SearchInputProps {
   size?: 'small' | 'medium' | 'large';
 }
 
-const sizeToNumber = {
-  small: 28,
-  medium: 32,
-  large: 40,
-} as const;
-
+// Component
 const SearchInput: React.FC<SearchInputProps> = ({
   value,
   onChange,
+  onSearch,
   onSuggestionSelect,
   suggestions,
   placeholder = "Search...",
@@ -43,6 +42,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const inputRef = useRef<HTMLDivElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0, width: 0 });
+  const { setQuery, setSelectedSuggestion } = useSearch();
 
   useEffect(() => {
     if (inputRef.current) {
@@ -56,13 +56,20 @@ const SearchInput: React.FC<SearchInputProps> = ({
   }, [isOpen]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
+    const newValue = e.target.value;
+    onChange(newValue);
+    setQuery(newValue); // Update shared state
     setIsOpen(true);
     setHighlightedIndex(-1);
   };
 
   const handleSuggestionClick = (suggestion: SearchSuggestion) => {
-    onSuggestionSelect?.(suggestion);
+    if (onSuggestionSelect) {
+      onSuggestionSelect(suggestion);
+    } else {
+      onChange(suggestion.value);
+      onSearch?.(suggestion.value);
+    }
     setIsOpen(false);
   };
 
@@ -83,6 +90,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
       case 'Enter':
         if (highlightedIndex >= 0 && suggestions[highlightedIndex]) {
           handleSuggestionClick(suggestions[highlightedIndex]);
+        } else if (value.trim()) {
+          onSearch?.(value.trim());
+          setIsOpen(false);
         }
         break;
       case 'Escape':

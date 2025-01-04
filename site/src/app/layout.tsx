@@ -5,6 +5,7 @@ import '@/styles/globals.scss';
 import TopNavigation from '@/components/TopNavigationBar/TopNavigation';
 import Providers from '@/components/Providers';
 import { siteMetadata, defaultOpenGraphImage } from '@/config/metadata';
+import { SearchProvider } from '@/contexts/SearchContext';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -71,10 +72,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Providers>
-          <TopNavigation />
-          {children}
-        </Providers>
+        <SearchProvider>
+          <Providers>
+            <TopNavigation />
+            {children}
+          </Providers>
+        </SearchProvider>
       </body>
     </html>
   );
