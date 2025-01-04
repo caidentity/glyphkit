@@ -1,0 +1,56 @@
+.floating-toc {
+  position: fixed;
+  right: 0;
+  top: calc(40vh + 2rem);
+  width: 220px;
+  padding: 1rem;
+
+  h2 {
+    font-size: 16px;
+    margin: 0 0 8px 0;
+    color: #333;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 1px;
+  }
+
+  a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 13px;
+
+    &:hover {
+      color: #333;
+    }
+
+    &.active {
+      color: #0066cc;
+      font-weight: 500;
+    }
+  }
+}
+
+.content-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  margin-right: 350px;
+}
+
+@media (max-width: 1200px) {
+  .floating-toc {
+    display: none;
+  }
+
+  .content-container {
+    margin-right: auto;
+  }
+} 
