@@ -23,35 +23,6 @@ body {
   min-height: 100vh;
 }
 
-// Heading defaults
-h1 { font-size: var(--text-4xl); }
-h2 { font-size: var(--text-3xl); }
-h3 { font-size: var(--text-2xl); }
-h4 { font-size: var(--text-xl); }
-h5 { font-size: var(--text-lg); }
-h6 { font-size: var(--text-base); }
-
-// Common text elements
-p {
-  font-size: var(--text-base);
-  line-height: var(--leading-relaxed);
-  margin-bottom: 1rem;
-}
-
-small {
-  font-size: var(--text-sm);
-}
-
-// Links
-a {
-  color: var(--accent-primary);
-  text-decoration: none;
-  
-  &:hover {
-    color: var(--accent-hover);
-  }
-}
-
 // Container
 .container {
   max-width: 1024px;
