@@ -51,21 +51,24 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   };
 
   const handleColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let newColor = e.target.value;
+    const newValue = e.target.value;
     
     if (inputType === 'hex') {
-      if (!newColor.startsWith('#')) {
-        newColor = '#' + newColor;
-      }
-      newColor = formatHex(newColor);
-      if (isValidHex(newColor)) {
-        setSelectedColor(newColor);
-        onChange?.(newColor);
+      // Allow typing by updating state immediately
+      setSelectedColor(newValue);
+      
+      // Only trigger onChange when it's a valid hex
+      if (isValidHex(formatHex(newValue))) {
+        const formattedHex = formatHex(newValue);
+        onChange?.(formattedHex);
       }
     } else {
-      const hexColor = rgbaToHex(newColor);
-      setSelectedColor(hexColor);
-      onChange?.(hexColor);
+      // For RGBA, update immediately and convert valid values
+      setSelectedColor(newValue);
+      if (newValue.match(/^rgba?\((\s*\d+\s*,){3}\s*[\d.]+\)$/)) {
+        const hexColor = rgbaToHex(newValue);
+        onChange?.(hexColor);
+      }
     }
   };
 
@@ -75,11 +78,25 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     setShowPicker(false);
   };
 
+  const handleColorDisplayClick = (e: React.MouseEvent) => {
+    // Allow clicking input without closing picker
+    if ((e.target as HTMLElement).closest('.color-value-input')) {
+      return;
+    }
+    setShowPicker(!showPicker);
+  };
+
   return (
     <div className="color-picker-container">
-      <div className="color-display" onClick={() => setShowPicker(!showPicker)}>
+      <div className="color-display" onClick={handleColorDisplayClick}>
         <div className="color-preview" style={{ backgroundColor: selectedColor }}></div>
-        <span>{selectedColor}</span>
+        <input
+          type="text"
+          value={inputType === 'hex' ? selectedColor : hexToRgba(selectedColor)}
+          onChange={handleColorChange}
+          className="color-display-input"
+          onClick={(e) => e.stopPropagation()}
+        />
       </div>
 
       {showPicker && (
@@ -112,7 +129,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               type="text"
               value={inputType === 'hex' ? selectedColor : hexToRgba(selectedColor)}
               onChange={handleColorChange}
-              className="color-value-input"
+              className="dropdown-color-input"
             />
           </div>
         </div>
