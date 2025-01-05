@@ -9,6 +9,7 @@ import CodeBlock from '../CodeBlock/CodeBlock';
 import './styling/IconDetailPanel.scss';
 import { cn } from '@/lib/utils';
 import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
+import Slider from '../Slider/Slider';
 
 interface IconDetailPanelProps {
   icon: IconMetadata;
@@ -26,6 +27,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
   onCopy,
 }) => {
   const [showLargePreview, setShowLargePreview] = React.useState(false);
+  const [iconSize, setIconSize] = React.useState(Math.max(icon.size * 1.5, icon.size));
 
   React.useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -59,7 +61,6 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               variant="tertiary"
               size="sm"
               onClick={onClose}
-
             >
               <X className="icon-detail-panel__close-icon" />
             </Button>
@@ -100,19 +101,23 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
           <section className="icon-detail-panel__preview">
             <div className="icon-detail-panel__preview-header">
               <h3>Preview</h3>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setShowLargePreview(!showLargePreview)}
-              >
-                {showLargePreview ? "Show Original" : "Show Large"}
-              </Button>
+              <div className='icon-detail-panel__preview-header-slider-container'>
+                <p>Size</p>
+              <Slider
+                value={[iconSize]}
+                min={icon.size}
+                max={icon.size * 5}
+                onValueChange={(value) => setIconSize(value[0])}
+                className="icon-detail-panel__preview-header-slider"
+                step={10}
+              />
+              </div>
             </div>
             <div className="icon-detail-panel__preview-container">
               <Icon
                 icon={icon}
                 showSize={true}
-                customSize={showLargePreview ? icon.size * 3 : icon.size}
+                customSize={iconSize}
               />
             </div>
           </section>
