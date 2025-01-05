@@ -9,7 +9,7 @@
   padding: 0 var(--space-1);
   border-left: 1px solid var(--divider-primary);
   background: var(--background-primary);
-  z-index: 99999;
+  z-index: 9999;
   transform: translateX(100%);
   transition: transform var(--kit-transition-duration) var(--kit-transition-ease),
               opacity var(--kit-transition-duration) var(--kit-transition-ease);
@@ -161,7 +161,7 @@
   background: var(--overlay-light);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-  z-index: 9999;
+  z-index: 999;
   opacity: 0;
   pointer-events: none;
   transition: opacity var(--kit-transition-duration) var(--kit-transition-ease);
