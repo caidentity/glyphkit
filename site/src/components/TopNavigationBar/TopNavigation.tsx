@@ -106,10 +106,12 @@ export default function TopNavigation() {
               size="md"
               onClick={() => window.open('https://www.npmjs.com/package/@glyphkit/glyphkit', '_blank', 'noopener noreferrer')}
               aria-label="Visit NPM package"
+              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name="brand_npm_24"
-                size={24} 
+                size={24}
+                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
 
@@ -119,10 +121,12 @@ export default function TopNavigation() {
               size="md"
               onClick={toggleTheme}
               aria-label="Toggle theme"
+              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name={theme === 'dark' ? 'moon_24' : 'sun_24'} 
                 size={24} 
+                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
 
@@ -133,10 +137,12 @@ export default function TopNavigation() {
               className="top-navigation__mobile-menu"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
+              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name={mobileMenuOpen ? 'shape_x_24' : 'text_align_left_24'} 
                 size={24} 
+                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
           </div>
