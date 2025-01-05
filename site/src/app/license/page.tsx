@@ -51,6 +51,7 @@ export default function LicensePage() {
             <h2>Brand Icons</h2>
             <ul>
               <li>Brand icons included in GlyphKit are trademarks of their respective owners.</li>
+              <li>Brand icons are included in this library as a resource for improved use, (e.g., informational use, fair use) and cannot be used in ways that imply endorsement, affiliation, or partnership with the trademark owner.</li>
               <li>Use of brand icons must comply with the brand's own guidelines and must only represent the corresponding company, product, or service.</li>
               <li>GlyphKit's inclusion of brand icons does not imply endorsement or affiliation.</li>
             </ul>
