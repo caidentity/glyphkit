@@ -74,7 +74,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
               variant="secondary"
               size="sm"
             >
-              <GlyphKitIcon name="text_24" size={16} color='#fff' />
+              <GlyphKitIcon name="text_24" size={16} />
               <span>Copy Name</span>
             </Button>
 
