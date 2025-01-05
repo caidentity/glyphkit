@@ -27,9 +27,8 @@ import { AnimatePresence } from 'framer-motion';
 import { useSearchSuggestions } from '../../hooks/useSearchSuggestions';
 import { useSearch } from '@/contexts/SearchContext';
 
-const IconViewer = () => {
-  const { query, setQuery, selectedSuggestion } = useSearch();
-  const [searchQuery, setSearchQuery] = useState(query);
+export default function IconViewer() {
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedSize, setSelectedSize] = useState<number | null>(24);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
@@ -274,47 +273,6 @@ const IconViewer = () => {
     }
   }, [categories]);
 
-  const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
-    switch (suggestion.type) {
-      case 'category':
-        handleCategoryToggle(suggestion.value);
-        setSearchQuery('');
-        break;
-      case 'tag':
-        handleTagToggle(suggestion.value);
-        setSearchQuery('');
-        break;
-      case 'icon':
-        setSearchQuery(suggestion.value);
-        break;
-    }
-  };
-
-  const suggestions = useSearchSuggestions(searchQuery, categories, allIcons);
-
-  useEffect(() => {
-    // Restore search state from homepage
-    const lastSearch = sessionStorage.getItem('lastSearch');
-    if (lastSearch) {
-      setSearchQuery(lastSearch);
-      setQuery(lastSearch);
-      sessionStorage.removeItem('lastSearch');
-    }
-
-    const searchType = sessionStorage.getItem('searchType');
-    const searchValue = sessionStorage.getItem('searchValue');
-    if (searchType && searchValue) {
-      // Handle filters based on suggestion type
-      if (searchType === 'category') {
-        setSelectedCategories([searchValue]);
-      } else if (searchType === 'tag') {
-        setSelectedTags([searchValue]);
-      }
-      sessionStorage.removeItem('searchType');
-      sessionStorage.removeItem('searchValue');
-    }
-  }, [setQuery, setSelectedCategories, setSelectedTags]);
-
   // Add error handling for empty states
   if (!categories.length) {
     return (
@@ -326,50 +284,6 @@ const IconViewer = () => {
 
   return (
     <div className="viewer">
-      {/* <div className="viewer-header"> */}
-        {/* <h1 className="viewer-header__title">Icons</h1> */}
-        {/* <p className="viewer-header__subtitle">
-          Showing {filteredIcons.length} of {allIcons.length} icons
-          {(selectedCategories.length > 0 || searchQuery) && (
-            <span className="viewer-header__subtitle-highlight">
-              {selectedCategories.length > 0 && (
-                <span className="mr-2">
-                  in {selectedCategories.length} {selectedCategories.length === 1 ? 'category' : 'categories'}
-                </span>
-              )}
-              {searchQuery && (
-                <span>matching "{searchQuery}"</span>
-              )}
-            </span>
-          )}
-        </p> */}
-      {/* </div> */}
-
-      <div className="viewer-search">
-        <div className="viewer-search__input-wrapper">
-          <SearchInput
-            value={searchQuery}
-            onChange={setSearchQuery}
-            onSuggestionSelect={handleSuggestionSelect}
-            suggestions={suggestions}
-            placeholder="Search 1000+ icons..."
-            className="viewer-search__input"
-            size='large'
-          />
-        </div>
-      </div>
-
-      <div className="viewer-mobile-filter">
-        <Button
-          variant="outline"
-          onClick={() => setIsFilterOpen(true)}
-          className="viewer-mobile-filter__button"
-        >
-          <SlidersHorizontal className="h-4 w-4" />
-          Filters
-        </Button>
-      </div>
-
       <div className="viewer-content">
         <div className="viewer-content__sidebar">
           {filterPanel}
@@ -430,6 +344,4 @@ const IconViewer = () => {
       </AnimatePresence>
     </div>
   );
-};
-
-export default IconViewer; 
+} 

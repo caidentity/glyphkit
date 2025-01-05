@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Sun, Moon } from 'lucide-react';
@@ -9,6 +9,12 @@ import { Icon } from '@glyphkit/glyphkit';
 import Image from 'next/image';
 import { getLogoPath } from '@/lib/assetLoader'
 import Button from '@/components/Button/Button';
+import SearchInput, { SearchSuggestion } from '@/components/Search/SearchInput';
+import { useSearch } from '@/contexts/SearchContext';
+import { useSearchSuggestions } from '@/hooks/useSearchSuggestions';
+import { useQuery } from '@tanstack/react-query';
+import { loadIconMetadata } from '@/lib/iconLoader';
+import { useRouter } from 'next/navigation';
 
 const navigation = [
   { name: 'Icons', href: '/icons' },
@@ -22,6 +28,39 @@ export default function TopNavigation() {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const pathname = usePathname();
   const logoPath = getLogoPath('logo.svg')
+  const router = useRouter();
+  const { query, setQuery, selectedSuggestion, setSelectedSuggestion } = useSearch();
+
+  // Load initial data for suggestions
+  const { data: categories = [] } = useQuery({
+    queryKey: ['iconMetadata'],
+    queryFn: loadIconMetadata,
+    staleTime: Infinity,
+    gcTime: Infinity,
+  });
+
+  const allIcons = useMemo(() => {
+    return categories.flatMap(category => category.icons);
+  }, [categories]);
+
+  const suggestions = useSearchSuggestions(query, categories, allIcons);
+
+  const handleSearch = (searchQuery: string) => {
+    // Store search state
+    sessionStorage.setItem('lastSearch', searchQuery);
+    if (selectedSuggestion) {
+      sessionStorage.setItem('searchType', selectedSuggestion.type);
+      sessionStorage.setItem('searchValue', selectedSuggestion.value);
+    }
+    
+    router.push(`/icons?search=${encodeURIComponent(searchQuery.trim())}`);
+  };
+
+  const handleSuggestionSelect = (suggestion: SearchSuggestion) => {
+    setSelectedSuggestion(suggestion);
+    setQuery(suggestion.value);
+    handleSearch(suggestion.value);
+  };
 
   useEffect(() => {
     // Check for saved theme preference or system preference
@@ -77,12 +116,27 @@ export default function TopNavigation() {
         </div>
       </div>
 
-      <nav className="top-navigation__container">
+      <nav className={`top-navigation__container ${pathname !== '/' ? 'top-navigation__container--with-search' : ''}`}>
         <div className="top-navigation__content">
           {/* Logo */}
           <Link href="/" className="top-navigation__logo">
             <Image src={logoPath} alt="Logo" width={40} height={40} priority />
           </Link>
+
+          {/* Search Bar - Only show if not on homepage */}
+          {pathname !== '/' && (
+            <div className="top-navigation__search">
+              <SearchInput
+                value={query}
+                onChange={setQuery}
+                onSearch={handleSearch}
+                onSuggestionSelect={handleSuggestionSelect}
+                suggestions={suggestions}
+                placeholder="Search 1000+ icons..."
+                size="medium"
+              />
+            </div>
+          )}
 
           {/* Desktop Navigation Links */}
           <div className="top-navigation__links">
@@ -106,12 +160,10 @@ export default function TopNavigation() {
               size="md"
               onClick={() => window.open('https://www.npmjs.com/package/@glyphkit/glyphkit', '_blank', 'noopener noreferrer')}
               aria-label="Visit NPM package"
-              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name="brand_npm_24"
                 size={24}
-                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
 
@@ -121,12 +173,10 @@ export default function TopNavigation() {
               size="md"
               onClick={toggleTheme}
               aria-label="Toggle theme"
-              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name={theme === 'dark' ? 'moon_24' : 'sun_24'} 
                 size={24} 
-                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
 
@@ -137,12 +187,10 @@ export default function TopNavigation() {
               className="top-navigation__mobile-menu"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
-              color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
             >
               <Icon 
                 name={mobileMenuOpen ? 'shape_x_24' : 'text_align_left_24'} 
                 size={24} 
-                color={mobileMenuOpen ? 'white' : 'var(--text-secondary)'}
               />
             </Button>
           </div>

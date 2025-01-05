@@ -2,7 +2,7 @@
 
 .top-navigation {
   width: 100%;
-  padding: var(--space-4) 0;
+  padding: 2px 0;
   position: fixed;
   top: 0;
   z-index: 99;
@@ -26,18 +26,28 @@
       border-radius: 0;
       padding: var(--space-2) var(--space-3);
     }
+
+    &--with-search {
+      max-width: 100%;
+      width: 100%;
+      margin: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: 0;
+    }
   }
 
   &__content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--space-12);
+    gap: var(--space-4);
+    width: 100%;
+  }
 
-    @include mobile {
-      justify-content: space-between;
-      width: 100%;
-    }
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-shrink: 0;
   }
 
   &__logo {
@@ -56,9 +66,9 @@
 
   &__links {
     display: flex;
-    gap: var(--space-3);
     align-items: center;
-    margin-right: auto;
+    gap: var(--space-4);
+    margin-left: var(--space-4);
 
     @include mobile {
       display: none;
@@ -165,24 +175,16 @@
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    margin-left: auto;
-    z-index: 31;
+    flex-shrink: 0;
+  }
 
-    .button {
-      background: transparent;
-      border: none;
-      padding: var(--space-1);
-      transition: all 0.2s;
-
-      svg {
-        height: 24px;
-        width: 24px;
-      }
-
-      &:hover {
-        color: var(--accent-primary);
-        background: transparent;
-      }
+  &__search {
+    flex: 1;
+    margin: 0 var(--space-4);
+    min-width: 200px;
+    
+    @include mobile {
+      display: none;
     }
   }
 } 
