@@ -23,6 +23,7 @@ interface IconProps {
   showSize?: boolean;
   showLabel?: boolean;
   customSize?: number;
+  color?: string;
 }
 
 const Icon: React.FC<IconProps> = ({ 
@@ -31,6 +32,7 @@ const Icon: React.FC<IconProps> = ({
   showSize = false,
   showLabel = false,
   customSize,
+  color = "#000000",
   ...props 
 }) => {
   const iconSize = customSize || icon.size;
@@ -47,6 +49,7 @@ const Icon: React.FC<IconProps> = ({
         <GlyphKitIcon
           name={iconName}
           size={iconSize}
+          color={color}
           onError={(error) => console.error('Icon not found:', iconName)}
         />
       </div>
