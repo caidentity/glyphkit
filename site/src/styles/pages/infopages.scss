@@ -12,10 +12,41 @@
     }
   }
 
+// New wrapper to center everything
+.info-page-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  display: flex;
+  gap: 4rem;
+}
+
+.content-container {
+  flex: 1;
+  max-width: 800px;
   
-  .content-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 1rem;
-    margin-right: 300px; // Make space for floating TOC
+  section {
+    margin-bottom: 3rem;
+    
+    h2 {
+      margin-bottom: 1.5rem;
+    }
   }
+}
+
+@media (max-width: 1200px) {
+  .info-page-wrapper {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .info-page-wrapper {
+    padding: 0 1rem;
+  }
+  
+  .page-masthead h1 {
+    font-size: 2.5rem;
+  }
+}

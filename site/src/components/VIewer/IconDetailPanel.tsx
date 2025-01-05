@@ -122,7 +122,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
             <CodeBlock
               label="React Component"
               code={`<Icon name="${icon.name}" size={${icon.size}} />`}
-              language="jsx"
+              language="javascript"
             />
             {/* <CodeBlock
               label="Import Path"

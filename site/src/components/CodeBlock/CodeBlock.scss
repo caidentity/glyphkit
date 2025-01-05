@@ -1,5 +1,5 @@
 .code-block {
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--divider-primary);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 12px;
@@ -8,15 +8,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 12px;
-    background: #f9fafb;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 4px 12px;
+    background: var(--surface-secondary);
+    border-bottom: 1px solid var(--divider-primary);
   }
 
   &__label {
     font-size: 13px;
     font-weight: 500;
-    color: #6b7280;
+    color: var(--text-secondary);
   }
 
   &__copy-button {
@@ -34,13 +34,13 @@
     transition: all 0.2s;
 
     &:hover {
-      background: #f3f4f6;
-      color: #374151;
+      background: var(--surface-tertiary);
+      color: var(--text-primary);
     }
   }
 
   &__container {
-    background: #ffffff;
+    background: var(--surface-secondary);
     padding: 12px;
   }
 
@@ -49,8 +49,17 @@
     font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-size: 13px;
     line-height: 1.5;
-    color: #1f2937;
-    white-space: pre-wrap;
-    word-break: break-all;
+    color: var(--text-primary);
+    
+    code {
+      white-space: pre;
+      word-spacing: normal;
+      word-break: normal;
+      tab-size: 4;
+      hyphens: none;
+      text-align: left;
+      display: block;
+      overflow-x: auto;
+    }
   }
 }

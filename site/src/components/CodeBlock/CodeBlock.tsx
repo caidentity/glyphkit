@@ -1,10 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '@/components/Button/Button';
 import { Check, Copy } from 'lucide-react';
 import Toast, { ToastType } from '@/components/Toast/Toast';
 import { AnimatePresence } from 'framer-motion';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-javascript';
+import './prism-theme.scss';
 import './CodeBlock.scss';
 
 interface CodeBlockProps {
@@ -16,6 +20,10 @@ interface CodeBlockProps {
 const CodeBlock: React.FC<CodeBlockProps> = ({ label, code, language }) => {
   const [toast, setToast] = React.useState<{ message: string; type: ToastType } | null>(null);
   const [copied, setCopied] = React.useState(false);
+
+  useEffect(() => {
+    Prism.highlightAll();
+  }, [code, language]);
 
   const handleCopy = async () => {
     try {
@@ -48,7 +56,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ label, code, language }) => {
       </div>
       <div className="code-block__container">
         <pre className="code-block__content">
-          <code>{code}</code>
+          <code className={`language-${language}`}>{code}</code>
         </pre>
       </div>
       <AnimatePresence>

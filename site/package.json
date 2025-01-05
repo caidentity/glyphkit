@@ -32,10 +32,12 @@
     "@tanstack/react-query": "^5.62.8",
     "@tanstack/react-virtual": "^3.11.2",
     "@types/next": "^8.0.7",
+    "@types/prismjs": "^1.26.5",
     "clsx": "^2.1.1",
     "framer-motion": "^11.15.0",
     "lucide-react": "^0.469.0",
     "next": "^14.0.4",
+    "prismjs": "^1.29.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "scheduler": "^0.25.0",
@@ -45,6 +47,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
     "@types/react-dom": "18.2.18",
@@ -53,13 +56,12 @@
     "cross-env": "^7.0.3",
     "eslint": "8.56.0",
     "eslint-config-next": "14.0.4",
+    "fs-extra": "^11.2.0",
     "postcss": "8.4.32",
     "prettier": "3.1.1",
     "sass": "1.69.7",
     "tailwindcss": "3.4.0",
     "tsx": "^4.19.2",
-    "typescript": "5.3.3",
-    "fs-extra": "^11.2.0",
-    "@types/fs-extra": "^11.0.4"
+    "typescript": "5.3.3"
   }
 }

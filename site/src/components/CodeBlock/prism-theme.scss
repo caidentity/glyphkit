@@ -1,0 +1,83 @@
+/* Based on your color scheme using CSS variables */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--text-primary);
+  background: none;
+  text-shadow: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  text-align: left;
+  font-weight: 500;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* Token colors */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--text-tertiary);
+}
+
+.token.punctuation {
+  color: var(--text-secondary);
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  color: #e5c07b; /* or use CSS variable */
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  color: #98c379; /* or use CSS variable */
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.token.variable,
+.token.inserted {
+  color: #56b6c2; /* or use CSS variable */
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #c678dd; /* or use CSS variable */
+}
+
+.token.function {
+  color: #61afef; /* or use CSS variable */
+}
+
+.token.regex,
+.token.important {
+  color: #e06c75; /* or use CSS variable */
+}
+
+.token.deleted {
+  color: #e06c75; /* or use CSS variable */
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+} 
