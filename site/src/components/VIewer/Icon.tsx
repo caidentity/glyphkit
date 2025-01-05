@@ -32,7 +32,7 @@ const Icon: React.FC<IconProps> = ({
   showSize = false,
   showLabel = false,
   customSize,
-  color = "#000000",
+  color = "currentColor",
   ...props 
 }) => {
   const iconSize = customSize || icon.size;

@@ -89,7 +89,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
     if (viewMode === 'list') {
       return 24;
     }
-    return Math.floor(baseSize * iconScale);
+    return Math.floor((baseSize * 1.5) * iconScale);
   }, [viewMode, iconScale]);
 
   // Render icon card with error boundary
@@ -289,7 +289,8 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
           height: `${rowVirtualizer.getTotalSize()}px`,
           width: '100%',
           position: 'relative',
-        }}
+          '--grid-columns': gridDimensions.columns,
+        } as React.CSSProperties}
       >
         {rowVirtualizer.getVirtualItems().map(renderRow)}
       </div>
