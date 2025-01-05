@@ -13,6 +13,7 @@ import Button from '@/components/Button/Button';
 const navigation = [
   { name: 'Icons', href: '/icons' },
   { name: 'Docs', href: '/docs' },
+  { name: 'Feedback', href: 'https://github.com/GlyphKit/glyphkit/issues/new/choose' },
 ];
 
 export default function TopNavigation() {
