@@ -1,0 +1,28 @@
+.table-wrapper {
+    overflow-x: auto;
+    margin: 1rem 0;
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      
+      th, td {
+        padding: 0.75rem;
+        text-align: left;
+        border: 1px solid var(--divider-primary);
+      }
+  
+      th {
+        background-color: var(--surface-secondary);
+        font-weight: 600;
+      }
+  
+      code {
+        background-color: var(--surface-tertiary);
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.875em;
+      }
+    }
+  }
+  
