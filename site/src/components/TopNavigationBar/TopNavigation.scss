@@ -183,6 +183,9 @@
     margin: 0 var(--space-4);
     min-width: 200px;
     
+    input {
+      background-color: var(--surface-secondary);
+    }
     @include mobile {
       display: none;
     }

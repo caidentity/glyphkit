@@ -29,6 +29,7 @@ import { useSearch } from '@/contexts/SearchContext';
 
 export default function IconViewer() {
   const [searchQuery, setSearchQuery] = useState('');
+  const { query, setQuery, selectedSuggestion } = useSearch();
   const [selectedSize, setSelectedSize] = useState<number | null>(24);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<IconMetadata | null>(null);
@@ -272,6 +273,37 @@ export default function IconViewer() {
       setSelectedCategories([]);
     }
   }, [categories]);
+
+  // Effect to handle search state restoration and filters
+  useEffect(() => {
+    // Restore search state from homepage
+    const lastSearch = sessionStorage.getItem('lastSearch');
+    if (lastSearch) {
+      setSearchQuery(lastSearch);
+      setQuery(lastSearch);
+      sessionStorage.removeItem('lastSearch');
+    }
+
+    const searchType = sessionStorage.getItem('searchType');
+    const searchValue = sessionStorage.getItem('searchValue');
+
+    if (searchType && searchValue) {
+      // Handle filters based on suggestion type
+      if (searchType === 'category') {
+        setSelectedCategories([searchValue]);
+      } else if (searchType === 'tag') {
+        setSelectedTags([searchValue]);
+      }
+      
+      sessionStorage.removeItem('searchType');
+      sessionStorage.removeItem('searchValue');
+    }
+  }, [setQuery, setSelectedCategories, setSelectedTags]);
+
+  // Effect to sync search query with global state
+  useEffect(() => {
+    setSearchQuery(query);
+  }, [query]);
 
   // Add error handling for empty states
   if (!categories.length) {

@@ -46,6 +46,8 @@ export default function TopNavigation() {
   const suggestions = useSearchSuggestions(query, categories, allIcons);
 
   const handleSearch = (searchQuery: string) => {
+    if (!searchQuery.trim()) return;
+    
     // Store search state
     sessionStorage.setItem('lastSearch', searchQuery);
     if (selectedSuggestion) {
@@ -128,12 +130,14 @@ export default function TopNavigation() {
             <div className="top-navigation__search">
               <SearchInput
                 value={query}
-                onChange={setQuery}
+                onChange={(value) => {
+                  setQuery(value);
+                }}
                 onSearch={handleSearch}
                 onSuggestionSelect={handleSuggestionSelect}
                 suggestions={suggestions}
                 placeholder="Search 1000+ icons..."
-                size="medium"
+                size="large"
               />
             </div>
           )}
