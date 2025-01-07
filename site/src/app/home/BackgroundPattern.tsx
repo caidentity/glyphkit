@@ -20,7 +20,9 @@ const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ isVisible }) => {
             style={{
               backgroundImage: `url(${iconPath})`,
               backgroundRepeat: 'repeat',
-              backgroundSize: '468px 406px'
+              backgroundSize: '891px 510.75px', // Reduced to 25% of original (1188/4 × 681/4)
+              backgroundPosition: 'center',
+              transform: 'rotate(-10deg) scale(1.5)',
             }}
           />
         </div>
