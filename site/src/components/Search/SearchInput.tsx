@@ -58,7 +58,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
     const newValue = e.target.value;
     onChange(newValue);
     setQuery(newValue); // Update shared state
-    setIsOpen(true);
+    setIsOpen(!!newValue.trim()); // Only open if there's non-empty input
     setHighlightedIndex(-1);
   };
 
@@ -129,7 +129,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   };
 
   const renderSuggestions = () => {
-    if (!isOpen) return null;
+    if (!isOpen || !value.trim()) return null;
 
     const content = (
       <div 
@@ -176,7 +176,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
         value={value}
         onChange={handleInputChange}
         onKeyDown={handleKeyDown}
-        onFocus={() => setIsOpen(true)}
+        onFocus={() => setIsOpen(!!value.trim())}
         placeholder={placeholder}
         autoFocus={autoFocus}
         className={className}

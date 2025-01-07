@@ -5,9 +5,9 @@
   margin-top: auto; // Pushes footer to bottom if used with flex parent
 
   &__container {
-    max-width: 1200px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 44px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
