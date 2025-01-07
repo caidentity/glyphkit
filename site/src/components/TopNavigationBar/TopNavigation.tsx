@@ -97,8 +97,10 @@ export default function TopNavigation() {
     };
   }, [mobileMenuOpen]);
 
+  const variant = pathname === '/' ? 'mini' : 'large';
+
   return (
-    <header className="top-navigation">
+    <header className={`top-navigation top-navigation--${variant}`}>
       {/* Mobile Menu Overlay */}
       <div className={`top-navigation__mobile-overlay ${mobileMenuOpen ? 'active' : ''}`}>
         <div className="top-navigation__mobile-links">
@@ -118,7 +120,7 @@ export default function TopNavigation() {
         </div>
       </div>
 
-      <nav className={`top-navigation__container ${pathname !== '/' ? 'top-navigation__container--with-search' : ''}`}>
+      <nav className="top-navigation__container">
         <div className="top-navigation__content">
           {/* Logo */}
           <Link href="/" className="top-navigation__logo">

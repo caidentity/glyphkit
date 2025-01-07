@@ -2,38 +2,92 @@
 
 .top-navigation {
   width: 100%;
-  padding: 2px 0;
   position: fixed;
   top: 0;
   z-index: 99;
   
+  // Mini variant (homepage)
+  &--mini {
+    padding: 16px 0;
+
+    @media (max-width: 1024px) {
+      padding: 8px 0; // Remove padding on mobile
+      
+      .top-navigation__container {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: var(--space-2) var(--space-3);
+      }
+    }
+
+    .top-navigation__container {
+      max-width: fit-content;
+      margin: 0 auto;
+      border-radius: 50px;
+      padding: 0px 0px 0px 8px;
+    }
+
+    // Reduce gaps specifically for mini variant
+    .top-navigation__content {
+      gap: var(--space-1);
+    }
+
+    .top-navigation__links {
+      gap: var(--space-1);
+      margin-left: var(--space-1);
+    }
+    
+    .top-navigation__link {
+      padding: 2px var(--space-2);
+      font-size: var(--text-base);
+
+      &:hover {
+        color: var(--accent-primary);
+        background: var(--overlay-light);
+      }
+
+      &--active {
+        color: var(--accent-primary);
+        background: var(--surface-secondary);
+      }
+    }
+  }
+
+  // Large variant (with search)
+  &--large {
+    padding: 0; // Flush with top
+
+    .top-navigation__container {
+      width: 100%;
+      margin: 0;
+      padding: var(--space-2) var(--space-3);
+      border-radius: 0;
+    }
+
+    .top-navigation__link {
+      padding: 2px var(--space-3);
+      
+      &:hover {
+        color: var(--accent-primary);
+        background: var(--overlay-light);
+      }
+
+      &--active {
+        color: var(--accent-primary);
+        background: var(--surface-secondary);
+      }
+    }
+  }
+
   &__container {
-    max-width: fit-content;
-    margin: 0 auto;
     background: var(--nav-bg);
-    border-radius: 50px;
-    padding: var(--space-1) var(--space-6);
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     position: relative;
     z-index: 31;
-    
-    @media (max-width: 1024px) {
-      max-width: 100%;
-      width: 100%;
-      margin: 0;
-      border-radius: 0;
-      padding: var(--space-2) var(--space-3);
-    }
-
-    &--with-search {
-      max-width: 100%;
-      width: 100%;
-      margin: 0;
-      padding: var(--space-2) var(--space-3);
-      border-radius: 0;
-    }
   }
 
   &__content {
@@ -174,7 +228,7 @@
   &__actions {
     display: flex;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-1);
     flex-shrink: 0;
   }
 
