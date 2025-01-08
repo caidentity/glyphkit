@@ -65,19 +65,22 @@
   width: 16px;
   height: 16px;
   background-color: var(--surface-primary);
-  border: 2px solid var(--accent-primary);
+  border: 1px solid var(--divider-primary);
   border-radius: 50%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: all 0.2s ease;
+  position: relative;
+  z-index: 1;
 
   &:hover {
     transform: scale(1.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px var(--surface-primary), 0 0 0 4px var(--accent-primary-alpha);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   }
 
   &:active {
