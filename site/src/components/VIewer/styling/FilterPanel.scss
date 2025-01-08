@@ -168,6 +168,9 @@
       &--checked {
         background: var(--accent-primary);
         border-color: var(--accent-primary);
+        svg {
+          color: #fff;
+        }
       }
 
       &--unchecked:hover {
