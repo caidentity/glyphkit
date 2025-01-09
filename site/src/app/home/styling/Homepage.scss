@@ -20,6 +20,7 @@
   display: flex;
   align-items: flex-end;
   z-index: 10;
+  overflow: hidden;
 
   @include mobile {
     height: 90vh;
@@ -49,14 +50,29 @@
     opacity: 0;
   }
 
+  svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+
   .clipped-section {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 80vw;
-    height: 72vh;
-    clip-path: polygon(100% 0, 0 0, 100% 100%);
-    overflow: hidden;
+    inset: 0;
+    width: 200%;
+    // height: 100%;
+    right: -150%;
+    top: -10%;
+    left: auto;
+
+    .gradient-content {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      clip-path: url(#masthead-clip);
+      background: var(--background-primary);
+    }
   }
 
   .gradient-background {

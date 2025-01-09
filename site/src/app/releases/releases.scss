@@ -1,0 +1,35 @@
+.change-category {
+    margin-bottom: 2rem;
+  
+    h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+  }
+  
+  .change-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1rem;
+    border-left: 3px solid transparent;
+  
+    &.new { border-left-color: #28a745; }
+    &.changed { border-left-color: #f5a623; }
+    &.fixed { border-left-color: #0366d6; }
+    &.removed { border-left-color: #d73a49; }
+  
+    .description {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+  
+    ul {
+      margin-top: 0.5rem;
+      margin-left: 1.5rem;
+      
+      li {
+        margin-bottom: 0.25rem;
+        color: #666;
+      }
+    }
+  }

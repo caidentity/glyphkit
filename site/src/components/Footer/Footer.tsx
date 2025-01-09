@@ -3,6 +3,8 @@ import './Footer.scss';
 const Footer = () => {
   const links = [
     { label: 'Home', href: '/' },
+    { label: 'Docs', href: '/docs' },
+    { label: 'Releases', href: '/releases' },
     { label: 'About', href: '/about' },
     { label: 'Terms', href: '/terms' },
     { label: 'License', href: '/license' },

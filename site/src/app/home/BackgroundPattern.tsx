@@ -1,6 +1,7 @@
 import React from 'react';
 import { CanvasBackground } from '@/components/Gradient/Gradient';
 import { getAssetPath } from '@/lib/assetLoader';
+import MastheadClip from './MastheadClip';
 
 interface BackgroundPatternProps {
   isVisible: boolean;
@@ -11,20 +12,23 @@ const BackgroundPattern: React.FC<BackgroundPatternProps> = ({ isVisible }) => {
   
   return (
     <div className={`masthead-background ${isVisible ? 'visible' : ''}`}>
+      <MastheadClip />
       <div className="clipped-section">
-        <CanvasBackground className="gradient-background" />
-        <div className="background-pattern" />
-        <div className="pattern-overlay">
-          <div 
-            className="pattern-repeat"
-            style={{
-              backgroundImage: `url(${iconPath})`,
-              backgroundRepeat: 'repeat',
-              backgroundSize: '891px 510.75px', // Reduced to 25% of original (1188/4 × 681/4)
-              backgroundPosition: 'center',
-              transform: 'rotate(-10deg) scale(1.5)',
-            }}
-          />
+        <div className="gradient-content">
+          <CanvasBackground className="gradient-background" />
+          <div className="background-pattern" />
+          <div className="pattern-overlay">
+            <div 
+              className="pattern-repeat"
+              style={{
+                backgroundImage: `url(${iconPath})`,
+                backgroundRepeat: 'repeat',
+                backgroundSize: '891px 510.75px',
+                backgroundPosition: 'center',
+                transform: 'rotate(-10deg) scale(1.5)',
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>
