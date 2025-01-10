@@ -11,19 +11,17 @@
 }
 
 .masthead {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 88vh;
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
   background: var(--background-primary);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   z-index: 10;
-  overflow: hidden;
+  overflow: visible;
 
   @include mobile {
-    height: 90vh;
+    min-height: 90vh;
     padding-bottom: var(--space-4);
   }
 
@@ -143,6 +141,9 @@
   width: 100%;
   padding: var(--space-12);
   z-index: 10;
+  display: flex;
+  align-items: center;
+  height: 100%;
 
   @include mobile {
     padding: var(--space-6) var(--space-4);
@@ -228,11 +229,10 @@
 // Add specific positioning for KitsSection
 .kits-section {
   position: relative;
-  margin-top: 80vh; // Slightly less than masthead height to ensure visibility
-  z-index: 20; // Higher than masthead to ensure visibility
+  z-index: 20;
   
   @include mobile {
-    margin-top: 85vh;
+    margin-top: 0;
   }
 }
 
