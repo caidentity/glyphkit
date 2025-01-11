@@ -22,6 +22,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const hueRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const colorPalette = [
     ['#000000', '#424242', '#616161', '#757575', '#9E9E9E', '#BDBDBD', '#E0E0E0', '#EEEEEE', '#F5F5F5', '#FFFFFF'],
@@ -153,10 +154,27 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChange?.(newColor);
   };
 
-  // Add useEffect for click outside handling
+  // Update dropdown position when showing picker
+  useEffect(() => {
+    if (showPicker && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX
+      });
+    }
+  }, [showPicker]);
+
+  // Update click outside handler
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      // Check if click is outside both the container and dropdown
+      if (
+        containerRef.current && 
+        !containerRef.current.contains(event.target as Node) &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setShowPicker(false);
       }
     };
@@ -168,17 +186,6 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [showPicker]);
-
-  // Update dropdown position when showing picker
-  useEffect(() => {
-    if (showPicker && containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      setDropdownPosition({
-        top: rect.bottom + window.scrollY,
-        left: rect.left + window.scrollX
-      });
-    }
   }, [showPicker]);
 
   return (
@@ -196,6 +203,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 
       {showPicker && createPortal(
         <div 
+          ref={dropdownRef}
           className="picker-dropdown"
           style={{
             position: 'fixed',
