@@ -58,7 +58,7 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
       <div className={cn('icon-detail-panel', { open: isOpen })}>
         <div className="icon-detail-panel__header">
           <div className="icon-detail-panel__title">
-            <h2>Details</h2>
+            <h2>Icon Details</h2>
             <Button
               variant="tertiary"
               size="sm"

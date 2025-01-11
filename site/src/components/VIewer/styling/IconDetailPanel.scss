@@ -17,6 +17,7 @@
   -webkit-backdrop-filter: blur(8px);
   will-change: transform, opacity;
   pointer-events: none;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
 
   &.open {
     transform: translateX(0);
@@ -25,7 +26,7 @@
   }
 
   &__header {
-    padding: var(--space-4) var(--space-2) var(--space-4);
+    padding: var(--space-2) var(--space-2) var(--space-4);
     border-bottom: 1px solid var(--divider-primary);
     background-color: var(--background-primary);
   }
@@ -34,12 +35,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: var(--space-3);
+    margin: 0px 0px var(--space-1);
 
     h2 {
       font-size: var(--text-xl);
       font-weight: var(--font-semibold);
       line-height: var(--leading-relaxed);
+      margin: 0px 0px var(--space-1);
     }
   }
 
