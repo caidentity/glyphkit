@@ -56,6 +56,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
     handleSearch(suggestion.value);
   };
 
+  const quickSuggestions = ['files', 'objects', 'text', 'controls',];
+
+  const handleQuickSuggestion = (term: string) => {
+    setQuery(term);
+    handleSearch(term);
+  };
+
   return (
     <div className={`search-container ${isVisible ? 'visible' : ''} ${isTransitioning ? 'transitioning' : ''}`}>
       <div className="search-wrapper">
@@ -70,6 +77,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ isVisible, onTransitionStart }) =
           size="large"
           autoFocus
         />
+        <div className="quick-suggestions">
+          <span className="suggestions-label">Suggestions:</span>
+          {quickSuggestions.map((term) => (
+            <button
+              key={term}
+              className="quick-suggestion"
+              onClick={() => handleQuickSuggestion(term)}
+            >
+              {term}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

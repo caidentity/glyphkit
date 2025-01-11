@@ -85,3 +85,84 @@
     max-width: 100%;
   }
 } 
+
+.quick-suggestions {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  justify-content: flex-start;
+  align-items: center;
+  transform: translateY(1rem);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 200ms;
+  pointer-events: none;
+  padding-left: 0;
+
+  .suggestions-label {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    margin-right: var(--space-3);
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: 300ms;
+  }
+
+  .search-container.visible & {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+
+    .suggestions-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick-suggestion {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .quick-suggestion:nth-child(1) { transition-delay: 300ms; }
+    .quick-suggestion:nth-child(2) { transition-delay: 400ms; }
+    .quick-suggestion:nth-child(3) { transition-delay: 500ms; }
+    .quick-suggestion:nth-child(4) { transition-delay: 600ms; }
+    .quick-suggestion:nth-child(5) { transition-delay: 700ms; }
+  }
+
+  .search-container.transitioning & {
+    opacity: 0;
+    transform: translateY(-1rem);
+    transition-delay: 0ms;
+
+    .quick-suggestion {
+      transition-delay: 0ms;
+    }
+  }
+
+  .quick-suggestion {
+    padding: var(--space-1) var(--space-3);
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    transform: translateY(0.5rem);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--text-primary);
+    }
+
+    @include mobile {
+      font-size: var(--text-xs);
+      padding: var(--space-1) var(--space-2);
+    }
+  }
+} 
