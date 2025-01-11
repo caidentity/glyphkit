@@ -6,7 +6,7 @@
   align-items: center;
   gap: 8px;
   padding: 12px 16px;
-  border-radius: 6px;
+  border-radius: 50px;
   background: var(--surface-primary);
   border: 1px solid var(--divider-primary);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -47,18 +47,21 @@
 
   // Toast types
   &--success {
+    background: var(--surface-success);
     .toast__icon {
       color: var(--success);
     }
   }
 
   &--error {
+    background: var(--surface-alert);
     .toast__icon {
       color: var(--error);
     }
   }
 
   &--info {
+    background: var(--surface-warning);
     .toast__icon {
       color: var(--info);
     }

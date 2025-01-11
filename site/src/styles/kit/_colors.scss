@@ -76,6 +76,11 @@
     // Brand colors in theme
     --brand-primary: var(--color-brand-primary);
     --brand-primary-hover: #0040D1; // Slightly darker shade for hover
+    
+    // Surface status colors
+    --surface-success: #ecfdf5;  // Light green
+    --surface-warning: #fffbeb;  // Light yellow
+    --surface-alert: #fef2f2;    // Light red
   }
 
   // Dark theme
@@ -121,5 +126,10 @@
     // Brand colors in theme
     --brand-primary: var(--color-brand-primary);
     --brand-primary-hover: #1A5FFF; // Slightly lighter shade for hover
+    
+    // Surface status colors
+    --surface-success: #064e3b;  // Dark green
+    --surface-warning: #78350f;  // Dark amber
+    --surface-alert: #7f1d1d;    // Dark red
   }
 } 

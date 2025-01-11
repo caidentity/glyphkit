@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, X, AlertCircle, Info } from 'lucide-react';
+import { Icon } from '@glyphkit/glyphkit';
 import './Toast.scss';
 
 export type ToastType = 'success' | 'error' | 'info';
@@ -30,11 +31,11 @@ const Toast: React.FC<ToastProps> = ({
   const getIcon = () => {
     switch (type) {
       case 'success':
-        return <Check className="h-4 w-4" />;
+        return <Icon name="checkmark_16" size={15} />;
       case 'error':
-        return <AlertCircle className="h-4 w-4" />;
+        return <Icon name="message_warning_16" size={15} />;
       case 'info':
-        return <Info className="h-4 w-4" />;
+        return <Icon name="message_info_16" size={15} />
     }
   };
 
@@ -51,7 +52,7 @@ const Toast: React.FC<ToastProps> = ({
       <p className="toast__message">{message}</p>
       {onClose && (
         <button onClick={onClose} className="toast__close">
-          <X className="h-4 w-4" />
+          <Icon name="x_circle_filled_16" size={15} />
         </button>
       )}
     </motion.div>
