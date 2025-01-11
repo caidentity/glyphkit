@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './ColorPicker.scss';
 
 interface ColorPickerProps {
@@ -20,6 +21,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const pickerRef = useRef<HTMLDivElement>(null);
   const hueRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
 
   const colorPalette = [
     ['#000000', '#424242', '#616161', '#757575', '#9E9E9E', '#BDBDBD', '#E0E0E0', '#EEEEEE', '#F5F5F5', '#FFFFFF'],
@@ -168,6 +170,17 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     };
   }, [showPicker]);
 
+  // Update dropdown position when showing picker
+  useEffect(() => {
+    if (showPicker && containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX
+      });
+    }
+  }, [showPicker]);
+
   return (
     <div className="color-picker-container" ref={containerRef}>
       <div className="color-display" onClick={handleColorDisplayClick}>
@@ -181,8 +194,15 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
         />
       </div>
 
-      {showPicker && (
-        <div className="picker-dropdown">
+      {showPicker && createPortal(
+        <div 
+          className="picker-dropdown"
+          style={{
+            position: 'fixed',
+            top: `${dropdownPosition.top}px`,
+            left: `${dropdownPosition.left}px`
+          }}
+        >
           <div 
             ref={pickerRef}
             className="gradient-picker"
@@ -246,7 +266,8 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               className="dropdown-color-input"
             />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
