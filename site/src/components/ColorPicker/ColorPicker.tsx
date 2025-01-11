@@ -19,6 +19,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const pickerRef = useRef<HTMLDivElement>(null);
   const hueRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const colorPalette = [
     ['#000000', '#424242', '#616161', '#757575', '#9E9E9E', '#BDBDBD', '#E0E0E0', '#EEEEEE', '#F5F5F5', '#FFFFFF'],
@@ -150,8 +151,25 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     onChange?.(newColor);
   };
 
+  // Add useEffect for click outside handling
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setShowPicker(false);
+      }
+    };
+
+    if (showPicker) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showPicker]);
+
   return (
-    <div className="color-picker-container">
+    <div className="color-picker-container" ref={containerRef}>
       <div className="color-display" onClick={handleColorDisplayClick}>
         <div className="color-preview" style={{ backgroundColor: selectedColor }}></div>
         <input
