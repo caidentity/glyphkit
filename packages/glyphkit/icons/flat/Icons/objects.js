@@ -804,7 +804,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","light","bulb"]
+    tags: ["objects","object","light","bulb", "light bulb", "idea"]
   },
 
   object_light_bulb_24: {
@@ -820,7 +820,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","light","bulb"]
+    tags: ["objects","object","light","bulb", "light bulb", "idea"]
   },
 
   object_lock_16: {
@@ -834,7 +834,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","lock"]
+    tags: ["objects","object","lock", "security", "protect"]
   },
 
   object_lock_24: {
@@ -848,7 +848,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","lock"]
+    tags: ["objects","object","lock","security", "protect"]
   },
 
   object_lock_unlocked_16: {
@@ -862,7 +862,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","lock","unlocked"]
+    tags: ["objects","object","lock","unlocked","security", "protect"]
   },
 
   object_lock_unlocked_24: {
@@ -876,7 +876,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","lock","unlocked"]
+    tags: ["objects","object","lock","unlocked","security", "protect"]
   },
 
   object_mobile_phone_16: {
@@ -894,7 +894,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","mobile","phone"]
+    tags: ["objects","object","mobile","phone", "connect", "communication"]
   },
 
   object_mobile_phone_24: {
@@ -912,7 +912,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","mobile","phone"]
+    tags: ["objects","object","mobile","phone", "connect", "communication"]
   },
 
   object_monitor_16: {
@@ -926,7 +926,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","monitor"]
+    tags: ["objects","object","monitor", "desktop"]
   },
 
   object_monitor_24: {
@@ -940,7 +940,7 @@ export const objectsIcons = {
     }
     ],
     category: "objects",
-    tags: ["objects","object","monitor"]
+    tags: ["objects","object","monitor", "desktop"]
   },
 
   object_package_cart_16: {
