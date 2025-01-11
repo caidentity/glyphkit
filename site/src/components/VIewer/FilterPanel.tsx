@@ -236,6 +236,30 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               )}
             </div>
           </section>
+
+          <section className="filter-footer">
+            <div className="filter-footer-links">
+              <ul className="filter-footer-list">
+                {[
+                  { label: 'Home', href: '/' },
+                  { label: 'Docs', href: '/docs' },
+                  { label: 'Releases', href: '/releases' },
+                  { label: 'About', href: '/about' },
+                  { label: 'Terms', href: '/terms' },
+                  { label: 'License', href: '/license' },
+                ].map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} className="filter-footer-link">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <div className="filter-footer-copyright">
+                © {new Date().getFullYear()} Interact LLC
+              </div>
+            </div>
+          </section>
         </div>
         {hasActiveFilters && (
           <div className="filter-reset">

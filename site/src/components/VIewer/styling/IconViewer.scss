@@ -5,4 +5,31 @@
   overflow: hidden;
   position: relative;
   background: var(--surface-primary);
+}
+
+.icon-viewer__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  &-icon {
+    color: var(--text-tertiary);
+  }
+
+  &-text {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+  }
 } 

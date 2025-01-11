@@ -297,7 +297,12 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
       
       {icons.length === 0 && (
         <div className="icon-viewer__empty">
-          No icons found matching your criteria
+          <div className="icon-viewer__empty-content">
+            <GlyphKitIcon name="view_cube_24" size={32} className="icon-viewer__empty-icon" />
+            <span className="icon-viewer__empty-text">
+              No icons found matching your criteria
+            </span>
+          </div>
         </div>
       )}
     </div>
