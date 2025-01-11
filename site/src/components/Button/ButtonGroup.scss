@@ -21,7 +21,7 @@
       background-color: var(--accent-primary);
       border-color: var(--accent-primary);
       color: var(--text-inverse) !important; // Force inverse text color
-      z-index: 2; // Keep active button's borders visible
+      z-index: 1; // Keep active button's borders visible
       
       // Update icon colors when button is active
       svg {

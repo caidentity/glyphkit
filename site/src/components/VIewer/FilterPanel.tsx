@@ -138,6 +138,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   step={0.1}
                   formatValue={(value) => `${value}x`}
                   onValueChange={([value]) => setIconScale(value)}
+                  showTooltip
                 />
               </div>
             </div>

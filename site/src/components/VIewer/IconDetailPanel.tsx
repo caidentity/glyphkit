@@ -123,11 +123,13 @@ const IconDetailPanel: React.FC<IconDetailPanelProps> = ({
                   <p>Size</p>
                   <Slider
                     value={[iconSize]}
-                    min={icon.size}
+                    min={9}
                     max={icon.size * 5}
                     onValueChange={(value) => setIconSize(value[0])}
                     className="icon-detail-panel__preview-controls-slider-slider"
-                    step={10}
+                    step={1}
+                    showTooltip={true}
+                    formatValue={(value) => `${value}px`}
                   />
                 </div>
               </div>
