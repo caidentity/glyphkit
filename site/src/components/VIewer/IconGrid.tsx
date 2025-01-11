@@ -17,6 +17,7 @@ interface IconGridProps {
   viewMode: 'grid' | 'list';
   iconScale?: number;
   gridPadding?: number;
+  iconColor?: string;
 }
 
 const IconGrid: React.FC<IconGridProps> = React.memo(({ 
@@ -26,7 +27,8 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
   onIconCopy,
   viewMode,
   iconScale = 1,
-  gridPadding = 6
+  gridPadding = 6,
+  iconColor = 'currentColor',
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(0);
@@ -113,6 +115,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
                   customSize={calculateIconSize(icon.size)}
                   className="viewer-list__item-icon"
                   showLabel={false}
+                  color={iconColor}
                 />
                 <span className="viewer-list__item-name">
                   {icon.name}
@@ -171,6 +174,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
                   customSize={calculateIconSize(icon.size)}
                   className="viewer-grid__item-icon"
                   showLabel={false}
+                  color={iconColor}
                 />
                 <span className="viewer-grid__item-name">
                   {icon.name}
@@ -228,7 +232,7 @@ const IconGrid: React.FC<IconGridProps> = React.memo(({
       console.error('Error rendering icon card:', error);
       return null;
     }
-  }, [viewMode, onIconSelect, onIconCopy, onIconDownload, calculateIconSize]);
+  }, [viewMode, onIconSelect, onIconCopy, onIconDownload, calculateIconSize, iconColor]);
 
   // Render grid rows
   const renderRow = useCallback((virtualRow: any) => {

@@ -42,6 +42,7 @@ export default function IconViewer() {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [debouncedSearch, setDebouncedSearch] = useState(searchQuery);
   const [toast, setToast] = useState<{ message: string; type: ToastType } | null>(null);
+  const [selectedColor, setSelectedColor] = useState<string>('currentColor');
 
   const queryClient = useQueryClient();
 
@@ -162,6 +163,7 @@ export default function IconViewer() {
     setIconScale(1);
     setIsDetailPanelOpen(false);
     setSelectedIcon(null);
+    setSelectedColor('currentColor');
     window.history.replaceState({}, '', window.location.pathname);
   };
 
@@ -239,6 +241,8 @@ export default function IconViewer() {
       onResetFilters={handleResetFilters}
       gridPadding={gridPadding}
       setGridPadding={setGridPadding}
+      selectedColor={selectedColor}
+      setSelectedColor={setSelectedColor}
     />
   );
 
@@ -330,6 +334,7 @@ export default function IconViewer() {
             viewMode={viewMode}
             iconScale={iconScale}
             gridPadding={gridPadding}
+            iconColor={selectedColor}
           />
         </div>
       </div>

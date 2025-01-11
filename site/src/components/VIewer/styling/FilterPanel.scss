@@ -27,6 +27,7 @@
       overflow-y: auto;
       padding-right: 2px;
       position: relative;
+      contain: paint;
 
       // Scrollbar styling
       &::-webkit-scrollbar {
@@ -71,6 +72,8 @@
       align-items: center;
       margin-bottom: 0.75rem;
       height: auto;
+      position: relative;
+      z-index: 30;
     }
 
     &-title {
@@ -119,6 +122,11 @@
         background: var(--surface-secondary);
         border-radius: 9999px;
       }
+    }
+
+    .color-picker-container {
+      width: auto;
+      min-width: 120px;
     }
   }
 

@@ -6,6 +6,7 @@ import { IconCategory, IconTag } from '@/types/icon';
 import './styling/FilterPanel.scss';
 import ButtonGroup from "../Button/ButtonGroup";
 import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
+import ColorPicker from "../ColorPicker/ColorPicker";
 
 interface FilterPanelProps {
   selectedSize: number | null;
@@ -24,6 +25,8 @@ interface FilterPanelProps {
   onResetFilters: () => void;
   gridPadding: number;
   setGridPadding: (padding: number) => void;
+  selectedColor: string;
+  setSelectedColor: (color: string) => void;
 }
 
 const FilterPanel: React.FC<FilterPanelProps> = ({
@@ -43,6 +46,8 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
   onResetFilters,
   gridPadding,
   setGridPadding,
+  selectedColor,
+  setSelectedColor,
 }) => {
   const handleCategoryClick = useCallback((categoryName: string) => {
     setSelectedCategories(categoryName);
@@ -162,6 +167,16 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 </div>
               </div>
             </section> */}
+
+            <section className="filter-section">
+              <div className="filter-section-header">
+                <h3 className="filter-section-title">Color</h3>
+                <ColorPicker
+                  initialColor={selectedColor}
+                  onChange={setSelectedColor}
+                />
+              </div>
+            </section>
 
             <section className="filter-categories">
               <h3 className="filter-section-title">Categories</h3>
