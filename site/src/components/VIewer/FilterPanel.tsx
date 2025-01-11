@@ -5,6 +5,7 @@ import Slider from "../Slider/Slider";
 import { IconCategory, IconTag } from '@/types/icon';
 import './styling/FilterPanel.scss';
 import ButtonGroup from "../Button/ButtonGroup";
+import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
 
 interface FilterPanelProps {
   selectedSize: number | null;
@@ -112,7 +113,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   onClick={() => setViewMode('grid')}
                   data-state={viewMode === 'grid' ? 'active' : undefined}
                 >
-                  <Grid className="h-4 w-4" />
+                  <GlyphKitIcon name="view_layout_grid_16" size={14} />
                 </Button>
                 <Button
                   variant="secondary"
@@ -120,7 +121,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   onClick={() => setViewMode('list')}
                   data-state={viewMode === 'list' ? 'active' : undefined}
                 >
-                  <List className="h-4 w-4" />
+                  <GlyphKitIcon name="lines_two_16" size={14} />
                 </Button>
               </ButtonGroup>
             </div>
