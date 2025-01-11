@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './ColorPicker.scss';
 
 interface ColorPickerProps {
@@ -13,6 +13,12 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const [showPicker, setShowPicker] = useState(false);
   const [selectedColor, setSelectedColor] = useState(initialColor);
   const [inputType, setInputType] = useState<'hex' | 'rgba'>('hex');
+  const [hue, setHue] = useState(260);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isDraggingHue, setIsDraggingHue] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const pickerRef = useRef<HTMLDivElement>(null);
+  const hueRef = useRef<HTMLDivElement>(null);
 
   const colorPalette = [
     ['#000000', '#424242', '#616161', '#757575', '#9E9E9E', '#BDBDBD', '#E0E0E0', '#EEEEEE', '#F5F5F5', '#FFFFFF'],
@@ -86,6 +92,64 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     setShowPicker(!showPicker);
   };
 
+  const hslToRgb = (h: number, s: number, l: number) => {
+    h /= 360;
+    s /= 100;
+    l /= 100;
+    let r, g, b;
+
+    if (s === 0) {
+      r = g = b = l;
+    } else {
+      const hue2rgb = (p: number, q: number, t: number) => {
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1/6) return p + (q - p) * 6 * t;
+        if (t < 1/2) return q;
+        if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+        return p;
+      };
+
+      const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+      const p = 2 * l - q;
+      r = hue2rgb(p, q, h + 1/3);
+      g = hue2rgb(p, q, h);
+      b = hue2rgb(p, q, h - 1/3);
+    }
+
+    return `#${Math.round(r * 255).toString(16).padStart(2, '0')}${Math.round(g * 255).toString(16).padStart(2, '0')}${Math.round(b * 255).toString(16).padStart(2, '0')}`.toUpperCase();
+  };
+
+  const handleHueChange = (e: React.MouseEvent) => {
+    if (!hueRef.current || (!isDraggingHue && e.type === 'mousemove')) return;
+    
+    const rect = hueRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const newHue = Math.round((x / rect.width) * 360);
+    setHue(newHue);
+    
+    const newColor = hslToRgb(newHue, 100, 50);
+    setSelectedColor(newColor);
+    onChange?.(newColor);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !pickerRef.current) return;
+    
+    const rect = pickerRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
+    
+    setPosition({ x, y });
+
+    const saturation = (x / rect.width) * 100;
+    const lightness = 100 - (y / rect.height) * 100;
+
+    const newColor = hslToRgb(hue, saturation, lightness);
+    setSelectedColor(newColor);
+    onChange?.(newColor);
+  };
+
   return (
     <div className="color-picker-container">
       <div className="color-display" onClick={handleColorDisplayClick}>
@@ -101,19 +165,51 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 
       {showPicker && (
         <div className="picker-dropdown">
-          <div className="color-grid">
-            {colorPalette.map((row, rowIndex) => (
-              <div key={rowIndex} className="color-row">
-                {row.map((color, colIndex) => (
-                  <div
-                    key={`${rowIndex}-${colIndex}`}
-                    className="color-cell"
-                    style={{ backgroundColor: color }}
-                    onClick={() => handlePaletteColorClick(color)}
-                  ></div>
-                ))}
-              </div>
-            ))}
+          <div 
+            ref={pickerRef}
+            className="gradient-picker"
+            style={{
+              background: `
+                linear-gradient(to right, #FFF, hsl(${hue}, 100%, 50%)),
+                linear-gradient(to bottom, transparent, #000)
+              `,
+              backgroundBlendMode: 'multiply'
+            }}
+            onMouseDown={(e) => {
+              setIsDragging(true);
+              handleMouseMove(e);
+            }}
+            onMouseMove={handleMouseMove}
+            onMouseUp={() => setIsDragging(false)}
+            onMouseLeave={() => setIsDragging(false)}
+          >
+            <div 
+              className="picker-handle"
+              style={{
+                left: position.x,
+                top: position.y,
+                backgroundColor: selectedColor
+              }}
+            />
+          </div>
+
+          <div 
+            ref={hueRef}
+            className="hue-slider"
+            onMouseDown={(e) => {
+              setIsDraggingHue(true);
+              handleHueChange(e);
+            }}
+            onMouseMove={handleHueChange}
+            onMouseUp={() => setIsDraggingHue(false)}
+            onMouseLeave={() => setIsDraggingHue(false)}
+          >
+            <div 
+              className="hue-handle"
+              style={{
+                left: `${(hue / 360) * 100}%`
+              }}
+            />
           </div>
 
           <div className="color-input">
