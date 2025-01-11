@@ -907,7 +907,7 @@ export const viewIcons = {
     tags: ["view","rotate","90","right"]
   },
 
-  vie_box_align_middle_16: {
+  view_box_align_middle_16: {
     viewBox: "0 0 17 17",
     paths: [
     {
@@ -945,7 +945,7 @@ export const viewIcons = {
     tags: ["view","vie","box","align","middle"]
   },
 
-  vie_box_align_middle_24: {
+  view_box_align_middle_24: {
     viewBox: "0 0 25 25",
     paths: [
     {
@@ -983,7 +983,7 @@ export const viewIcons = {
     tags: ["view","vie","box","align","middle"]
   },
 
-  vie_box_align_top_16: {
+  view_box_align_top_16: {
     viewBox: "0 0 17 17",
     paths: [
     {
@@ -1021,7 +1021,7 @@ export const viewIcons = {
     tags: ["view","vie","box","align","top"]
   },
 
-  vie_box_align_top_24: {
+  view_box_align_top_24: {
     viewBox: "0 0 25 25",
     paths: [
     {
