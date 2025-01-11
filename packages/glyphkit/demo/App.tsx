@@ -18,7 +18,7 @@ const iconConfigs = [
   { name: 'data_chart_pie_quarter_24', color: 'red' },
   { name: 'diagram_ven_24', color: 'red' },
   { name: 'data_spreadsheet_search_24', color: 'red' },
-  { name: 'data_spreadsheet_24', color: 'yellow' },
+  { name: 'view_box_dots_inside_24', color: 'pink' },
   { name: 'checkmark_circle_24', color: 'purple' },
   { name: 'file_note_24', color: 'green' },
   { name: 'location_pin_24', color: 'green' },
