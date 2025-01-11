@@ -3,25 +3,33 @@
 .viewer {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: calc(100vh - 66px);
   background: var(--surface-primary);
   margin-top: 66px;
+  overflow: hidden;
+  position: relative;
 
   &-content {
     display: flex;
     flex: 1;
     overflow: hidden;
+    height: 100%;
+    position: relative;
 
     &__sidebar {
       width: 280px;
       flex-shrink: 0;
       border-right: 1px solid var(--divider-primary);
+      overflow-y: auto;
+      height: 100%;
     }
 
     &__main {
       flex: 1;
       overflow: auto;
       padding: var(--space-4);
+      height: 100%;
+      position: relative;
     }
   }
 
