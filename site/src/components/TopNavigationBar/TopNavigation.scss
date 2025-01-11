@@ -8,7 +8,7 @@
   
   // Mini variant (homepage)
   &--mini {
-    padding: 16px 0;
+    padding: 16px;
 
     @media (max-width: 1024px) {
       padding: 8px 0; // Remove padding on mobile
@@ -24,9 +24,15 @@
 
     .top-navigation__container {
       max-width: fit-content;
-      margin: 0 auto;
+      margin: 0;
       border-radius: 50px;
       padding: 0px 0px 0px 8px;
+      box-shadow: none;
+    }
+
+    // Hide logo on mini variant
+    .top-navigation__logo {
+      display: none;
     }
 
     // Reduce gaps specifically for mini variant
@@ -121,7 +127,7 @@
   &__links {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
+    gap: var(--space-2);
     margin-left: var(--space-4);
 
     @include mobile {

@@ -168,7 +168,7 @@
   width: 120px;
   backdrop-filter: blur(8px);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,8 +194,7 @@
   font-size: var(--text-xl);
   color: var(--text-secondary);
   font-weight: var(--font-medium);
-  line-height: 1.5;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1.8;
   transform: translateY(2rem);
   opacity: 0;
   transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);

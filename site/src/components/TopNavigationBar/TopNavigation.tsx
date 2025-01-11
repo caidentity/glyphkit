@@ -122,10 +122,12 @@ export default function TopNavigation() {
 
       <nav className="top-navigation__container">
         <div className="top-navigation__content">
-          {/* Logo */}
-          <Link href="/" className="top-navigation__logo">
-            <Image src={logoPath} alt="Logo" width={40} height={40} priority />
-          </Link>
+          {/* Only show logo when not on homepage */}
+          {pathname !== '/' && (
+            <Link href="/" className="top-navigation__logo">
+              <Image src={logoPath} alt="Logo" width={40} height={40} priority />
+            </Link>
+          )}
 
           {/* Search Bar - Only show if not on homepage */}
           {pathname !== '/' && (
