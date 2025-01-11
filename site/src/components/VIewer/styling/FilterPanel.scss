@@ -1,20 +1,56 @@
 @use '@/styles/kit' as *;
 
 .filter {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
 
   &-container {
-    height: 100%;
+    height: 100vh;
     overflow: hidden;
     background: var(--surface-primary);
-    padding: var(--space-4);
+    padding: 4px 8px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+
+    // Main scrollable filter section
+    .filter-sections {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 2px;
+      position: relative;
+      max-height: calc(100vh - 280px);
+
+      // Scrollbar styling
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--surface-secondary);
+        border-radius: 9999px;
+      }
+
+      scrollbar-width: thin;
+      scrollbar-color: var(--surface-secondary) transparent;
+    }
   }
 
   &-reset {
-    position: absolute;
+    position: sticky;
     bottom: 0;
     left: 0;
     right: 0;
@@ -26,60 +62,35 @@
     z-index: 20;
   }
 
-  &-content {
-    height: calc(100% - 3rem);
-    overflow-y: auto;
-    padding-right: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-
-    // Scrollbar styling
-    &::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: var(--surface-secondary);
-      border-radius: 9999px;
-    }
-
-    scrollbar-width: thin;
-    scrollbar-color: var(--surface-secondary) transparent;
-  }
-
   // Section styles
   &-section {
     position: relative;
-    height: 16px;
+    margin-bottom: 8px;
 
     &-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 0.75rem;
+      height: auto;
     }
 
     &-title {
       font-size: var(--text-sm);
       font-weight: var(--font-semibold);
       color: var(--text-secondary);
-      margin-top: 0px;
+      margin: 0;
     }
 
     &-actions {
       display: flex;
-      gap: 0.5rem;
+      gap: 4px;
     }
 
     // Size buttons
     &-size {
       display: flex;
-      gap: 0.5rem;
+      gap: 4px;
     }
 
     // View mode
@@ -98,8 +109,8 @@
     &-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      max-height: 12rem;
+      gap: 8px;
+      max-height: 188px;
       overflow-y: auto;
 
       &::-webkit-scrollbar {
@@ -143,7 +154,7 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.375rem;
+      padding: 6px;
       border-radius: var(--radius-sm);
       cursor: pointer;
       transition: background-color var(--transition-default);
@@ -158,8 +169,8 @@
     }
 
     &-checkbox {
-      width: 1rem;
-      height: 1rem;
+      width: 16px;
+      height: 16px;
       border-radius: 0.25rem;
       border: 1px solid var(--divider-primary);
       display: flex;
@@ -189,7 +200,7 @@
     }
 
     &-content {
-      height: calc(100vh - 6rem);
+      height: calc(100vh - 96px);
     }
   }
 }
@@ -296,10 +307,11 @@
 }
 
 .filter-footer {
-  border-top: 1px solid var(--divider-primary);
-  padding-top: 1rem;
   margin-top: auto;
-  padding-bottom: 3rem;
+  padding-top: 16px;
+  border-top: 1px solid var(--divider-primary);
+  min-height: fit-content;
+  padding-bottom: 64px;
 
   &-list {
     list-style: none;
@@ -307,18 +319,18 @@
     margin: 0 0 0.75rem 0;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.125rem 1rem;
+    gap: 2px 16px;
   }
 
   &-link {
     display: block;
-    padding: 0.0625rem 0;
+    padding: 1px 0;
     color: var(--text-secondary);
     text-decoration: none;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     transition: color 0.2s ease;
     white-space: nowrap;
-    line-height: 1.2;
+    line-height: 1.1;
 
     &:hover {
       color: var(--text-primary);
@@ -327,6 +339,6 @@
 
   &-copyright {
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 12px;
   }
 }

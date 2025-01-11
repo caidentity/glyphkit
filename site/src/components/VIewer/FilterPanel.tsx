@@ -79,199 +79,198 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
     <div className="filter">
       <div className="filter-container">
         <div className="filter-content">
-          <section className="filter-section">
-            <div className="filter-section-header">
-              <h3 className="filter-section-title">Size</h3>
-              <ButtonGroup>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
-                  data-state={selectedSize === 24 ? 'active' : undefined}
-                >
-                  24px
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
-                  data-state={selectedSize === 16 ? 'active' : undefined}
-                >
-                  16px
-                </Button>
-              </ButtonGroup>
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <div className="filter-section-header">
-              <h3 className="filter-section-title">View Mode</h3>
-              <ButtonGroup>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  data-state={viewMode === 'grid' ? 'active' : undefined}
-                >
-                  <GlyphKitIcon name="view_layout_grid_16" size={14} />
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  data-state={viewMode === 'list' ? 'active' : undefined}
-                >
-                  <GlyphKitIcon name="lines_two_16" size={14} />
-                </Button>
-              </ButtonGroup>
-            </div>
-          </section>
-
-          <section className="filter-section">
-            <div className="filter-section-header">
-              <h3 className="filter-section-title">Icon Size</h3>
-              <div className="filter-section-scale">
-                <Slider
-                  label="Scale"
-                  value={[iconScale]}
-                  min={0.5}
-                  max={2}
-                  step={0.1}
-                  formatValue={(value) => `${value}x`}
-                  onValueChange={([value]) => setIconScale(value)}
-                  showTooltip
-                />
+          <div className="filter-sections">
+            <section className="filter-section">
+              <div className="filter-section-header">
+                <h3 className="filter-section-title">Size</h3>
+                <ButtonGroup>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setSelectedSize(prev => prev === 24 ? null : 24)}
+                    data-state={selectedSize === 24 ? 'active' : undefined}
+                  >
+                    24px
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setSelectedSize(prev => prev === 16 ? null : 16)}
+                    data-state={selectedSize === 16 ? 'active' : undefined}
+                  >
+                    16px
+                  </Button>
+                </ButtonGroup>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* <section className="filter-section">
-            <div className="filter-section-header">
-              <h3 className="filter-section-title">Icons per Row</h3>
-              <div className="filter-section-scale">
-                <Slider
-                  label="Count"
-                  value={[gridPadding]}
-                  min={2}
-                  max={8}
-                  step={1}
-                  formatValue={(value) => `${value}`}
-                  onValueChange={([value]) => setGridPadding(value)}
-                />
+            <section className="filter-section">
+              <div className="filter-section-header">
+                <h3 className="filter-section-title">View Mode</h3>
+                <ButtonGroup>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setViewMode('grid')}
+                    data-state={viewMode === 'grid' ? 'active' : undefined}
+                  >
+                    <GlyphKitIcon name="view_layout_grid_16" size={14} />
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => setViewMode('list')}
+                    data-state={viewMode === 'list' ? 'active' : undefined}
+                  >
+                    <GlyphKitIcon name="lines_two_16" size={14} />
+                  </Button>
+                </ButtonGroup>
               </div>
-            </div>
-          </section> */}
+            </section>
 
-          <section className="filter-categories">
-            <h3 className="filter-section-title">Categories</h3>
-            <div className="filter-categories-list">
-              {categories.map(category => (
-                <div 
-                  key={category.name}
-                  className="filter-categories-item"
-                  onClick={() => handleCategoryClick(category.name)}
-                  role="button"
-                  tabIndex={0}
-                >
-                  <div className={`
-                    filter-categories-checkbox
-                    ${selectedCategories.includes(category.name) 
-                      ? 'filter-categories-checkbox--checked'
-                      : 'filter-categories-checkbox--unchecked'
-                    }
-                  `}>
-                    {selectedCategories.includes(category.name) && (
-                      <Check className="h-3 w-3 text-white" />
-                    )}
-                  </div>
-                  <span className="text-sm">
-                    {category.name}
-                    <span className="text-gray-400 ml-1">
-                      ({category.icons.length})
-                    </span>
-                  </span>
+            <section className="filter-section">
+              <div className="filter-section-header">
+                <h3 className="filter-section-title">Icon Size</h3>
+                <div className="filter-section-scale">
+                  <Slider
+                    label="Scale"
+                    value={[iconScale]}
+                    min={0.5}
+                    max={2}
+                    step={0.1}
+                    formatValue={(value) => `${value}x`}
+                    onValueChange={([value]) => setIconScale(value)}
+                    showTooltip
+                  />
                 </div>
-              ))}
-            </div>
-          </section>
+              </div>
+            </section>
 
-          <section className="filter-categories">
-            <h3 className="filter-section-title">Tags</h3>
-            <div className="filter-categories-list">
-              {tags?.length > 0 ? (
-                tags.map(tag => (
+            {/* <section className="filter-section">
+              <div className="filter-section-header">
+                <h3 className="filter-section-title">Icons per Row</h3>
+                <div className="filter-section-scale">
+                  <Slider
+                    label="Count"
+                    value={[gridPadding]}
+                    min={2}
+                    max={8}
+                    step={1}
+                    formatValue={(value) => `${value}`}
+                    onValueChange={([value]) => setGridPadding(value)}
+                  />
+                </div>
+              </div>
+            </section> */}
+
+            <section className="filter-categories">
+              <h3 className="filter-section-title">Categories</h3>
+              <div className="filter-categories-list">
+                {categories.map(category => (
                   <div 
-                    key={tag.name}
+                    key={category.name}
                     className="filter-categories-item"
-                    onClick={() => handleTagClick(tag.name)}
+                    onClick={() => handleCategoryClick(category.name)}
                     role="button"
                     tabIndex={0}
-                    onKeyPress={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        handleTagClick(tag.name);
-                      }
-                    }}
                   >
                     <div className={`
                       filter-categories-checkbox
-                      ${selectedTags.includes(tag.name) 
+                      ${selectedCategories.includes(category.name) 
                         ? 'filter-categories-checkbox--checked'
                         : 'filter-categories-checkbox--unchecked'
                       }
                     `}>
-                      {selectedTags.includes(tag.name) && (
+                      {selectedCategories.includes(category.name) && (
                         <Check className="h-3 w-3 text-white" />
                       )}
                     </div>
                     <span className="text-sm">
-                      {tag.name}
+                      {category.name}
                       <span className="text-gray-400 ml-1">
-                        ({tag.count})
+                        ({category.icons.length})
                       </span>
                     </span>
                   </div>
-                ))
-              ) : (
-                <div className="text-sm text-gray-400 p-2">No tags available</div>
-              )}
-            </div>
-          </section>
-
-          <section className="filter-footer">
-            <div className="filter-footer-links">
-              <ul className="filter-footer-list">
-                {[
-                  { label: 'Home', href: '/' },
-                  { label: 'Docs', href: '/docs' },
-                  { label: 'Releases', href: '/releases' },
-                  { label: 'About', href: '/about' },
-                  { label: 'Terms', href: '/terms' },
-                  { label: 'License', href: '/license' },
-                ].map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href} className="filter-footer-link">
-                      {link.label}
-                    </a>
-                  </li>
                 ))}
-              </ul>
-              <div className="filter-footer-copyright">
-                © {new Date().getFullYear()} Interact LLC
               </div>
+            </section>
+
+            <section className="filter-categories">
+              <h3 className="filter-section-title">Tags</h3>
+              <div className="filter-categories-list">
+                {tags?.length > 0 ? (
+                  tags.map(tag => (
+                    <div 
+                      key={tag.name}
+                      className="filter-categories-item"
+                      onClick={() => handleTagClick(tag.name)}
+                      role="button"
+                      tabIndex={0}
+                      onKeyPress={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          handleTagClick(tag.name);
+                        }
+                      }}
+                    >
+                      <div className={`
+                        filter-categories-checkbox
+                        ${selectedTags.includes(tag.name) 
+                          ? 'filter-categories-checkbox--checked'
+                          : 'filter-categories-checkbox--unchecked'
+                        }
+                      `}>
+                        {selectedTags.includes(tag.name) && (
+                          <Check className="h-3 w-3 text-white" />
+                        )}
+                      </div>
+                      <span className="text-sm">
+                        {tag.name}
+                        <span className="text-gray-400 ml-1">
+                          ({tag.count})
+                        </span>
+                      </span>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-sm text-gray-400 p-2">No tags available</div>
+                )}
+              </div>
+            </section>
+
+            <div className="filter-reset">
+              <Button
+                variant="tertiary"
+                size="sm"
+                onClick={onResetFilters}
+              >
+                Reset all filters
+              </Button>
+            </div>
+          </div>
+          
+          <section className="filter-footer">
+            <ul className="filter-footer-list">
+              {[
+                { label: 'Home', href: '/' },
+                { label: 'Docs', href: '/docs' },
+                { label: 'Releases', href: '/releases' },
+                { label: 'About', href: '/about' },
+                { label: 'Terms', href: '/terms' },
+                { label: 'License', href: '/license' },
+              ].map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="filter-footer-link">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div className="filter-footer-copyright">
+              © {new Date().getFullYear()} Interact LLC
             </div>
           </section>
         </div>
-        {hasActiveFilters && (
-          <div className="filter-reset">
-            <Button
-              variant="tertiary"
-              size="sm"
-              onClick={onResetFilters}
-            >
-              Reset all filters
-            </Button>
-          </div>
-        )}
       </div>
     </div>
   );
