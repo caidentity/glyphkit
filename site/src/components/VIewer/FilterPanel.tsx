@@ -176,6 +176,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                   onChange={(color) => {
                     setSelectedColor(color);
                   }}
+                  showInput={false}
                 />
               </div>
             </section>

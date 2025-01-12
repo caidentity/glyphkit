@@ -74,6 +74,7 @@
       height: auto;
       position: relative;
       z-index: 30;
+      padding: 0;
     }
 
     &-title {
@@ -126,7 +127,16 @@
 
     .color-picker-container {
       width: auto;
-      min-width: 120px;
+      min-width: auto;
+      
+      .color-display {
+        padding: 2px;
+        width: fit-content;
+        
+        .color-preview {
+          margin-right: 0;
+        }
+      }
     }
   }
 

@@ -53,6 +53,11 @@
       outline: none;
     }
   }
+
+  &:not(:has(.color-value-input)) {
+    width: fit-content;
+    padding: 4px;
+  }
 }
 
 .picker-dropdown {

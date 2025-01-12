@@ -5,11 +5,13 @@ import './ColorPicker.scss';
 interface ColorPickerProps {
   initialColor?: string;
   onChange?: (color: string) => void;
+  showInput?: boolean;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({ 
   initialColor = '#5F6368',
-  onChange
+  onChange,
+  showInput = true,
 }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [selectedColor, setSelectedColor] = useState(initialColor);
@@ -205,13 +207,15 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     <div className="color-picker-container" ref={containerRef}>
       <div className="color-display" onClick={handleColorDisplayClick}>
         <div className="color-preview" style={{ backgroundColor: selectedColor }}></div>
-        <input
-          type="text"
-          value={inputType === 'hex' ? selectedColor : hexToRgba(selectedColor)}
-          onChange={handleColorChange}
-          className="color-value-input"
-          onClick={(e) => e.stopPropagation()}
-        />
+        {showInput && (
+          <input
+            type="text"
+            value={inputType === 'hex' ? selectedColor : hexToRgba(selectedColor)}
+            onChange={handleColorChange}
+            className="color-value-input"
+            onClick={(e) => e.stopPropagation()}
+          />
+        )}
       </div>
 
       {showPicker && createPortal(
