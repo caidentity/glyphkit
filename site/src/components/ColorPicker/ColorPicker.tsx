@@ -6,12 +6,14 @@ interface ColorPickerProps {
   initialColor?: string;
   onChange?: (color: string) => void;
   showInput?: boolean;
+  previewClassName?: string;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({ 
   initialColor = '#5F6368',
   onChange,
   showInput = true,
+  previewClassName,
 }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [selectedColor, setSelectedColor] = useState(initialColor);
@@ -206,7 +208,10 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   return (
     <div className="color-picker-container" ref={containerRef}>
       <div className="color-display" onClick={handleColorDisplayClick}>
-        <div className="color-preview" style={{ backgroundColor: selectedColor }}></div>
+        <div 
+          className={`color-preview ${previewClassName || ''}`} 
+          style={{ backgroundColor: selectedColor }}
+        ></div>
         {showInput && (
           <input
             type="text"

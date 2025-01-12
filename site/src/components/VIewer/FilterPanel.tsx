@@ -142,6 +142,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                     setSelectedColor(color);
                   }}
                   showInput={false}
+                  previewClassName="filter-color-preview"
                 />
               </div>
             </section>
