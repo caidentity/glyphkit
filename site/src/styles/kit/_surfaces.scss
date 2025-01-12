@@ -10,6 +10,8 @@
   // Common shadows
   --shadow-lg: 0 10px 15px -3px var(--shadow-light),
                0 4px 6px -2px var(--shadow-light);
+  --shadow-xl: 0 20px 25px -5px var(--shadow-light),
+               0 10px 10px -5px var(--shadow-light);
 
   // Light theme
   &[data-theme="light"] {
