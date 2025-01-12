@@ -205,6 +205,60 @@ function App() {
 />`}
               language="javascript"
             />
+
+            <h3>Accessibility</h3>
+            <p>
+              GlyphKit icons support ARIA attributes for proper accessibility implementation. Here are the common patterns for different use cases:
+            </p>
+
+            <h4>Decorative Icons</h4>
+            <p>
+              Icons that are purely decorative should have <code>aria-hidden="true"</code>. This will not visually hide the icon, 
+              but it will hide the element from assistive technology.
+            </p>
+            <CodeBlock
+              label="Decorative Icon"
+              code={`
+<Icon 
+  name="heart"
+  aria-hidden={true}
+  size={24}
+/>`}
+              language="javascript"
+            />
+
+            <h4>Interactive Icons</h4>
+            <p>
+              If the icon conveys meaning, it should have alternate text defined by adding an <code>aria-label</code>.
+            </p>
+            <CodeBlock
+              label="Interactive Icon"
+              code={`
+<Icon
+  name="heart"
+  aria-label="Add to favorites"
+  size={24}
+/>`}
+              language="javascript"
+            />
+
+            <h4>Icons Within Interactive Elements</h4>
+            <p>
+              When an icon is inside another element that it's describing, the parent element should have the <code>aria-label</code>,
+              and the icon should be hidden using <code>aria-hidden</code>.
+            </p>
+            <CodeBlock
+              label="Icon in Button"
+              code={`
+<button aria-label="Add to favorites">
+  <Icon
+    name="heart"
+    aria-hidden={true}
+    size={24}
+  />
+</button>`}
+              language="javascript"
+            />
           </section>
 
           <section id="need-help">
