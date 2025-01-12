@@ -125,7 +125,7 @@ export default function TopNavigation() {
           {/* Only show logo when not on homepage */}
           {pathname !== '/' && (
             <Link href="/" className="top-navigation__logo">
-              <Image src={logoPath} alt="Logo" width={40} height={40} priority />
+              <Image className="theme-aware-logo" src={logoPath} alt="Logo" width={40} height={40} priority />
             </Link>
           )}
 

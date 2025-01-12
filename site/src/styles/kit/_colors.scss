@@ -11,10 +11,10 @@
   --color-blue-100: #dbeafe;
   --color-blue-200: #bfdbfe;
   --color-blue-300: #93c5fd;
-  --color-blue-400: #60a5fa;
+  --color-blue-400: #58a3ff;
   --color-blue-500: #3b82f6;
   --color-blue-600: #2563eb;
-  --color-blue-700: #1d4ed8;
+  --color-blue-700: #0d41ce;
   
   // Purple shades
   --color-purple-400: #a78bfa;
@@ -40,7 +40,8 @@
     --text-secondary: var(--color-gray-700);
     --text-tertiary: var(--color-gray-500);
     --text-inverse: var(--color-white);
-    
+    --text-link: var(--color-blue-600);
+
     // Background colors
     --background-primary: var(--color-white);
     --background-secondary: var(--color-gray-50);
@@ -90,7 +91,8 @@
     --text-secondary: var(--color-gray-300);
     --text-tertiary: var(--color-gray-400);
     --text-inverse: var(--color-gray-900);
-    
+    --text-link: var(--color-blue-400);
+
     // Background colors
     --background-primary: var(--color-gray-900);
     --background-secondary: var(--color-gray-800);
@@ -102,7 +104,7 @@
     --nav-hover: var(--color-gray-200);
     
     // Accent colors
-    --accent-primary: var(--color-blue-400);
+    --accent-primary: var(--color-blue-500);
     --accent-secondary: var(--color-purple-400);
     --accent-hover: var(--color-blue-300);
     
@@ -124,7 +126,7 @@
     --divider-secondary: var(--color-gray-600);
     
     // Brand colors in theme
-    --brand-primary: var(--color-brand-primary);
+    --brand-primary: #0098FF;
     --brand-primary-hover: #1A5FFF; // Slightly lighter shade for hover
     
     // Surface status colors

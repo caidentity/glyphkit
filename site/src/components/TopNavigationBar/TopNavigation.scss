@@ -57,12 +57,12 @@
       font-size: var(--text-base);
 
       &:hover {
-        color: var(--accent-primary);
+        color: var(--text-link);
         background: var(--overlay-light);
       }
 
       &--active {
-        color: var(--accent-primary);
+        color: var(--text-link);
         background: var(--surface-secondary);
       }
     }
@@ -106,12 +106,12 @@
       padding: 2px var(--space-3);
       
       &:hover {
-        color: var(--accent-primary);
+        color: var(--text-link);
         background: var(--overlay-light);
       }
 
       &--active {
-        color: var(--accent-primary);
+        color: var(--text-link);
         background: var(--surface-secondary);
       }
     }
@@ -173,12 +173,12 @@
     transition: all 0.2s;
 
     &:hover {
-      color: var(--accent-primary);
+      color: var(--text-link);
       background: var(--overlay-light);
     }
 
     &--active {
-      color: var(--accent-primary);
+      color: var(--text-link);
       background: var(--surface-secondary);
     }
   }
@@ -257,7 +257,7 @@
     }
 
     &.active {
-      color: var(--accent-primary);
+      color: var(--text-link);
     }
   }
 

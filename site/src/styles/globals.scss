@@ -36,3 +36,12 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.theme-aware-logo {
+  filter: brightness(1);
+  transition: filter 0.3s ease;
+
+  [data-theme="dark"] & {
+    filter: brightness(1.9);
+  }
+}
