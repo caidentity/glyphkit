@@ -1,4 +1,7 @@
+'use client';
+
 import './Footer.scss';
+import { Icon as GlyphKitIcon } from '@glyphkit/glyphkit';
 
 const Footer = () => {
   const links = [
@@ -25,8 +28,13 @@ const Footer = () => {
             ))}
           </ul>
         </nav>
-        <div className="footer__copyright">
-          © {new Date().getFullYear()} Interact LLC
+        <div className="footer__right">
+          <span className="footer__copyright">
+            © {new Date().getFullYear()} Interact LLC
+          </span>
+          <a href="https://x.com/glyphkit" className="footer__social-link" target="_blank" rel="noopener noreferrer">
+            <GlyphKitIcon name="brand_twitter_16" size={18} color="var(--text-tertiary)" />
+          </a>
         </div>
       </div>
     </footer>

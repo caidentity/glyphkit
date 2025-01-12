@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { GridContainer, GridRow, GridCol } from '@/components/GridSystem';
 import './styling/KitsSection.scss';
