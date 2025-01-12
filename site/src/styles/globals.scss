@@ -38,7 +38,6 @@ body {
 }
 
 .theme-aware-logo {
-  filter: brightness(1);
   transition: filter 0.3s ease;
 
   [data-theme="dark"] & {
