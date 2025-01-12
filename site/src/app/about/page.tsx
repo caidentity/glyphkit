@@ -26,14 +26,21 @@ export default function AboutPage() {
               GlyphKit is a comprehensive icon toolkit designed to bring quality to any application. 
             </p>
 
-            <h2>Design Philosphy</h2>
+            <h2>Our Vision</h2>
             <p>
-              Eaach icon is carefully designed to uphold a high level of accessibility, readability and conformance to any design language.
+              We envision a future where developers and designers no longer struggle to find the perfect icon system for their applications. GlyphKit aims to be the definitive solution by providing a robust, cohesive icon system that seamlessly integrates with any design language or application framework.
             </p>
             <p>
-              Styling is kept a  minimum in order to bring conformance to any existing design language. This library will continue to evolve over time and support more mechinims to control styling in order to ensure a even closer fit to your existing design language. 
+              Our mission is to fill a critical gap in the icon library ecosystem by offering unparalleled flexibility, comprehensive coverage, and developer-first tooling. We believe that icons should not only look beautiful but also be effortless to implement and customize.
             </p>
 
+            <h2>Design Philosophy</h2>
+            <p>
+              Each icon is carefully designed to uphold a high level of accessibility, readability and conformance to any design language.
+            </p>
+            <p>
+              Styling is kept at a minimum in order to bring conformance to any existing design language. This library will continue to evolve over time and support more mechanisms to control styling in order to ensure an even closer fit to your existing design language. 
+            </p>
 
             <h2>Features</h2>
             <ul>
