@@ -173,7 +173,9 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
                 <h3 className="filter-section-title">Color</h3>
                 <ColorPicker
                   initialColor={selectedColor}
-                  onChange={setSelectedColor}
+                  onChange={(color) => {
+                    setSelectedColor(color);
+                  }}
                 />
               </div>
             </section>

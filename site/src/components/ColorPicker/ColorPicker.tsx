@@ -13,6 +13,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
   const [showPicker, setShowPicker] = useState(false);
   const [selectedColor, setSelectedColor] = useState(initialColor);
+  const trueInitialColor = useRef(initialColor);
   const [inputType, setInputType] = useState<'hex' | 'rgba'>('hex');
   const [hue, setHue] = useState(260);
   const [isDragging, setIsDragging] = useState(false);
@@ -23,6 +24,12 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    console.log('Selected Color:', selectedColor);
+    console.log('True Initial Color:', trueInitialColor.current);
+    console.log('Should show reset:', selectedColor.toLowerCase() !== trueInitialColor.current.toLowerCase());
+  }, [selectedColor]);
 
   const colorPalette = [
     ['#000000', '#424242', '#616161', '#757575', '#9E9E9E', '#BDBDBD', '#E0E0E0', '#EEEEEE', '#F5F5F5', '#FFFFFF'],
@@ -188,6 +195,12 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
     };
   }, [showPicker]);
 
+  const handleReset = () => {
+    setSelectedColor(trueInitialColor.current);
+    onChange?.(trueInitialColor.current);
+    setShowPicker(false);
+  };
+
   return (
     <div className="color-picker-container" ref={containerRef}>
       <div className="color-display" onClick={handleColorDisplayClick}>
@@ -196,7 +209,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
           type="text"
           value={inputType === 'hex' ? selectedColor : hexToRgba(selectedColor)}
           onChange={handleColorChange}
-          className="color-display-input"
+          className="color-value-input"
           onClick={(e) => e.stopPropagation()}
         />
       </div>
@@ -274,6 +287,17 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
               className="dropdown-color-input"
             />
           </div>
+
+          {selectedColor.toLowerCase() !== trueInitialColor.current.toLowerCase() && (
+            <div className="color-reset">
+              <button 
+                onClick={handleReset}
+                className="reset-button"
+              >
+                Reset to default
+              </button>
+            </div>
+          )}
         </div>,
         document.body
       )}
