@@ -7,6 +7,7 @@ const Footer = () => {
     { label: 'Releases', href: '/releases' },
     { label: 'About', href: '/about' },
     { label: 'Terms', href: '/terms' },
+    { label: 'Privacy', href: '/privacy' },
     { label: 'License', href: '/license' },
   ];
 

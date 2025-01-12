@@ -5,21 +5,29 @@ A lightweight, customizable SVG icon toolkit for React applications with built-i
 [![npm version](https://badge.fury.io/js/%40glyphkit%2Fglyphkit.svg)](https://www.npmjs.com/package/@glyphkit/glyphkit)  
 [![TypeScript](https://badges.frapsoft.com/typescript/code/typescript.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
 
----
+## Overview
 
-## Features
+GlyphKit is an extensive icon library designed to be friendly to use, highly performant, flexible to any need, and in a constant state of evolution. This documentation will help you get started with using the library effectively.
 
-- 🚀 **Zero dependencies**
-- 📦 **Tree-shakeable**
-- 🎨 **Customizable colors and sizes**
-- 💾 **Built-in SVG caching**
-- 🔧 **TypeScript support**
-- ♿ **Accessibility-friendly**
-- 🎯 **Simple API**
+### Performance
+GlyphKit includes built-in caching for SVG content:
+- SVGs are cached after the first load
+- Subsequent requests use cached content
+- Memory-efficient Map implementation
+- Automatic error handling
 
----
+### Browser Support
+Supported browsers include:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-## Installation
+**Note**: IE11 is not supported.
+
+## Getting Started
+
+### Installation
 
 Choose your preferred package manager:
 
@@ -34,9 +42,9 @@ yarn add @glyphkit/glyphkit
 pnpm add @glyphkit/glyphkit
 ```
 
----
+### Quick Start
 
-## Quick Start
+Once installed correctly, its pretty simple to get started... Just import the package where will be consumed then add the icon reference like so:
 
 ```jsx
 import { Icon } from '@glyphkit/glyphkit';
@@ -52,39 +60,26 @@ function App() {
 }
 ```
 
----
-
 ## API Reference
 
 ### Icon Props
 
-| Prop           | Type                        | Default            | Description                                   |
-|----------------|-----------------------------|--------------------|-----------------------------------------------|
-| `name`         | `string`                   | **Required**       | Icon name (without `.svg` extension)         |
-| `size`         | `number \| string`         | `24`               | Icon size in pixels                          |
-| `color`        | `string`                   | `'currentColor'`   | Icon color                                   |
-| `className`    | `string`                   | `undefined`        | Additional CSS classes                       |
-| `svgDirectory` | `string`                   | `'public/icons'`   | Directory containing SVG files               |
-| `iconPrefix`   | `string`                   | `'gk'`             | Prefix for icon IDs                          |
-| `onError`      | `(error: Error) => void`   | `undefined`        | Error callback                               |
-| `onLoad`       | `() => void`               | `undefined`        | Success callback                             |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `string` | Required | Icon name (without .svg extension) |
+| `size` | `number \| string` | `24` | Icon size in pixels |
+| `color` | `string` | `'currentColor'` | Icon color |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `svgDirectory` | `string` | `'public/icons'` | Directory containing SVG files |
+| `iconPrefix` | `string` | `'gk'` | Prefix for icon IDs |
+| `onError` | `(error: Error) => void` | `undefined` | Error callback |
+| `onLoad` | `() => void` | `undefined` | Success callback |
 
----
-
-## Advanced Usage
-
-### Custom Directory Structure
-
-```jsx
-<Icon
-  name="menu"
-  svgDirectory="/assets/icons"
-  size={32}
-  color="#333"
-/>
-```
+## Usage
 
 ### Error Handling
+
+The `onError` and `onLoad` props can be used for debugging purposes. The `onError` prop allows you to handle any issues that arise when loading an icon, while the `onLoad` prop can be used to confirm successful loading.
 
 ```jsx
 <Icon
@@ -94,16 +89,9 @@ function App() {
 />
 ```
 
-### With Tailwind CSS
+### Color
 
-```jsx
-<Icon
-  name="search"
-  className="w-6 h-6 text-gray-500 hover:text-gray-700"
-/>
-```
-
-### Dynamic Colors
+The `color` prop can handle various formats, including hex, rgba, and even advanced logic for dynamic color changes. This allows for flexible styling based on application state or user interactions.
 
 ```jsx
 <Icon
@@ -113,80 +101,74 @@ function App() {
 />
 ```
 
----
+### Size
 
-## SVG Requirements
+The `size` prop allows you to specify the size of the icon. You can use dynamic size attributes to adjust the icon's size based on your application's needs. For example, you can specify sizes like `x_16` or `x_24` in the icon name to indicate the desired size.
 
-- SVG files should be optimized (you can use tools like [SVGO](https://github.com/svg/svgo)).
-- File names should match the `name` prop (e.g., `arrow-right.svg`).
-- Place SVG files in your public directory (default: `public/icons`).
-
----
-
-## Performance
-
-GlyphKit includes built-in caching for SVG content:
-
-- SVGs are cached after the first load.
-- Subsequent requests use cached content.
-- Memory-efficient `Map` implementation.
-- Automatic error handling.
-
----
-
-## Browser Support
-
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- **Note**: IE11 is not supported.
-
----
-
-## TypeScript Support
-
-GlyphKit is written in TypeScript and includes type definitions:
-
-```tsx
-import { Icon, IconProps } from '@glyphkit/glyphkit';
-
-const MyIcon: React.FC<{ iconName: string }> = ({ iconName }) => (
-  <Icon
-    name={iconName}
-    size={24}
-  />
-);
+```jsx
+<Icon
+  name="x_24"
+  size={24}
+/>
 ```
 
----
+### Accessibility
 
-## Contributing
+GlyphKit icons support ARIA attributes for proper accessibility implementation. Here are the common patterns for different use cases:
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+#### Decorative Icons
+Icons that are purely decorative should have `aria-hidden="true"`. This will not visually hide the icon, but it will hide the element from assistive technology.
 
----
+```jsx
+<Icon 
+  name="heart"
+  aria-hidden={true}
+  size={24}
+/>
+```
+
+#### Interactive Icons
+If the icon conveys meaning, it should have alternate text defined by adding an `aria-label`.
+
+```jsx
+<Icon
+  name="heart"
+  aria-label="Add to favorites"
+  size={24}
+/>
+```
+
+#### Icons Within Interactive Elements
+When an icon is inside another element that it's describing, the parent element should have the `aria-label`, and the icon should be hidden using `aria-hidden`.
+
+```jsx
+<button aria-label="Add to favorites">
+  <Icon
+    name="heart"
+    aria-hidden={true}
+    size={24}
+  />
+</button>
+```
+
+## Keywords
+
+- 🚀 Zero dependencies
+- 📦 Tree-shakeable
+- 🎨 Customizable colors and sizes
+- 💾 Built-in SVG caching
+- 🔧 TypeScript support
+- ♿ Accessibility-friendly
+- 🎯 Simple API
+
+## Support
+
+- [Submit Feedback](https://docs.google.com/forms/d/e/1FAIpQLSfcyX2Xe75o5kgseKGcexqCuyOKIFwrixdelPrCga_-EvN-xg/viewform)
+- [Twitter](https://twitter.com/glyphkit)
 
 ## License
 
 MIT © [caidentity](https://github.com/caidentity)
-
----
-
-## Related Projects
-
-- [GlyphKit Website](https://github.com/caidentity/glyphkit) - Official documentation and examples.
-- [Create GlyphKit](https://github.com/caidentity/create-glyphkit) - CLI tool for creating icon sets.
-
----
-
-## Support
-
-- [GitHub Issues](https://github.com/caidentity/glyphkit/issues)
-- [Discord Community](https://discord.gg/glyphkit)
-- [Twitter](https://twitter.com/glyphkit)
-
----
 
 ## Credits
 
