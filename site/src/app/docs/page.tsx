@@ -108,7 +108,7 @@ function App() {
                   </tr>
                   <tr>
                     <td><code>size</code></td>
-                    <td><code>number | string</code></td>
+                    <td><code>number</code></td>
                     <td>24</td>
                     <td>Icon size in pixels</td>
                   </tr>
@@ -121,20 +121,26 @@ function App() {
                   <tr>
                     <td><code>className</code></td>
                     <td><code>string</code></td>
-                    <td>undefined</td>
+                    <td>''</td>
                     <td>Additional CSS classes</td>
                   </tr>
                   <tr>
-                    <td><code>svgDirectory</code></td>
-                    <td><code>string</code></td>
-                    <td>'public/icons'</td>
-                    <td>Directory containing SVG files</td>
+                    <td><code>aria-hidden</code></td>
+                    <td><code>boolean</code></td>
+                    <td>undefined</td>
+                    <td>Whether to hide the icon from screen readers</td>
                   </tr>
                   <tr>
-                    <td><code>iconPrefix</code></td>
+                    <td><code>aria-label</code></td>
                     <td><code>string</code></td>
-                    <td>'gk'</td>
-                    <td>Prefix for icon IDs</td>
+                    <td>undefined</td>
+                    <td>Accessible label for the icon</td>
+                  </tr>
+                  <tr>
+                    <td><code>role</code></td>
+                    <td><code>string</code></td>
+                    <td>'img' if aria-label present</td>
+                    <td>ARIA role for the icon</td>
                   </tr>
                   <tr>
                     <td><code>onError</code></td>
