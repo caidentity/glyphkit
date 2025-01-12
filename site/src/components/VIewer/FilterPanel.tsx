@@ -135,6 +135,19 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
 
             <section className="filter-section">
               <div className="filter-section-header">
+                <h3 className="filter-section-title">Color</h3>
+                <ColorPicker
+                  initialColor={selectedColor}
+                  onChange={(color) => {
+                    setSelectedColor(color);
+                  }}
+                  showInput={false}
+                />
+              </div>
+            </section>
+
+            <section className="filter-section">
+              <div className="filter-section-header">
                 <h3 className="filter-section-title">Icon Size</h3>
                 <div className="filter-section-scale">
                   <Slider
@@ -168,18 +181,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({
               </div>
             </section> */}
 
-            <section className="filter-section">
-              <div className="filter-section-header">
-                <h3 className="filter-section-title">Color</h3>
-                <ColorPicker
-                  initialColor={selectedColor}
-                  onChange={(color) => {
-                    setSelectedColor(color);
-                  }}
-                  showInput={false}
-                />
-              </div>
-            </section>
 
             <section className="filter-categories">
               <h3 className="filter-section-title">Categories</h3>
