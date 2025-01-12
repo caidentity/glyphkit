@@ -28,5 +28,6 @@ export const metadataHeaders = {
   'Pragma': 'no-cache',
   'Expires': '-1',
   'Surrogate-Control': 'no-store',
-  'Vary': '*'
+  'Vary': '*',
+  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com",
 } 

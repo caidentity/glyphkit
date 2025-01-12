@@ -16,7 +16,7 @@ const nextConfig = {
     remotePatterns: [],
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com",
     unoptimized: process.env.NODE_ENV === 'development',
   },
 
