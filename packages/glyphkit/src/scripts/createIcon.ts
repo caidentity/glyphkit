@@ -40,7 +40,7 @@ const PACKAGE_ROOT = path.resolve(__dirname, '..', '..');
 const SOURCE_CONFIG = {
   "location": {
     sourcePath: path.join(PACKAGE_ROOT, 'icons/flat/Icons/newicons'),
-    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/files.js')
+    targetFile: path.join(PACKAGE_ROOT, 'icons/flat/Icons/people.js')
   }
 };
 
