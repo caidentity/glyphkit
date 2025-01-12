@@ -15570,7 +15570,9 @@
         "objects",
         "object",
         "light",
-        "bulb"
+        "bulb",
+        "light bulb",
+        "idea"
       ]
     },
     "object_light_bulb_24": {
@@ -15593,7 +15595,9 @@
         "objects",
         "object",
         "light",
-        "bulb"
+        "bulb",
+        "light bulb",
+        "idea"
       ]
     },
     "object_lock_16": {
@@ -15611,7 +15615,9 @@
       "tags": [
         "objects",
         "object",
-        "lock"
+        "lock",
+        "security",
+        "protect"
       ]
     },
     "object_lock_24": {
@@ -15629,7 +15635,9 @@
       "tags": [
         "objects",
         "object",
-        "lock"
+        "lock",
+        "security",
+        "protect"
       ]
     },
     "object_lock_unlocked_16": {
@@ -15648,7 +15656,9 @@
         "objects",
         "object",
         "lock",
-        "unlocked"
+        "unlocked",
+        "security",
+        "protect"
       ]
     },
     "object_lock_unlocked_24": {
@@ -15667,7 +15677,9 @@
         "objects",
         "object",
         "lock",
-        "unlocked"
+        "unlocked",
+        "security",
+        "protect"
       ]
     },
     "object_mobile_phone_16": {
@@ -15691,7 +15703,9 @@
         "objects",
         "object",
         "mobile",
-        "phone"
+        "phone",
+        "connect",
+        "communication"
       ]
     },
     "object_mobile_phone_24": {
@@ -15715,7 +15729,9 @@
         "objects",
         "object",
         "mobile",
-        "phone"
+        "phone",
+        "connect",
+        "communication"
       ]
     },
     "object_monitor_16": {
@@ -15733,7 +15749,8 @@
       "tags": [
         "objects",
         "object",
-        "monitor"
+        "monitor",
+        "desktop"
       ]
     },
     "object_monitor_24": {
@@ -15751,7 +15768,8 @@
       "tags": [
         "objects",
         "object",
-        "monitor"
+        "monitor",
+        "desktop"
       ]
     },
     "object_package_cart_16": {
@@ -25708,6 +25726,6 @@
   "metadata": {
     "totalIcons": 1049,
     "totalCategories": 19,
-    "generatedAt": "2025-01-11T22:21:30.470Z"
+    "generatedAt": "2025-01-12T01:16:25.339Z"
   }
 }

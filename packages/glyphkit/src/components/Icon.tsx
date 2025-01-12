@@ -24,6 +24,9 @@ export interface IconProps {
   className?: string;
   onError?: (error: Error) => void;
   onLoad?: () => void;
+  'aria-hidden'?: boolean;
+  'aria-label'?: string;
+  role?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({ 
@@ -32,7 +35,10 @@ export const Icon: React.FC<IconProps> = ({
   color = 'currentColor',
   className = '',
   onError,
-  onLoad
+  onLoad,
+  'aria-hidden': ariaHidden,
+  'aria-label': ariaLabel,
+  role,
 }) => {
   const icon = icons[name] as IconDefinition;
 
@@ -56,15 +62,16 @@ export const Icon: React.FC<IconProps> = ({
       height={size}
       viewBox={icon.viewBox}
       xmlns="http://www.w3.org/2000/svg"
+      aria-hidden={ariaHidden}
+      aria-label={ariaLabel}
+      role={role || (ariaLabel ? 'img' : undefined)}
     >
       {icon.d ? (
-        // Single path format
         <path
           d={icon.d}
           fill={color}
         />
       ) : icon.paths ? (
-        // Multi-path format - always use color prop if provided
         icon.paths.map((pathData: PathAttributes, index: number) => (
           <path
             key={`icon-path-${index}`}
