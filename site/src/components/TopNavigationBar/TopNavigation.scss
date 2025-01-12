@@ -10,24 +10,31 @@
   &--mini {
     padding: 16px;
 
-    @media (max-width: 1024px) {
-      padding: 8px 0; // Remove padding on mobile
-      
-      .top-navigation__container {
-        max-width: 100%;
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-        padding: var(--space-2) var(--space-3);
-      }
-    }
-
     .top-navigation__container {
       max-width: fit-content;
       margin: 0;
       border-radius: 50px;
       padding: 0px 0px 0px 8px;
       box-shadow: none;
+    }
+
+    @media (max-width: 1024px) {
+      padding: 0;
+      width: 100%;
+      
+      .top-navigation__container {
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+        padding: var(--space-2) var(--space-3);
+      }
+
+      .top-navigation__content {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
     }
 
     // Hide logo on mini variant
@@ -63,13 +70,28 @@
 
   // Large variant (with search)
   &--large {
-    padding: 0; // Flush with top
+    padding: 0;
 
     .top-navigation__container {
       width: 100%;
       margin: 0;
       padding: var(--space-2) var(--space-3);
       border-radius: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .top-navigation__content {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+      }
+
+      .top-navigation__search {
+        display: block; // Override previous mobile hide
+        order: 2;
+        width: 100%;
+        margin: 0;
+        padding-top: var(--space-2);
+      }
     }
 
     .top-navigation__link {
@@ -194,10 +216,10 @@
 
     .top-navigation__actions .button,
     .top-navigation__mobile-menu.button {
-      color: var(--nav-text) !important;
+      color: var(--text-inverse) !important;
 
       &:hover {
-        color: var(--nav-text) !important;
+        color: var(--text-inverse) !important;
         opacity: 0.8;
       }
     }

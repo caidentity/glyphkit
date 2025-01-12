@@ -140,7 +140,7 @@ export default function TopNavigation() {
                 onSearch={handleSearch}
                 onSuggestionSelect={handleSuggestionSelect}
                 suggestions={suggestions}
-                placeholder="Search 1000+ icons..."
+                placeholder="Search 1109+ icons..."
                 size="large"
               />
             </div>
@@ -183,8 +183,8 @@ export default function TopNavigation() {
               aria-label="Toggle theme"
             >
               <Icon 
-                name={theme === 'dark' ? 'moon_24' : 'sun_24'} 
-                size={24} 
+                name={theme === 'dark' ? 'moon_filled_16' : 'sun_filled_16'} 
+                size={20} 
               />
             </Button>
 

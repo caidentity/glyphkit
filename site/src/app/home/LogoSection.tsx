@@ -15,7 +15,7 @@ const LogoSection: React.FC<LogoSectionProps> = ({ isVisible }) => {
         <Image src={logoPath} alt="Logo" width={140}  priority />
       </div>
       <p className={`description ${isVisible ? 'visible' : ''}`}>
-        1000+ icons designed to improve cohesion and development
+        1109+ icons designed to improve cohesion and development
       </p>
     </div>
   );
