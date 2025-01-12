@@ -11,7 +11,8 @@ const tocItems = [
   { href: '#updates', text: 'Updates and Maintenance' },
   { href: '#limitations', text: 'Limitations of Use' },
   { href: '#disclaimer', text: 'Disclaimer' },
-  { href: '#general-terms', text: 'General Terms' }
+  { href: '#general-terms', text: 'General Terms' },
+  { href: '#warranty', text: 'Warranty Disclaimer' }
 ];
 
 export default function LicensePage() {
@@ -25,7 +26,7 @@ export default function LicensePage() {
         <div className="content-container">
           <p className="intro">
             These terms ("Agreement") govern the use of the GlyphKit icon library and related resources 
-            provided by Interact LLC, a Montana company ("the Company"). By downloading or using GlyphKit, 
+            provided by Interact LLC, a Wyoming company ("the Company"). By downloading or using GlyphKit, 
             you ("the User") agree to these terms.
           </p>
 
@@ -44,6 +45,8 @@ export default function LicensePage() {
               <li>Ownership: All GlyphKit icons, tools, and resources ("Content") are the intellectual property of Interact LLC.</li>
               <li>Open Use: Users are granted a non-exclusive, worldwide, royalty-free right to use, modify, and distribute the Content in their projects.</li>
               <li>Attribution: While not required, attribution to GlyphKit is encouraged when feasible.</li>
+              <li>Copyright (c) for portions of GlyphKit are held by Interact LLC 2025 as part of Feather (MIT). All other copyright (c) for GlyphKit are held by GlyphKit Contributors 2025.</li>
+              <li>ISC License</li>
             </ul>
           </section>
 
@@ -87,10 +90,17 @@ export default function LicensePage() {
           <section id="general-terms">
             <h2>General Terms</h2>
             <ul>
-              <li>Governing Law: This Agreement shall be governed by and construed in accordance with the laws of the State of Montana, without regard to conflict of laws principles.</li>
+              <li>Governing Law: This Agreement shall be governed by and construed in accordance with the laws of the State of Wyoming, without regard to conflict of laws principles.</li>
               <li>Severability: If any provision of this Agreement is deemed invalid or unenforceable, the remaining provisions shall remain in full force and effect.</li>
               <li>Amendments: Interact LLC reserves the right to modify these terms at any time. Continued use of GlyphKit after changes are made constitutes acceptance of the updated terms.</li>
             </ul>
+          </section>
+
+          <section id="warranty">
+            <h2>Warranty Disclaimer</h2>
+            <p>
+              THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+            </p>
           </section>
 
           <section id="questions">
