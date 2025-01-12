@@ -6,7 +6,7 @@ import TopNavigation from '@/components/TopNavigationBar/TopNavigation';
 import Providers from '@/components/Providers';
 import { siteMetadata, defaultOpenGraphImage } from '@/config/metadata';
 import { SearchProvider } from '@/contexts/SearchContext';
-
+import GoogleAnalytics from '@/components/Analytics/GoogleAnalytics';
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap'
@@ -76,6 +76,7 @@ export default function RootLayout({
           <Providers>
             <TopNavigation />
             {children}
+            <GoogleAnalytics />
           </Providers>
         </SearchProvider>
       </body>
