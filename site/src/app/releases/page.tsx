@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import './releases.scss';
 import Footer from '@/components/Footer/Footer';

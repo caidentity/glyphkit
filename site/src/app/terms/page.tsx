@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
 import './terms.scss';
 import Footer from '@/components/Footer/Footer';
 import '@/styles/pages/infopages.scss';
 import FloatingTOC from '@/components/FloatingTOC/FloatingTOC';
-'use client';
 
 const tocItems = [
   { href: '#account-terms', text: 'Account Terms' },

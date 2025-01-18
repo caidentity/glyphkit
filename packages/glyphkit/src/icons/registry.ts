@@ -8014,8 +8014,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "0"
     ]
   },
@@ -8032,8 +8032,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "0"
     ]
   },
@@ -8055,8 +8055,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "100"
     ]
   },
@@ -8078,8 +8078,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "100"
     ]
   },
@@ -8101,8 +8101,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "12"
     ]
   },
@@ -8124,8 +8124,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "12"
     ]
   },
@@ -8147,8 +8147,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "25"
     ]
   },
@@ -8170,8 +8170,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "25"
     ]
   },
@@ -8193,8 +8193,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "37"
     ]
   },
@@ -8216,8 +8216,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "37"
     ]
   },
@@ -8239,8 +8239,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "50"
     ]
   },
@@ -8262,8 +8262,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "50"
     ]
   },
@@ -8285,8 +8285,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "62"
     ]
   },
@@ -8308,8 +8308,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "62"
     ]
   },
@@ -8331,8 +8331,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "75"
     ]
   },
@@ -8354,8 +8354,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "75"
     ]
   },
@@ -8377,8 +8377,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "88"
     ]
   },
@@ -8400,8 +8400,8 @@ export const icons: Record<string, IconDefinition> = {
     "category": "data",
     "tags": [
       "data",
-      "date",
-      "progress",
+      "data",
+      "progresss",
       "88"
     ]
   },
@@ -20547,6 +20547,7 @@ export const icons: Record<string, IconDefinition> = {
     "category": "view",
     "tags": [
       "view",
+      "view",
       "grid",
       "filled"
     ]
@@ -20577,6 +20578,7 @@ export const icons: Record<string, IconDefinition> = {
     ],
     "category": "view",
     "tags": [
+      "view",
       "view",
       "grid",
       "filled"
@@ -25009,8 +25011,7 @@ export const tags = [
   "spreadsheet",
   "search",
   "tallymarks",
-  "date",
-  "progress",
+  "progresss",
   "0",
   "100",
   "12",
@@ -25183,6 +25184,7 @@ export const tags = [
   "cube",
   "detailed",
   "grid",
+  "view",
   "lines",
   "two",
   "magnifying",
@@ -25190,7 +25192,6 @@ export const tags = [
   "block",
   "180",
   "90",
-  "view",
   "middle",
   "attach",
   "augment",
