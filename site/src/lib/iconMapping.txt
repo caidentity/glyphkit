@@ -350,8 +350,8 @@ graph_check_16: data
 graph_check_24: data
 grid_16: view
 grid_24: view
-grid_filled_16: view
-grid_filled_24: view
+view_grid_filled_16: view
+view_grid_filled_24: view
 highlighter_16: files
 highlighter_24: files
 highlighter_filled_16: files

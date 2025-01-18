@@ -21123,9 +21123,9 @@
         "grid"
       ]
     },
-    "grid_filled_16": {
+    "view_grid_filled_16": {
       "category": "view",
-      "name": "grid_filled_16",
+      "name": "view_grid_filled_16",
       "viewBox": "0 0 16 16",
       "paths": [
         {
@@ -21155,9 +21155,9 @@
         "filled"
       ]
     },
-    "grid_filled_24": {
+    "view_grid_filled_24": {
       "category": "view",
-      "name": "grid_filled_24",
+      "name": "view_grid_filled_24",
       "viewBox": "0 0 24 24",
       "paths": [
         {
@@ -26528,8 +26528,8 @@
         "cube_detailed_24",
         "grid_16",
         "grid_24",
-        "grid_filled_16",
-        "grid_filled_24",
+        "view_grid_filled_16",
+        "view_grid_filled_24",
         "lines_three_16",
         "lines_three_24",
         "lines_three_circle_16",

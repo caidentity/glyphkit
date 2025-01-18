@@ -119,7 +119,7 @@ export const viewIcons = {
     tags: ["view","grid"]
   },
 
-  grid_filled_16: {
+  view_grid_filled_16: {
     viewBox: "0 0 16 16",
     paths: [
     {
@@ -143,7 +143,7 @@ export const viewIcons = {
     tags: ["view","grid","filled"]
   },
 
-  grid_filled_24: {
+  view_grid_filled_24: {
     viewBox: "0 0 24 24",
     paths: [
     {
