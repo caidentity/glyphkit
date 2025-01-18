@@ -8001,7 +8001,7 @@ export const icons: Record<string, IconDefinition> = {
       "tallymarks"
     ]
   },
-  "date_progress_0_16": {
+  "data_progresss_0_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8019,7 +8019,7 @@ export const icons: Record<string, IconDefinition> = {
       "0"
     ]
   },
-  "date_progress_0_24": {
+  "data_progresss_0_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8037,7 +8037,7 @@ export const icons: Record<string, IconDefinition> = {
       "0"
     ]
   },
-  "date_progress_100_16": {
+  "data_progresss_100_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8060,7 +8060,7 @@ export const icons: Record<string, IconDefinition> = {
       "100"
     ]
   },
-  "date_progress_100_24": {
+  "data_progresss_100_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8083,7 +8083,7 @@ export const icons: Record<string, IconDefinition> = {
       "100"
     ]
   },
-  "date_progress_12_16": {
+  "data_progresss_12_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8106,7 +8106,7 @@ export const icons: Record<string, IconDefinition> = {
       "12"
     ]
   },
-  "date_progress_12_24": {
+  "data_progresss_12_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8129,7 +8129,7 @@ export const icons: Record<string, IconDefinition> = {
       "12"
     ]
   },
-  "date_progress_25_16": {
+  "data_progresss_25_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8152,7 +8152,7 @@ export const icons: Record<string, IconDefinition> = {
       "25"
     ]
   },
-  "date_progress_25_24": {
+  "data_progresss_25_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8175,7 +8175,7 @@ export const icons: Record<string, IconDefinition> = {
       "25"
     ]
   },
-  "date_progress_37_16": {
+  "data_progresss_37_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8198,7 +8198,7 @@ export const icons: Record<string, IconDefinition> = {
       "37"
     ]
   },
-  "date_progress_37_24": {
+  "data_progresss_37_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8221,7 +8221,7 @@ export const icons: Record<string, IconDefinition> = {
       "37"
     ]
   },
-  "date_progress_50_16": {
+  "data_progresss_50_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8244,7 +8244,7 @@ export const icons: Record<string, IconDefinition> = {
       "50"
     ]
   },
-  "date_progress_50_24": {
+  "data_progresss_50_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8267,7 +8267,7 @@ export const icons: Record<string, IconDefinition> = {
       "50"
     ]
   },
-  "date_progress_62_16": {
+  "data_progresss_62_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8290,7 +8290,7 @@ export const icons: Record<string, IconDefinition> = {
       "62"
     ]
   },
-  "date_progress_62_24": {
+  "data_progresss_62_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8313,7 +8313,7 @@ export const icons: Record<string, IconDefinition> = {
       "62"
     ]
   },
-  "date_progress_75_16": {
+  "data_progresss_75_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8336,7 +8336,7 @@ export const icons: Record<string, IconDefinition> = {
       "75"
     ]
   },
-  "date_progress_75_24": {
+  "data_progresss_75_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
@@ -8359,7 +8359,7 @@ export const icons: Record<string, IconDefinition> = {
       "75"
     ]
   },
-  "date_progress_88_16": {
+  "data_progresss_88_16": {
     "viewBox": "0 0 16 16",
     "paths": [
       {
@@ -8382,7 +8382,7 @@ export const icons: Record<string, IconDefinition> = {
       "88"
     ]
   },
-  "date_progress_88_24": {
+  "data_progresss_88_24": {
     "viewBox": "0 0 24 24",
     "paths": [
       {
