@@ -26,7 +26,7 @@
     "verify:setup": "tsx src/scripts/verifyAssetSetup.ts"
   },
   "dependencies": {
-    "@glyphkit/glyphkit": "^0.0.123",
+    "@glyphkit/glyphkit": "^0.0.124",
     "@radix-ui/react-icons": "^1.3.2",
     "@radix-ui/react-slider": "^1.2.2",
     "@tanstack/react-query": "^5.62.8",
